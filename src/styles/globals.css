@@ -10,7 +10,7 @@ body {
 }
 
 #__next {
-  @apply flex h-screen w-screen justify-center font-sans bg-lightGray;
+  @apply flex flex-col items-center h-screen w-screen justify-center font-sans bg-lightGray;
 }
 
 @layer base {

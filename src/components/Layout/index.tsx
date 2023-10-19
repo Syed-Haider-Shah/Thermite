@@ -2,8 +2,7 @@ import Head from 'next/head'
 
 import { ReactNode } from 'react'
 
-import NavBar from '@/components/NavBar'
-
+import { Header, NavBar } from '@/components'
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
@@ -14,9 +13,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
       </Head>
-      <NavBar />
-      <main id="main" className="flex flex-row w-full">
-        <nav></nav>
+      <Header />
+      <main id="main" className="flex flex-row w-full h-full">
+        <NavBar />
         <section>{children}</section>
         <aside></aside>
       </main>

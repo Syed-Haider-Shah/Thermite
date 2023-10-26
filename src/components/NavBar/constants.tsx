@@ -11,7 +11,7 @@ import {
   SoftwareOutline,
   TickersFill,
   TickersOutline
-} from '../Icons'
+} from '@/components'
 
 export const PageColors = [
   {

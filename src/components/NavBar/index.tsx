@@ -2,8 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import classnames from 'classnames'
-
 import Button from './Button'
 import { PageColors } from './constants'
 
@@ -11,7 +9,7 @@ const NavBar = () => {
   const pathname = usePathname()
   return (
     <nav className="h-full bg-white shadow flex flex-col px-6 gap-9">
-      <Link href={'/'}>
+      <Link href="/">
         <Image
           alt="logo"
           src="/LOGO1.png"
@@ -25,14 +23,7 @@ const NavBar = () => {
           <Button
             key={option.link}
             link={option.link}
-            colorbg={classnames({
-              [`bg-indigo`]: pathname === option.link,
-              [`bg-white`]: pathname !== option.link
-            })}
-            colortxt={classnames({
-              [`text-white`]: pathname === option.link,
-              [`text-zinc`]: pathname !== option.link
-            })}
+            active={pathname === option.link}
           >
             {pathname === option.link ? option.logoActive : option.logoBlur}
             {option.text}

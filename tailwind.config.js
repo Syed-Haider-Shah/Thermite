@@ -64,8 +64,9 @@ module.exports = {
       height: {
         0.25: '0.0625rem', // 1px
         0.5: '0.125rem', // 2px
-        17: '4.25rem', //68px
-        18: '4.5rem', //72px
+        15: '3.75rem', // 60px
+        17: '4.25rem', // 68px
+        18: '4.5rem', // 72px
         31: '7.75rem', //124px
         45.5: '11.375rem', // '182px
         70.5: '17.625rem', // 282px
@@ -134,7 +135,8 @@ module.exports = {
         lightGray: '#F2F2F2',
         zinc: '#D9D9D9',
         neutral: '#525252',
-        indigo: '#4F46E5'
+        indigo: '#4F46E5',
+        lightYellow: '#F8F5F0'
       }
     }
   },

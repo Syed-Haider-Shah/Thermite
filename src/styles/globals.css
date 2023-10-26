@@ -10,7 +10,7 @@ body {
 }
 
 #__next {
-  @apply flex flex-col h-screen w-screen font-sans bg-lightGray;
+  @apply flex flex-row h-screen w-screen font-sans bg-lightYellow;
 }
 
 @layer base {

@@ -128,6 +128,7 @@ module.exports = {
       },
       borderRadius: {
         4.5: '1.125rem', // 18px
+        5: '1.25rem'// 20px
       },
       colors: {
         transparent: 'transparent',

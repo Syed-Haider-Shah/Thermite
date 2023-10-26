@@ -23,7 +23,7 @@ const SearchBar = ({ placeholder, className }: ISearch) => {
   return (
     <div
       className={classNames(
-        'relative flex h-full items-center overflow-hidden rounded-7.5 border border-white/5 bg-black/5',
+        'relative flex h-full items-center overflow-hidden rounded-full border border-white/5 bg-[#F4F7FC]',
         className
       )}
     >

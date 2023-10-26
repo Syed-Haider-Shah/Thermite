@@ -20,6 +20,8 @@ module.exports = {
         tightest: '0.075em' // 1.2px
       },
       width: {
+        6: '1.5rem', //24px
+        11: '2.75rem', //44px
         18: '4.5rem', //72px
         22: '5.5rem', //88px
         24: '6rem', //96px
@@ -27,10 +29,10 @@ module.exports = {
         31: '7.75rem', //124px
         33: '8.125rem', //130px
         35: '8.75rem', // 140px
+        39: '0.75rem', // 156px
         42: '10.5rem', // 168px
         53: '13.25rem', // 212px
         55: '13.75rem', // 220px
-        58: '14.5rem', // 232px
         66: '16.25rem', // 260px
         70.5: '17.375rem', // 278px
         87: '21.75rem', // 348px
@@ -40,6 +42,7 @@ module.exports = {
         180: '45rem' // 720px
       },
       minWidth: {
+        58: '14.5rem', // 232px
         55: '13.75rem', // 220px
         95: '23.75rem', // 380px
         sm: '25rem' // 400px
@@ -53,6 +56,7 @@ module.exports = {
         xl: '90rem' //1440px
       },
       minHeight: {
+
         sm: '18.75rem', //300px
         md: '31.25rem' //500px
       },
@@ -89,7 +93,7 @@ module.exports = {
         14.5: '3.625rem', // 58px
         15: '3.75rem', // 60px
         22: '5.5rem', // 88px
-        29.5: '7.375rem' // 118px
+        29.5: '7.375rem', // 118px
       },
       gap: {
         15: '3.75rem' // 60px
@@ -122,6 +126,9 @@ module.exports = {
         lg: '80rem', // 1280px
         xl: '90rem' // 1440px
       },
+      borderRadius: {
+        4.5: '1.125rem', // 18px
+      },
       colors: {
         transparent: 'transparent',
         // Content Colors
@@ -133,7 +140,7 @@ module.exports = {
         // BG Colors
         lightSilver: '#ECF1F0',
         lightGray: '#F2F2F2',
-        zinc: '#D9D9D9',
+        zinc: '#7A7E86', //zinc 500
         neutral: '#525252',
         indigo: '#4F46E5',
         lightYellow: '#F8F5F0'

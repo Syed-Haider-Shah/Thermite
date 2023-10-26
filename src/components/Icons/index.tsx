@@ -1,3 +1,7 @@
+export { default as Magnifier } from './Magnifier'
+export { default as Bell } from './Bell'
+export { default as Download } from './Download'
+export { default as Person } from './Person'
 export { default as GridFill } from './GridFill'
 export { default as GridOutlined } from './GridOutlined'
 export { default as CustomersFill } from './CustomersFill'

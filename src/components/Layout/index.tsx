@@ -13,13 +13,12 @@ const Layout = ({ children }: { children: ReactNode }) => {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
       </Head>
-      <Header />
-      <main id="main" className="flex flex-row w-full h-full">
-        <NavBar />
-        <section>{children}</section>
-        <aside></aside>
-      </main>
-      <footer />
+      <NavBar />
+      <div className='className="flex flex-col w-full h-full p-5'>
+        <Header />
+        <main id="main">{children}</main>
+        <footer />
+      </div>
     </>
   )
 }

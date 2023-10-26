@@ -8,8 +8,8 @@ import { PageColors } from './constants'
 const NavBar = () => {
   const pathname = usePathname()
   return (
-    <nav className="h-full bg-white shadow flex flex-col px-6 gap-9">
-      <Link href="/">
+    <nav className="h-full bg-white shadow rounded-r-5 flex flex-col px-6 gap-9">
+      <Link href={'/'}>
         <Image
           alt="logo"
           src="/LOGO1.png"

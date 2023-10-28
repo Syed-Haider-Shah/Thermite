@@ -14,9 +14,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
         />
       </Head>
       <NavBar />
-      <div className='className="flex flex-col w-full h-full p-5'>
+      <div className="flex flex-col w-full h-full p-5 items-center gap-3.5">
         <Header />
-        <main id="main">{children}</main>
+        <main id="main" className="w-full flex flex-col items-center">
+          {children}
+        </main>
         <footer />
       </div>
     </>

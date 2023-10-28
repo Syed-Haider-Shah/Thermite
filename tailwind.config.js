@@ -70,6 +70,7 @@ module.exports = {
         0.5: '0.125rem', // 2px
         15: '3.75rem', // 60px
         17: '4.25rem', // 68px
+        19.25: '4.812rem', // 77px
         18: '4.5rem', // 72px
         31: '7.75rem', //124px
         45.5: '11.375rem', // '182px
@@ -138,9 +139,9 @@ module.exports = {
         red: '#F64F4F',
         lightGolden: '#D9AC69',
         darkGreen: '#134D2E',
+        lightSilver: '#6C757D',
         // BG Colors
-        lightSilver: '#ECF1F0',
-        lightGray: '#F2F2F2',
+        lightGray: '#EEEEEE',
         zinc: '#7A7E86', //zinc 500
         neutral: '#525252',
         indigo: '#4F46E5',

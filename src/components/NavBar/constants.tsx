@@ -1,3 +1,5 @@
+import { Paths } from '@/constants'
+
 import {
   CustomersFill,
   CustomersOutline,
@@ -15,37 +17,37 @@ import {
 
 export const PageColors = [
   {
-    link: '/',
+    link: Paths.HOME,
     text: 'Dashboard',
     logoActive: <GridFill />,
     logoBlur: <GridOutlined />
   },
   {
-    link: '/tickets',
+    link: Paths.PARENT_TICKET,
     text: 'Tickets',
     logoActive: <TickersFill />,
     logoBlur: <TickersOutline />
   },
   {
-    link: '/customers',
+    link: Paths.CUSTOMER,
     text: 'Customers',
     logoActive: <CustomersFill />,
     logoBlur: <CustomersOutline />
   },
   {
-    link: '/forms',
+    link: Paths.FORM,
     text: 'Forms',
     logoActive: <FormsFill />,
     logoBlur: <FormsOutlined />
   },
   {
-    link: '/guides',
+    link: Paths.GUIDE,
     text: 'Guides',
     logoActive: <GuidesFill />,
     logoBlur: <GuidesOutline />
   },
   {
-    link: '/software',
+    link: Paths.SOFTWARE,
     text: 'Software',
     logoActive: <SoftwareFill />,
     logoBlur: <SoftwareOutline />

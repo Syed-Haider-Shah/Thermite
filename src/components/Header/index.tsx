@@ -2,7 +2,7 @@ import { Bell, Download, Person, SearchBar } from '@/components'
 
 const Header = () => {
   return (
-    <header className="bg-white rounded-lg py-2.5 px-4 flex items-center justify-between h-15">
+    <header className="bg-white rounded-lg py-2.5 px-4 flex items-center justify-between h-15 w-full">
       <div className="gap-6 h-full flex items-center">
         <SearchBar placeholder="Search anything" className="w-72" />
         <button

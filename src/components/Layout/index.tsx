@@ -16,7 +16,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <NavBar />
       <div className="flex flex-col w-full h-full p-5 items-center gap-3.5">
         <Header />
-        <main id="main" className="w-full flex flex-col items-center">
+        <main id="main" className="w-full flex flex-col items-center bg-white">
           {children}
         </main>
         <footer />

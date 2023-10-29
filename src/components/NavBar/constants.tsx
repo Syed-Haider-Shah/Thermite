@@ -15,7 +15,7 @@ import {
   TickersOutline
 } from '../Icons'
 
-export const PageColors = [
+export const NAV_OPTIONS = [
   {
     link: Paths.HOME,
     text: 'Dashboard',
@@ -23,7 +23,7 @@ export const PageColors = [
     logoBlur: <GridOutlined />
   },
   {
-    link: Paths.PARENT_TICKET,
+    link: Paths.TICKET,
     text: 'Tickets',
     logoActive: <TickersFill />,
     logoBlur: <TickersOutline />

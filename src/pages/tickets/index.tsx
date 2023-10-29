@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 import { Filter, Magnifier, PageHeader, Table } from '@/components'
 
 const cols = [
@@ -54,6 +56,11 @@ const rows = [
 const ParentTicket = () => {
   return (
     <>
+      <Head>
+        <title>Home | Thermite</title>
+        <meta name="description" content="Thermite" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <PageHeader title="All Tickets total count (61)">
         <Magnifier />
         <Filter />

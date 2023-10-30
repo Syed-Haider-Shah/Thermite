@@ -24,7 +24,7 @@ const modules = {
 
 const ParentNotes = () => {
   return (
-    <section className="w-full px-9 flex justify-between">
+    <section className="w-full px-9 flex gap-14">
       <div className="h-72 shadow-md w-2/5 rounded-5 overflow-hidden border border-black/40">
         <ReactQuill theme="snow" modules={modules} className="h-full" />
       </div>

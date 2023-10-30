@@ -2,6 +2,21 @@ import Head from 'next/head'
 
 import { Filter, FormLine, Magnifier, PageHeader } from '@/components'
 
+const fields = [
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' },
+  { title: 'Problems', placeholder: 'problems' }
+]
+
 const CreateChild = () => {
   return (
     <>
@@ -21,26 +36,15 @@ const CreateChild = () => {
           Create Child Ticket
         </h1>
         <form className="grid grid-cols-2 w-full max-w-2xl gap-y-6 gap-x-16">
-          <FormLine id="problem" title="Problem" className="w-72" />
-          <FormLine id="serial-number" title="Serial Number" className="w-72" />
-          <FormLine
-            id="parent-name"
-            title="Parent Ticket Name"
-            className="w-72"
-          />
-          <FormLine
-            id="parent-number"
-            title="Parent Ticket Number"
-            className="w-72"
-          />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
-          <FormLine id="ticket-status" title="ticket-status" className="w-72" />
+          {fields.map(({ title, placeholder }) => (
+            <FormLine
+              key={title}
+              id={title}
+              title={title}
+              className="w-80"
+              placeholder={placeholder}
+            />
+          ))}
         </form>
       </section>
     </>

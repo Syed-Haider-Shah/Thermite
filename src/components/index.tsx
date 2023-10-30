@@ -5,6 +5,8 @@ export { default as SearchBar } from './SearchBar'
 export { default as PageHeader } from './PageHeader'
 export { default as Table } from './Table'
 export { default as Tabs } from './Tabs'
+export { default as ParentDetails } from './ParentDetails'
+export { default as ParentNotes } from './ParentNotes'
 
 export {
   GridFill,
@@ -23,5 +25,6 @@ export {
   Bell,
   Download,
   Person,
-  Filter
+  Filter,
+  Page
 } from './Icons'

@@ -1,6 +1,17 @@
 import Head from 'next/head'
+import { useSearchParams } from 'next/navigation'
 
-import { Filter, Magnifier, PageHeader, Table, Tabs } from '@/components'
+import { useMemo } from 'react'
+
+import {
+  Filter,
+  Magnifier,
+  PageHeader,
+  ParentDetails,
+  ParentNotes,
+  Table,
+  Tabs
+} from '@/components'
 
 const cols = [
   'Serial Number',
@@ -54,6 +65,17 @@ const rows = [
 ]
 
 const TicketById = () => {
+  const tab = useSearchParams().get('tab')
+
+  const tabValue = useMemo(() => {
+    switch (tab) {
+      case 'Notes':
+        return <ParentNotes />
+      default:
+        return <ParentDetails />
+    }
+  }, [tab])
+
   return (
     <>
       <Head>
@@ -67,49 +89,8 @@ const TicketById = () => {
         <Magnifier />
         <Filter />
       </PageHeader>
-      <Tabs tabs={['Details', 'Notes']}>
-        <section id="details" className="w-full">
-          <ul className="grid grid-cols-3 h-full gap-y-10 content-start place-content-between">
-            <li>
-              <h1 className="text-darkGray text-xl font-semibold">
-                Parent ticket details
-              </h1>
-              <p className="text-gray font-normal">sample data</p>
-            </li>
-            <li>
-              <h1 className="text-darkGray text-xl font-semibold">
-                Parent ticket details
-              </h1>
-              <p className="text-gray font-normal">sample data</p>
-            </li>
-            <li>
-              <h1 className="text-darkGray text-xl font-semibold">
-                Parent ticket details
-              </h1>
-              <p className="text-gray font-normal">sample data</p>
-            </li>
-            <li>
-              <h1 className="text-darkGray text-xl font-semibold">
-                Parent ticket details
-              </h1>
-              <p className="text-gray font-normal">sample data</p>
-            </li>
-            <li>
-              <h1 className="text-darkGray text-xl font-semibold">
-                Parent ticket details
-              </h1>
-              <p className="text-gray font-normal">sample data</p>
-            </li>
-            <li>
-              <h1 className="text-darkGray text-xl font-semibold">
-                Parent ticket details
-              </h1>
-              <p className="text-gray font-normal">sample data</p>
-            </li>
-          </ul>
-        </section>
-      </Tabs>
-      <section id="parent-tickets" className="w-full py-3 space-y-4 mt-4">
+      <Tabs tabs={['Details', 'Notes']}>{tabValue}</Tabs>
+      <section id="parent-tickets" className="w-full py-3 mt-10 space-y-4">
         <h1 className="text-xl font-semibold text-black px-9">
           All child tickets (total count)
         </h1>

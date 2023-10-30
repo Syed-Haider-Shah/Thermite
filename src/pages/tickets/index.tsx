@@ -65,7 +65,7 @@ const ParentTicket = () => {
         <Magnifier />
         <Filter />
       </PageHeader>
-      <section id="parent-tickets" className="w-full bg-white py-3">
+      <section id="parent-tickets" className="w-full py-3">
         <Table cols={cols} rows={rows} />
       </section>
     </>

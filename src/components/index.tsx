@@ -9,6 +9,7 @@ export { default as ParentDetails } from './ParentDetails'
 export { default as ParentNotes } from './ParentNotes'
 export { default as DropDown } from './DropDown'
 export { default as TextArea } from './TextArea'
+export { default as FormLine } from './FormLine'
 
 export {
   GridFill,
@@ -28,5 +29,6 @@ export {
   Download,
   Person,
   Filter,
+  Spinner,
   Page
 } from './Icons'

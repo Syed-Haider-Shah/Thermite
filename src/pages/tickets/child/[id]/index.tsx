@@ -57,7 +57,7 @@ const ChildById = () => {
             ))}
           </ul>
         </section>
-        <section id="close-ticket" className="max-w-2xl w-full px-9 space-y-10">
+        <form id="close-ticket" className="max-w-2xl w-full px-9 space-y-10">
           <h1 className="text-2xl font-semibold text-black">Close Ticket</h1>
           <DropDown
             defaultOption="Select Fault"
@@ -75,7 +75,7 @@ const ChildById = () => {
             rows={3}
             placeholder="write description"
           />
-        </section>
+        </form>
       </article>
     </>
   )

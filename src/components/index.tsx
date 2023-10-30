@@ -7,6 +7,8 @@ export { default as Table } from './Table'
 export { default as Tabs } from './Tabs'
 export { default as ParentDetails } from './ParentDetails'
 export { default as ParentNotes } from './ParentNotes'
+export { default as DropDown } from './DropDown'
+export { default as TextArea } from './TextArea'
 
 export {
   GridFill,

@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <Header />
         <main
           id="main"
-          className="w-full flex flex-col items-center bg-white rounded-xl overflow-auto scrollbar-none"
+          className="w-full h-full flex flex-col items-center bg-white rounded-xl overflow-auto scrollbar-none"
         >
           {children}
         </main>

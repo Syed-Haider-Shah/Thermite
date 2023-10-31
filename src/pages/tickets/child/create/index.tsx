@@ -35,7 +35,7 @@ const CreateChild = () => {
         <h1 className="text-2xl font-semibold text-black">
           Create Child Ticket
         </h1>
-        <form className="grid grid-cols-2 w-full max-w-2xl gap-y-6 gap-x-16">
+        <form className="flex flex-wrap w-full gap-y-6 gap-x-16">
           {fields.map(({ title, placeholder }) => (
             <FormLine
               key={title}

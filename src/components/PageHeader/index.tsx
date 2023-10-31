@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 type IPageHeader = {
   title: string
-  children: ReactNode
+  children?: ReactNode
 }
 
 const PageHeader = ({ title, children }: IPageHeader) => (

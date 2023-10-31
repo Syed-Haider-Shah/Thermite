@@ -139,7 +139,7 @@ module.exports = {
         red: '#F64F4F',
         lightGolden: '#D9AC69',
         darkGreen: '#134D2E',
-        lightSilver: '#6C757D',
+        lightSilver: '#F2F2F2',
         gray: '#7B7979',
         darkGray: '#535353',
         // BG Colors

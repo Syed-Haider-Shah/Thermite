@@ -13,7 +13,7 @@ const Table = ({ cols, rows }: ITable) => {
       rows.map((row, idx) => (
         <tr
           key={idx}
-          className="border-b border-black/10 last:border-b-0 text-lightSilver"
+          className="border-b border-black/10 last:border-b-0 text-black/60 font-bold"
         >
           {Object.keys(row).map((val) => (
             <td key={val} className="px-6 py-4">

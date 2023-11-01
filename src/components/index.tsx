@@ -10,6 +10,8 @@ export { default as ParentNotes } from './ParentNotes'
 export { default as DropDown } from './DropDown'
 export { default as TextArea } from './TextArea'
 export { default as FormLine } from './FormLine'
+export { default as EmployeeGroup } from './EmployeeGroup'
+export { default as EmployeeDetails } from './EmployeeDetails'
 
 export {
   GridFill,
@@ -30,5 +32,7 @@ export {
   Person,
   Filter,
   Spinner,
-  Page
+  Page,
+  Bin,
+  Pen
 } from './Icons'

@@ -125,7 +125,6 @@ module.exports = {
         sm: '48rem', // 768px
         md: '64rem', // 1024px
         lg: '80rem', // 1280px
-        xl: '90rem' // 1440px
       },
       borderRadius: {
         4.5: '1.125rem', // 18px

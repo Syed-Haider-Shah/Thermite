@@ -20,3 +20,7 @@ body {
     margin: 0;
   }
 }
+
+.scrollbar-custom {
+   @apply scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-full scrollbar-thumb-rounded scrollbar-thumb-black/40
+}

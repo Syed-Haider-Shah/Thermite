@@ -9,5 +9,7 @@ export enum Paths {
   FORM_ID = `${FORM}/[id]`,
   GUIDE = `${HOME}guides`,
   GUIDE_ID = `${GUIDE}/[id]`,
-  SOFTWARE = `${HOME}software`
+  SOFTWARE = `${HOME}software`,
+  PROFILE = `${HOME}profile`,
+  PROFILE_UPDATE = `${PROFILE}/update`
 }

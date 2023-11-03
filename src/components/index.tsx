@@ -34,5 +34,6 @@ export {
   Spinner,
   Page,
   Bin,
-  Pen
+  Pen,
+  Upload
 } from './Icons'

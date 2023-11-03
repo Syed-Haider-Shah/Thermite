@@ -2,11 +2,11 @@ import Head from 'next/head'
 
 import { FormLine, Upload } from '@/components'
 
-const Profile = () => {
+const UpdateProfile = () => {
   return (
     <>
       <Head>
-        <title>Guides | Thermite</title>
+        <title>Update Profile | Thermite</title>
         <meta name="description" content="Thermite" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -45,4 +45,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default UpdateProfile

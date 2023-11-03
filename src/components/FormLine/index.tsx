@@ -4,8 +4,7 @@ import {
   forwardRef,
   ForwardRefRenderFunction,
   InputHTMLAttributes,
-  KeyboardEvent,
-  MouseEvent
+  KeyboardEvent
 } from 'react'
 
 import classNames from 'classnames'
@@ -16,7 +15,6 @@ interface IFormLine extends InputHTMLAttributes<HTMLInputElement> {
   id: string
   type?: string
   title?: string
-  showStatus?: boolean
   isLoading?: boolean
   placeholder?: string
   className?: string
@@ -26,7 +24,6 @@ interface IFormLine extends InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
-  onStatusClick?: (e: MouseEvent<HTMLDivElement>) => void
 }
 
 const FormLine: ForwardRefRenderFunction<HTMLInputElement, IFormLine> = (
@@ -34,7 +31,6 @@ const FormLine: ForwardRefRenderFunction<HTMLInputElement, IFormLine> = (
     id,
     type,
     title,
-    showStatus,
     isLoading,
     placeholder,
     className,
@@ -44,7 +40,6 @@ const FormLine: ForwardRefRenderFunction<HTMLInputElement, IFormLine> = (
     disabled,
     onChange,
     onKeyDown,
-    onStatusClick,
     ...restProps
   },
   ref
@@ -79,17 +74,13 @@ const FormLine: ForwardRefRenderFunction<HTMLInputElement, IFormLine> = (
         onKeyDown={onKeyDown}
         aria-label={title}
       />
-      {showStatus && (
+      {isLoading && (
         <div
-          className={classNames(
-            'absolute bottom-3 right-3 flex cursor-pointer items-center justify-center rounded-full bg-gray-medium p-1 text-white [&>svg]:h-3.5 [&>svg]:w-3.5',
-            {
-              'animate-spin': isLoading
-            }
-          )}
-          onClick={onStatusClick}
+          className={
+            'absolute bottom-3 right-3 flex cursor-pointer items-center justify-center rounded-full bg-gray-medium p-1 text-white [&>svg]:h-3.5 [&>svg]:w-3.5'
+          }
         >
-          {isLoading && <Spinner />}
+          <Spinner />
         </div>
       )}
       <span className="text-sm font-semibold leading-4 text-red">{error}</span>

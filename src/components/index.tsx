@@ -12,6 +12,7 @@ export { default as TextArea } from './TextArea'
 export { default as FormLine } from './FormLine'
 export { default as EmployeeGroup } from './EmployeeGroup'
 export { default as EmployeeDetails } from './EmployeeDetails'
+export { default as SearchField } from './SearchField'
 
 export {
   GridFill,

@@ -1,24 +1,31 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Hanken_Grotesk } from 'next/font/google'
+
+import { ReactNode } from 'react'
 
 import '@/styles/globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Header, NavBar } from '@/components'
+
+const inter = Hanken_Grotesk({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Innox Management',
-  description: 'Innox Management Admin Panel'
+  title: 'Thermite',
+  description: 'Thermite Ticket Management'
 }
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="mt-32 w-full max-w-5xl">{children}</main>
+        <NavBar />
+        <div className="flex w-full flex-col">
+          <Header />
+          <main className="relative m-8 flex justify-center overflow-hidden rounded-2xl bg-white shadow-sm">
+            {children}
+          </main>
+        </div>
+        <div id="modal-root"></div>
       </body>
     </html>
   )

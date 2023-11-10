@@ -7,7 +7,7 @@ interface IModal {
   title?: string
   showModal: boolean
   children: ReactElement | ReactElement[]
-  onClose: () => void
+  onClose?: () => void
 }
 
 const ModalWrapper = ({
@@ -15,12 +15,7 @@ const ModalWrapper = ({
   children,
   showModal,
   onClose
-}: {
-  title?: string
-  showModal: boolean
-  children: ReactElement | ReactElement[]
-  onClose: () => void
-}): ReactElement =>
+}: IModal): ReactElement =>
   showModal ? (
     <div className="dark:bg-navy/80 absolute left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black/40 backdrop-blur">
       {onClose ? (

@@ -31,7 +31,8 @@ const config: Config = {
         110: '27.5rem', // 440px
         sm: '42.188rem', // 670px
         md: '47.688rem', // 763px
-        lg: '50.125rem' // 802px
+        lg: '50.125rem', // 802px
+        xl: '90rem' //1440px
       },
       minWidth: {
         55: '13.75rem', // 220px

@@ -5,8 +5,8 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    // Public Keys
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL
   },
   trailingSlash: false
 }

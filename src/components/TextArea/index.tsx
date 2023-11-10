@@ -1,32 +1,42 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { forwardRef, ForwardRefRenderFunction } from 'react'
+import {
+  ChangeEvent,
+  forwardRef,
+  ForwardRefRenderFunction,
+  KeyboardEvent,
+  TextareaHTMLAttributes
+} from 'react'
 
-import classNames from 'classnames'
+import { clsx } from 'clsx'
 
-interface ITextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  id?: string
-  className?: string
+interface IFormLine extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  id: string
   title?: string
-  required?: boolean
-  error?: string | undefined
-  rows?: number
-  cols?: number
-  ariaLable?: string
+  className?: string
   placeholder?: string
+  value?: string
+  primary?: string | boolean
+  required?: boolean
+  disabled?: boolean
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
+  onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void
 }
 
-const TextArea: ForwardRefRenderFunction<HTMLTextAreaElement, ITextArea> = (
+const FormAreaComponent: ForwardRefRenderFunction<
+  HTMLTextAreaElement,
+  IFormLine
+> = (
   {
     id,
-    className,
     title,
-    rows,
-    cols,
-    required,
-    ariaLable,
+    className,
     placeholder,
-    error,
-    ...restProps
+    value,
+    primary,
+    required,
+    disabled,
+    onChange,
+    onKeyDown,
+    rows
   },
   ref
 ) => {
@@ -34,39 +44,33 @@ const TextArea: ForwardRefRenderFunction<HTMLTextAreaElement, ITextArea> = (
     <label
       title={title}
       htmlFor={id}
-      className={classNames(
-        'relative mt-6 flex flex-col gap-y-1.5 text-xl font-semibold leading-4',
-        {
-          'text-red': error,
-          'text-darkGray': !error
-        }
-      )}
+      className={clsx('relative flex flex-col gap-y-1 font-semibold', {
+        'text-sm leading-4 text-black/90': primary,
+        'mt-6 text-xl leading-6 text-black/60 ': !primary
+      })}
     >
       {title}
-      {required && '*'}
-      <span className="absolute right-0 text-sm font-semibold leading-4 text-red">
-        {error}
-      </span>
       <textarea
-        {...restProps}
-        id={id}
-        ref={ref}
-        rows={rows}
-        cols={cols}
-        required={required}
-        aria-label={ariaLable}
-        placeholder={placeholder}
-        className={classNames(
+        className={clsx(
           className,
+          'text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
           {
-            'border-red focus:border-red': error,
-            'focus:border-white/40 ': !error
-          },
-          'relative w-full resize-none rounded-xl bg-black/5 px-5 py-2.5 text-base placeholder-black/40 placeholder:font-medium focus:outline-none'
+            'rounded-1.25 border-heavyGray border px-2 py-2.5': primary,
+            'rounded-full bg-black/5 p-3': !primary
+          }
         )}
+        ref={ref}
+        placeholder={placeholder}
+        rows={rows}
+        value={value}
+        required={required}
+        disabled={disabled}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        aria-label={title}
       />
     </label>
   )
 }
 
-export default forwardRef(TextArea)
+export default forwardRef(FormAreaComponent)

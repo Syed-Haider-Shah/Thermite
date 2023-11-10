@@ -1,37 +1,70 @@
-import classNames from 'classnames'
+import Link from 'next/link'
+import { usePathname, useSearchParams } from 'next/navigation'
+
+import { memo, useState } from 'react'
+
+import { clsx } from 'clsx'
+
+import { ChevronDownIcon } from '@/components'
 
 type IDropDown = {
-  defaultOption: string
-  title?: string
+  options: { name: string; value: string }[]
+  name: string
   className?: string
-  options: {
-    option: string
-    value: string
-  }[]
 }
 
-const DropDown = ({ defaultOption, options, title, className }: IDropDown) => {
+const DropDownComponent = ({ options, className, name }: IDropDown) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+
+  const handleToggle = (): void => {
+    setIsOpen((value) => !value)
+  }
+
+  const handleRoute = (value: { name: string }) => {
+    const newParams = new URLSearchParams(searchParams.toString())
+    return newParams.set(name, value.name)
+  }
+
   return (
-    <label
-      htmlFor={title}
-      className={classNames(
-        'block gap-y-1.5 text-darkGray text-xl font-semibold',
-        className
+    <div
+      className={clsx(
+        'relative space-y-1 text-sm font-medium text-black/60 dark:text-white/60',
+        className || 'w-40'
       )}
     >
-      {title}
-      <select
-        id={title}
-        className="bg-gray-50 w-full text-sm block border border-black/40 outline-none p-2.5 rounded-lg"
+      <button
+        type="button"
+        onClick={handleToggle}
+        className="flex w-full items-center justify-between rounded-lg border border-black/5 bg-white/40 px-2 py-3 text-left dark:bg-black/60"
       >
-        <option selected>{defaultOption}</option>
-        {options.map(({ option, value }) => (
-          <option key={value} value={value}>
-            {option}
-          </option>
+        {options[0]?.name}
+        <ChevronDownIcon
+          className={clsx('origin-center transform transition', {
+            '-rotate-90': !isOpen
+          })}
+        />
+      </button>
+      <ul
+        className={clsx(
+          'transition-maxHeight absolute z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl duration-300 dark:bg-black',
+          className || 'w-40',
+          { 'max-h-sm': isOpen, 'max-h-0': !isOpen }
+        )}
+      >
+        {options.map((value) => (
+          <Link
+            href={`${pathname}?${handleRoute(value)}`}
+            key={value.name}
+            className="w-full cursor-pointer px-2 py-2.5 text-left hover:bg-black/5 dark:hover:bg-white/5"
+          >
+            {value.name}
+          </Link>
         ))}
-      </select>
-    </label>
+      </ul>
+    </div>
   )
 }
-export default DropDown
+
+export default memo(DropDownComponent)

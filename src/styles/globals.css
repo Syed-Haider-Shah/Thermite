@@ -2,25 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './fonts.css';
-
-html,
-body {
+html {
   @apply m-0 h-screen w-screen overflow-hidden p-0 antialiased outline-none;
 }
 
-#__next {
-  @apply flex flex-row h-screen w-screen font-sans bg-lightYellow;
-}
-
-@layer base {
-  input[type='number']::-webkit-inner-spin-button,
-  input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-}
-
-.scrollbar-custom {
-   @apply scrollbar-thin scrollbar-track-slate-200 scrollbar-track-rounded-full scrollbar-thumb-rounded scrollbar-thumb-black/40
+body {
+  @apply flex h-screen w-screen justify-center;
 }

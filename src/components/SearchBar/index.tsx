@@ -1,39 +1,31 @@
-import { useCallback, useState } from 'react'
+import { FC } from 'react'
 
-import classNames from 'classnames'
+import { clsx } from 'clsx'
 
-import { Magnifier } from '@/components'
+import { MagnifierIcon } from '@/components'
 
 type ISearch = {
+  onFocus: () => void
+  onBlur: () => void
   placeholder?: string
-  className?: string
+  isSearchFocused: boolean
 }
 
-const SearchBar = ({ placeholder, className }: ISearch) => {
-  const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false)
-
-  const handleFocus = useCallback(() => {
-    setIsSearchFocused(true)
-  }, [])
-
-  const handleBlur = useCallback(() => {
-    setIsSearchFocused(false)
-  }, [])
-
+const SearchComponent: FC<ISearch> = ({
+  placeholder,
+  onFocus,
+  onBlur,
+  isSearchFocused
+}) => {
   return (
-    <div
-      className={classNames(
-        'relative flex h-full items-center overflow-hidden rounded-full border border-white/5 bg-[#F4F7FC]',
-        className
-      )}
-    >
+    <div className="rounded-7.5 relative flex h-12 items-center overflow-hidden border border-white/5 bg-black/5">
       <input
         title="Search bar"
         type="text"
         placeholder={placeholder}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        className={classNames(
+        onFocus={onFocus}
+        onBlur={onBlur}
+        className={clsx(
           'w-full bg-transparent pr-4 text-base font-medium leading-4 outline-none transition-all duration-300 placeholder:text-sm',
           {
             'pl-11': !isSearchFocused,
@@ -42,18 +34,15 @@ const SearchBar = ({ placeholder, className }: ISearch) => {
         )}
       />
       <div
-        className={classNames(
-          'absolute text-black/40 transition-all duration-300',
-          {
-            'left-4 opacity-100': !isSearchFocused,
-            'left-0 opacity-0': isSearchFocused
-          }
-        )}
+        className={clsx('absolute text-black/40 transition-all duration-300', {
+          'left-4 opacity-100': !isSearchFocused,
+          'left-0 opacity-0': isSearchFocused
+        })}
       >
-        <Magnifier className="h-4 w-4" />
+        <MagnifierIcon className="h-4 w-4" />
       </div>
     </div>
   )
 }
 
-export default SearchBar
+export default SearchComponent

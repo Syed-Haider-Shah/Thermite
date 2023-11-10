@@ -1,28 +1,24 @@
 import Link from 'next/link'
 
-import { ReactNode } from 'react'
+import { FC } from 'react'
 
-import classNames from 'classnames'
-
-const Button = ({
-  active,
-  link,
-  children
-}: {
-  active: boolean
-  link: string
-  children: ReactNode
-}) => {
-  return (
-    <Link
-      href={link}
-      className={classNames(`py-4 px-5 gap-5 flex rounded-4.5 min-w-58`, {
-        'bg-indigo text-white': active,
-        'bg-white text-zinc': !active
-      })}
-    >
-      {children}
-    </Link>
-  )
+type INavButton = {
+  title: string
+  href: string
+  active: string
 }
-export default Button
+
+const NavBarButtonComponent: FC<INavButton> = ({ title, href, active }) => (
+  <Link
+    href={href}
+    className={`px-4.5 rounded-2.5 hover:bg-gray cursor-pointer py-2 text-xl font-semibold leading-6 transition-colors duration-300 hover:text-white dark:hover:text-black ${
+      active.indexOf(href) === 1
+        ? 'bg-gray text-white dark:text-white/90'
+        : 'text-black/50 dark:text-white/40'
+    }`}
+  >
+    {title}
+  </Link>
+)
+
+export default NavBarButtonComponent

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
   ChangeEvent,
   forwardRef,
@@ -7,62 +6,66 @@ import {
   KeyboardEvent
 } from 'react'
 
-import classNames from 'classnames'
-
-import { Spinner } from '@/components'
+import { clsx } from 'clsx'
 
 interface IFormLine extends InputHTMLAttributes<HTMLInputElement> {
   id: string
   type?: string
   title?: string
-  isLoading?: boolean
-  placeholder?: string
   className?: string
+  placeholder?: string
   value?: string
-  error?: string | boolean
+  primary?: string | boolean
+  secondary?: boolean
   required?: boolean
   disabled?: boolean
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
-const FormLine: ForwardRefRenderFunction<HTMLInputElement, IFormLine> = (
+const FormLineComponent: ForwardRefRenderFunction<
+  HTMLInputElement,
+  IFormLine
+> = (
   {
     id,
     type,
     title,
-    isLoading,
-    placeholder,
     className,
+    placeholder,
     value,
-    error,
+    primary,
+    secondary,
     required,
     disabled,
     onChange,
-    onKeyDown,
-    ...restProps
+    onKeyDown
   },
   ref
 ) => {
   return (
-    <div className="relative mt-6 flex flex-col gap-y-1 ">
-      <label
-        title={title}
-        htmlFor={id}
-        className={classNames('text-sm font-bold leading-4', {
-          'text-red': error,
-          'text-black/60': !error
-        })}
-      >
+    <label
+      title={title}
+      htmlFor={id}
+      className={clsx('relative flex flex-col gap-y-1 font-semibold', {
+        'text-sm leading-4 text-black/60': secondary,
+        'text-sm leading-4 text-black/90': primary,
+        'mt-6 text-xl leading-6 text-black/60 ': !primary && !secondary
+      })}
+    >
+      <div className="flex">
         {title}
-        {required && '*'}
-      </label>
+        {required && <div className="text-red">*</div>}
+      </div>
       <input
-        {...restProps}
-        id={id}
-        className={classNames(
-          'rounded-xl bg-black/5 p-3 text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
-          className
+        className={clsx(
+          className,
+          'text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
+          {
+            'rounded-1.25 border-heavyGray border': secondary,
+            'py-2.25 rounded-1.25 border-heavyGray border px-2': primary,
+            'rounded-full bg-black/5 p-3': !primary && !secondary
+          }
         )}
         ref={ref}
         type={type}
@@ -74,18 +77,8 @@ const FormLine: ForwardRefRenderFunction<HTMLInputElement, IFormLine> = (
         onKeyDown={onKeyDown}
         aria-label={title}
       />
-      {isLoading && (
-        <div
-          className={
-            'absolute bottom-3 right-3 flex cursor-pointer items-center justify-center rounded-full bg-gray-medium p-1 text-white [&>svg]:h-3.5 [&>svg]:w-3.5'
-          }
-        >
-          <Spinner />
-        </div>
-      )}
-      <span className="text-sm font-semibold leading-4 text-red">{error}</span>
-    </div>
+    </label>
   )
 }
 
-export default forwardRef(FormLine)
+export default forwardRef(FormLineComponent)

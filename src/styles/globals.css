@@ -7,5 +7,11 @@ html {
 }
 
 body {
-  @apply w-xl bg-background flex h-screen justify-between;
+  @apply flex h-screen w-xl justify-between bg-background;
+}
+
+@layer components {
+  .scrollbar-primary {
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray scrollbar-thumb-rounded;
+  }
 }

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 
 import { FC, ReactNode } from 'react'
 
@@ -7,12 +6,16 @@ import { DownArrowIcon } from '@/components'
 
 type ISortableColumn = {
   field: string
+  searchParams?: { [key: string]: string | undefined }
   children: ReactNode
 }
 
-const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
-  const searchParams = useSearchParams()
-  const [sortField, asc] = searchParams.get('sort')?.split(':') ?? []
+const SortableColumn: FC<ISortableColumn> = ({
+  field,
+  searchParams,
+  children
+}) => {
+  const [sortField, asc] = searchParams?.sort?.split(':') ?? []
   let newSort = ''
 
   if (sortField !== field) {
@@ -45,14 +48,14 @@ const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
 
 type ITable = {
   rows: { id: string; [key: string]: string }[]
-  fields: { field: string; name: string }[]
-  onRowSelect: (row: { id: string; [key: string]: string }) => void
+  cols: { field: string; name: string }[]
+  searchParams?: { [key: string]: string | undefined }
 }
 
-const TableComponent: FC<ITable> = ({ rows, fields, onRowSelect }) => {
+const TableComponent: FC<ITable> = ({ rows, cols, searchParams }) => {
   return (
-    <div className="overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5">
-      <table className="min-w-full divide-y divide-gray-300">
+    <div className="w-full overflow-hidden rounded-lg ring-1 ring-black ring-opacity-5">
+      <table className="divide-gray-300 min-w-full divide-y">
         <thead className="bg-gray-50">
           <tr className="bg-lightGray">
             <th
@@ -61,25 +64,28 @@ const TableComponent: FC<ITable> = ({ rows, fields, onRowSelect }) => {
             >
               <input title="checkbox" type="checkbox" defaultValue={0} />
             </th>
-            {fields.map((val) => (
-              <SortableColumn key={val.field} field={val.field}>
+            {cols.map((val) => (
+              <SortableColumn
+                searchParams={searchParams}
+                key={val.field}
+                field={val.field}
+              >
                 {val.name}
               </SortableColumn>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200 bg-white">
+        <tbody className="divide-gray-200 divide-y bg-white">
           {rows.map((data) => (
             <tr
               key={data.id}
-              onClick={() => onRowSelect(data)}
-              className="even:bg-golden/20 cursor-pointer border-y border-black/5 transition-colors hover:bg-black/5"
+              className="cursor-pointer border-y border-black/5 transition-colors even:bg-golden/20 hover:bg-black/5"
             >
-              <td className="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+              <td className="text-gray-900 whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium sm:pl-6">
                 <input title="checkbox" type="checkbox" defaultValue={0} />
               </td>
-              {fields.map(({ field }) => (
-                <td className="py-3 pl-4 text-sm text-gray-500" key={field}>
+              {cols.map(({ field }) => (
+                <td className="text-gray-500 py-3 pl-4 text-sm" key={field}>
                   {data[field]}
                 </td>
               ))}

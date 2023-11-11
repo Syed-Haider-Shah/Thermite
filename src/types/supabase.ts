@@ -11,31 +11,31 @@ export interface Database {
     Tables: {
       Customers: {
         Row: {
-          Address: string
-          Coordinates: string | null
-          'Customer ID': number
-          'Installation Date': string | null
-          'Number of Panels': number
-          Region: string
-          'Serial Number': string
+          address: string
+          coordinates: string | null
+          id: number
+          installation_date: string | null
+          number_of_panels: number
+          region: string
+          serial_number: string
         }
         Insert: {
-          Address: string
-          Coordinates?: string | null
-          'Customer ID'?: number
-          'Installation Date'?: string | null
-          'Number of Panels': number
-          Region: string
-          'Serial Number': string
+          address: string
+          coordinates?: string | null
+          id?: number
+          installation_date?: string | null
+          number_of_panels: number
+          region: string
+          serial_number: string
         }
         Update: {
-          Address?: string
-          Coordinates?: string | null
-          'Customer ID'?: number
-          'Installation Date'?: string | null
-          'Number of Panels'?: number
-          Region?: string
-          'Serial Number'?: string
+          address?: string
+          coordinates?: string | null
+          id?: number
+          installation_date?: string | null
+          number_of_panels?: number
+          region?: string
+          serial_number?: string
         }
         Relationships: []
       }

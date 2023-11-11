@@ -1,5 +1,6 @@
 import { Table } from '@/components'
 import { supabase } from '@/services/supabase'
+import { ICustomers } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -31,170 +32,13 @@ const cols = [
     name: 'Number of Panels'
   }
 ]
-//test data, to check the scroll, can be removed
-const rows = [
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  },
-  {
-    id: '1',
-    serial_number: '222',
-    address: 'home',
-    coordinates: '132,13',
-    installation_date: '1999',
-    number_of_panels: '66',
-    region: 'NSW'
-  }
-]
 
-const Home = async ({
-  searchParams
-}: {
-  searchParams?: { [key: string]: string | undefined }
-}) => {
-  const { data } = await supabase.from('Customers').select()
-  return <Table cols={cols} rows={data} searchParams={searchParams} />
+const Home = async () => {
+  const { data: rows } = (await supabase.from('Customers').select()) as {
+    data: ICustomers[]
+  }
+
+  return <Table cols={cols} rows={rows} />
 }
 
 export default Home

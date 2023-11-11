@@ -124,6 +124,9 @@ const config: Config = {
       activeBlue: '#456BF0'
     }
   },
-  plugins: []
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
+  variants: {
+    scrollBar: ['rounded']
+  }
 }
 export default config

@@ -1,4 +1,5 @@
 import { Table } from '@/components'
+import { supabase } from '@/services/supabase'
 
 const cols = [
   {
@@ -6,68 +7,194 @@ const cols = [
     name: 'ID'
   },
   {
-    field: 'Serial Number',
+    field: 'serial_number',
     name: 'Serial Number'
   },
   {
-    field: 'Address',
+    field: 'address',
     name: 'Address'
   },
   {
-    field: 'Coordinates',
+    field: 'region',
+    name: 'Region'
+  },
+  {
+    field: 'coordinates',
     name: 'Coordinates'
   },
   {
-    field: 'Installation Date',
+    field: 'installation_date',
     name: 'Installation Date'
   },
   {
-    field: 'Number of Panels',
+    field: 'number_of_panels',
     name: 'Number of Panels'
   }
 ]
-
+//test data, to check the scroll, can be removed
 const rows = [
   {
     id: '1',
-    'Serial Number': 'H-7144',
-    Address: 'AU.NSW.Armidale:WPA.NSWS-Drummond-Memorial-Public-School',
-    Coordinates: 'null',
-    'Installation Date': 'null',
-    'Number of Panels': '1'
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
   },
   {
     id: '1',
-    'Serial Number': 'H-7144',
-    Address: 'AU.NSW.Armidale:WPA.NSWS-Drummond-Memorial-Public-School',
-    Coordinates: 'null',
-    'Installation Date': 'null',
-    'Number of Panels': '1'
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
   },
   {
     id: '1',
-    'Serial Number': 'H-7144',
-    Address: 'AU.NSW.Armidale:WPA.NSWS-Drummond-Memorial-Public-School',
-    Coordinates: 'null',
-    'Installation Date': 'null',
-    'Number of Panels': '1'
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
   },
   {
     id: '1',
-    'Serial Number': 'H-7144',
-    Address: 'AU.NSW.Armidale:WPA.NSWS-Drummond-Memorial-Public-School',
-    Coordinates: 'null',
-    'Installation Date': 'null',
-    'Number of Panels': '1'
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
+  },
+  {
+    id: '1',
+    serial_number: '222',
+    address: 'home',
+    coordinates: '132,13',
+    installation_date: '1999',
+    number_of_panels: '66',
+    region: 'NSW'
   }
 ]
 
-const Home = ({
+const Home = async ({
   searchParams
 }: {
   searchParams?: { [key: string]: string | undefined }
 }) => {
-  return <Table cols={cols} rows={rows} searchParams={searchParams} />
+  const { data } = await supabase.from('Customers').select()
+  return <Table cols={cols} rows={data} searchParams={searchParams} />
 }
 
 export default Home

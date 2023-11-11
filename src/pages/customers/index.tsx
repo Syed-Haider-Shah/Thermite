@@ -8,6 +8,7 @@ const cols = [
   'Address',
   'Location (Co-ordinates)',
   'Under Warranty',
+  'Region',
   'Contact'
 ]
 const rows = [
@@ -16,6 +17,7 @@ const rows = [
     address: 'Karachi',
     ticketNo: '1',
     childCount: '10',
+    region: 'NSW',
     assignedTo: 'EMP1'
   },
   {
@@ -23,6 +25,7 @@ const rows = [
     address: 'Karachi',
     ticketNo: '1',
     childCount: '10',
+    region: 'NSW',
     assignedTo: 'EMP1'
   },
   {
@@ -30,6 +33,7 @@ const rows = [
     address: 'Karachi',
     ticketNo: '1',
     childCount: '10',
+    region: 'NSW',
     assignedTo: 'EMP1'
   },
   {
@@ -37,6 +41,7 @@ const rows = [
     address: 'Karachi',
     ticketNo: '1',
     childCount: '10',
+    region: 'NSW',
     assignedTo: 'EMP1'
   },
   {
@@ -44,6 +49,7 @@ const rows = [
     address: 'Karachi',
     ticketNo: '1',
     childCount: '10',
+    region: 'NSW',
     assignedTo: 'EMP1'
   },
   {
@@ -51,6 +57,7 @@ const rows = [
     address: 'Karachi',
     ticketNo: '1',
     childCount: '10',
+    region: 'NSW',
     assignedTo: 'EMP1'
   },
   {
@@ -58,6 +65,7 @@ const rows = [
     address: 'Karachi',
     ticketNo: '1',
     childCount: '10',
+    region: 'NSW',
     assignedTo: 'EMP1'
   }
 ]

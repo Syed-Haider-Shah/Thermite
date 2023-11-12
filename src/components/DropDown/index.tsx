@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 
@@ -23,21 +24,21 @@ const DropDownComponent = ({ options, className, name }: IDropDown) => {
   }
 
   const handleRoute = (value: { name: string }) => {
-    const newParams = new URLSearchParams(searchParams.toString())
+    const newParams = new URLSearchParams(searchParams?.toString())
     return newParams.set(name, value.name)
   }
 
   return (
     <div
       className={clsx(
-        'relative space-y-1 text-sm font-medium text-black/60 dark:text-white/60',
+        'relative space-y-1 text-sm font-medium text-black/60',
         className || 'w-40'
       )}
     >
       <button
         type="button"
         onClick={handleToggle}
-        className="flex w-full items-center justify-between rounded-lg border border-black/5 bg-white/40 px-2 py-3 text-left dark:bg-black/60"
+        className="flex w-full items-center justify-between rounded-lg border border-black/5 bg-white/40 px-2 py-3 text-left"
       >
         {options[0]?.name}
         <ChevronDownIcon
@@ -48,7 +49,7 @@ const DropDownComponent = ({ options, className, name }: IDropDown) => {
       </button>
       <ul
         className={clsx(
-          'transition-maxHeight absolute z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl duration-300 dark:bg-black',
+          'absolute z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
           className || 'w-40',
           { 'max-h-sm': isOpen, 'max-h-0': !isOpen }
         )}
@@ -57,7 +58,7 @@ const DropDownComponent = ({ options, className, name }: IDropDown) => {
           <Link
             href={`${pathname}?${handleRoute(value)}`}
             key={value.name}
-            className="w-full cursor-pointer px-2 py-2.5 text-left hover:bg-black/5 dark:hover:bg-white/5"
+            className="w-full cursor-pointer px-2 py-2.5 text-left hover:bg-black/5"
           >
             {value.name}
           </Link>

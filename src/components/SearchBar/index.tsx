@@ -5,10 +5,10 @@ import { clsx } from 'clsx'
 import { MagnifierIcon } from '@/components'
 
 type ISearch = {
-  onFocus: () => void
-  onBlur: () => void
+  onFocus?: () => void
+  onBlur?: () => void
   placeholder?: string
-  isSearchFocused: boolean
+  isSearchFocused?: boolean
 }
 
 const SearchComponent: FC<ISearch> = ({
@@ -18,7 +18,7 @@ const SearchComponent: FC<ISearch> = ({
   isSearchFocused
 }) => {
   return (
-    <div className="rounded-7.5 relative flex h-12 items-center overflow-hidden border border-white/5 bg-black/5">
+    <div className="relative flex h-12 items-center overflow-hidden rounded-full border border-white/5 bg-black/5">
       <input
         title="Search bar"
         type="text"

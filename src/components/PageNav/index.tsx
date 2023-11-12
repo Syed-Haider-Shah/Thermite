@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 
@@ -29,7 +31,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
     <div className="flex items-center justify-center gap-x-2">
       <Button
         onClick={handlePrev}
-        className="border-darkGray h-7 rounded-md border bg-white px-2 text-black/50"
+        className="h-7 rounded-md border border-darkGray bg-white px-2 text-black/50"
       >
         Prev
       </Button>
@@ -40,7 +42,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
             key={pageVal}
             href={`./../${pageVal}`}
             className={clsx('rounded px-1 font-semibold', {
-              'border-heavyGray border text-black': `${pageVal}` === page,
+              'border border-heavyGray text-black': `${pageVal}` === page,
               'text-black/50': `${pageVal}` !== page
             })}
           >
@@ -50,7 +52,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
       })}
       <Button
         onClick={handleNext}
-        className="border-darkGray h-7 rounded-md border bg-white px-2 text-black/50"
+        className="h-7 rounded-md border border-darkGray bg-white px-2 text-black/50"
       >
         Next
       </Button>

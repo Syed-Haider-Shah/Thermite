@@ -12,6 +12,6 @@ body {
 
 @layer components {
   .scrollbar-primary {
-    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray scrollbar-thumb-rounded;
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-darkGray scrollbar-thumb-rounded;
   }
 }

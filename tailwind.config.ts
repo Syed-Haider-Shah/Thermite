@@ -48,6 +48,7 @@ const config: Config = {
       },
       maxHeight: {
         sm: '18.75rem', //300px
+        md: '37.5rem', // 600px
         lg: '59.375rem' // 832px
       },
       height: {

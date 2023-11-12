@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <NavBar />
         <div className="flex w-full flex-col">
           <Header />
-          <main className="scrollbar-primary relative m-8 flex justify-center overflow-y-auto rounded-2xl bg-white shadow-sm">
+          <main className="relative m-8 overflow-hidden rounded-2xl bg-white p-4 shadow-sm">
             {children}
           </main>
         </div>

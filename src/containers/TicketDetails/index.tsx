@@ -1,6 +1,6 @@
 import { Button, Card } from '@/components'
 
-const ChildDetails = () => {
+const TicketDetails = () => {
   return (
     <Card title="details" id="details">
       <div className="flex w-full justify-between">
@@ -41,4 +41,4 @@ const ChildDetails = () => {
   )
 }
 
-export default ChildDetails
+export default TicketDetails

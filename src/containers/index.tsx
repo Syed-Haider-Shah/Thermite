@@ -1,2 +1,2 @@
 export { default as Modal } from './Modal'
-export { default as ChildDetails } from './ChildDetails'
+export { default as TicketDetails } from './TicketDetails'

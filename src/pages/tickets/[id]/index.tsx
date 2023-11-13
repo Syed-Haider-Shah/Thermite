@@ -1,5 +1,5 @@
 import { Button, Card, DropDown, PageNav, Table, UnionIcon } from '@/components'
-import { ChildDetails } from '@/containers'
+import { TicketDetails } from '@/containers'
 
 const cols = [
   {
@@ -39,7 +39,7 @@ const OPTIONS = [
 const Tickets = () => {
   return (
     <>
-      <ChildDetails />
+      <TicketDetails />
       <Card>
         <div className="flex flex-row-reverse gap-2">
           <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">

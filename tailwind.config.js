@@ -140,6 +140,7 @@ module.exports = {
       darkGray: '#D2D2D2',
       lightGray: '#F8F8F8',
       golden: '#F1E4D0',
+      goldenMedium: '#DAA960',
       //button
       gray: '#969DAE',
       activeBlue: '#456BF0',

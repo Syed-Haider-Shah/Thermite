@@ -1,4 +1,4 @@
-import { Card, DropDown, SearchBar } from '@/components'
+import { Card, DropDown, SearchBar, Tag } from '@/components'
 
 const CATEGORYS = [
   'Generation F',
@@ -30,12 +30,9 @@ const Guides = () => {
           </h2>
           <div className="flex gap-2">
             {CATEGORYS.map((tag) => (
-              <div
-                key={tag}
-                className="h-min cursor-pointer rounded-full border border-golden px-4.5 pb-1 pt-1 text-center text-sm font-semibold leading-5 text-black/50"
-              >
+              <Tag title={tag} key={tag}>
                 {tag}
-              </div>
+              </Tag>
             ))}
           </div>
         </div>

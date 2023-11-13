@@ -7,6 +7,7 @@ export { default as SearchBar } from './SearchBar'
 export { default as DropDown } from './DropDown'
 export { default as Layout } from './Layout'
 export { default as PageNav } from './PageNav'
+export { default as Tag } from './Tag'
 
 export {
   LogoIcon,

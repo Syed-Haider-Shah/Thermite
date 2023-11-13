@@ -7,7 +7,7 @@ html,body {
 }
 
 #__next {
-  @apply flex h-screen max-w-xl justify-between bg-background;
+  @apply flex h-screen max-w-xl w-full justify-between bg-background;
 }
 
 @layer components {

@@ -1,11 +1,5 @@
-import {
-  Button,
-  DropDown,
-  PageNav,
-  SearchBar,
-  Table,
-  UnionIcon
-} from '@/components'
+import { Button, Card, DropDown, PageNav, Table, UnionIcon } from '@/components'
+import { ChildDetails } from '@/containers'
 
 const cols = [
   {
@@ -44,20 +38,20 @@ const OPTIONS = [
 ]
 const Tickets = () => {
   return (
-    <article className="flex flex-col gap-5 rounded-2xl bg-white p-4">
-      <div className="flex justify-between">
-        <SearchBar placeholder="Search for Tickets" />
-        <div className="flex gap-x-2">
-          <DropDown options={OPTIONS} name="category" />
+    <>
+      <ChildDetails />
+      <Card>
+        <div className="flex flex-row-reverse gap-2">
           <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
             <UnionIcon />
-            New Parent Ticket
+            New Child Ticket
           </Button>
+          <DropDown options={OPTIONS} name="category" />
         </div>
-      </div>
-      <Table cols={cols} rows={[]} />
-      <PageNav pageCount={5} />
-    </article>
+        <Table cols={cols} rows={[]} />
+        <PageNav pageCount={5} />
+      </Card>
+    </>
   )
 }
 export default Tickets

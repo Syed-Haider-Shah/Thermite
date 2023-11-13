@@ -49,13 +49,15 @@ const OPTIONS = [
 
 const Customers = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchCustomers = useCallback(async () => {
+    setIsLoading(true)
     const { data: rows, error } = await supabase
       .from('Customers')
       .select()
       .limit(12)
-
+    setIsLoading(false)
     if (error) {
       console.log(error.message)
       return
@@ -71,7 +73,7 @@ const Customers = () => {
   }, [fetchCustomers])
 
   return (
-    <article className="flex h-full flex-col gap-5">
+    <article className="flex h-full flex-col gap-5 rounded-2xl bg-white p-4">
       <div className="flex justify-between">
         <SearchBar placeholder="Search for Customers" />
         <div className="flex gap-x-2">
@@ -82,7 +84,7 @@ const Customers = () => {
           </Button>
         </div>
       </div>
-      <Table cols={cols} rows={customers} />
+      <Table cols={cols} rows={customers} isLoading={isLoading} />
       <PageNav pageCount={5} />
     </article>
   )

@@ -39,6 +39,7 @@ module.exports = {
         xl: '90rem', //1440px
       },
       minHeight: {
+        sm: '18.75rem', //300px
         md: '31.25rem', // 500px
       },
       maxHeight: {

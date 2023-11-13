@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import {
   Button,
@@ -8,8 +8,7 @@ import {
   Table,
   UnionIcon
 } from '@/components'
-import { supabase } from '@/services/supabase'
-import { ICustomer } from '@/types/supabaseTables'
+import { ITicket } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -46,46 +45,24 @@ const OPTIONS = [
   { value: 'active', name: 'Active' },
   { value: 'completed', name: 'Completed' }
 ]
-
-const Customers = () => {
-  const [customers, setCustomers] = useState<ICustomer[]>([])
-
-  const fetchCustomers = useCallback(async () => {
-    const { data: rows, error } = await supabase
-      .from('Customers')
-      .select()
-      .limit(12)
-
-    if (error) {
-      console.log(error.message)
-      return
-    }
-
-    if (rows) {
-      setCustomers(rows as ICustomer[])
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchCustomers()
-  }, [fetchCustomers])
+const Tickets = () => {
+  const [tickets, setTickets] = useState<ITicket[]>([])
 
   return (
-    <article className="flex h-full flex-col gap-5">
+    <article className="flex flex-col gap-5">
       <div className="flex justify-between">
-        <SearchBar placeholder="Search for Customers" />
+        <SearchBar placeholder="Search for Tickets" />
         <div className="flex gap-x-2">
           <DropDown options={OPTIONS} name="category" />
           <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
             <UnionIcon />
-            New Customer
+            New Parent Ticket
           </Button>
         </div>
       </div>
-      <Table cols={cols} rows={customers} />
+      <Table cols={cols} rows={tickets} />
       <PageNav pageCount={5} />
     </article>
   )
 }
-
-export default Customers
+export default Tickets

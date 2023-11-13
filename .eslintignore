@@ -4,7 +4,7 @@ public
 next-env.d.ts
 .env*
 .next
-tailwind.config.ts
+tailwind.config.js
 postcss.config.js
 prettier.config.js
 next.config.js

@@ -1,21 +1,17 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
-  ],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       space: {
-        4.5: '1.125rem'
+        4.5: '1.125rem',
       },
       translate: {
-        3.25: '0.813rem'
+        3.25: '0.813rem',
       },
       transitionProperty: {
-        maxHeight: 'max-height'
+        maxHeight: 'max-height',
       },
       width: {
         18: '4.5rem', //72px
@@ -32,36 +28,34 @@ const config: Config = {
         sm: '42.188rem', // 670px
         md: '47.688rem', // 763px
         lg: '50.125rem', // 802px
-        xl: '90rem' //1440px
       },
       minWidth: {
         55: '13.75rem', // 220px
         95: '23.75rem', // 380px
-        md: '47.688rem' // 763px
+        md: '47.688rem', // 763px
       },
       maxWidth: {
         md: '47.688rem', // 832px
-        xl: '90rem' //1440px
+        xl: '90rem', //1440px
       },
       minHeight: {
-        md: '31.25rem' // 500px
+        md: '31.25rem', // 500px
       },
       maxHeight: {
         sm: '18.75rem', //300px
-        md: '37.5rem', // 600px
-        lg: '59.375rem' // 832px
+        lg: '52rem', // 832px
       },
       height: {
         0.25: '0.0625rem', // 1px
         0.5: '0.125rem', // 2px
         18: '4.5rem', //72px
         50.5: '12.625rem', //202px
-        md: '44.688rem' // 715px
+        md: '44.688rem', // 715px
       },
       margin: {
         9.5: '2.375rem', // 38px
         34: '8.5rem', // 136px
-        15: '3.75rem' // 60px
+        15: '3.75rem', // 60px
       },
       padding: {
         0.25: '0.063rem', // 1px
@@ -73,40 +67,65 @@ const config: Config = {
         5.5: '1.325rem', // 22px
         8.5: '2.125rem', // 34px
         9.5: '2.375rem', // 38px
-        15: '3.75rem' // 60px
+        15: '3.75rem', // 60px
+      },
+      gap: {
+        15: '3.75rem', // 60px
+      },
+      fontSize: {
+        10: '2.5rem', // 40px
+      },
+      lineHeight: {
+        3.5: '0.875rem', //14px
+        12: '3rem', // 48px
+      },
+      borderRadius: {
+        7.5: '1.875rem', // 30px
+        5: '1.25rem', // 20px
+        2.5: '0.625rem', // 10px
+        1.25: '0.313rem', // 5px,
+      },
+      boxShadow: {
+        md: '0 4px 24px rgba(0, 0, 0, 0.03)',
+      },
+      zIndex: {
+        51: 51,
       },
       animation: {
         fade: 'fade .3s ease-in',
         'slide-up': 'slide-up .3s ease-out',
         'slide-down': 'slide-down .3s ease-out',
         'float-zoom': 'float-zoom .3s ease-in-out',
-        'zoom-in': 'zoom-in .3s ease-in'
+        'zoom-in': 'zoom-in .3s ease-in',
       },
       keyframes: {
         fade: {
-          from: { opacity: '0' },
-          to: { opacity: '1' }
+          from: { opacity: 0 },
+          to: { opacity: 1 },
         },
         'slide-up': {
           from: { transform: 'translateY(200px)' },
-          to: { transform: 'translateY(0)' }
+          to: { transform: 'translateY(0)' },
         },
         'slide-down': {
           from: { transform: 'translateY(-200px)' },
-          to: { transform: 'translateY(0)' }
+          to: { transform: 'translateY(0)' },
         },
         'float-zoom': {
           from: { transform: 'translateY(500px) scale(0.3)' },
-          to: { transform: 'translateY(0) scale(1)' }
-        }
-      }
+          to: { transform: 'translateY(0) scale(1)' },
+        },
+      },
     },
     screens: {
       xs: '30rem', // 480px
       sm: '48rem', // 768px
       md: '64rem', // 1024px
       lg: '80rem', // 1280px
-      xl: '90rem' // 1440px
+      xl: '90rem', // 1440px
+    },
+    fontFamily: {
+      sans: ['HK Grotesk'],
     },
     colors: {
       transparent: 'transparent',
@@ -122,12 +141,13 @@ const config: Config = {
       golden: '#F1E4D0',
       //button
       gray: '#969DAE',
-      activeBlue: '#456BF0'
-    }
+      activeBlue: '#456BF0',
+    },
   },
-  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
   variants: {
-    scrollBar: ['rounded']
-  }
+    scrollBar: ['rounded'],
+  },
 }
-export default config

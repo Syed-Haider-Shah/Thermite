@@ -1,7 +1,7 @@
 const UnionIcon = () => {
   return (
     <svg
-      className="transform transition origin-center group-hover:rotate-90"
+      className="origin-center transform transition group-hover:rotate-90"
       width="16"
       height="16"
       viewBox="0 0 16 16"

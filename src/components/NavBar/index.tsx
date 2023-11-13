@@ -24,7 +24,7 @@ const NavBarComponent: FC = () => {
       <div className="flex items-center">
         <LogoIcon />
       </div>
-      <div className="w-55 mt-[172px] flex flex-col gap-4">
+      <div className="mt-[172px] flex w-55 flex-col gap-4">
         {ROUTES.map((route) => (
           <Button
             key={route.name}

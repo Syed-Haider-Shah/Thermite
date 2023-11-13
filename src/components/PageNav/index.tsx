@@ -10,18 +10,18 @@ import { clsx } from 'clsx'
 import { Button } from '@/components'
 
 const PageNav = ({ pageCount }: { pageCount: number }) => {
-  const { page } = useParams() as { page?: string }
+  const { page } = useParams() || { page: null }
   const navigate = useRouter()
 
   const handleNext = useCallback(() => {
-    if (page) {
+    if (typeof page === 'string') {
       const currPage = parseInt(page, 10)
       if (page && currPage < pageCount) navigate.push(`./../${currPage + 1}`)
     }
   }, [navigate, page, pageCount])
 
   const handlePrev = useCallback(() => {
-    if (page) {
+    if (typeof page === 'string') {
       const currPage = parseInt(page, 10)
       if (page && currPage > 1) navigate.push(`./../${currPage - 1}`)
     }
@@ -42,7 +42,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
             key={pageVal}
             href={`./../${pageVal}`}
             className={clsx('rounded px-1 font-semibold', {
-              'border border-heavyGray text-black': `${pageVal}` === page,
+              'border-heavyGray border text-black': `${pageVal}` === page,
               'text-black/50': `${pageVal}` !== page
             })}
           >

@@ -39,48 +39,84 @@ export interface Database {
         }
         Relationships: []
       }
-      'Parent Ticket': {
+      Parent: {
         Row: {
-          Address: string
-          'Assigned Employee': string | null
-          'Child Ticket Count': number
-          'Close Date': string | null
-          Coordinates: string | null
-          Date: string
-          'Parent Ticket Number': number
-          Problem: string | null
-          Region: string | null
-          'Serial Number': string[]
-          Status: string
-          'Under Warranty': boolean | null
+          id: number
+          address: string
+          region: string | null
+          created_at: string
+          assigned_employee: string | null
+          child_count: number
+          close_date: string | null
+          coordinates: string | null
+          serial_number: string[]
+          status: string
+          country: string | null
+          under_warranty: boolean | null
         }
         Insert: {
-          Address: string
-          'Assigned Employee'?: string | null
-          'Child Ticket Count'?: number
-          'Close Date'?: string | null
-          Coordinates?: string | null
-          Date?: string
-          'Parent Ticket Number'?: number
-          Problem?: string | null
-          Region?: string | null
-          'Serial Number': string[]
-          Status: string
-          'Under Warranty'?: boolean | null
+          id?: number
+          address: string
+          region?: string | null
+          created_at: string
+          assigned_employee?: string | null
+          child_count?: number
+          close_date: string | null
+          coordinates?: string | null
+          serial_number: string[]
+          status: string
+          country: string | null
+          under_warranty?: boolean | null
         }
         Update: {
-          Address?: string
-          'Assigned Employee'?: string | null
-          'Child Ticket Count'?: number
-          'Close Date'?: string | null
-          Coordinates?: string | null
-          Date?: string
-          'Parent Ticket Number'?: number
-          Problem?: string | null
-          Region?: string | null
-          'Serial Number'?: string[]
-          Status?: string
-          'Under Warranty'?: boolean | null
+          id?: number
+          address: string
+          region?: string | null
+          created_at: string
+          assigned_employee?: string | null
+          child_count?: number
+          close_date: string | null
+          coordinates?: string | null
+          serial_number: string[]
+          status: string
+          country: string | null
+          under_warranty?: boolean | null
+        }
+        Relationships: []
+      }
+      Child: {
+        Row: {
+          id: number
+          created_at: string
+          address: string
+          serial_number: string
+          assigned_employee: string | null
+          close_date: string | null
+          problem: string | null
+          status: string
+          parent_ticket_id: number
+        }
+        Insert: {
+          id: number
+          created_at: string
+          address: string
+          serial_number: string
+          assigned_employee: string | null
+          close_date: string | null
+          problem: string | null
+          status: string
+          parent_ticket_id: number
+        }
+        Update: {
+          id: number
+          created_at: string
+          address: string
+          serial_number: string
+          assigned_employee: string | null
+          close_date: string | null
+          problem: string | null
+          status: string
+          parent_ticket_id: number
         }
         Relationships: []
       }

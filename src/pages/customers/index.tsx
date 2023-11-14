@@ -56,7 +56,7 @@ const Customers = () => {
     const { data: rows, error } = await supabase
       .from('Customers')
       .select()
-      .limit(12)
+      .limit(15)
     setIsLoading(false)
     if (error) {
       console.log(error.message)

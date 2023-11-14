@@ -8,6 +8,7 @@ export { default as DropDown } from './DropDown'
 export { default as Layout } from './Layout'
 export { default as PageNav } from './PageNav'
 export { default as Tag } from './Tag'
+export { default as TextArea } from './TextArea'
 
 export {
   LogoIcon,

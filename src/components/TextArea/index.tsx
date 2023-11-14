@@ -49,13 +49,16 @@ const FormAreaComponent: ForwardRefRenderFunction<
         'mt-6 text-xl leading-6 text-black/60 ': !primary
       })}
     >
-      {title}
+      <div className="flex gap-1">
+        {title}
+        {required && <span className="text-red">*</span>}
+      </div>
       <textarea
         className={clsx(
           className,
           'text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
           {
-            'rounded-1.25 border-heavyGray border px-2 py-2.5': primary,
+            'rounded-1.25 border border-heavyGray px-2 py-2.5': primary,
             'rounded-full bg-black/5 p-3': !primary
           }
         )}

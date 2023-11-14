@@ -9,7 +9,7 @@ type ICard = {
   id?: string
 }
 
-const CardComponent: FC<ICard> = ({ children, className, title, id }) => {
+const Card: FC<ICard> = ({ children, className, title, id }) => {
   return (
     <section
       id={id}
@@ -24,4 +24,4 @@ const CardComponent: FC<ICard> = ({ children, className, title, id }) => {
   )
 }
 
-export default CardComponent
+export default Card

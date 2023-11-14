@@ -53,17 +53,17 @@ const FormLineComponent: ForwardRefRenderFunction<
         'mt-6 text-xl leading-6 text-black/60 ': !primary && !secondary
       })}
     >
-      <div className="flex">
+      <div className="flex gap-1">
         {title}
-        {required && <div className="text-red">*</div>}
+        {required && <span className="text-red">*</span>}
       </div>
       <input
         className={clsx(
           className,
           'text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
           {
-            'rounded-1.25 border-heavyGray border': secondary,
-            'py-2.25 rounded-1.25 border-heavyGray border px-2': primary,
+            'rounded-1.25 border border-heavyGray': secondary,
+            'rounded-1.25 border border-heavyGray px-2 py-2.25': primary,
             'rounded-full bg-black/5 p-3': !primary && !secondary
           }
         )}

@@ -1,4 +1,7 @@
+import Link from 'next/link'
+
 import { Button, Card, DropDown, PageNav, Table, UnionIcon } from '@/components'
+import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 
 const cols = [
@@ -42,10 +45,12 @@ const Tickets = () => {
       <TicketDetails />
       <Card>
         <div className="flex flex-row-reverse gap-2">
-          <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
-            <UnionIcon />
-            New Child Ticket
-          </Button>
+          <Link href={`${Paths.TICKET_CREATE}`}>
+            <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
+              <UnionIcon />
+              New Child Ticket
+            </Button>
+          </Link>
           <DropDown options={OPTIONS} name="category" />
         </div>
         <Table cols={cols} rows={[]} />

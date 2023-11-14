@@ -19,7 +19,7 @@ const NavBarComponent: FC = () => {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky top-0 h-screen border-r border-black/5 bg-white px-5 py-10">
+    <nav className="sticky top-0 h-screen bg-white px-5 py-10">
       <div className="flex items-center">
         <LogoIcon />
       </div>

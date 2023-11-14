@@ -3,6 +3,7 @@ export enum Paths {
   CREATE = `${HOME}create`,
   TICKET = `${HOME}tickets`,
   TICKET_ID = `${TICKET}/[id]`,
+  TICKET_CREATE = `${TICKET}/create`,
   CUSTOMER = `${HOME}customers`,
   CUSTOMER_ID = `${CUSTOMER}/[id]`,
   FORM = `${HOME}forms`,

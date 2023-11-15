@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-import { clsx } from 'clsx'
+import { cn } from '@/utils/cn'
 
 type ICard = {
   children: ReactNode
@@ -14,7 +14,7 @@ const Card: FC<ICard> = ({ children, className, title, id }) => {
     <section
       id={id}
       title={title}
-      className={clsx(
+      className={cn(
         'relative h-min w-full space-y-5 overflow-hidden rounded-2xl bg-white p-4 shadow-sm',
         className
       )}

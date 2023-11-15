@@ -3,9 +3,8 @@ import { usePathname, useSearchParams } from 'next/navigation'
 
 import { memo, useState } from 'react'
 
-import { clsx } from 'clsx'
-
 import { ChevronDownIcon } from '@/components'
+import { cn } from '@/utils/cn'
 
 type IDropDown = {
   options: { name: string; value: string }[]
@@ -29,7 +28,7 @@ const DropDownComponent = ({ options, className, name }: IDropDown) => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'relative space-y-1 text-sm font-medium text-black/60',
         className || 'w-40'
       )}
@@ -41,13 +40,13 @@ const DropDownComponent = ({ options, className, name }: IDropDown) => {
       >
         {options[0]?.name}
         <ChevronDownIcon
-          className={clsx('origin-center transform transition', {
+          className={cn('origin-center transform transition', {
             '-rotate-90': !isOpen
           })}
         />
       </button>
       <ul
-        className={clsx(
+        className={cn(
           'absolute z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
           className || 'w-40',
           { 'max-h-sm': isOpen, 'max-h-0': !isOpen }

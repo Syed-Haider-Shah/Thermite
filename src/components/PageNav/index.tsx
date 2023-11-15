@@ -5,9 +5,8 @@ import { useParams, useRouter } from 'next/navigation'
 
 import { memo, useCallback } from 'react'
 
-import { clsx } from 'clsx'
-
 import { Button } from '@/components'
+import { cn } from '@/utils/cn'
 
 const PageNav = ({ pageCount }: { pageCount: number }) => {
   const { page } = useParams() || { page: null }
@@ -41,8 +40,8 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
           <Link
             key={pageVal}
             href={`./../${pageVal}`}
-            className={clsx('rounded px-1 font-semibold', {
-              'border-heavyGray border text-black': `${pageVal}` === page,
+            className={cn('rounded px-1 font-semibold', {
+              'border border-heavyGray text-black': `${pageVal}` === page,
               'text-black/50': `${pageVal}` !== page
             })}
           >

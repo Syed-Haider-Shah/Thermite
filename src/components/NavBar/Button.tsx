@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { FC } from 'react'
 
-import { clsx } from 'clsx'
+import { cn } from '@/utils/cn'
 
 type INavButton = {
   title: string
@@ -13,7 +13,7 @@ type INavButton = {
 const NavBarButtonComponent: FC<INavButton> = ({ title, href, active }) => (
   <Link
     href={href}
-    className={clsx(
+    className={cn(
       'cursor-pointer rounded-2.5 px-4.5 py-2 text-xl font-semibold leading-6 transition-colors duration-300 hover:bg-gray hover:text-white',
       {
         'bg-gray text-white': active === href,

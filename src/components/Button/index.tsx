@@ -1,6 +1,6 @@
 import { FC, memo, ReactNode } from 'react'
 
-import { clsx } from 'clsx'
+import { cn } from '@/utils/cn'
 
 type IButton = {
   className?: string
@@ -26,7 +26,7 @@ const ButtonComponent: FC<IButton> = ({
       disabled={disabled}
       onClick={onClick}
       type={type ? 'submit' : 'button'}
-      className={clsx(
+      className={cn(
         className,
         {
           'rounded-full bg-gray py-2.5': !active && !primary,

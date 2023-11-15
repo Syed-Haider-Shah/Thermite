@@ -1,10 +1,10 @@
-import { clsx } from 'clsx'
+import { cn } from '@/utils/cn'
 
 import { ISvgIcon } from './model'
 
 const Spinner = ({ className }: ISvgIcon) => (
   <svg
-    className={clsx('animate-spin', className)}
+    className={cn('animate-spin', className)}
     width="20"
     height="20"
     viewBox="0 0 20 20"

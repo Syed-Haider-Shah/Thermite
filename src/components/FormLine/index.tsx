@@ -6,7 +6,7 @@ import {
   KeyboardEvent
 } from 'react'
 
-import { clsx } from 'clsx'
+import { cn } from '@/utils/cn'
 
 interface IFormLine extends InputHTMLAttributes<HTMLInputElement> {
   id: string
@@ -47,7 +47,7 @@ const FormLineComponent: ForwardRefRenderFunction<
     <label
       title={title}
       htmlFor={id}
-      className={clsx('relative flex flex-col gap-y-1 font-semibold', {
+      className={cn('relative flex flex-col gap-y-1 font-semibold', {
         'text-sm leading-4 text-black/60': secondary,
         'text-sm leading-4 text-black/90': primary,
         'mt-6 text-xl leading-6 text-black/60 ': !primary && !secondary
@@ -58,7 +58,7 @@ const FormLineComponent: ForwardRefRenderFunction<
         {required && <span className="text-red">*</span>}
       </div>
       <input
-        className={clsx(
+        className={cn(
           className,
           'text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
           {

@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation'
 
 import { FC } from 'react'
 
+import Employees from '../Icons/Employees'
 import Button from './Button'
 
 const ROUTES = [
@@ -11,7 +12,7 @@ const ROUTES = [
   { name: 'Customers', link: '/customers' },
   { name: 'Forms', link: '/forms' },
   { name: 'Guides', link: '/guides' },
-  { name: 'Employees', link: '/employees' },
+  { name: 'Employees', link: '/employees', icon: <Employees /> },
   { name: 'Softwares', link: '/softwares' },
   { name: 'Settings', link: '/settings' }
 ]
@@ -30,12 +31,9 @@ const NavBarComponent: FC = () => {
       />
       <div className="mt-[80px] flex w-55 flex-col gap-4">
         {ROUTES.map((route) => (
-          <Button
-            key={route.name}
-            href={route.link}
-            title={route.name}
-            active={pathname}
-          />
+          <Button key={route.name} href={route.link} active={pathname}>
+            {route.icon} {route.name}
+          </Button>
         ))}
       </div>
     </nav>

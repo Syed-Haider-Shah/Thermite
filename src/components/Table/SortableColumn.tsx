@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useCallback } from 'react'
 
 import { DownArrowIcon } from '@/components'
 
@@ -14,6 +14,8 @@ type ISortableColumn = {
 
 const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
   const searchParams = useSearchParams()
+  const pathname = usePathname()
+
   const [sortField, asc] = searchParams?.get('sort')?.split(':') ?? []
   let newSort = ''
 
@@ -23,7 +25,11 @@ const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
     newSort = `${field}:asc`
   }
 
-  const newSearchParams = new URLSearchParams({ sort: newSort })
+  const createQueryString = useCallback(() => {
+    const params = new URLSearchParams(searchParams)
+    params.set('sort', newSort)
+    return params.toString()
+  }, [newSort, searchParams])
 
   return (
     <th
@@ -31,7 +37,7 @@ const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
       className="px-3 py-3.5 text-left font-semibold leading-5 text-black/50 first:pl-4 first:sm:pl-6"
     >
       <Link
-        href={newSort === '' ? './' : `./?${newSearchParams}`}
+        href={`${pathname}?${createQueryString()}`}
         className="group inline-flex items-center gap-x-1 whitespace-nowrap"
       >
         {children}

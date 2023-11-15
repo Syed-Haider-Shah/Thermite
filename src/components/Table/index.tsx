@@ -1,19 +1,23 @@
 import { FC, useMemo } from 'react'
 
+import { IRow } from '@/types/supabaseTables'
+
 import Spinner from '../Icons/Spinner'
 import SortableColumn from './SortableColumn'
 
 type ITable = {
-  rows: { [key: string]: string | number | string[] | boolean | null }[]
+  rows: IRow[]
+  onRowSelect?: (row: IRow) => void
   cols: { field: string; name: string }[]
   isLoading?: boolean
 }
 
-const TableComponent: FC<ITable> = ({ rows, cols, isLoading }) => {
+const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
   const rowList = useMemo(
     () =>
       rows.map((row, idx) => (
         <tr
+          onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
           className="cursor-pointer border-y border-black/5 transition-colors last:border-b-0 even:bg-golden/20 hover:bg-black/5"
         >
@@ -27,11 +31,11 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading }) => {
           ))}
         </tr>
       )),
-    [cols, rows]
+    [cols, onRowSelect, rows]
   )
 
   return (
-    <div className="scrollbar-primary min-h-sm max-h-[calc(100%-108px)] overflow-hidden overflow-y-auto rounded-lg ring-1 ring-black/5 ">
+    <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-lg ring-1 ring-black/5 ">
       <table className="h-full min-w-full divide-y">
         <thead className="sticky top-0 bg-lightGray">
           <tr>
@@ -48,15 +52,13 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading }) => {
             ))}
           </tr>
         </thead>
-        <tbody className="relative border-black/5">
-          {isLoading && (
-            <div className="absolute left-1/2 top-1/2">
-              <Spinner />
-            </div>
-          )}
-          {rowList}
-        </tbody>
+        <tbody className="relative border-black/5">{rowList}</tbody>
       </table>
+      {isLoading && (
+        <div className="absolute left-1/2 top-1/2">
+          <Spinner />
+        </div>
+      )}
     </div>
   )
 }

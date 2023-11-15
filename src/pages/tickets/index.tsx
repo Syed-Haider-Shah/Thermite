@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 
@@ -10,8 +11,9 @@ import {
   Table,
   UnionIcon
 } from '@/components'
+import { Paths } from '@/constants'
 import { supabase } from '@/services/supabase'
-import { IParentTicket } from '@/types/supabaseTables'
+import { IParentTicket, IRow } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -69,10 +71,19 @@ const OPTIONS = [
   { value: 'completed', name: 'Completed' }
 ]
 const Tickets = () => {
-  const [customers, setCustomers] = useState<IParentTicket[]>([])
+  const [tickets, setTickets] = useState<IParentTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const fetchCustomers = useCallback(async () => {
+  const router = useRouter()
+
+  const handleRowSelect = useCallback(
+    (row: IRow) => {
+      router.push(`${Paths.TICKET}/${row.id}`)
+    },
+    [router]
+  )
+
+  const fetchTickets = useCallback(async () => {
     setIsLoading(true)
     const { data: rows, error } = await supabase
       .from('Parent')
@@ -86,13 +97,14 @@ const Tickets = () => {
     }
 
     if (rows) {
-      setCustomers(rows as IParentTicket[])
+      setTickets(rows as IParentTicket[])
     }
   }, [])
 
   useEffect(() => {
-    fetchCustomers()
-  }, [fetchCustomers])
+    fetchTickets()
+  }, [fetchTickets])
+
   return (
     <article className="flex flex-col gap-5 rounded-2xl bg-white p-4">
       <div className="flex justify-between">
@@ -107,7 +119,12 @@ const Tickets = () => {
           </Link>
         </div>
       </div>
-      <Table cols={cols} rows={customers} isLoading={isLoading} />
+      <Table
+        cols={cols}
+        rows={tickets}
+        isLoading={isLoading}
+        onRowSelect={handleRowSelect}
+      />
       <PageNav pageCount={5} />
     </article>
   )

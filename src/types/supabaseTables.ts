@@ -9,6 +9,10 @@ export interface ICustomer {
   [key: string]: string | number | null
 }
 
+export type IRow = {
+  [key: string]: string | string[] | boolean | number | null
+}
+
 export interface IParentTicket {
   id: number
   address: string

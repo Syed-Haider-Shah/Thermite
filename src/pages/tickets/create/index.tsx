@@ -1,22 +1,20 @@
-//This should be for child ticket
-
 import { useRouter } from 'next/navigation'
 
 import { Button, DropDown, TextArea } from '@/components'
 import FormLine from '@/components/FormLine'
 import { Modal } from '@/containers'
 
-const CreateTicket = () => {
+const CreateParentTicket = () => {
   const router = useRouter()
 
   return (
-    <Modal showModal title="Create Ticket" onClose={router.back}>
+    <Modal showModal title="Create Parent Ticket" onClose={router.back}>
       <form className="space-y-5">
         <div className="mt-5 flex flex-1 flex-wrap gap-6 rounded-5 bg-lightGray p-5">
           <FormLine
             required
-            title="Title"
-            id="title"
+            title="Address"
+            id="address"
             className="w-sm"
             primary
           />
@@ -81,4 +79,4 @@ const CreateTicket = () => {
   )
 }
 
-export default CreateTicket
+export default CreateParentTicket

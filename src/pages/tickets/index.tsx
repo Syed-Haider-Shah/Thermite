@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 
@@ -75,6 +75,7 @@ const Tickets = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
+  const pathname = usePathname()
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -89,7 +90,6 @@ const Tickets = () => {
       .from('Parent')
       .select()
       .limit(15)
-    console.log(rows)
     setIsLoading(false)
     if (error) {
       console.log(error.message)
@@ -111,8 +111,8 @@ const Tickets = () => {
         <SearchBar placeholder="Search for Tickets" />
         <div className="flex gap-x-2">
           <DropDown options={OPTIONS} name="category" />
-          <Link href={'tickets/parentCreate'}>
-            <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
+          <Link href={`${pathname}${Paths.CREATE}`}>
+            <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />
               New Parent Ticket
             </Button>

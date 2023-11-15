@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { Button, Card, DropDown, PageNav, Table, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
@@ -40,12 +41,14 @@ const OPTIONS = [
   { value: 'completed', name: 'Completed' }
 ]
 const Tickets = () => {
+  const pathname = usePathname()
+
   return (
     <>
       <TicketDetails />
       <Card>
         <div className="flex flex-row-reverse gap-2">
-          <Link href={`${Paths.TICKET_CREATE}`}>
+          <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />
               New Child Ticket

@@ -27,14 +27,14 @@ const ButtonComponent: FC<IButton> = ({
       onClick={onClick}
       type={type ? 'submit' : 'button'}
       className={cn(
-        className,
+        'flex items-center justify-center gap-x-2 text-sm font-bold',
         {
-          'rounded-full bg-gray py-2.5': !active && !primary,
+          'rounded-full bg-gray py-3': !active && !primary,
           'rounded-1.25 bg-activeBlue px-4.5 py-1 text-white': active,
-          'rounded-1.25 border border-black/10 bg-transparent px-4.5 py-1 text-black/40':
+          'rounded-1.25 border border-black/10 bg-transparent px-4.5 text-black/40':
             primary
         },
-        'flex items-center justify-center gap-x-2 text-sm font-bold'
+        className
       )}
     >
       {children}

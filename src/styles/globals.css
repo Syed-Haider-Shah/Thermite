@@ -10,11 +10,11 @@ html,body {
 }
 
 #__next {
-  @apply flex h-screen w-full justify-between bg-background border-x border-black/5;
+  @apply flex h-screen w-full justify-between bg-vLightIndigo border-x border-black/5;
 }
 
 @layer components {
   .scrollbar-primary {
-    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-darkGray scrollbar-thumb-rounded;
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-vLightIndigo scrollbar-thumb-rounded;
   }
 }

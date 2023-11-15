@@ -29,7 +29,7 @@ const ButtonComponent: FC<IButton> = ({
       className={cn(
         'flex items-center justify-center gap-x-2 text-sm font-bold',
         {
-          'rounded-full bg-gray py-3': !active && !primary,
+          'rounded-full bg-indigo py-3': !active && !primary,
           'rounded-1.25 bg-activeBlue px-4.5 py-1 text-white': active,
           'rounded-1.25 border border-black/10 bg-transparent px-4.5 text-black/40':
             primary

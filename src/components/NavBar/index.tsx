@@ -11,7 +11,9 @@ const ROUTES = [
   { name: 'Customers', link: '/customers' },
   { name: 'Forms', link: '/forms' },
   { name: 'Guides', link: '/guides' },
-  { name: 'Softwares', link: '/softwares' }
+  { name: 'Employees', link: '/employees' },
+  { name: 'Softwares', link: '/softwares' },
+  { name: 'Settings', link: '/settings' }
 ]
 
 const NavBarComponent: FC = () => {
@@ -26,7 +28,7 @@ const NavBarComponent: FC = () => {
         width={120}
         height={120}
       />
-      <div className="mt-[172px] flex w-55 flex-col gap-4">
+      <div className="mt-[80px] flex w-55 flex-col gap-4">
         {ROUTES.map((route) => (
           <Button
             key={route.name}

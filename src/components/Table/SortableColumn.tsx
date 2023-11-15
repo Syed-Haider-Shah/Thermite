@@ -34,7 +34,7 @@ const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
   return (
     <th
       scope="col"
-      className="px-3 py-3.5 text-left font-semibold leading-5 text-black/50 first:pl-4 first:sm:pl-6"
+      className="px-3 py-3.5 text-left font-semibold leading-5 text-white first:pl-4 first:sm:pl-6"
     >
       <Link
         href={`${pathname}?${createQueryString()}`}
@@ -43,7 +43,7 @@ const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
         {children}
         <DownArrowIcon
           className={`${asc && sortField === field && 'rotate-180'}`}
-          color={`${sortField === field ? '#456BF0' : '#7C7C7C'}`}
+          color={`${sortField === field ? '#456BF0' : '#FFFFFF'}`}
           aria-hidden="true"
         />
       </Link>

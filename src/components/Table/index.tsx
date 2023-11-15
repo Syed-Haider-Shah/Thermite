@@ -19,9 +19,9 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
         <tr
           onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
-          className="even:bg-indigo/5 cursor-pointer border-y border-black/5 transition-colors last:border-b-0 hover:bg-black/5"
+          className="cursor-pointer border-y border-black/5 transition-colors last:border-b-0 even:bg-indigo/5 hover:bg-black/5"
         >
-          <td className="text-gray-900 whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium sm:pl-6">
+          <td className="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-red sm:pl-6">
             <input title="checkbox" type="checkbox" defaultValue={0} />
           </td>
           {cols.map(({ field }) => (
@@ -35,9 +35,9 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
   )
 
   return (
-    <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-lg ring-1 ring-black/5 ">
+    <div className="scrollbar-primary rounde relative max-h-[calc(100%-108px)] min-h-sm overflow-auto ring-1 ring-black/5 ">
       <table className="h-full min-w-full divide-y">
-        <thead className="sticky top-0 z-10 bg-lightGray bg-opacity-100">
+        <thead className="bg-darkIndigo sticky top-0 z-10 bg-opacity-100">
           <tr>
             <th
               scope="col"

@@ -41,7 +41,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
             key={pageVal}
             href={`./../${pageVal}`}
             className={cn('rounded px-1 font-semibold', {
-              'border border-heavyGray text-black': `${pageVal}` === page,
+              'border border-darkGray text-black': `${pageVal}` === page,
               'text-black/50': `${pageVal}` !== page
             })}
           >

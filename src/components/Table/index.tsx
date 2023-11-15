@@ -19,7 +19,7 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
         <tr
           onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
-          className="cursor-pointer border-y border-black/5 transition-colors last:border-b-0 even:bg-golden/20 hover:bg-black/5"
+          className="even:bg-indigo/5 cursor-pointer border-y border-black/5 transition-colors last:border-b-0 hover:bg-black/5"
         >
           <td className="text-gray-900 whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium sm:pl-6">
             <input title="checkbox" type="checkbox" defaultValue={0} />

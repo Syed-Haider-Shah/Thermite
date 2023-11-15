@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-import { memo, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import { ChevronDownIcon } from '@/components'
 import { cn } from '@/utils/cn'
@@ -21,10 +21,14 @@ const DropDownComponent = ({ options, className, name }: IDropDown) => {
     setIsOpen((value) => !value)
   }
 
-  const handleRoute = (value: { name: string }) => {
-    const newParams = new URLSearchParams(searchParams?.toString())
-    return newParams.set(name, value.name)
-  }
+  const createQueryString = useCallback(
+    (value: string) => {
+      const params = new URLSearchParams(searchParams)
+      params.set(name, value)
+      return params.toString()
+    },
+    [name, searchParams]
+  )
 
   return (
     <div
@@ -52,13 +56,13 @@ const DropDownComponent = ({ options, className, name }: IDropDown) => {
           { 'max-h-sm': isOpen, 'max-h-0': !isOpen }
         )}
       >
-        {options.map((value) => (
+        {options.map(({ name, value }) => (
           <Link
-            href={`${pathname}?${handleRoute(value)}`}
-            key={value.name}
+            href={`${pathname}?${createQueryString(value)}`}
+            key={name}
             className="w-full cursor-pointer px-2 py-2.5 text-left hover:bg-black/5"
           >
-            {value.name}
+            {name}
           </Link>
         ))}
       </ul>

@@ -16,7 +16,7 @@ const ModalWrapper: FC<IModal> = ({ title, children, showModal, onClose }) => {
       {onClose ? (
         <div className="absolute z-0 h-full w-full" onClick={onClose} />
       ) : null}
-      <div className="flex h-fit max-h-lg min-h-md w-md flex-col rounded-5 bg-white p-5">
+      <div className="flex h-fit max-h-lg min-h-md w-md animate-float-zoom flex-col rounded-5 bg-white p-5">
         {title && (
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-medium text-black/90">{title}</h2>

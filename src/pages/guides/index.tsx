@@ -36,7 +36,7 @@ const Guides = () => {
             ))}
           </div>
         </div>
-        <DropDown options={OPTIONS} name="Type" />
+        <DropDown options={OPTIONS} name="type" />
       </div>
       <h1 className="translate-y-1 font-semibold leading-5 text-black/90">
         Guides

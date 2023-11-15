@@ -1,8 +1,7 @@
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 import { FC } from 'react'
-
-import { LogoIcon } from '@/components'
 
 import Button from './Button'
 
@@ -20,9 +19,13 @@ const NavBarComponent: FC = () => {
 
   return (
     <nav className="sticky top-0 h-screen bg-white px-5 py-10">
-      <div className="flex items-center">
-        <LogoIcon />
-      </div>
+      <Image
+        src="/logo.svg"
+        className="px-4"
+        alt="logo"
+        width={120}
+        height={120}
+      />
       <div className="mt-[172px] flex w-55 flex-col gap-4">
         {ROUTES.map((route) => (
           <Button

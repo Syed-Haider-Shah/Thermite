@@ -11,7 +11,6 @@ export { default as Tag } from './Tag'
 export { default as TextArea } from './TextArea'
 
 export {
-  LogoIcon,
   MagnifierIcon,
   ChevronDownIcon,
   CrossIcon,

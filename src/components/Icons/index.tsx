@@ -1,4 +1,3 @@
-export { default as LogoIcon } from './Logo'
 export { default as MagnifierIcon } from './Magnifier'
 export { default as ChevronDownIcon } from './ChevronDown'
 export { default as UnionIcon } from './Union'

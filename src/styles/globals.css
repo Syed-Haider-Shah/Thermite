@@ -10,7 +10,7 @@ html,body {
 }
 
 #__next {
-  @apply flex h-screen max-w-xl w-full justify-between bg-background border-x border-black/5;
+  @apply flex h-screen w-full justify-between bg-background border-x border-black/5;
 }
 
 @layer components {

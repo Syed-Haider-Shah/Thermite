@@ -37,7 +37,7 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
   return (
     <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-md ring-1 ring-black/5 ">
       <table className="h-full min-w-full divide-y">
-        <thead className="bg-darkIndigo sticky top-0 z-10 bg-opacity-100">
+        <thead className="sticky top-0 z-10 bg-darkIndigo bg-opacity-100">
           <tr>
             <th
               scope="col"

@@ -43,7 +43,7 @@ const SortableColumn: FC<ISortableColumn> = ({ field, children }) => {
         {children}
         <DownArrowIcon
           className={`${asc && sortField === field && 'rotate-180'}`}
-          color={`${sortField === field ? '#456BF0' : '#FFFFFF'}`}
+          color={`${sortField === field ? '#DCE546' : '#FFFFFF'}`}
           aria-hidden="true"
         />
       </Link>

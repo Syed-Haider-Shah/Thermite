@@ -42,7 +42,7 @@ const HeaderComponent: FC = () => {
           <h1 className=" text-lg font-semibold leading-6">Admin</h1>
           <button
             type="button"
-            className="bg-darkIndigo h-9 w-9 rounded-full"
+            className="h-9 w-9 rounded-full bg-darkIndigo"
           />
           <ul
             className={cn(

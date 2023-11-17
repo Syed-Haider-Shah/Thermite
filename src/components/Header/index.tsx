@@ -31,7 +31,7 @@ const HeaderComponent: FC = () => {
         className="flex items-center gap-x-4 px-7 pb-5.5 pt-9"
       >
         <h1 className="text-lg font-semibold leading-6">Admin</h1>
-        <button type="button" className="h-9 w-9 rounded-full bg-darkIndigo" />
+        <button type="button" className="bg-darkIndigo h-9 w-9 rounded-full" />
         <ul
           className={cn(
             'absolute right-2 top-20 z-10 flex w-36 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',

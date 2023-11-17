@@ -3,18 +3,32 @@ import { usePathname } from 'next/navigation'
 
 import { FC } from 'react'
 
-import Employees from '../Icons/Employees'
+import {
+  Archive,
+  Calender,
+  Circle,
+  Employees,
+  Explore,
+  Gear,
+  Grid,
+  People
+} from '@/components/Icons'
+
 import Button from './Button'
 
 const ROUTES = [
-  { name: 'Dashboard', link: '/' },
-  { name: 'Tickets', link: '/tickets' },
-  { name: 'Customers', link: '/customers' },
-  { name: 'Forms', link: '/forms' },
-  { name: 'Guides', link: '/guides' },
-  { name: 'Employees', link: '/employees', icon: <Employees /> },
-  { name: 'Softwares', link: '/softwares' },
-  { name: 'Settings', link: '/settings' }
+  { name: 'Dashboard', link: '/', icon: <Grid /> },
+  { name: 'Tickets', link: '/tickets', icon: <Archive /> },
+  { name: 'Customers', link: '/customers', icon: <People /> },
+  { name: 'Forms', link: '/forms', icon: <Calender /> },
+  { name: 'Guides', link: '/guides', icon: <Explore /> },
+  {
+    name: 'Employees',
+    link: '/employees',
+    icon: <Employees />
+  },
+  { name: 'Softwares', link: '/softwares', icon: <Circle /> },
+  { name: 'Settings', link: '/settings', icon: <Gear /> }
 ]
 
 const NavBarComponent: FC = () => {

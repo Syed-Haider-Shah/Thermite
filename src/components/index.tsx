@@ -18,5 +18,12 @@ export {
   BinIcon,
   NewUserIcon,
   UnionIcon,
-  CorneredBoxIcon
+  CorneredBoxIcon,
+  Archive,
+  Calender,
+  Explore,
+  Gear,
+  People,
+  Employees,
+  Circle
 } from './Icons'

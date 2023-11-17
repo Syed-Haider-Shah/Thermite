@@ -26,5 +26,7 @@ export {
   Gear,
   People,
   Employees,
-  Circle
+  Circle,
+  Bell,
+  Grid
 } from './Icons'

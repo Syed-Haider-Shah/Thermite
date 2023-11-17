@@ -27,7 +27,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
   }, [navigate, page])
 
   return (
-    <div className="flex items-center justify-center gap-x-2">
+    <div className="flex items-center justify-center gap-x-2 shadow-md">
       <Button
         onClick={handlePrev}
         className="h-7 rounded-md border border-darkGray bg-white px-2 text-black/50"

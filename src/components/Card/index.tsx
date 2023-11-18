@@ -15,7 +15,7 @@ const Card: FC<ICard> = ({ children, className, title, id }) => {
       id={id}
       title={title}
       className={cn(
-        'scrollbar-primary relative h-min w-full space-y-5 overflow-hidden overflow-y-scroll rounded-2xl bg-white p-4 shadow-md',
+        'relative h-min w-full scroll-p-5 space-y-5 overflow-hidden rounded-2xl bg-white p-4 shadow-md',
         className
       )}
     >

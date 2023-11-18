@@ -2,11 +2,7 @@ import { Card } from '@/components'
 
 const Guides = () => {
   return (
-    <Card
-      title="softwares"
-      id="softwares"
-      className="scrollbar-primary overflow-y-scroll"
-    >
+    <Card title="softwares" id="softwares">
       <h1 className="text-xl font-semibold leading-6">Softwares</h1>
       <div className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5">
         <div className="space-y-2 text-sm">

@@ -21,19 +21,7 @@ const cols = [
     name: 'ID'
   },
   {
-    field: 'address',
-    name: 'Address'
-  },
-  {
-    field: 'region',
-    name: 'Region'
-  },
-  {
-    field: 'serial_number',
-    name: 'Serial Number'
-  },
-  {
-    field: 'assigned_employee',
+    field: 'employee',
     name: 'Assigned Employee'
   },
   {
@@ -45,24 +33,16 @@ const cols = [
     name: 'Created At'
   },
   {
-    field: 'coordinates',
-    name: 'Coordinates'
-  },
-  {
     field: 'status',
     name: 'Status'
   },
   {
-    field: 'under_warranty',
-    name: 'Under Warranty'
+    field: 'customer_id',
+    name: 'Customer ID'
   },
   {
     field: 'close_date',
     name: 'Close Date'
-  },
-  {
-    field: 'country',
-    name: 'Country'
   }
 ]
 const OPTIONS = [
@@ -89,16 +69,14 @@ const Tickets = () => {
     const { data: rows, error } = await supabase
       .from('Parent')
       .select()
+      .order('created_at', {
+        ascending: false
+      })
       .limit(15)
     setIsLoading(false)
-    if (error) {
-      console.log(error.message)
-      return
-    }
 
-    if (rows) {
-      setTickets(rows as IParentTicket[])
-    }
+    if (error) console.log(error.message)
+    else if (rows) setTickets(rows as IParentTicket[])
   }, [])
 
   useEffect(() => {
@@ -106,7 +84,7 @@ const Tickets = () => {
   }, [fetchTickets])
 
   return (
-    <article className="flex flex-col gap-5 rounded-2xl bg-white p-4">
+    <article className="flex h-full flex-col gap-5 rounded-2xl bg-white p-4">
       <div className="flex justify-between">
         <SearchBar placeholder="Search for Tickets" />
         <div className="flex gap-x-2">

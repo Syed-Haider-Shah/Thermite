@@ -52,7 +52,7 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
             ))}
           </tr>
         </thead>
-        <tbody className="relative border-black/5">{rowList}</tbody>
+        <tbody className="border-black/5">{rowList}</tbody>
       </table>
       {isLoading && (
         <div className="absolute left-1/2 top-1/2">

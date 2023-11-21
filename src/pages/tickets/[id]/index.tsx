@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { Button, Card, DropDown, PageNav, Table, UnionIcon } from '@/components'
+import { Button, DropDown, PageNav, Table, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 
@@ -46,7 +46,7 @@ const Tickets = () => {
   return (
     <>
       <TicketDetails />
-      <Card>
+      <article className="flex h-full flex-col gap-5 rounded-2xl bg-white p-4">
         <div className="flex flex-row-reverse gap-2">
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
@@ -58,7 +58,7 @@ const Tickets = () => {
         </div>
         <Table cols={cols} rows={[]} />
         <PageNav pageCount={5} />
-      </Card>
+      </article>
     </>
   )
 }

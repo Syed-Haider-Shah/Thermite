@@ -14,30 +14,21 @@ export type IRow = {
 }
 
 export interface IParentTicket {
-  id: number
-  address: string
-  region: string | null
-  created_at: string
-  assigned_employee: string | null
-  child_count: number
+  child_count: string
   close_date: string | null
-  coordinates: string | null
-  serial_number: string[]
-  status: string
-  country: string | null
-  under_warranty: boolean | null
+  created_at: string
+  customer_id: number | null
+  employee: number | null
+  id: number
   [key: string]: string | string[] | boolean | number | null
 }
 
 export interface IChildTicket {
-  id: number
-  created_at: string
-  address: string
-  serial_number: string
-  assigned_employee: string | null
   close_date: string | null
+  created_at: string
+  id: number
+  parent_id: number
   problem: string | null
   status: string
-  parent_ticket_id: number
   [key: string]: string | boolean | number | null
 }

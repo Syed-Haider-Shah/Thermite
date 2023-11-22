@@ -229,13 +229,13 @@ export interface Database {
           par_id: number
         }
         Returns: {
-          p_id: number
+          parent_id: number
           created_at: string
           child_count: string
           close_date: string
           status: string
           employee: string
-          c_id: number
+          customer_id: number
           address: string
           region: string
           serial_number: string
@@ -251,6 +251,15 @@ export interface Database {
           par_id: number
         }
         Returns: Record<string, unknown>
+      }
+      test: {
+        Args: {
+          par_id: number
+        }
+        Returns: {
+          parent_id: number
+          child_count: string
+        }[]
       }
       update_child_count: {
         Args: {

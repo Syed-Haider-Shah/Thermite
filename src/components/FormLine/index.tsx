@@ -19,6 +19,7 @@ interface IFormLine extends InputHTMLAttributes<HTMLInputElement> {
   secondary?: boolean
   required?: boolean
   disabled?: boolean
+  error?: string | boolean
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
 }
@@ -38,6 +39,7 @@ const FormLineComponent: ForwardRefRenderFunction<
     secondary,
     required,
     disabled,
+    error,
     onChange,
     onKeyDown
   },
@@ -77,6 +79,14 @@ const FormLineComponent: ForwardRefRenderFunction<
         onKeyDown={onKeyDown}
         aria-label={title}
       />
+      <div
+        className={cn(
+          'whitespace-pre text-sm font-semibold leading-4 text-red duration-300 ease-in-out',
+          { 'text-red/0': !error }
+        )}
+      >
+        {error || ''}
+      </div>
     </label>
   )
 }

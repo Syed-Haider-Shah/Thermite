@@ -17,6 +17,7 @@ interface IFormLine extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   primary?: string | boolean
   required?: boolean
   disabled?: boolean
+  error?: string | boolean
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
   onKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void
 }
@@ -36,6 +37,7 @@ const FormAreaComponent: ForwardRefRenderFunction<
     disabled,
     onChange,
     onKeyDown,
+    error,
     rows
   },
   ref
@@ -72,6 +74,14 @@ const FormAreaComponent: ForwardRefRenderFunction<
         onKeyDown={onKeyDown}
         aria-label={title}
       />
+      <div
+        className={cn(
+          'whitespace-pre text-sm font-semibold leading-4 text-red duration-300 ease-in-out',
+          { 'text-red/0': !error }
+        )}
+      >
+        {error}
+      </div>
     </label>
   )
 }

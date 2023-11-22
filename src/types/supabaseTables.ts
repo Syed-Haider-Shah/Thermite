@@ -1,12 +1,15 @@
 export interface ICustomer {
   address: string
+  c_id: number
   coordinates: string | null
-  id: number
+  country: string | null
+  created_at: string
   installation_date: string | null
   number_of_panels: number
   region: string
   serial_number: string
-  [key: string]: string | number | null
+  warranty: boolean | null
+  [key: string]: string | string[] | boolean | number | null
 }
 
 export type IRow = {
@@ -37,5 +40,5 @@ export interface IChildTicket {
   serial_number: string
   status: string
   upgrade: boolean
-  [key: string]: string | boolean | number | null
+  [key: string]: string | string[] | boolean | number | null
 }

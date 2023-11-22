@@ -58,14 +58,9 @@ const Customers = () => {
       .select()
       .limit(15)
     setIsLoading(false)
-    if (error) {
-      console.log(error.message)
-      return
-    }
 
-    if (rows) {
-      setCustomers(rows as ICustomer[])
-    }
+    if (error) console.log(error.message)
+    else if (rows) setCustomers(rows as ICustomer[])
   }, [])
 
   useEffect(() => {

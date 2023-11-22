@@ -19,10 +19,6 @@ const cols = [
     name: 'Description'
   },
   {
-    field: 'close_date',
-    name: 'Close Date'
-  },
-  {
     field: 'created_at',
     name: 'Created At'
   },

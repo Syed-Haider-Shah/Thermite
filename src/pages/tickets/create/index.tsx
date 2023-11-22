@@ -61,7 +61,7 @@ const CreateParentTicket = () => {
 
       setIsLoading(true)
       const { error } = await supabase.rpc('create_parent_ticket', {
-        cus_id: selectedRow.id
+        cus_id: Number(selectedRow.id)
       })
       setIsLoading(false)
 

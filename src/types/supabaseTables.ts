@@ -26,9 +26,16 @@ export interface IParentTicket {
 export interface IChildTicket {
   close_date: string | null
   created_at: string
+  created_date: string
+  customer_impact: boolean
+  customer_inquiry: boolean
+  description: string
+  fault: string
   id: number
   parent_id: number
   problem: string | null
+  serial_number: string
   status: string
+  upgrade: boolean
   [key: string]: string | boolean | number | null
 }

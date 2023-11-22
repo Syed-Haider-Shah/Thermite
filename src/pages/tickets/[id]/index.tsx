@@ -1,9 +1,13 @@
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
+
+import { useCallback, useEffect, useState } from 'react'
 
 import { Button, DropDown, PageNav, Table, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
+import { supabase } from '@/services/supabase'
+import { IChildTicket } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -11,28 +15,48 @@ const cols = [
     name: 'ID'
   },
   {
+    field: 'description',
+    name: 'Description'
+  },
+  {
+    field: 'close_date',
+    name: 'Close Date'
+  },
+  {
+    field: 'created_at',
+    name: 'Created At'
+  },
+  {
+    field: 'customer_impact',
+    name: 'Customer Impact'
+  },
+  {
+    field: 'customer_inquiry',
+    name: 'Customer Inquiry'
+  },
+  {
+    field: 'fault',
+    name: 'Fault'
+  },
+  {
+    field: 'parent_id',
+    name: 'Parent ID'
+  },
+  {
+    field: 'problem',
+    name: 'Problem'
+  },
+  {
+    field: 'status',
+    name: 'Status'
+  },
+  {
+    field: 'upgrade',
+    name: 'Upgrade'
+  },
+  {
     field: 'serial_number',
     name: 'Serial Number'
-  },
-  {
-    field: 'address',
-    name: 'Address'
-  },
-  {
-    field: 'region',
-    name: 'Region'
-  },
-  {
-    field: 'coordinates',
-    name: 'Coordinates'
-  },
-  {
-    field: 'installation_date',
-    name: 'Installation Date'
-  },
-  {
-    field: 'number_of_panels',
-    name: 'Number of Panels'
   }
 ]
 const OPTIONS = [
@@ -41,7 +65,33 @@ const OPTIONS = [
   { value: 'completed', name: 'Completed' }
 ]
 const Tickets = () => {
+  const [rows, setRows] = useState<IChildTicket[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const { id } = useParams() || { id: '' }
   const pathname = usePathname()
+
+  const fetchChildTickets = useCallback(async () => {
+    if (!id) return
+
+    setIsLoading(true)
+    const { data, error } = await supabase
+      .from('Child')
+      .select()
+      .eq('parent_id', id)
+      .order('created_at', {
+        ascending: false
+      })
+      .limit(10)
+    setIsLoading(false)
+
+    if (error) console.log(error.message)
+    else if (data) setRows(data)
+  }, [id])
+
+  useEffect(() => {
+    fetchChildTickets()
+  }, [fetchChildTickets])
 
   return (
     <>
@@ -56,7 +106,7 @@ const Tickets = () => {
           </Link>
           <DropDown options={OPTIONS} name="category" />
         </div>
-        <Table cols={cols} rows={[]} />
+        <Table isLoading={isLoading} cols={cols} rows={rows} />
         <PageNav pageCount={5} />
       </article>
     </>

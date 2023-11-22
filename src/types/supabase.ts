@@ -13,26 +13,47 @@ export interface Database {
         Row: {
           close_date: string | null
           created_at: string
+          created_date: string
+          customer_impact: boolean
+          customer_inquiry: boolean
+          description: string
+          fault: string
           id: number
           parent_id: number
           problem: string | null
+          serial_number: string
           status: string
+          upgrade: boolean
         }
         Insert: {
           close_date?: string | null
           created_at?: string
+          created_date?: string
+          customer_impact?: boolean
+          customer_inquiry?: boolean
+          description?: string
+          fault?: string
           id?: number
           parent_id: number
           problem?: string | null
+          serial_number?: string
           status?: string
+          upgrade?: boolean
         }
         Update: {
           close_date?: string | null
           created_at?: string
+          created_date?: string
+          customer_impact?: boolean
+          customer_inquiry?: boolean
+          description?: string
+          fault?: string
           id?: number
           parent_id?: number
           problem?: string | null
+          serial_number?: string
           status?: string
+          upgrade?: boolean
         }
         Relationships: [
           {
@@ -47,30 +68,39 @@ export interface Database {
       Customers: {
         Row: {
           address: string
+          c_id: number
           coordinates: string | null
-          id: number
+          country: string | null
+          created_at: string
           installation_date: string | null
           number_of_panels: number
           region: string
           serial_number: string
+          warranty: boolean | null
         }
         Insert: {
           address: string
+          c_id?: number
           coordinates?: string | null
-          id?: number
+          country?: string | null
+          created_at?: string
           installation_date?: string | null
           number_of_panels: number
           region: string
           serial_number: string
+          warranty?: boolean | null
         }
         Update: {
           address?: string
+          c_id?: number
           coordinates?: string | null
-          id?: number
+          country?: string | null
+          created_at?: string
           installation_date?: string | null
           number_of_panels?: number
           region?: string
           serial_number?: string
+          warranty?: boolean | null
         }
         Relationships: []
       }
@@ -126,7 +156,7 @@ export interface Database {
             columns: ['customer_id']
             isOneToOne: false
             referencedRelation: 'Customers'
-            referencedColumns: ['id']
+            referencedColumns: ['c_id']
           },
           {
             foreignKeyName: 'Parent_employee_fkey'
@@ -161,10 +191,23 @@ export interface Database {
         }
         Returns: undefined
       }
-      create_child_ticket: {
+      count_children: {
         Args: {
           par_id: number
-          prob: string
+        }
+        Returns: number
+      }
+      create_child_ticket: {
+        Args: {
+          parentid: number
+          problem: string
+          fault: string
+          serial: string
+          customerimpact: boolean
+          customemrinquiry: boolean
+          upgrade: boolean
+          datecreated: string
+          description: string
         }
         Returns: undefined
       }
@@ -178,6 +221,40 @@ export interface Database {
         Args: {
           par_id: number
           stat: string
+        }
+        Returns: undefined
+      }
+      show_parent_details: {
+        Args: {
+          par_id: number
+        }
+        Returns: {
+          p_id: number
+          created_at: string
+          child_count: string
+          close_date: string
+          status: string
+          employee: string
+          c_id: number
+          address: string
+          region: string
+          serial_number: string
+          coordinates: string
+          installation_date: string
+          number_of_panels: number
+          country: string
+          warranty: boolean
+        }[]
+      }
+      show_parent_ticket: {
+        Args: {
+          par_id: number
+        }
+        Returns: Record<string, unknown>
+      }
+      update_child_count: {
+        Args: {
+          par_id: number
         }
         Returns: undefined
       }

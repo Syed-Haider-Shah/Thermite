@@ -1,6 +1,6 @@
 export interface ICustomer {
   address: string
-  c_id: number
+  id: number
   coordinates: string | null
   country: string | null
   created_at: string

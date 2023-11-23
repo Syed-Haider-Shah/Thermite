@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 const DownArrowIcon: FC<{ className?: string; color?: string }> = ({
   className,
-  color,
+  color
 }) => {
   return (
     <svg

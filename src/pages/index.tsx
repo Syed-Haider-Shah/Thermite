@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,7 +12,7 @@ import { supabase } from '@/services/supabase'
 import { LoginSchema } from '@/utils/yupConfig'
 
 export default function Home() {
-  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     register,
@@ -30,16 +29,17 @@ export default function Home() {
 
   const handleSignIn = useCallback(
     async ({ email, password }: { email: string; password: string }) => {
+      setIsLoading(true)
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password
       })
-
+      setIsLoading(false)
       if (error) console.log(error)
 
-      router.push(Paths.HOME)
+      window.location.replace(Paths.HOME)
     },
-    [router]
+    []
   )
 
   return (
@@ -74,7 +74,11 @@ export default function Home() {
             className="w-80"
             placeholder="Password"
           />
-          <Button type="submit" className="w-80 bg-lightIndigo text-white">
+          <Button
+            type="submit"
+            isLoading={isLoading}
+            className="w-80 bg-lightIndigo text-white"
+          >
             Sign in
           </Button>
         </form>

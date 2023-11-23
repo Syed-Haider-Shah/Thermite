@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (error) throw error
 
+      // route protection
       if (!data.session)
         if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
         else return
@@ -83,6 +84,4 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 }
 
 // export the useAuth hook
-export const useAuth = () => {
-  return useContext(AuthContext)
-}
+export const useAuth = () => useContext(AuthContext)

@@ -52,7 +52,7 @@ const FormLineComponent: ForwardRefRenderFunction<
       className={cn('relative flex flex-col gap-y-1 font-semibold', {
         'text-sm leading-4 text-black/60': secondary,
         'text-sm leading-4 text-black/90': primary,
-        'mt-6 text-xl leading-6 text-black/60 ': !primary && !secondary
+        'text-xl leading-6 text-black/60 ': !primary && !secondary
       })}
     >
       <div className="flex gap-1">

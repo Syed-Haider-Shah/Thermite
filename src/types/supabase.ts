@@ -68,10 +68,10 @@ export interface Database {
       Customers: {
         Row: {
           address: string
-          c_id: number
           coordinates: string | null
           country: string | null
           created_at: string
+          id: number
           installation_date: string | null
           number_of_panels: number
           region: string
@@ -80,10 +80,10 @@ export interface Database {
         }
         Insert: {
           address: string
-          c_id?: number
           coordinates?: string | null
           country?: string | null
           created_at?: string
+          id?: number
           installation_date?: string | null
           number_of_panels: number
           region: string
@@ -92,10 +92,10 @@ export interface Database {
         }
         Update: {
           address?: string
-          c_id?: number
           coordinates?: string | null
           country?: string | null
           created_at?: string
+          id?: number
           installation_date?: string | null
           number_of_panels?: number
           region?: string
@@ -107,20 +107,37 @@ export interface Database {
       Employees: {
         Row: {
           created_at: string
-          id: number
+          id: string
           name: string
+          number_of_assigned_tickets: number
+          number_of_completed_tickets: number
+          Roles: string
         }
         Insert: {
           created_at?: string
-          id?: number
-          name: string
+          id: string
+          name?: string
+          number_of_assigned_tickets?: number
+          number_of_completed_tickets?: number
+          Roles?: string
         }
         Update: {
           created_at?: string
-          id?: number
+          id?: string
           name?: string
+          number_of_assigned_tickets?: number
+          number_of_completed_tickets?: number
+          Roles?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: 'Employees_id_fkey'
+            columns: ['id']
+            isOneToOne: true
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
       }
       Parent: {
         Row: {
@@ -128,7 +145,7 @@ export interface Database {
           close_date: string | null
           created_at: string
           customer_id: number | null
-          employee: number | null
+          employee: string | null
           id: number
           status: string
         }
@@ -137,7 +154,7 @@ export interface Database {
           close_date?: string | null
           created_at?: string
           customer_id?: number | null
-          employee?: number | null
+          employee?: string | null
           id?: number
           status?: string
         }
@@ -146,7 +163,7 @@ export interface Database {
           close_date?: string | null
           created_at?: string
           customer_id?: number | null
-          employee?: number | null
+          employee?: string | null
           id?: number
           status?: string
         }
@@ -156,7 +173,7 @@ export interface Database {
             columns: ['customer_id']
             isOneToOne: false
             referencedRelation: 'Customers'
-            referencedColumns: ['c_id']
+            referencedColumns: ['id']
           },
           {
             foreignKeyName: 'Parent_employee_fkey'
@@ -172,10 +189,10 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      add_employee: {
+      assign_employee: {
         Args: {
-          par_id: number
-          emp: number
+          parent_id: number
+          new_employee: string
         }
         Returns: undefined
       }
@@ -211,6 +228,20 @@ export interface Database {
         }
         Returns: undefined
       }
+      create_child_ticket2: {
+        Args: {
+          parentid: number
+          problem: string
+          fault: string
+          serial: string
+          customerimpact: boolean
+          customerinquiry: boolean
+          upgrade: boolean
+          datecreated: string
+          description: string
+        }
+        Returns: undefined
+      }
       create_parent_ticket: {
         Args: {
           cus_id: number
@@ -226,10 +257,10 @@ export interface Database {
       }
       show_parent_details: {
         Args: {
-          par_id: number
+          parent_id: number
         }
         Returns: {
-          parent_id: number
+          id: number
           created_at: string
           child_count: string
           close_date: string
@@ -246,27 +277,19 @@ export interface Database {
           warranty: boolean
         }[]
       }
-      show_parent_ticket: {
-        Args: {
-          par_id: number
-        }
-        Returns: Record<string, unknown>
-      }
-      test: {
-        Args: {
-          par_id: number
-        }
-        Returns: {
-          parent_id: number
-          child_count: string
-        }[]
-      }
-      update_child_count: {
-        Args: {
-          par_id: number
-        }
-        Returns: undefined
-      }
+      update_child_count:
+        | {
+            Args: {
+              par_id: number
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              par_id: number
+            }
+            Returns: undefined
+          }
     }
     Enums: {
       [_ in never]: never

@@ -1,42 +1,112 @@
+import { useParams } from 'next/navigation'
+
+import { useCallback, useEffect, useState } from 'react'
+
 import { Button, Card } from '@/components'
+import Spinner from '@/components/Icons/Spinner'
+import { supabase } from '@/services/supabase'
+import { INITAIL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
+
+const DETAILS_FIELD = [
+  {
+    name: 'ID',
+    field: 'id'
+  },
+  {
+    name: 'Co-ordinates',
+    field: 'coordinates'
+  },
+  {
+    name: 'Location',
+    field: 'address'
+  },
+  {
+    name: 'Country',
+    field: 'country'
+  },
+  {
+    name: 'Region',
+    field: 'region'
+  },
+  {
+    name: 'Child Count',
+    field: 'child_count'
+  },
+  {
+    name: 'Created Date',
+    field: 'created_at'
+  },
+  {
+    name: 'Installation Date',
+    field: 'installation_date'
+  },
+  {
+    name: 'Employee Assigned',
+    field: 'employee'
+  },
+  {
+    name: 'Number of Panels',
+    field: 'number_of_panels'
+  },
+  {
+    name: 'Serial Number',
+    field: 'serial_number'
+  },
+  {
+    name: 'Status',
+    field: 'Status'
+  },
+  {
+    name: 'Warranty',
+    field: 'warranty'
+  }
+]
 
 const TicketDetails = () => {
+  const [details, setDetails] = useState<IParentDetails>(INITAIL_PARENT_DETAILS)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const { id } = useParams() || { id: '' }
+
+  const fetchDetails = useCallback(async () => {
+    setIsLoading(true)
+    const { data, error } = await supabase
+      .rpc('show_parent_details', {
+        parent_id: Number(id)
+      })
+      .single()
+    setIsLoading(false)
+
+    if (error) console.log(error)
+    else if (data) setDetails(data)
+  }, [id])
+
+  useEffect(() => {
+    fetchDetails()
+  }, [fetchDetails])
+
   return (
     <Card title="details" id="details">
       <div className="flex w-full justify-between">
         <h1 className="text-xl font-semibold leading-6">Details</h1>
         <Button active>Edit</Button>
       </div>
-      <div className="flex gap-8">
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Name</h2>
-          <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
-            Will Twitter suffer another major
-          </p>
+      {isLoading ? (
+        <div className="relative left-1/2 pb-10">
+          <Spinner />
         </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Description</h2>
-          <p className="mt-2 line-clamp-2 max-w-md break-words font-normal text-black/80">
-            ABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFG
-          </p>
+      ) : (
+        <div className="flex max-w-5xl flex-wrap justify-between gap-8">
+          {DETAILS_FIELD.map(({ name, field }) => (
+            <div key={field}>
+              <h2 className="text-sm font-semibold leading-4">{name}</h2>
+              <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+                {details[field]}
+              </p>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="flex gap-8">
-        <div>
-          <h2 className="mb-2 text-sm font-semibold leading-4">Location</h2>
-          <p className="mt-2 line-clamp-2 max-w-md break-words font-normal text-black/80">
-            ABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFG
-          </p>
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Child Count</h2>
-          <p className="mt-2 text-sm font-normal text-black/80">700</p>
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Date Created</h2>
-          <p className="mt-2 text-sm font-normal text-black/80">{Date.now()}</p>
-        </div>
-      </div>
+      )}
     </Card>
   )
 }

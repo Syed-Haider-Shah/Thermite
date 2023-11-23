@@ -79,6 +79,7 @@ const Tickets = () => {
         ascending: false
       })
       .limit(10)
+
     setIsLoading(false)
 
     if (error) console.log(error.message)

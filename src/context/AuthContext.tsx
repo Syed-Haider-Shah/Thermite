@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import {
   createContext,
@@ -27,32 +27,35 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
+  const pathname = usePathname()
   const router = useRouter()
 
   useEffect(() => {
     const setData = async () => {
       const { data, error } = await supabase.auth.getSession()
 
-      if (!data.session) return
       if (error) throw error
+
+      if (!data.session)
+        if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
+        else return
+      else if (pathname === Paths.INDEX) router.push(Paths.HOME)
 
       setSession(data.session)
       setIsLoading(false)
     }
 
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (event, sesh) => {
-        setSession(sesh)
-        setIsLoading(false)
-      }
-    )
+    const { data: listener } = supabase.auth.onAuthStateChange((_, sesh) => {
+      setSession(sesh)
+      setIsLoading(false)
+    })
 
     setData()
 
     return () => {
       listener.subscription.unsubscribe()
     }
-  }, [])
+  }, [pathname, router])
 
   const value = useMemo(
     () => ({

@@ -4,6 +4,7 @@ import { FC, useCallback, useState } from 'react'
 
 import { Bell, Button, SearchBar } from '@/components'
 import { Paths } from '@/constants'
+import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/utils/cn'
 
 const OPTIONS = [
@@ -19,6 +20,8 @@ const OPTIONS = [
 
 const HeaderComponent: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const { signOut } = useAuth()
 
   const handleOpen = useCallback(() => setIsOpen(true), [])
 
@@ -61,6 +64,7 @@ const HeaderComponent: FC = () => {
             ))}
             <li>
               <button
+                onClick={signOut}
                 type="button"
                 className="w-full cursor-pointer border border-black/5 px-5 py-2.5 text-left text-sm font-medium hover:bg-black/5"
               >

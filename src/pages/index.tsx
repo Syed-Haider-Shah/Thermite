@@ -45,24 +45,24 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Home | Thermite</title>
+        <title>Login | Thermite</title>
         <meta name="description" content="Thermite" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="relative flex w-full justify-center ">
         <form
           onSubmit={handleSubmit(handleSignIn)}
-          className="flex w-full max-w-md flex-col items-center gap-7 rounded-5 bg-white py-[12%]"
+          className="flex w-full max-w-md flex-col items-center gap-7 rounded-5 bg-white py-[24vh]"
         >
           <Image src="/logo.svg" alt="Logo" width={150} height={150} />
           <FormLine
             id="email"
             title="Email"
-            {...register('email')}
-            error={errors.email?.message}
             required
             className="w-80"
             placeholder="Email"
+            {...register('email')}
+            error={errors.email?.message}
           />
           <FormLine
             id="password"

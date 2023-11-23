@@ -41,7 +41,8 @@ const FormLineComponent: ForwardRefRenderFunction<
     disabled,
     error,
     onChange,
-    onKeyDown
+    onKeyDown,
+    ...restProps
   },
   ref
 ) => {
@@ -69,6 +70,7 @@ const FormLineComponent: ForwardRefRenderFunction<
             'rounded-full bg-black/5 p-3': !primary && !secondary
           }
         )}
+        {...restProps}
         ref={ref}
         type={type}
         placeholder={placeholder}

@@ -96,12 +96,12 @@ const TicketDetails = () => {
           <Spinner />
         </div>
       ) : (
-        <div className="flex max-w-5xl flex-wrap justify-between gap-8">
+        <div className="flex max-w-lg flex-wrap justify-between gap-8">
           {DETAILS_FIELD.map(({ name, field }) => (
             <div key={field}>
               <h2 className="text-sm font-semibold leading-4">{name}</h2>
               <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
-                {details[field]}
+                {`${details[field]}`}
               </p>
             </div>
           ))}

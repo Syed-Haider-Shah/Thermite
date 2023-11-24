@@ -79,3 +79,13 @@ export const INITAIL_PARENT_DETAILS: IParentDetails = {
   serial_number: '',
   warranty: false
 }
+
+export interface IEmployee {
+  created_at: string
+  id: string
+  name: string | null
+  number_of_assigned_tickets: number
+  number_of_closed_tickets: number
+  role: string
+  [key: string]: string | string[] | boolean | number | null
+}

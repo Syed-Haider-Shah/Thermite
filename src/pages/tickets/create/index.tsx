@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation'
 
 import { FormEvent, useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { Button, SearchBar, Table } from '@/components'
 import { Paths } from '@/constants'
@@ -40,14 +41,9 @@ const CreateParentTicket = () => {
       .select()
       .limit(15)
     setIsLoading(false)
-    if (error) {
-      console.log(error.message)
-      return
-    }
 
-    if (rows) {
-      setCustomers(rows as ICustomer[])
-    }
+    if (error) toast.error(error.message)
+    else if (rows) setCustomers(rows as ICustomer[])
   }, [])
 
   const handleRowSelect = useCallback((val: IRow) => {
@@ -65,12 +61,8 @@ const CreateParentTicket = () => {
       })
       setIsLoading(false)
 
-      if (error) {
-        console.log(error.message)
-        return
-      }
-
-      handleClose()
+      if (error) toast.error(error.message)
+      else handleClose()
     },
     [handleClose, selectedRow]
   )

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import {
   Button,
@@ -75,7 +76,7 @@ const Tickets = () => {
       .limit(15)
     setIsLoading(false)
 
-    if (error) console.log(error.message)
+    if (error) toast.error(error.message)
     else if (rows) setTickets(rows as IParentTicket[])
   }, [])
 

@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import {
   Button,
   DropDown,
@@ -10,6 +13,8 @@ import {
   UnionIcon
 } from '@/components'
 import { Paths } from '@/constants'
+import { supabase } from '@/services/supabase'
+import { IEmployee } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -29,6 +34,10 @@ const cols = [
     name: 'Region'
   },
   {
+    field: 'role',
+    name: 'Role'
+  },
+  {
     field: 'created_at',
     name: 'Created At'
   },
@@ -45,7 +54,23 @@ const OPTIONS = [
 ]
 
 const Employees = () => {
+  const [rows, setRows] = useState<IEmployee[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const pathname = usePathname()
+
+  const fetchEmployees = useCallback(async () => {
+    setIsLoading(true)
+    const { data, error } = await supabase.from('Employees').select()
+    setIsLoading(false)
+
+    if (error) toast.error(error.message)
+    else if (data) setRows(rows as IEmployee[])
+  }, [rows])
+
+  useEffect(() => {
+    fetchEmployees()
+  }, [fetchEmployees])
 
   return (
     <article className="flex flex-col gap-5 rounded-2xl bg-white p-4">
@@ -61,7 +86,7 @@ const Employees = () => {
           </Link>
         </div>
       </div>
-      <Table cols={cols} rows={[]} />
+      <Table cols={cols} rows={rows} isLoading={isLoading} />
       <PageNav pageCount={5} />
     </article>
   )

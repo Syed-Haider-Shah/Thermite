@@ -3,6 +3,12 @@ import { useRouter } from 'next/router'
 import { Button, DropDown, FormLine } from '@/components'
 import { Modal } from '@/containers'
 
+const ROLES = [
+  { name: 'Employee', value: 'user' },
+  { name: 'Admin', value: 'admin' },
+  { name: 'Super User', value: 'superuser' }
+]
+
 const CreateEmployee = () => {
   const router = useRouter()
 
@@ -19,7 +25,6 @@ const CreateEmployee = () => {
           <FormLine id="name" title="Name" primary className="w-80" />
           <FormLine id="email" title="Email" primary className="w-80" />
           <FormLine id="password" title="Password" primary className="w-80" />
-          <FormLine id="phone" title="Phone Number" primary className="w-80" />
           <div>
             <h1 className="text-sm font-semibold text-black/90">Region</h1>
             <DropDown
@@ -27,6 +32,10 @@ const CreateEmployee = () => {
               options={[{ name: 'Open', value: '' }]}
               className="w-80"
             />
+          </div>
+          <div>
+            <h1 className="text-sm font-semibold text-black/90">Role</h1>
+            <DropDown name="role" options={ROLES} className="w-80" />
           </div>
         </div>
         <div className="mb-2 flex w-full justify-end pr-3">

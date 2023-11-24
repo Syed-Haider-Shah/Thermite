@@ -8,7 +8,11 @@ export const LoginSchema = yup.object().shape({
     .string()
     .email('Please provide valid email')
     .required('Please input your email'),
-  password: yup.string().required('Please input your password')
+  password: yup
+    .string()
+    // .password()
+    // .minRepeating(3, 'Repeated characters are not allowed')
+    .required('Please input your password')
 })
 
 export const CreateChildSchema = yup.object().shape({

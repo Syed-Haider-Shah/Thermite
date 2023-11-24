@@ -1,6 +1,7 @@
 import { useParams } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { Button, Card } from '@/components'
 import Spinner from '@/components/Icons/Spinner'
@@ -77,7 +78,7 @@ const TicketDetails = () => {
       .single()
     setIsLoading(false)
 
-    if (error) console.log(error)
+    if (error) toast.error(error.message)
     else if (data) setDetails(data)
   }, [id])
 

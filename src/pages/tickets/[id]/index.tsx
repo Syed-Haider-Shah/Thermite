@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { Button, DropDown, PageNav, Table, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
@@ -82,7 +83,7 @@ const Tickets = () => {
 
     setIsLoading(false)
 
-    if (error) console.log(error.message)
+    if (error) toast.error(error.message)
     else if (data) setRows(data)
   }, [id])
 

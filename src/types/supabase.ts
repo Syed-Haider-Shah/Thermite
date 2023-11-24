@@ -108,26 +108,26 @@ export interface Database {
         Row: {
           created_at: string
           id: string
-          name: string
+          name: string | null
           number_of_assigned_tickets: number
-          number_of_completed_tickets: number
-          Roles: string
+          number_of_closed_tickets: number
+          role: string
         }
         Insert: {
           created_at?: string
           id: string
-          name?: string
+          name?: string | null
           number_of_assigned_tickets?: number
-          number_of_completed_tickets?: number
-          Roles?: string
+          number_of_closed_tickets?: number
+          role?: string
         }
         Update: {
           created_at?: string
           id?: string
-          name?: string
+          name?: string | null
           number_of_assigned_tickets?: number
-          number_of_completed_tickets?: number
-          Roles?: string
+          number_of_closed_tickets?: number
+          role?: string
         }
         Relationships: [
           {
@@ -196,6 +196,12 @@ export interface Database {
         }
         Returns: undefined
       }
+      change_status_superuser: {
+        Args: {
+          u_id: string
+        }
+        Returns: undefined
+      }
       close_child_ticket: {
         Args: {
           c_id: number
@@ -221,20 +227,6 @@ export interface Database {
           fault: string
           serial: string
           customerimpact: boolean
-          customemrinquiry: boolean
-          upgrade: boolean
-          datecreated: string
-          description: string
-        }
-        Returns: undefined
-      }
-      create_child_ticket2: {
-        Args: {
-          parentid: number
-          problem: string
-          fault: string
-          serial: string
-          customerimpact: boolean
           customerinquiry: boolean
           upgrade: boolean
           datecreated: string
@@ -252,6 +244,13 @@ export interface Database {
         Args: {
           par_id: number
           stat: string
+        }
+        Returns: undefined
+      }
+      setup_name: {
+        Args: {
+          employee_name: string
+          u_id: string
         }
         Returns: undefined
       }

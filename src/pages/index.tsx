@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -35,7 +36,7 @@ export default function Home() {
         password
       })
       setIsLoading(false)
-      if (error) console.log(error)
+      if (error) toast.error(error.message)
 
       window.location.replace(Paths.HOME)
     },

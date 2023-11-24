@@ -22,7 +22,7 @@ const ModalWrapper: FC<IModal> = ({ title, children, showModal, onClose }) => {
             <h2 className="text-xl font-medium text-black/90">{title}</h2>
             {onClose ? (
               <div
-                className="flex transform cursor-pointer overflow-hidden rounded-full p-2 text-black/90 duration-300 hover:bg-black/5"
+                className="flex cursor-pointer overflow-hidden rounded-full p-2 text-black/90 opacity-40 transition-all duration-300 ease-in-out hover:bg-black/5 hover:opacity-100"
                 onClick={onClose}
               >
                 <CrossIcon />

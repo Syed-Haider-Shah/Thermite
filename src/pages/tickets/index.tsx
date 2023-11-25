@@ -22,28 +22,32 @@ const cols = [
     name: 'ID'
   },
   {
-    field: 'employee',
-    name: 'Assigned Employee'
+    field: 'address',
+    name: 'Address'
   },
   {
     field: 'child_count',
-    name: 'Child Ticket Count'
-  },
-  {
-    field: 'created_at',
-    name: 'Created At'
-  },
-  {
-    field: 'status',
-    name: 'Status'
+    name: 'Child Count'
   },
   {
     field: 'customer_id',
     name: 'Customer ID'
   },
   {
+    field: 'created_at',
+    name: 'Created At'
+  },
+  {
     field: 'close_date',
     name: 'Close Date'
+  },
+  {
+    field: 'employee',
+    name: 'Assigned Employee'
+  },
+  {
+    field: 'status',
+    name: 'Status'
   }
 ]
 const OPTIONS = [

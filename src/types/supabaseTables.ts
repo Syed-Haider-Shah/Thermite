@@ -62,7 +62,7 @@ export interface IParentDetails {
   [key: string]: string | string[] | boolean | number | null
 }
 
-export const INITAIL_PARENT_DETAILS: IParentDetails = {
+export const INITIAL_PARENT_DETAILS: IParentDetails = {
   id: 0,
   created_at: '',
   child_count: '',
@@ -81,11 +81,23 @@ export const INITAIL_PARENT_DETAILS: IParentDetails = {
 }
 
 export interface IEmployee {
+  country: string | null
   created_at: string
   id: string
   name: string | null
   number_of_assigned_tickets: number
   number_of_closed_tickets: number
-  role: string
-  [key: string]: string | string[] | boolean | number | null
+  role: string | null
+  email?: string
+  [key: string]: string | number | null | undefined
+}
+
+export const INITIAL_EMPLOYEE_DATA: IEmployee = {
+  created_at: '',
+  id: '',
+  name: null,
+  number_of_assigned_tickets: 0,
+  number_of_closed_tickets: 0,
+  role: '',
+  country: null
 }

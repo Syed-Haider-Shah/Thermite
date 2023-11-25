@@ -21,7 +21,7 @@ const OPTIONS = [
 const HeaderComponent: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
 
   const handleOpen = useCallback(() => setIsOpen(true), [])
 
@@ -42,7 +42,7 @@ const HeaderComponent: FC = () => {
           onBlur={handleClose}
           onFocus={handleOpen}
         >
-          <h1 className=" text-lg font-semibold leading-6">Admin</h1>
+          <h1 className=" text-lg font-semibold leading-6">{user.name}</h1>
           <button
             type="button"
             className="h-9 w-9 rounded-full bg-darkIndigo"

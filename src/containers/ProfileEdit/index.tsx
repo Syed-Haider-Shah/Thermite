@@ -14,17 +14,8 @@ const COUNTIES = [
   { name: 'China', value: 'china' }
 ]
 
-const REGIONS = [
-  {
-    name: 'Asia',
-    value: 'asia'
-  },
-  { name: 'Australia', value: 'au' }
-]
-
 const ProfileEdit = () => {
   const [country, setCountry] = useState<IOption>(COUNTIES[0])
-  const [region, setRegion] = useState<IOption>(REGIONS[0])
   const edit = useSearchParams().get('edit')
 
   return (
@@ -36,7 +27,7 @@ const ProfileEdit = () => {
         </div>
         <div className="h-32 w-32 rounded-lg bg-gray" />
         <form className="scrollbar-primary mt-4 flex max-h-lg max-w-lg flex-wrap items-center gap-6 overflow-y-scroll">
-          <FormLine className="w-80" id="name" primary title="Name" />
+          <FormLine className="w-80" id="name" required primary title="Name" />
           <DropDown
             title="Country"
             required
@@ -45,21 +36,17 @@ const ProfileEdit = () => {
             options={COUNTIES}
             className="w-80"
           />
-          <div>
-            <h1 className="text-sm font-semibold text-black/90">Region</h1>
-            <DropDown
-              setValue={setRegion}
-              value={region}
-              required
-              title="Region"
-              options={REGIONS}
-              className="w-80"
-            />
-          </div>
-          <FormLine className="w-80" id="password" primary title="Password" />
+          <FormLine
+            className="w-80"
+            id="password"
+            required
+            primary
+            title="Password"
+          />
           <FormLine
             className="w-80"
             id="confirm"
+            required
             primary
             title="Confirm Password"
           />

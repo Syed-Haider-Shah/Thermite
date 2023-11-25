@@ -38,8 +38,8 @@ const DropDownComponent = ({
   return (
     <div
       className={cn(
-        'relative text-sm font-medium text-black/60',
-        className || 'w-40'
+        'relative w-40 text-sm font-medium text-black/60',
+        className
       )}
     >
       {title && (
@@ -62,9 +62,12 @@ const DropDownComponent = ({
       </button>
       <div
         className={cn(
-          'absolute top-16 z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
-          className || 'w-40',
-          { 'max-h-sm': isOpen, 'max-h-0': !isOpen }
+          'absolute top-16 z-30 flex h-full w-40 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
+          className,
+          {
+            'scrollbar-primary max-h-sm overflow-y-scroll': isOpen,
+            'max-h-0': !isOpen
+          }
         )}
       >
         {options.map((option) => (

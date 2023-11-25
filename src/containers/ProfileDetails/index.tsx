@@ -2,10 +2,13 @@ import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 
 import { Button, Card } from '@/components'
+import { useAuth } from '@/context/AuthContext'
 
 const ProfileDetails = () => {
   const pathname = usePathname()
   const edit = useSearchParams().get('edit')
+
+  const { user } = useAuth()
 
   return edit ? null : (
     <Card title="profile" id="profile">
@@ -28,29 +31,31 @@ const ProfileDetails = () => {
           <div className="flex w-full max-w-md justify-between">
             <div>
               <h2 className="text-sm font-semibold leading-4">Name</h2>
-              <p className="text-xl font-normal text-black/80">Ali Aizaz</p>
+              <p className="text-lg font-normal text-black/80">{user.name}</p>
             </div>
             <div>
               <h2 className="text-sm font-semibold leading-4">Email</h2>
-              <p className="break-words text-xl font-normal text-black/80">
-                aliaizaz@gmail.com
+              <p className="break-words text-lg font-normal text-black/80">
+                {user.email}
               </p>
             </div>
             <div>
-              <h2 className="text-sm font-semibold leading-4">Location</h2>
-              <p className=" break-words text-xl font-normal text-black/80">
-                Australia
+              <h2 className="text-sm font-semibold leading-4">Country</h2>
+              <p className=" break-words text-lg font-normal text-black/80">
+                {`${user.country}`}
               </p>
             </div>
           </div>
-          <div className="flex w-full max-w-sm justify-between">
+          <div className="flex w-full max-w-sm justify-between gap-10">
             <div>
-              <h2 className="text-sm font-semibold leading-4">Region</h2>
-              <p className="text-xl font-normal text-black/80">AUS</p>
+              <h2 className="text-sm font-semibold leading-4">Role</h2>
+              <p className="text-lg font-normal text-black/80">{user.role}</p>
             </div>
             <div>
               <h2 className="text-sm font-semibold leading-4">Date Created</h2>
-              <p className="text-xl font-normal text-black/80">{Date.now()}</p>
+              <p className="mt-1 text-base font-normal text-black/80">
+                {new Date(user.created_at).toDateString()}
+              </p>
             </div>
           </div>
         </div>

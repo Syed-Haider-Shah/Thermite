@@ -73,7 +73,6 @@ const CreateTicket = () => {
             setValue={setProblem}
             value={problem}
             options={PROBLEMS}
-            name="problem"
             className="w-80"
           />
           <DropDown
@@ -81,7 +80,6 @@ const CreateTicket = () => {
             value={fault}
             setValue={setFault}
             options={FAULTS}
-            name="pault"
             className="w-80"
           />
           <DropDown
@@ -89,7 +87,6 @@ const CreateTicket = () => {
             setValue={setSerialNumber}
             value={serialNumber}
             options={[{ name: 'Serial No', value: '' }]}
-            name="serial_number"
             className="w-80"
           />
         </div>

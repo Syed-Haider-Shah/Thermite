@@ -40,7 +40,7 @@ const FilterSelect = ({ options, className, name }: IDropDown) => {
       <button
         type="button"
         onClick={handleToggle}
-        className="flex w-full items-center justify-between rounded-lg border border-black/5 bg-white/40 px-2 py-3 text-left"
+        className="flex w-full items-center justify-between rounded-lg border border-black/5 bg-white/40 px-2 py-2.25 text-left"
       >
         {options[0]?.name}
         <ChevronDownIcon

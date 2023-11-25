@@ -39,7 +39,6 @@ const ProfileEdit = () => {
           <FormLine className="w-80" id="name" primary title="Name" />
           <DropDown
             title="Country"
-            name="country"
             required
             setValue={setCountry}
             value={country}
@@ -54,7 +53,6 @@ const ProfileEdit = () => {
               required
               title="Region"
               options={REGIONS}
-              name="status"
               className="w-80"
             />
           </div>

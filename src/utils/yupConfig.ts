@@ -24,3 +24,20 @@ export const CreateChildSchema = yup.object().shape({
   customerImpact: yup.boolean().oneOf([true]),
   upgrade: yup.boolean().oneOf([true])
 })
+
+export const CreateEmployeeSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please provide valid email')
+    .required('Please input your email'),
+  password: yup
+    .string()
+    .password()
+    .minRepeating(3, 'Repeated characters are not allowed')
+    .required('Please input your password'),
+  name: yup
+    .string()
+    .min(1, 'minimum 3 text character required')
+    .max(150, 'maximum 150 text character allowed')
+    .required('Please input ticket name')
+})

@@ -1,10 +1,16 @@
 import { useRouter } from 'next/router'
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, DropDown, FormLine } from '@/components'
 import { Modal } from '@/containers'
+import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
+import { CreateEmployeeSchema } from '@/utils/yupConfig'
 
 const ROLES = [
   { name: 'Employee', value: 'user' },
@@ -24,11 +30,59 @@ const COUNTIES = [
 const CreateEmployee = () => {
   const [country, setCountry] = useState<IOption>(COUNTIES[0])
   const [role, setRole] = useState<IOption>(ROLES[0])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(CreateEmployeeSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      email: '',
+      name: '',
+      password: ''
+    }
+  })
+
+  const handleCreateEmployee = useCallback(
+    async ({
+      name,
+      password,
+      email
+    }: {
+      name: string
+      email: string
+      password: string
+    }) => {
+      setIsLoading(true)
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            name,
+            role: role.value,
+            country: country.value
+          }
+        }
+      })
+      setIsLoading(false)
+
+      if (error) toast.error(error.message)
+      else router.back()
+    },
+    [country, role, router]
+  )
 
   return (
     <Modal showModal onClose={router.back} title="Create Employee">
-      <form className="relative space-y-5">
+      <form
+        onSubmit={handleSubmit(handleCreateEmployee)}
+        className="relative space-y-5"
+      >
         <div className="mt-5 flex flex-1 flex-wrap gap-6 rounded-5 bg-lightGray p-5">
           <div className="flex w-full flex-col items-center space-y-2">
             <div className="h-28 w-28 rounded-full bg-lightIndigo" />
@@ -36,12 +90,32 @@ const CreateEmployee = () => {
               Upload Image
             </Button>
           </div>
-          <FormLine id="name" title="Name" primary className="w-80" />
-          <FormLine id="email" title="Email" primary className="w-80" />
-          <FormLine id="password" title="Password" primary className="w-80" />
+          <FormLine
+            id="name"
+            title="Name"
+            {...register('name')}
+            error={errors.name?.message}
+            primary
+            className="w-80"
+          />
+          <FormLine
+            id="email"
+            title="Email"
+            {...register('email')}
+            error={errors.email?.message}
+            primary
+            className="w-80"
+          />
+          <FormLine
+            id="password"
+            title="Password"
+            {...register('password')}
+            error={errors.email?.message}
+            primary
+            className="w-80"
+          />
           <DropDown
             title="Country"
-            name="country"
             setValue={setCountry}
             value={country}
             options={COUNTIES}
@@ -51,13 +125,12 @@ const CreateEmployee = () => {
             setValue={setRole}
             value={role}
             title="Role"
-            name="role"
             options={ROLES}
             className="w-80"
           />
         </div>
         <div className="mb-2 flex w-full justify-end pr-3">
-          <Button type="submit" active>
+          <Button type="submit" isLoading={isLoading} active>
             Create
           </Button>
         </div>

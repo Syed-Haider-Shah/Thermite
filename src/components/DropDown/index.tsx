@@ -6,7 +6,6 @@ import { cn } from '@/utils/cn'
 
 type IDropDown = {
   options: IOption[]
-  name: string
   className?: string
   setValue: Dispatch<SetStateAction<IOption>>
   value: IOption
@@ -31,6 +30,7 @@ const DropDownComponent = ({
   const handleSelect = useCallback(
     (option: IOption) => {
       setValue(option)
+      setIsOpen(false)
     },
     [setValue]
   )
@@ -69,6 +69,7 @@ const DropDownComponent = ({
       >
         {options.map((option) => (
           <button
+            type="button"
             onClick={() => handleSelect(option)}
             key={option.name}
             className="w-full cursor-pointer px-2 py-2.5 text-left hover:bg-black/5"

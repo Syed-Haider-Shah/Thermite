@@ -106,28 +106,31 @@ export interface Database {
       }
       Employees: {
         Row: {
+          country: string | null
           created_at: string
           id: string
           name: string | null
           number_of_assigned_tickets: number
           number_of_closed_tickets: number
-          role: string
+          role: string | null
         }
         Insert: {
+          country?: string | null
           created_at?: string
           id: string
           name?: string | null
           number_of_assigned_tickets?: number
           number_of_closed_tickets?: number
-          role?: string
+          role?: string | null
         }
         Update: {
+          country?: string | null
           created_at?: string
           id?: string
           name?: string | null
           number_of_assigned_tickets?: number
           number_of_closed_tickets?: number
-          role?: string
+          role?: string | null
         }
         Relationships: [
           {

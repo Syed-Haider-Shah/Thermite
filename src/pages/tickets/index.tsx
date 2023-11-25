@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 import {
   Button,
-  DropDown,
+  FilterSelect,
   PageNav,
   SearchBar,
   Table,
@@ -89,7 +89,7 @@ const Tickets = () => {
       <div className="flex justify-between">
         <SearchBar placeholder="Search for Tickets" />
         <div className="flex gap-x-2">
-          <DropDown options={OPTIONS} name="category" />
+          <FilterSelect options={OPTIONS} name="category" />
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />

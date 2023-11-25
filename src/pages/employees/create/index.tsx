@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router'
 
+import { useState } from 'react'
+
 import { Button, DropDown, FormLine } from '@/components'
 import { Modal } from '@/containers'
+import { IOption } from '@/types/model'
 
 const ROLES = [
   { name: 'Employee', value: 'user' },
@@ -9,7 +12,18 @@ const ROLES = [
   { name: 'Super User', value: 'superuser' }
 ]
 
+const COUNTIES = [
+  { name: 'Pakistan', value: 'pakistan' },
+  { name: 'South Africa', value: 'south_africa' },
+  { name: 'Australia', value: 'australia' },
+  { name: 'United States', value: 'united_states' },
+  { name: 'Canada', value: 'canada' },
+  { name: 'China', value: 'china' }
+]
+
 const CreateEmployee = () => {
+  const [country, setCountry] = useState<IOption>(COUNTIES[0])
+  const [role, setRole] = useState<IOption>(ROLES[0])
   const router = useRouter()
 
   return (
@@ -25,18 +39,22 @@ const CreateEmployee = () => {
           <FormLine id="name" title="Name" primary className="w-80" />
           <FormLine id="email" title="Email" primary className="w-80" />
           <FormLine id="password" title="Password" primary className="w-80" />
-          <div>
-            <h1 className="text-sm font-semibold text-black/90">Region</h1>
-            <DropDown
-              name="region"
-              options={[{ name: 'Open', value: '' }]}
-              className="w-80"
-            />
-          </div>
-          <div>
-            <h1 className="text-sm font-semibold text-black/90">Role</h1>
-            <DropDown name="role" options={ROLES} className="w-80" />
-          </div>
+          <DropDown
+            title="Country"
+            name="country"
+            setValue={setCountry}
+            value={country}
+            options={COUNTIES}
+            className="w-80"
+          />
+          <DropDown
+            setValue={setRole}
+            value={role}
+            title="Role"
+            name="role"
+            options={ROLES}
+            className="w-80"
+          />
         </div>
         <div className="mb-2 flex w-full justify-end pr-3">
           <Button type="submit" active>

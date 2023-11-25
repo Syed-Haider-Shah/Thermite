@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import {
   Button,
   Card,
-  DropDown,
+  FilterSelect,
   SearchBar,
   Table,
   UnionIcon
@@ -66,7 +66,7 @@ const Profile = () => {
                 New Child Ticket
               </Button>
             </Link>
-            <DropDown options={OPTIONS} name="category" />
+            <FilterSelect options={OPTIONS} name="category" />
           </div>
         </div>
         <Table cols={cols} rows={[]} />

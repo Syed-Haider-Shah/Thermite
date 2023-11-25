@@ -1,8 +1,30 @@
 import { useSearchParams } from 'next/navigation'
 
+import { useState } from 'react'
+
 import { Button, DropDown, FormLine } from '@/components'
+import { IOption } from '@/types/model'
+
+const COUNTIES = [
+  { name: 'Pakistan', value: 'pakistan' },
+  { name: 'South Africa', value: 'south_africa' },
+  { name: 'Australia', value: 'australia' },
+  { name: 'United States', value: 'united_states' },
+  { name: 'Canada', value: 'canada' },
+  { name: 'China', value: 'china' }
+]
+
+const REGIONS = [
+  {
+    name: 'Asia',
+    value: 'asia'
+  },
+  { name: 'Australia', value: 'au' }
+]
 
 const ProfileEdit = () => {
+  const [country, setCountry] = useState<IOption>(COUNTIES[0])
+  const [region, setRegion] = useState<IOption>(REGIONS[0])
   const edit = useSearchParams().get('edit')
 
   return (
@@ -15,18 +37,23 @@ const ProfileEdit = () => {
         <div className="h-32 w-32 rounded-lg bg-gray" />
         <form className="scrollbar-primary mt-4 flex max-h-lg max-w-lg flex-wrap items-center gap-6 overflow-y-scroll">
           <FormLine className="w-80" id="name" primary title="Name" />
-          <div>
-            <h1 className="text-sm font-semibold text-black/90">Country</h1>
-            <DropDown
-              options={[{ name: 'Country', value: '' }]}
-              name="status"
-              className="w-80"
-            />
-          </div>
+          <DropDown
+            title="Country"
+            name="country"
+            required
+            setValue={setCountry}
+            value={country}
+            options={COUNTIES}
+            className="w-80"
+          />
           <div>
             <h1 className="text-sm font-semibold text-black/90">Region</h1>
             <DropDown
-              options={[{ name: 'Region', value: '' }]}
+              setValue={setRegion}
+              value={region}
+              required
+              title="Region"
+              options={REGIONS}
               name="status"
               className="w-80"
             />

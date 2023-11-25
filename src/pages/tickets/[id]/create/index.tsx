@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation'
 
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -7,9 +8,17 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, DropDown, TextArea } from '@/components'
 import FormLine from '@/components/FormLine'
 import { Modal } from '@/containers'
+import { IOption } from '@/types/model'
 import { CreateChildSchema } from '@/utils/yupConfig'
 
+const PROBLEMS = [{ name: 'Problem', value: '' }]
+const FAULTS = [{ name: 'Fault', value: '' }]
+const SERIAL_NUMBERS = [{ name: 'Serial Number', value: '' }]
+
 const CreateTicket = () => {
+  const [problem, setProblem] = useState<IOption>(PROBLEMS[0])
+  const [fault, setFault] = useState<IOption>(FAULTS[0])
+  const [serialNumber, setSerialNumber] = useState<IOption>(SERIAL_NUMBERS[0])
   const router = useRouter()
 
   const {
@@ -59,32 +68,30 @@ const CreateTicket = () => {
               />
             </div>
           </div>
-          <div>
-            <h1 className="text-sm font-semibold text-black/90">Problem</h1>
-            <DropDown
-              options={[{ name: 'Problem', value: '' }]}
-              name="problem"
-              className="w-80"
-            />
-          </div>
-          <div>
-            <h1 className="text-sm font-semibold text-black/90">Fault</h1>
-            <DropDown
-              options={[{ name: 'Fault', value: '' }]}
-              name="pault"
-              className="w-80"
-            />
-          </div>
-          <div>
-            <h1 className="text-sm font-semibold text-black/90">
-              Serial Number
-            </h1>
-            <DropDown
-              options={[{ name: 'Serial No', value: '' }]}
-              name="serial_number"
-              className="w-80"
-            />
-          </div>
+          <DropDown
+            title="Problem"
+            setValue={setProblem}
+            value={problem}
+            options={PROBLEMS}
+            name="problem"
+            className="w-80"
+          />
+          <DropDown
+            title="Fault"
+            value={fault}
+            setValue={setFault}
+            options={FAULTS}
+            name="pault"
+            className="w-80"
+          />
+          <DropDown
+            title="Serial Number"
+            setValue={setSerialNumber}
+            value={serialNumber}
+            options={[{ name: 'Serial No', value: '' }]}
+            name="serial_number"
+            className="w-80"
+          />
         </div>
         <div className="mb-2 flex w-full justify-end pr-3">
           <Button type="submit" active>

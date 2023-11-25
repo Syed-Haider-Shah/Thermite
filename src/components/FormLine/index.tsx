@@ -50,25 +50,29 @@ const FormLineComponent: ForwardRefRenderFunction<
     <label
       title={title}
       htmlFor={id}
-      className={cn('relative flex flex-col gap-y-1 font-semibold', {
-        'text-sm leading-4 text-black/60': secondary,
-        'text-sm leading-4 text-black/90': primary,
-        'text-xl leading-6 text-black/60 ': !primary && !secondary
-      })}
+      className={cn(
+        'relative flex flex-col gap-y-1 text-xl font-semibold leading-6 text-black/60',
+        {
+          'text-sm leading-4 text-black/60': secondary,
+          'text-sm leading-4 text-black/90': primary
+        }
+      )}
     >
-      <div className="flex gap-1">
-        {title}
-        {required && <span className="text-red">*</span>}
-      </div>
+      {title && (
+        <div className="flex gap-1">
+          {title}
+          {required && <span className="text-red">*</span>}
+        </div>
+      )}
       <input
         className={cn(
-          className,
-          'text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
+          'rounded-full bg-black/5 p-3 text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
           {
-            'rounded-1.25 border border-heavyGray': secondary,
-            'rounded-1.25 border border-heavyGray px-2 py-2.25': primary,
-            'rounded-full bg-black/5 p-3': !primary && !secondary
-          }
+            'rounded-md border border-heavyGray': secondary,
+            'rounded-md border border-heavyGray bg-white/40 px-2 py-2.25':
+              primary
+          },
+          className
         )}
         {...restProps}
         ref={ref}
@@ -87,7 +91,7 @@ const FormLineComponent: ForwardRefRenderFunction<
           { 'text-red/0': !error }
         )}
       >
-        {error || ''}
+        {error}
       </div>
     </label>
   )

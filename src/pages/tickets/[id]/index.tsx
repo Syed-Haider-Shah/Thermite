@@ -4,7 +4,7 @@ import { useParams, usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button, DropDown, PageNav, Table, UnionIcon } from '@/components'
+import { Button, FilterSelect, PageNav, Table, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
@@ -102,7 +102,7 @@ const Tickets = () => {
               New Child Ticket
             </Button>
           </Link>
-          <DropDown options={OPTIONS} name="category" />
+          <FilterSelect options={OPTIONS} name="category" />
         </div>
         <Table isLoading={isLoading} cols={cols} rows={rows} />
         <PageNav pageCount={5} />

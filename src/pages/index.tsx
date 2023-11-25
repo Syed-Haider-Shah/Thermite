@@ -37,8 +37,7 @@ export default function Home() {
       })
       setIsLoading(false)
       if (error) toast.error(error.message)
-
-      window.location.replace(Paths.HOME)
+      else window.location.replace(Paths.HOME)
     },
     []
   )

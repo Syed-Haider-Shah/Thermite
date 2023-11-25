@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { FC, useCallback, useState } from 'react'
 
-import { Bell, Button, SearchBar } from '@/components'
+import { Bell, Button } from '@/components'
 import { Paths } from '@/constants'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/utils/cn'
@@ -30,9 +30,11 @@ const HeaderComponent: FC = () => {
   return (
     <header className="relative flex h-24 w-full items-center justify-between border-l border-black/5 bg-white px-7 pb-5.5 pt-9 text-black/90">
       <div className="flex items-center gap-7">
-        <SearchBar placeholder="Search Tickets" />
+        <h1 className="rounded-full bg-black/5 px-4 py-3.5 text-sm font-semibold">
+          32 Tickets Open
+        </h1>
         <Button active className="rounded-md py-3">
-          Create
+          Add Feedback
         </Button>
       </div>
       <div className="flex items-center gap-7">

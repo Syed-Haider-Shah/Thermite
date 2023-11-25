@@ -23,7 +23,7 @@ const HeaderComponent: FC = () => {
 
   const { signOut, user } = useAuth()
 
-  const handleOpen = useCallback(() => setIsOpen(true), [])
+  const handleToggle = useCallback(() => setIsOpen((val) => !val), [])
 
   const handleClose = useCallback(() => setIsOpen(false), [])
 
@@ -37,14 +37,12 @@ const HeaderComponent: FC = () => {
       </div>
       <div className="flex items-center gap-7">
         <Bell />
-        <div
-          className="flex items-center gap-4"
-          onBlur={handleClose}
-          onFocus={handleOpen}
-        >
+        <div className="flex items-center gap-4">
           <h1 className=" text-lg font-semibold leading-6">{user.name}</h1>
           <button
             type="button"
+            onBlur={handleClose}
+            onClick={handleToggle}
             className="h-9 w-9 rounded-full bg-darkIndigo"
           />
           <ul

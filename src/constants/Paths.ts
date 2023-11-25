@@ -11,7 +11,9 @@ export enum Paths {
   FORM_ID = `${FORM}/[id]`,
   GUIDE = `${INDEX}guides`,
   GUIDE_ID = `${GUIDE}/[id]`,
-  SOFTWARE = `${INDEX}software`,
+  SOFTWARE = `${INDEX}softwares`,
   PROFILE = `${INDEX}profile`,
-  PROFILE_UPDATE = `${PROFILE}/update`
+  PROFILE_UPDATE = `${PROFILE}/update`,
+  EMPLOYEE = `${INDEX}employees`,
+  EMPLOYEE_CREATE = `${EMPLOYEE}/create`
 }

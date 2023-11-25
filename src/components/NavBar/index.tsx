@@ -6,29 +6,28 @@ import { FC } from 'react'
 import {
   Archive,
   Calender,
-  Circle,
   Employees,
   Explore,
   Gear,
   Grid,
   People
 } from '@/components/Icons'
+import { Paths } from '@/constants'
 
 import Button from './Button'
 
 const ROUTES = [
-  { name: 'Dashboard', link: '/', icon: <Grid /> },
-  { name: 'Tickets', link: '/tickets', icon: <Archive /> },
-  { name: 'Customers', link: '/customers', icon: <People /> },
-  { name: 'Forms', link: '/forms', icon: <Calender /> },
-  { name: 'Guides', link: '/guides', icon: <Explore /> },
+  { name: 'Dashboard', link: Paths.HOME, icon: <Grid /> },
+  { name: 'Tickets', link: Paths.TICKET, icon: <Archive /> },
+  { name: 'Customers', link: Paths.CUSTOMER, icon: <People /> },
+  { name: 'Forms', link: Paths.FORM, icon: <Calender /> },
+  { name: 'Guides', link: Paths.GUIDE, icon: <Explore /> },
   {
     name: 'Employees',
-    link: '/employees',
+    link: Paths.EMPLOYEE,
     icon: <Employees />
   },
-  { name: 'Softwares', link: '/softwares', icon: <Circle /> },
-  { name: 'Settings', link: '/settings', icon: <Gear /> }
+  { name: 'Softwares', link: Paths.SOFTWARE, icon: <Gear /> }
 ]
 
 const NavBarComponent: FC = () => {

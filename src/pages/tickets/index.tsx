@@ -72,8 +72,7 @@ const Tickets = () => {
   const fetchTickets = useCallback(async () => {
     setIsLoading(true)
     const { data: rows, error } = await supabase
-      .from('Parent')
-      .select()
+      .rpc('get_parent_tickets')
       .order('created_at', {
         ascending: false
       })

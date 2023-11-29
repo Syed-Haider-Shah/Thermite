@@ -17,12 +17,21 @@ export type IRow = {
 }
 
 export interface IParentTicket {
-  child_count: string
-  close_date: string | null
-  created_at: string
-  customer_id: number | null
-  employee: number | null
   id: number
+  created_at: string
+  child_count: string
+  close_date: string
+  status: string
+  employee: string
+  customer_id: number
+  address: string
+  region: string
+  serial_number: string
+  coordinates: string
+  installation_date: string
+  number_of_panels: number
+  country: string
+  warranty: boolean
   [key: string]: string | string[] | boolean | number | null
 }
 

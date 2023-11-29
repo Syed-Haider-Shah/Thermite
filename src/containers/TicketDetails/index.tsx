@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { Button, Card } from '@/components'
 import Spinner from '@/components/Icons/Spinner'
 import { supabase } from '@/services/supabase'
-import { INITAIL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
+import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
 
 const DETAILS_FIELD = [
   {
@@ -64,7 +64,7 @@ const DETAILS_FIELD = [
 ]
 
 const TicketDetails = () => {
-  const [details, setDetails] = useState<IParentDetails>(INITAIL_PARENT_DETAILS)
+  const [details, setDetails] = useState<IParentDetails>(INITIAL_PARENT_DETAILS)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const { id } = useParams() || { id: '' }

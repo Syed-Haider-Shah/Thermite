@@ -61,7 +61,7 @@ const Employees = () => {
 
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
-    const { data, error } = await supabase.from('Employees').select()
+    const { data, error } = await supabase.from('employees').select()
     setIsLoading(false)
 
     if (error) toast.error(error.message)

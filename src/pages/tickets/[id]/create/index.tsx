@@ -25,7 +25,13 @@ const CreateTicket = () => {
     register,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(CreateChildSchema)
+    resolver: yupResolver(CreateChildSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      customerImpact: false,
+      description: '',
+      upgrade: false
+    }
   })
 
   return (

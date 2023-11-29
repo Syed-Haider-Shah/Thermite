@@ -104,7 +104,7 @@ export interface Database {
         }
         Relationships: []
       }
-      Employees: {
+      employees: {
         Row: {
           country: string | null
           created_at: string
@@ -134,7 +134,7 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: 'Employees_id_fkey'
+            foreignKeyName: 'employees_id_fkey'
             columns: ['id']
             isOneToOne: true
             referencedRelation: 'users'
@@ -182,7 +182,7 @@ export interface Database {
             foreignKeyName: 'Parent_employee_fkey'
             columns: ['employee']
             isOneToOne: false
-            referencedRelation: 'Employees'
+            referencedRelation: 'employees'
             referencedColumns: ['id']
           }
         ]
@@ -217,6 +217,12 @@ export interface Database {
         }
         Returns: undefined
       }
+      count_assigned_employees: {
+        Args: {
+          user_id: string
+        }
+        Returns: number
+      }
       count_children: {
         Args: {
           par_id: number
@@ -250,17 +256,8 @@ export interface Database {
         }
         Returns: undefined
       }
-      setup_name: {
-        Args: {
-          employee_name: string
-          u_id: string
-        }
-        Returns: undefined
-      }
-      show_parent_details: {
-        Args: {
-          parent_id: number
-        }
+      get_parent_tickets: {
+        Args: Record<PropertyKey, never>
         Returns: {
           id: number
           created_at: string
@@ -278,6 +275,62 @@ export interface Database {
           country: string
           warranty: boolean
         }[]
+      }
+      setup_name: {
+        Args: {
+          employee_name: string
+          u_id: string
+        }
+        Returns: undefined
+      }
+      show_parent_details:
+        | {
+            Args: Record<PropertyKey, never>
+            Returns: {
+              id: number
+              created_at: string
+              child_count: string
+              close_date: string
+              status: string
+              employee: string
+              customer_id: number
+              address: string
+              region: string
+              serial_number: string
+              coordinates: string
+              installation_date: string
+              number_of_panels: number
+              country: string
+              warranty: boolean
+            }[]
+          }
+        | {
+            Args: {
+              parent_id: number
+            }
+            Returns: {
+              id: number
+              created_at: string
+              child_count: string
+              close_date: string
+              status: string
+              employee: string
+              customer_id: number
+              address: string
+              region: string
+              serial_number: string
+              coordinates: string
+              installation_date: string
+              number_of_panels: number
+              country: string
+              warranty: boolean
+            }[]
+          }
+      update_assigned_number_tickets: {
+        Args: {
+          user_id: string
+        }
+        Returns: undefined
       }
       update_child_count:
         | {

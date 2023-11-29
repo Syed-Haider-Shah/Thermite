@@ -13,7 +13,7 @@ export interface ICustomer {
 }
 
 export type IRow = {
-  [key: string]: string | string[] | boolean | number | null
+  [key: string]: string | string[] | boolean | number | null | undefined
 }
 
 export interface IParentTicket {

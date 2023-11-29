@@ -3,6 +3,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -34,44 +35,44 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname()
   const router = useRouter()
 
-  useEffect(() => {
-    const setData = async () => {
-      setIsLoading(true)
-      const { data, error } = await supabase.auth.getSession()
+  const fetchData = useCallback(async () => {
+    setIsLoading(true)
+    const { data, error } = await supabase.auth.getSession()
 
-      if (error) throw error
+    if (error) throw error
 
-      // route protection
-      if (!data.session)
-        if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
-        else return
-      else if (pathname === Paths.INDEX) {
-        router.push(Paths.HOME)
-      } else {
-        const { data: empData } = await supabase
-          .from('employees')
-          .select()
-          .eq('id', data.session.user.id)
-          .single()
+    // route protection
+    if (!data.session) {
+      if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
+      else return
+    } else if (pathname === Paths.INDEX) {
+      router.push(Paths.HOME)
+    } else {
+      const { data: empData } = await supabase
+        .from('employees')
+        .select()
+        .eq('id', data.session.user.id)
+        .single()
 
-        if (empData) setUser({ ...empData, email: data.session.user.email })
-      }
-
-      setSession(data.session)
-      setIsLoading(false)
+      if (empData) setUser({ ...empData, email: data.session.user.email })
     }
 
+    setSession(data.session)
+    setIsLoading(false)
+  }, [pathname, router])
+
+  useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange((_, sesh) => {
       setSession(sesh)
       setIsLoading(false)
     })
 
-    setData()
+    fetchData()
 
     return () => {
       listener.subscription.unsubscribe()
     }
-  }, [pathname, router])
+  }, [pathname, router, fetchData])
 
   const value = useMemo(
     () => ({

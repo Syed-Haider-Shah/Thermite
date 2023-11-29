@@ -21,8 +21,18 @@ export const CreateChildSchema = yup.object().shape({
     .min(1, 'minimum 1 text character required')
     .max(150, 'maximum 150 text character allowed')
     .required('Please input ticket description'),
-  customerImpact: yup.boolean().oneOf([true]),
-  upgrade: yup.boolean().oneOf([true])
+  customerimpact: yup
+    .boolean()
+    .oneOf([true, false])
+    .required('Please add customer Impact status'),
+  customerinquiry: yup
+    .boolean()
+    .oneOf([true, false])
+    .required('Please add customer Inquiry status'),
+  upgrade: yup
+    .boolean()
+    .oneOf([true, false])
+    .required('Please add upgrade status')
 })
 
 export const CreateEmployeeSchema = yup.object().shape({

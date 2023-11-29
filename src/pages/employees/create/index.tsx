@@ -36,8 +36,6 @@ const CreateEmployee = () => {
   const {
     register,
     handleSubmit,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    watch,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(CreateEmployeeSchema),

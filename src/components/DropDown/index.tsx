@@ -75,7 +75,7 @@ const DropDownComponent = ({
             type="button"
             onClick={() => handleSelect(option)}
             key={option.name}
-            className="w-full cursor-pointer px-2 py-2.5 text-left hover:bg-black/5"
+            className="w-full cursor-pointer px-3 py-2.5 text-left hover:bg-black/5"
           >
             {option.name}
           </button>

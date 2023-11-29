@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         router.push(Paths.HOME)
       } else {
         const { data: empData } = await supabase
-          .from('Employees')
+          .from('employees')
           .select()
           .eq('id', data.session.user.id)
           .single()

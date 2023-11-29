@@ -36,6 +36,8 @@ const CreateEmployee = () => {
   const {
     register,
     handleSubmit,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    watch,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(CreateEmployeeSchema),
@@ -101,6 +103,7 @@ const CreateEmployee = () => {
           <FormLine
             id="email"
             title="Email"
+            type="email"
             {...register('email')}
             error={errors.email?.message}
             primary
@@ -109,8 +112,9 @@ const CreateEmployee = () => {
           <FormLine
             id="password"
             title="Password"
+            type="password"
             {...register('password')}
-            error={errors.email?.message}
+            error={errors.password?.message}
             primary
             className="w-80"
           />

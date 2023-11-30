@@ -36,6 +36,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
 
   const fetchData = useCallback(async () => {
+    if (session) {
+      setIsLoading(false)
+      return
+    }
+
     setIsLoading(true)
     const { data, error } = await supabase.auth.getSession()
 
@@ -43,13 +48,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // route protection
     if (!data.session) {
-      if (pathname !== Paths.INDEX) {
-        router.push(Paths.INDEX)
-        return
-      } else {
-        setIsLoading(false)
-        return
-      }
+      if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
+      else setIsLoading(false)
+      return
     } else if (pathname === Paths.INDEX) {
       router.push(Paths.HOME)
       return
@@ -65,6 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     setSession(data.session)
     setIsLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, router])
 
   useEffect(() => {

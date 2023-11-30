@@ -43,10 +43,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     // route protection
     if (!data.session) {
-      if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
-      else return
+      if (pathname !== Paths.INDEX) {
+        router.push(Paths.INDEX)
+        return
+      } else {
+        setIsLoading(false)
+        return
+      }
     } else if (pathname === Paths.INDEX) {
       router.push(Paths.HOME)
+      return
     } else {
       const { data: empData } = await supabase
         .from('employees')
@@ -64,7 +70,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange((_, sesh) => {
       setSession(sesh)
-      setIsLoading(false)
     })
 
     fetchData()

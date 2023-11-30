@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -8,7 +8,7 @@ import { Button, FilterSelect, PageNav, Table, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
-import { IChildTicket } from '@/types/supabaseTables'
+import { IChildTicket, IRow } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -65,17 +65,25 @@ const Tickets = () => {
   const [rows, setRows] = useState<IChildTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const { id } = useParams() || { id: '' }
+  const { pid } = useParams() || { pid: '' }
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleRowSelect = useCallback(
+    (row: IRow) => {
+      router.push(`${pathname}/${row.id}`)
+    },
+    [pathname, router]
+  )
 
   const fetchChildTickets = useCallback(async () => {
-    if (!id) return
+    if (!pid) return
 
     setIsLoading(true)
     const { data, error } = await supabase
       .from('Child')
       .select()
-      .eq('parent_id', id)
+      .eq('parent_id', pid)
       .order('created_at', {
         ascending: false
       })
@@ -85,7 +93,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (data) setRows(data)
-  }, [id])
+  }, [pid])
 
   useEffect(() => {
     fetchChildTickets()
@@ -104,7 +112,12 @@ const Tickets = () => {
           </Link>
           <FilterSelect options={OPTIONS} name="category" />
         </div>
-        <Table isLoading={isLoading} cols={cols} rows={rows} />
+        <Table
+          onRowSelect={handleRowSelect}
+          isLoading={isLoading}
+          cols={cols}
+          rows={rows}
+        />
         <PageNav pageCount={5} />
       </article>
     </>

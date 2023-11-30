@@ -67,20 +67,20 @@ const TicketDetails = () => {
   const [details, setDetails] = useState<IParentDetails>(INITIAL_PARENT_DETAILS)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const { id } = useParams() || { id: '' }
+  const { pid } = useParams() || { pid: '' }
 
   const fetchDetails = useCallback(async () => {
     setIsLoading(true)
     const { data, error } = await supabase
       .rpc('show_parent_details', {
-        parent_id: Number(id)
+        parent_id: Number(pid)
       })
       .single()
     setIsLoading(false)
 
     if (error) toast.error(error.message)
     else if (data) setDetails(data)
-  }, [id])
+  }, [pid])
 
   useEffect(() => {
     fetchDetails()

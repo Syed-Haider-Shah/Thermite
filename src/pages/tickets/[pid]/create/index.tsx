@@ -14,7 +14,6 @@ import { IOption } from '@/types/model'
 import { CreateChildSchema } from '@/utils/yupConfig'
 
 const PROBLEMS = [{ name: 'Problem', value: '' }]
-const FAULTS = [{ name: 'Fault', value: '' }]
 const SERIAL_NUMBERS = [{ name: 'Serial Number', value: '' }]
 
 type IChildFields = {
@@ -26,14 +25,13 @@ type IChildFields = {
 
 const CreateTicket = () => {
   const [problem, setProblem] = useState<IOption>(PROBLEMS[0])
-  const [fault, setFault] = useState<IOption>(FAULTS[0])
   const [serialNumber, setSerialNumber] = useState<IOption>(SERIAL_NUMBERS[0])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
 
-  const { id } = useParams() || {
-    id: ''
+  const { pid } = useParams() || {
+    pid: ''
   }
 
   const {
@@ -56,8 +54,8 @@ const CreateTicket = () => {
       setIsLoading(true)
       const { error } = await supabase.rpc('create_child_ticket', {
         ...data,
-        fault: fault.value,
-        parentid: Number(id),
+        fault: '',
+        parentid: Number(pid),
         problem: problem.value,
         serial: serialNumber.value,
         datecreated: new Date().toISOString()
@@ -68,7 +66,7 @@ const CreateTicket = () => {
       if (error) toast.error(error.message)
       else router.back()
     },
-    [fault.value, id, problem.value, router, serialNumber.value]
+    [pid, problem.value, router, serialNumber.value]
   )
 
   return (
@@ -129,13 +127,6 @@ const CreateTicket = () => {
             setValue={setProblem}
             value={problem}
             options={PROBLEMS}
-            className="w-80"
-          />
-          <DropDown
-            title="Fault"
-            value={fault}
-            setValue={setFault}
-            options={FAULTS}
             className="w-80"
           />
           <DropDown

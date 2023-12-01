@@ -28,7 +28,7 @@ const CreateParentTicket = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [customers, setCustomers] = useState<ICustomer[]>([])
-  const [selectedRow, setSelectedRow] = useState<ICustomer | null>(null)
+  const [selectedRow, setSelectedRow] = useState<ICustomer>()
 
   const handleClose = useCallback(() => {
     router.push(Paths.TICKET)
@@ -53,7 +53,7 @@ const CreateParentTicket = () => {
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      if (selectedRow === null) return
+      if (!selectedRow) return
 
       setIsLoading(true)
       const { error } = await supabase.rpc('create_parent_ticket', {
@@ -80,19 +80,13 @@ const CreateParentTicket = () => {
         <SearchBar placeholder="Search for Customers" />
         <Table
           cols={cols}
-          rows={selectedRow ? [selectedRow] : customers}
+          rows={customers}
+          selectedRow={selectedRow?.id.toString()}
           isLoading={isLoading}
           onRowSelect={handleRowSelect}
         />
         {selectedRow && (
-          <div className="flex w-full justify-between">
-            <Button
-              onClick={() => setSelectedRow(null)}
-              active
-              className="bg-black/20 text-black"
-            >
-              Back
-            </Button>
+          <div className="flex w-full flex-row-reverse justify-between">
             <Button isLoading={isLoading} active type="submit">
               Create
             </Button>

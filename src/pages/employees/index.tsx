@@ -25,14 +25,8 @@ const cols = [
     field: 'name',
     name: 'Name'
   },
-  {
-    field: 'email',
-    name: 'Email'
-  },
-  {
-    field: 'region',
-    name: 'Region'
-  },
+  { field: 'number_of_assigned_tickets', name: 'Assigned Tickets' },
+  { field: 'number_of_closed_tickets', name: 'Closed Tickets' },
   {
     field: 'role',
     name: 'Role'
@@ -61,12 +55,12 @@ const Employees = () => {
 
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
-    const { data, error } = await supabase.from('employees').select()
+    const { data: rows, error } = await supabase.from('employees').select()
     setIsLoading(false)
 
-    if (error) toast.error(error.message)
-    else if (data) setRows(rows as IEmployee[])
-  }, [rows])
+    if (rows) setRows(rows as IEmployee[])
+    else if (error) toast.error(error.message)
+  }, [])
 
   useEffect(() => {
     fetchEmployees()

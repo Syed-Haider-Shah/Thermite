@@ -35,46 +35,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname()
   const router = useRouter()
 
-  const fetchData = useCallback(async () => {
-    if (session) {
+  const fetchData = useCallback(
+    async (sesh: Session | null) => {
+      // route protection
+      if (!sesh) {
+        if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
+        else setIsLoading(false)
+        return
+      } else if (pathname === Paths.INDEX) {
+        router.push(Paths.HOME)
+        return
+      } else {
+        const { data: empData } = await supabase
+          .from('employees')
+          .select()
+          .eq('id', sesh.user.id)
+          .single()
+
+        if (empData) setUser({ ...empData, email: sesh.user.email })
+      }
+
       setIsLoading(false)
-      return
-    }
-
-    setIsLoading(true)
-    const { data, error } = await supabase.auth.getSession()
-
-    if (error) throw error
-
-    // route protection
-    if (!data.session) {
-      if (pathname !== Paths.INDEX) router.push(Paths.INDEX)
-      else setIsLoading(false)
-      return
-    } else if (pathname === Paths.INDEX) {
-      router.push(Paths.HOME)
-      return
-    } else {
-      const { data: empData } = await supabase
-        .from('employees')
-        .select()
-        .eq('id', data.session.user.id)
-        .single()
-
-      if (empData) setUser({ ...empData, email: data.session.user.email })
-    }
-
-    setSession(data.session)
-    setIsLoading(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, router])
+    },
+    [pathname, router]
+  )
 
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange((_, sesh) => {
       setSession(sesh)
+      fetchData(sesh)
     })
-
-    fetchData()
 
     return () => {
       listener.subscription.unsubscribe()

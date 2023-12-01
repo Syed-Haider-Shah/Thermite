@@ -8,6 +8,8 @@ import Spinner from '@/components/Icons/Spinner'
 import { supabase } from '@/services/supabase'
 import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
 
+import AssignEmployee from '../AssignEmployee'
+
 const DETAILS_FIELD = [
   {
     name: 'ID',
@@ -40,10 +42,6 @@ const DETAILS_FIELD = [
   {
     name: 'Installation Date',
     field: 'installation_date'
-  },
-  {
-    name: 'Employee Assigned',
-    field: 'employee'
   },
   {
     name: 'Number of Panels',
@@ -99,13 +97,23 @@ const TicketDetails = () => {
       ) : (
         <div className="flex max-w-lg flex-wrap justify-between gap-8">
           {DETAILS_FIELD.map(({ name, field }) => (
-            <div key={field}>
+            <div title={name} key={field}>
               <h2 className="text-sm font-semibold leading-4">{name}</h2>
               <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
                 {`${details[field]}`}
               </p>
             </div>
           ))}
+          <div>
+            <h2 className="text-sm font-semibold leading-4">
+              Employee Assigned
+            </h2>
+            <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+              {details['employee'] || (
+                <AssignEmployee fetchDetails={fetchDetails} />
+              )}
+            </p>
+          </div>
         </div>
       )}
     </Card>

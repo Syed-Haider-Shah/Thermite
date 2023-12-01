@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react'
 
 import { IRow } from '@/types/supabaseTables'
+import { cn } from '@/utils/cn'
 
 import Spinner from '../Icons/Spinner'
 import SortableColumn from './SortableColumn'
@@ -9,21 +10,31 @@ type ITable = {
   rows: IRow[]
   onRowSelect?: (row: IRow) => void
   cols: { field: string; name: string }[]
+  selectedRow?: string
   isLoading?: boolean
 }
 
-const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
+const TableComponent: FC<ITable> = ({
+  rows,
+  cols,
+  isLoading,
+  onRowSelect,
+  selectedRow
+}) => {
   const rowList = useMemo(
     () =>
       rows.map((row, idx) => (
         <tr
           onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
-          className="cursor-pointer border-y border-black/5 transition-colors last:border-b-0 even:bg-indigo/5 hover:bg-black/5"
+          className={cn(
+            'cursor-pointer border-y border-black/5 transition-colors last:border-b-0 even:bg-indigo/5 hover:bg-black/5',
+            {
+              '!bg-indigo/30 hover:bg-indigo/40':
+                selectedRow === row.id?.toString()
+            }
+          )}
         >
-          <td className="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-red sm:pl-6">
-            <input title="checkbox" type="checkbox" defaultValue={0} />
-          </td>
           {cols.map(({ field }) => (
             <td className="py-3 pl-4 text-sm" key={field}>
               {row[field]}
@@ -31,7 +42,7 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
           ))}
         </tr>
       )),
-    [cols, onRowSelect, rows]
+    [cols, onRowSelect, rows, selectedRow]
   )
 
   return (
@@ -39,12 +50,6 @@ const TableComponent: FC<ITable> = ({ rows, cols, isLoading, onRowSelect }) => {
       <table className="h-full min-w-full divide-y">
         <thead className="sticky top-0 z-10 bg-darkIndigo bg-opacity-100">
           <tr>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left font-semibold leading-5 text-black/50 first:pl-4 first:sm:pl-6"
-            >
-              <input title="checkbox" type="checkbox" defaultValue={0} />
-            </th>
             {cols.map((val) => (
               <SortableColumn key={val.field} field={val.field}>
                 {val.name}

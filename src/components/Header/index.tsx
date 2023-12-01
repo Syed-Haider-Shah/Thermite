@@ -14,7 +14,7 @@ const OPTIONS = [
   },
   {
     name: 'Settings',
-    link: Paths.PROFILE_UPDATE
+    link: `${Paths.PROFILE}?edit=true`
   }
 ]
 

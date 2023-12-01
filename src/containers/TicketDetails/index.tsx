@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Button, Card } from '@/components'
-import Spinner from '@/components/Icons/Spinner'
+import { Spinner } from '@/components'
 import { supabase } from '@/services/supabase'
 import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
 

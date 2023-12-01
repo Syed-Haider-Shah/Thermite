@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react'
 
+import { Spinner } from '@/components'
 import { IRow } from '@/types/supabaseTables'
 import { cn } from '@/utils/cn'
 
-import Spinner from '../Icons/Spinner'
 import SortableColumn from './SortableColumn'
 
 type ITable = {

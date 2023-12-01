@@ -1,8 +1,7 @@
 import { FC, memo, ReactNode } from 'react'
 
+import { Spinner } from '@/components'
 import { cn } from '@/utils/cn'
-
-import Spinner from '../Icons/Spinner'
 
 type IButton = {
   className?: string

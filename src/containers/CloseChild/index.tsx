@@ -1,7 +1,15 @@
-import { useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
+
+import { useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, DropDown, TextArea } from '@/components'
+import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
+import { CloseChildSchema } from '@/utils/yupConfig'
 
 const FAULTS = [{ name: 'Fault', value: '' }]
 const PARTS = [{ name: 'Parts', value: '' }]
@@ -11,9 +19,42 @@ const CloseChild = () => {
   const [fault, setFault] = useState<IOption>(FAULTS[0])
   const [part, setPart] = useState<IOption>(PARTS[0])
   const [resolution, setResolution] = useState<IOption>(RESOLUTIONS[0])
+  const [isSaving, setIsSaving] = useState<boolean>(false)
+
+  const { cid } = useParams() || { cid: '' }
+  const router = useRouter()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(CloseChildSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      description: ''
+    }
+  })
+
+  const handleCloseChild = useCallback(async () => {
+    setIsSaving(true)
+    const { error } = await supabase.rpc('close_child_ticket', {
+      c_id: Number(cid)
+    })
+    setIsSaving(false)
+
+    if (error) toast.error(error.message)
+    else {
+      toast.success('Ticket Closed Successfully')
+      router.back()
+    }
+  }, [cid, router])
 
   return (
-    <form className="mt-5 flex flex-1 flex-wrap gap-6 rounded-5 bg-lightGray p-5">
+    <form
+      onSubmit={handleSubmit(handleCloseChild)}
+      className="mt-5 flex flex-1 flex-wrap gap-4 rounded-5 bg-lightGray p-5"
+    >
       <DropDown
         title="Fault"
         value={fault}
@@ -38,12 +79,16 @@ const CloseChild = () => {
       <TextArea
         id="solution"
         title="Solution Description"
+        {...register('description')}
+        error={errors.description?.message}
         primary
         rows={4}
         className="w-sm"
       />
       <div className="mr-2 flex w-full flex-row-reverse">
-        <Button active>Close Ticket</Button>
+        <Button type="submit" isLoading={isSaving} active>
+          Close Ticket
+        </Button>
       </div>
     </form>
   )

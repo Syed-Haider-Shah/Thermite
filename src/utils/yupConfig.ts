@@ -19,7 +19,7 @@ export const CreateChildSchema = yup.object().shape({
   description: yup
     .string()
     .min(1, 'minimum 1 text character required')
-    .max(150, 'maximum 150 text character allowed')
+    .max(300, 'maximum 300 text character allowed')
     .required('Please input ticket description'),
   customerimpact: yup
     .boolean()
@@ -70,4 +70,12 @@ export const UpdateNameSchema = yup.object().shape({
     .min(1, 'minimum 3 text character required')
     .max(150, 'maximum 150 text character allowed')
     .required('Please input ticket name')
+})
+
+export const CloseChildSchema = yup.object().shape({
+  description: yup
+    .string()
+    .min(1, 'minimum 1 text character required')
+    .max(300, 'maximum 300 text character allowed')
+    .required('Please input ticket description')
 })

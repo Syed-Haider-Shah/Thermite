@@ -2,13 +2,15 @@ import { useSearchParams } from 'next/navigation'
 
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, DropDown, FormLine } from '@/components'
+import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
-import { UpdatePasswordSchema } from '@/utils/yupConfig'
+import { UpdateNameSchema, UpdatePasswordSchema } from '@/utils/yupConfig'
 
 const COUNTIES = [
   { name: 'Pakistan', value: 'pakistan' },
@@ -20,13 +22,20 @@ const COUNTIES = [
 ]
 
 const ProfileEdit = () => {
-  const [country, setCountry] = useState<IOption>(COUNTIES[0])
+  const { user } = useAuth()
+
+  const [country, setCountry] = useState<IOption>(
+    COUNTIES.find((val) => val.value === user.country) || COUNTIES[0]
+  )
+  const [isSavingPass, setIsSavingPass] = useState<boolean>(false)
+  const [isSavingUser, setIsSavingUser] = useState<boolean>(false)
+
   const edit = useSearchParams().get('edit')
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors }
+    register: registerPassword,
+    handleSubmit: handlePasswordSubmit,
+    formState: { errors: passwordErrors }
   } = useForm({
     resolver: yupResolver(UpdatePasswordSchema),
     mode: 'onBlur',
@@ -36,21 +45,65 @@ const ProfileEdit = () => {
     }
   })
 
+  const {
+    register: registerUpdate,
+    handleSubmit: handleUpdateSubmit,
+    formState: { errors: updateErrors }
+  } = useForm({
+    resolver: yupResolver(UpdateNameSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      name: user.name || ''
+    }
+  })
+
   const handleUpdatePassword = useCallback(
     async ({ password }: { password: string }) => {
-      const {} = await supabase.auth.updateUser({
+      setIsSavingPass(true)
+      const { error } = await supabase.auth.updateUser({
         password
       })
+      setIsSavingPass(false)
+
+      if (error) toast.error(error.message)
+      else toast.success('Password updated successfully')
     },
     []
+  )
+
+  const handleUpdateUser = useCallback(
+    async ({ name }: { name: string }) => {
+      setIsSavingUser(true)
+      const { error } = await supabase.from('employees').update({
+        name,
+        country: country.value
+      })
+
+      setIsSavingUser(false)
+
+      if (error) toast.error(error.message)
+      else toast.success('Password updated successfully')
+    },
+    [country.value]
   )
 
   return (
     edit && (
       <article className="rounded-5 bg-white p-4">
         <div className="h-32 w-32 rounded-lg bg-gray" />
-        <form className="mt-4 flex flex-wrap items-center gap-6">
-          <FormLine className="w-80" id="name" required primary title="Name" />
+        <form
+          onSubmit={handleUpdateSubmit(handleUpdateUser)}
+          className="mt-4 flex flex-wrap items-center gap-6"
+        >
+          <FormLine
+            className="w-80"
+            id="name"
+            {...registerUpdate('name')}
+            error={updateErrors.name?.message}
+            required
+            primary
+            title="Name"
+          />
           <DropDown
             title="Country"
             required
@@ -59,19 +112,19 @@ const ProfileEdit = () => {
             options={COUNTIES}
             className="w-80"
           />
-          <Button className="py-2" active>
+          <Button isLoading={isSavingUser} className="py-2" active>
             Update Details
           </Button>
         </form>
         <form
-          onSubmit={handleSubmit(handleUpdatePassword)}
+          onSubmit={handlePasswordSubmit(handleUpdatePassword)}
           className="mt-4 flex flex-wrap items-center gap-6"
         >
           <FormLine
             className="w-80"
             id="password"
-            {...register('password')}
-            error={errors.password?.message}
+            {...registerPassword('password')}
+            error={passwordErrors.password?.message}
             type="password"
             required
             primary
@@ -80,14 +133,19 @@ const ProfileEdit = () => {
           <FormLine
             className="w-80"
             id="confirm"
-            {...register('confirm')}
-            error={errors.confirm?.message}
+            {...registerPassword('confirm')}
+            error={passwordErrors.confirm?.message}
             type="password"
             required
             primary
             title="Confirm Password"
           />
-          <Button type="submit" className="h-min py-2" active>
+          <Button
+            isLoading={isSavingPass}
+            type="submit"
+            className="h-min py-2"
+            active
+          >
             Update Password
           </Button>
         </form>

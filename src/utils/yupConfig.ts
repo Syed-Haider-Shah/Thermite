@@ -63,3 +63,11 @@ export const UpdatePasswordSchema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Password must match')
     .required('Please input your password confirmation')
 })
+
+export const UpdateNameSchema = yup.object().shape({
+  name: yup
+    .string()
+    .min(1, 'minimum 3 text character required')
+    .max(150, 'maximum 150 text character allowed')
+    .required('Please input ticket name')
+})

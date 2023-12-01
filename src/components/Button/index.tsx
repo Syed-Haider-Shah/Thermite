@@ -31,9 +31,10 @@ const ButtonComponent: FC<IButton> = ({
       onClick={onClick}
       type={type ? 'submit' : 'button'}
       className={cn(
-        'flex items-center justify-center gap-x-2 rounded-full px-4.5 py-3 text-sm font-bold disabled:bg-black/40',
+        'flex items-center justify-center gap-x-2 rounded-full px-4.5 py-3 text-sm font-bold transition duration-300 hover:bg-black/5 disabled:bg-black/40',
         {
-          '!rounded-1.25 bg-activeBlue py-1 text-white': active,
+          '!rounded-1.25 border bg-activeBlue py-1 text-white hover:invert':
+            active,
           '!rounded-1.25 border border-black/10 bg-transparent text-black/40':
             primary
         },

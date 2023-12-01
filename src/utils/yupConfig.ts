@@ -51,3 +51,15 @@ export const CreateEmployeeSchema = yup.object().shape({
     .max(150, 'maximum 150 text character allowed')
     .required('Please input ticket name')
 })
+
+export const UpdatePasswordSchema = yup.object().shape({
+  password: yup
+    .string()
+    .password()
+    .minRepeating(3, 'Repeated characters are not allowed')
+    .required('Please input your password'),
+  confirm: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Password must match')
+    .required('Please input your password confirmation')
+})

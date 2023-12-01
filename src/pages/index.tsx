@@ -77,7 +77,7 @@ export default function Home() {
           <Button
             type="submit"
             isLoading={isLoading}
-            className="w-80 bg-lightIndigo text-white"
+            className="w-80 bg-lightIndigo text-white hover:bg-indigo"
           >
             Sign in
           </Button>

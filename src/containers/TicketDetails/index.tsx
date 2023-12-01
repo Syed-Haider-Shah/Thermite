@@ -104,7 +104,7 @@ const TicketDetails = () => {
               </p>
             </div>
           ))}
-          <div>
+          <div title="Employee">
             <h2 className="text-sm font-semibold leading-4">
               Employee Assigned
             </h2>

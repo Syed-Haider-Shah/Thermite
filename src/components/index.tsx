@@ -28,5 +28,6 @@ export {
   People,
   Employees,
   Bell,
-  Grid
+  Grid,
+  Spinner
 } from './Icons'

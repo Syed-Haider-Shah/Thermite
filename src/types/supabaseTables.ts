@@ -52,6 +52,22 @@ export interface IChildTicket {
   [key: string]: string | string[] | boolean | number | null
 }
 
+export const INITIAL_CHILD_DATA = {
+  close_date: null,
+  created_at: '',
+  created_date: '',
+  customer_impact: false,
+  customer_inquiry: false,
+  description: '',
+  fault: '',
+  id: 0,
+  parent_id: 0,
+  problem: null,
+  serial_number: '',
+  status: '',
+  upgrade: false
+}
+
 export interface IParentDetails {
   id: number
   created_at: string

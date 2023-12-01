@@ -1,57 +1,51 @@
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
-import { Button, DropDown, TextArea } from '@/components'
-import { ChildDetails, Modal } from '@/containers'
-import { IOption } from '@/types/model'
-
-const FAULTS = [{ name: 'Fault', value: '' }]
-const PARTS = [{ name: 'Parts', value: '' }]
-const RESOLUTIONS = [{ name: 'Resolution', value: '' }]
+import { Spinner } from '@/components'
+import { ChildDetails, CloseChild, Modal } from '@/containers'
+import { supabase } from '@/services/supabase'
+import { IChildTicket, INITIAL_CHILD_DATA } from '@/types/supabaseTables'
 
 const ChildTicket = () => {
-  const [fault, setFault] = useState<IOption>(FAULTS[0])
-  const [part, setPart] = useState<IOption>(PARTS[0])
-  const [resolution, setResolution] = useState<IOption>(RESOLUTIONS[0])
+  const [childTicket, setChildTicket] =
+    useState<IChildTicket>(INITIAL_CHILD_DATA)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
+
+  const { cid } = useParams() || { cid: '' }
+
+  const fetchChildTicket = useCallback(async () => {
+    setIsLoading(true)
+    const { data, error } = await supabase
+      .from('Child')
+      .select()
+      .eq('id', Number(cid))
+      .single()
+    setIsLoading(false)
+
+    if (data) setChildTicket(data)
+    else if (error) toast.error(error.message)
+  }, [cid])
+
+  useEffect(() => {
+    fetchChildTicket()
+  }, [fetchChildTicket])
+
   return (
     <Modal showModal onClose={router.back} title="Child Ticket">
-      <ChildDetails />
-      <form className="mt-5 flex flex-1 flex-wrap gap-6 rounded-5 bg-lightGray p-5">
-        <DropDown
-          title="Fault"
-          value={fault}
-          setValue={setFault}
-          options={FAULTS}
-          className="w-80"
-        />
-        <DropDown
-          title="Parts"
-          value={part}
-          setValue={setPart}
-          options={PARTS}
-          className="w-80"
-        />
-        <DropDown
-          title="Resolution"
-          value={resolution}
-          setValue={setResolution}
-          options={RESOLUTIONS}
-          className="w-80"
-        />
-        <TextArea
-          id="solution"
-          title="Solution Description"
-          primary
-          rows={4}
-          className="w-sm"
-        />
-        <div className="mr-2 flex w-full flex-row-reverse">
-          <Button active>Close Ticket</Button>
+      {isLoading ? (
+        <div className="absolute left-1/2 top-1/2">
+          <Spinner className="" />
         </div>
-      </form>
+      ) : (
+        <>
+          <ChildDetails child={childTicket} />
+          {childTicket.status === 'OPEN' && <CloseChild />}
+        </>
+      )}
     </Modal>
   )
 }

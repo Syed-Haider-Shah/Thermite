@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect, useState } from 'react'
+import { FC, ReactNode, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import { CrossIcon } from '@/components'
@@ -6,7 +6,7 @@ import { CrossIcon } from '@/components'
 interface IModal {
   title?: string
   showModal: boolean
-  children: ReactElement | ReactElement[]
+  children: ReactNode
   onClose?: () => void
 }
 

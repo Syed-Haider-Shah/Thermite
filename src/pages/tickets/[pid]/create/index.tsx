@@ -72,7 +72,7 @@ const CreateTicket = () => {
   return (
     <Modal showModal title="Create Ticket" onClose={router.back}>
       <form onSubmit={handleSubmit(handleCreateChild)} className="space-y-5">
-        <div className="mt-5 flex flex-1 flex-wrap gap-6 rounded-5 bg-lightGray p-5">
+        <div className="mt-5 flex h-full flex-1 flex-wrap gap-6 rounded-5 bg-lightGray px-5 py-8">
           <TextArea
             required
             id="description"
@@ -84,8 +84,8 @@ const CreateTicket = () => {
             primary
           />
           <div className="flex w-full gap-20">
-            <div className="flex items-end">
-              <h1 className="text-sm font-semibold text-black/90">
+            <div className="flex items-start">
+              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
                 Customer Impact
               </h1>
               <FormLine
@@ -97,8 +97,8 @@ const CreateTicket = () => {
                 type="checkbox"
               />
             </div>
-            <div className="flex items-end">
-              <h1 className="text-sm font-semibold text-black/90">
+            <div className="flex items-start">
+              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
                 Customer Inquiry
               </h1>
               <FormLine
@@ -110,8 +110,10 @@ const CreateTicket = () => {
                 type="checkbox"
               />
             </div>
-            <div className="flex items-end">
-              <h1 className="text-sm font-semibold text-black/90">Upgrade</h1>
+            <div className="flex items-start">
+              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
+                Upgrade
+              </h1>
               <FormLine
                 id="upgrade"
                 {...register('upgrade')}

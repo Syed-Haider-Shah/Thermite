@@ -59,7 +59,7 @@ const ProfileEdit = () => {
             options={COUNTIES}
             className="w-80"
           />
-          <Button className="mt-6 py-2" active>
+          <Button className="py-2" active>
             Update Details
           </Button>
         </form>
@@ -72,6 +72,7 @@ const ProfileEdit = () => {
             id="password"
             {...register('password')}
             error={errors.password?.message}
+            type="password"
             required
             primary
             title="Password"
@@ -81,11 +82,12 @@ const ProfileEdit = () => {
             id="confirm"
             {...register('confirm')}
             error={errors.confirm?.message}
+            type="password"
             required
             primary
             title="Confirm Password"
           />
-          <Button type="submit" className="mt-4 py-2" active>
+          <Button type="submit" className="h-min py-2" active>
             Update Password
           </Button>
         </form>

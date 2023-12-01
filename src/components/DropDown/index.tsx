@@ -38,7 +38,7 @@ const DropDownComponent = ({
   return (
     <div
       className={cn(
-        'relative w-40 text-sm font-medium text-black/60',
+        'relative mb-5 w-40 text-sm font-medium text-black/60',
         className
       )}
     >

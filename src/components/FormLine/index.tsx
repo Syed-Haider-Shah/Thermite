@@ -51,7 +51,7 @@ const FormLineComponent: ForwardRefRenderFunction<
       title={title}
       htmlFor={id}
       className={cn(
-        'relative flex flex-col gap-y-1 text-xl font-semibold leading-6 text-black/60',
+        'relative mb-5 flex flex-col gap-y-1 text-xl font-semibold leading-6 text-black/60',
         {
           'text-sm leading-4 text-black/60': secondary,
           'text-sm leading-4 text-black/90': primary
@@ -87,7 +87,7 @@ const FormLineComponent: ForwardRefRenderFunction<
       />
       <div
         className={cn(
-          'whitespace-pre text-sm font-semibold leading-4 text-red duration-300 ease-in-out',
+          'absolute -bottom-5 text-sm font-semibold leading-4 text-red duration-300 ease-in-out',
           { 'text-red/0': !error }
         )}
       >

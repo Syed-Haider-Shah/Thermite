@@ -1,16 +1,14 @@
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
-import {
-  Button,
-  Card,
-  FilterSelect,
-  SearchBar,
-  Table,
-  UnionIcon
-} from '@/components'
+import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
+import { Card, FilterSelect, SearchBar, Table } from '@/components'
 import { Paths } from '@/constants'
 import { ProfileDetails, ProfileEdit } from '@/containers'
+import { useAuth } from '@/context/AuthContext'
+import { supabase } from '@/services/supabase'
+import { IParentTicket, IRow } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -50,7 +48,36 @@ const OPTIONS = [
 ]
 
 const Profile = () => {
-  const pathname = usePathname()
+  const [rows, setRows] = useState<IParentTicket[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const { user } = useAuth()
+
+  const router = useRouter()
+
+  const fetchTickets = useCallback(async () => {
+    if (!user.name) return
+
+    setIsLoading(true)
+    const { data, error } = await supabase
+      .rpc('get_parent_tickets')
+      .eq('employee', user.name)
+    setIsLoading(false)
+
+    if (data) setRows(data)
+    else if (error) toast.error(error.message)
+  }, [user.name])
+
+  const handleSelectRow = useCallback(
+    (row: IRow) => {
+      router.push(`${Paths.TICKET}/${row.id}`)
+    },
+    [router]
+  )
+
+  useEffect(() => {
+    fetchTickets()
+  }, [fetchTickets])
 
   return (
     <>
@@ -60,16 +87,15 @@ const Profile = () => {
         <div className="flex justify-between">
           <SearchBar placeholder="Search for Tickets" />
           <div className="flex gap-x-2">
-            <Link href={`${pathname}${Paths.CREATE}`}>
-              <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
-                <UnionIcon />
-                New Child Ticket
-              </Button>
-            </Link>
             <FilterSelect options={OPTIONS} name="category" />
           </div>
         </div>
-        <Table cols={cols} rows={[]} />
+        <Table
+          onRowSelect={handleSelectRow}
+          isLoading={isLoading}
+          cols={cols}
+          rows={rows}
+        />
       </Card>
     </>
   )

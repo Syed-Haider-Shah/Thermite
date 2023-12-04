@@ -4,7 +4,14 @@ import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button, FilterSelect, PageNav, Table, UnionIcon } from '@/components'
+import {
+  Button,
+  Card,
+  FilterSelect,
+  PageNav,
+  Table,
+  UnionIcon
+} from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
@@ -102,7 +109,7 @@ const Tickets = () => {
   return (
     <>
       <TicketDetails />
-      <article className="flex h-full flex-col gap-5 rounded-2xl bg-white p-4">
+      <Card>
         <div className="flex flex-row-reverse gap-2">
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
@@ -119,7 +126,7 @@ const Tickets = () => {
           rows={rows}
         />
         <PageNav pageCount={5} />
-      </article>
+      </Card>
     </>
   )
 }

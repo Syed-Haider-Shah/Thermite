@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 
 import {
   Button,
+  Card,
   FilterSelect,
   PageNav,
   SearchBar,
@@ -67,7 +68,7 @@ const Employees = () => {
   }, [fetchEmployees])
 
   return (
-    <article className="flex flex-col gap-5 rounded-2xl bg-white p-4">
+    <Card>
       <div className="flex justify-between">
         <SearchBar placeholder="Search for Employees" />
         <div className="flex gap-x-2">
@@ -82,7 +83,7 @@ const Employees = () => {
       </div>
       <Table cols={cols} rows={rows} isLoading={isLoading} />
       <PageNav pageCount={5} />
-    </article>
+    </Card>
   )
 }
 

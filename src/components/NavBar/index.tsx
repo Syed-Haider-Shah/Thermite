@@ -34,7 +34,7 @@ const NavBarComponent: FC = () => {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky top-0 h-screen bg-white px-5 py-10">
+    <nav className="sticky top-0 h-screen bg-white px-5 py-10 drop-shadow-lg">
       <Image
         src="/logo.svg"
         className="px-4"

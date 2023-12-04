@@ -15,7 +15,7 @@ const Card: FC<ICard> = ({ children, className, title, id }) => {
       id={id}
       title={title}
       className={cn(
-        'relative flex h-full flex-col gap-5 rounded-2xl bg-white p-4',
+        'relative flex h-full flex-col gap-5 rounded-2xl bg-white p-4 drop-shadow-md',
         className
       )}
     >

@@ -49,10 +49,10 @@ export default function Home() {
         <meta name="description" content="Thermite" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className="relative flex w-full justify-center ">
+      <div className="absolute -my-8 flex h-screen w-full justify-end">
         <form
           onSubmit={handleSubmit(handleSignIn)}
-          className="flex w-full max-w-md flex-col items-center gap-7 rounded-5 bg-white py-[24vh]"
+          className="flex w-full max-w-4xl flex-col items-center gap-7 bg-white py-[24vh]"
         >
           <Image src="/logo.svg" alt="Logo" width={150} height={150} />
           <FormLine

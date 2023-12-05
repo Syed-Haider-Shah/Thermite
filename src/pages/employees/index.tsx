@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -15,7 +15,7 @@ import {
 } from '@/components'
 import { Paths } from '@/constants'
 import { supabase } from '@/services/supabase'
-import { IEmployee } from '@/types/supabaseTables'
+import { IEmployee, IRow } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -53,6 +53,14 @@ const Employees = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleSelectRow = useCallback(
+    (row: IRow) => {
+      router.push(`${Paths.EMPLOYEE}/${row.name}`)
+    },
+    [router]
+  )
 
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
@@ -81,7 +89,12 @@ const Employees = () => {
           </Link>
         </div>
       </div>
-      <Table cols={cols} rows={rows} isLoading={isLoading} />
+      <Table
+        cols={cols}
+        rows={rows}
+        isLoading={isLoading}
+        onRowSelect={handleSelectRow}
+      />
       <PageNav pageCount={5} />
     </Card>
   )

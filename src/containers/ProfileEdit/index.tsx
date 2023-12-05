@@ -1,4 +1,5 @@
-import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -6,7 +7,7 @@ import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Button, DropDown, FormLine } from '@/components'
+import { Button, Card, DropDown, FormLine } from '@/components'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
@@ -31,6 +32,7 @@ const ProfileEdit = () => {
   const [isSavingUser, setIsSavingUser] = useState<boolean>(false)
 
   const edit = useSearchParams().get('edit')
+  const pathname = usePathname()
 
   const {
     register: registerPassword,
@@ -89,11 +91,21 @@ const ProfileEdit = () => {
 
   return (
     edit && (
-      <article className="rounded-5 bg-white p-4">
+      <Card className="gap-0 space-y-0 pb-1">
+        <div className="flex w-full justify-between">
+          <h1 className="text-xl font-semibold leading-6">Profile Edit</h1>
+          <Link
+            href={{
+              pathname
+            }}
+          >
+            <Button active>Details</Button>
+          </Link>
+        </div>
         <div className="h-32 w-32 rounded-lg bg-gray" />
         <form
           onSubmit={handleUpdateSubmit(handleUpdateUser)}
-          className="mt-4 flex flex-wrap items-center gap-6"
+          className="!mt-2 flex flex-wrap items-center gap-6"
         >
           <FormLine
             className="w-80"
@@ -149,7 +161,7 @@ const ProfileEdit = () => {
             Update Password
           </Button>
         </form>
-      </article>
+      </Card>
     )
   )
 }

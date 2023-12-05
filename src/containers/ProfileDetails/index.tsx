@@ -2,28 +2,34 @@ import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 
 import { Button, Card } from '@/components'
-import { useAuth } from '@/context/AuthContext'
+import { IEmployee } from '@/types/supabaseTables'
 
-const ProfileDetails = () => {
+const ProfileDetails = ({
+  user,
+  hideEdit
+}: {
+  user: IEmployee
+  hideEdit?: boolean
+}) => {
   const pathname = usePathname()
   const edit = useSearchParams().get('edit')
-
-  const { user } = useAuth()
 
   return edit ? null : (
     <Card title="profile" id="profile">
       <div className="flex w-full justify-between">
         <h1 className="text-xl font-semibold leading-6">Profile Details</h1>
-        <Link
-          href={{
-            pathname,
-            query: {
-              edit: true
-            }
-          }}
-        >
-          <Button active>Edit</Button>
-        </Link>
+        {hideEdit ? null : (
+          <Link
+            href={{
+              pathname,
+              query: {
+                edit: true
+              }
+            }}
+          >
+            <Button active>Edit</Button>
+          </Link>
+        )}
       </div>
       <div className="flex gap-20">
         <div className="h-32 w-32 translate-x-5 rounded-xl bg-gray" />

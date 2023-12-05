@@ -1,4 +1,7 @@
+import Link from 'next/link'
+
 import { Card, FilterSelect, SearchBar, Tag } from '@/components'
+import { Paths } from '@/constants'
 
 const CATEGORYS = [
   'Generation F',
@@ -41,8 +44,11 @@ const Guides = () => {
       <h1 className="translate-y-1 font-semibold leading-5 text-black/90">
         Guides
       </h1>
-      <ul className="space-y-3">
-        <li className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5 transition-shadow duration-300 hover:shadow-lg">
+      <div className="space-y-3">
+        <Link
+          href={`${Paths.GUIDE}/1`}
+          className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5 transition-shadow duration-300 hover:shadow-lg"
+        >
           <div className="space-y-2 text-sm">
             <h1 className="font-semibold leading-4">
               Source GUI Installation Instruction
@@ -50,8 +56,11 @@ const Guides = () => {
             <p className="font-medium text-black/60">NEW 07/29/2023</p>
           </div>
           <p>Installation Instruction for the source GUI</p>
-        </li>
-        <li className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5 transition-shadow duration-300 hover:shadow-lg">
+        </Link>
+        <Link
+          href={`${Paths.GUIDE}/1`}
+          className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5 transition-shadow duration-300 hover:shadow-lg"
+        >
           <div className="space-y-2 text-sm">
             <h1 className="font-semibold leading-4">
               Source GUI Installation Instruction
@@ -59,8 +68,8 @@ const Guides = () => {
             <p className="font-medium text-black/60">NEW 07/29/2023</p>
           </div>
           <p>Installation Instruction for the source GUI</p>
-        </li>
-      </ul>
+        </Link>
+      </div>
     </Card>
   )
 }

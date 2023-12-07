@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, DropDown, FormLine } from '@/components'
 import { Modal } from '@/containers'
-import { supabase } from '@/services/supabase'
+import { useAuth } from '@/context/AuthContext'
 import { IOption } from '@/types/model'
 import { CreateEmployeeSchema } from '@/utils/yupConfig'
 
@@ -32,6 +32,8 @@ const CreateEmployee = () => {
   const [role, setRole] = useState<IOption>(ROLES[0])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
+
+  const { user } = useAuth()
 
   const {
     register,
@@ -58,23 +60,40 @@ const CreateEmployee = () => {
       password: string
     }) => {
       setIsLoading(true)
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            name,
-            role: role.value,
-            country: country.value
-          }
-        }
+
+      if (user.role !== 'admin' || 'superuser') {
+        toast.error('Invalid Permission')
+        return
+      }
+
+      const res = await fetch('/api/create-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          name,
+          role: role.value,
+          country: country.value
+        })
       })
+
+      const { message, error } = (await res.json()) as {
+        message?: string
+        error?: string
+      }
+
       setIsLoading(false)
 
-      if (error) toast.error(error.message)
-      else router.back()
+      if (error) {
+        toast.error(error)
+        return
+      } else if (message) toast.success(message)
+      router.back()
     },
-    [country, role, router]
+    [country.value, role.value, router, user.role]
   )
 
   return (

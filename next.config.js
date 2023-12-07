@@ -7,6 +7,7 @@ const nextConfig = {
   env: {
     SUPABASE_URL: process.env.SUPABASE_URL,
     ANON_KEY: process.env.ANON_KEY,
+    SERVICE_ROLE: process.env.SERVICE_ROLE
   },
   trailingSlash: false
 }

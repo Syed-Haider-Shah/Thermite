@@ -49,10 +49,17 @@ export default function Home() {
         <meta name="description" content="Thermite" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className="absolute -my-8 flex h-screen w-full justify-end">
+      <div className="-my-8 flex h-screen w-full">
+        <Image
+          src="/home.webp"
+          alt="home-art"
+          width={1500}
+          height={100}
+          className="-ml-8 object-cover"
+        />
         <form
           onSubmit={handleSubmit(handleSignIn)}
-          className="flex w-full max-w-4xl flex-col items-center gap-7 bg-white py-[24vh]"
+          className="-mr-8 flex w-1/2 min-w-95 max-w-4xl flex-col items-center gap-7 bg-white py-[24vh]"
         >
           <Image src="/logo.svg" alt="Logo" width={150} height={150} />
           <FormLine

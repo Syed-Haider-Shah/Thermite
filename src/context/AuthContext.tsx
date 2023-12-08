@@ -52,7 +52,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           .eq('id', sesh.user.id)
           .single()
 
-        if (empData) setUser({ ...empData, email: sesh.user.email })
+        if (empData) {
+          setUser({ ...empData, email: sesh.user.email })
+          if (
+            empData.role !== 'admin' &&
+            empData.role !== 'superadmin' &&
+            pathname.startsWith(Paths.EMPLOYEE)
+          )
+            router.push(Paths.HOME)
+        }
       }
 
       setIsLoading(false)

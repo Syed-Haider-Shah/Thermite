@@ -13,6 +13,7 @@ import {
   People
 } from '@/components/Icons'
 import { Paths } from '@/constants'
+import { useAuth } from '@/context/AuthContext'
 
 import Button from './Button'
 
@@ -32,7 +33,7 @@ const ROUTES = [
 
 const NavBarComponent: FC = () => {
   const pathname = usePathname()
-
+  const { user } = useAuth()
   return (
     <nav className="sticky top-0 h-screen bg-white px-5 py-10 drop-shadow-lg">
       <Image
@@ -43,11 +44,20 @@ const NavBarComponent: FC = () => {
         height={120}
       />
       <div className="mt-[80px] flex w-55 flex-col gap-4">
-        {ROUTES.map((route) => (
-          <Button key={route.name} href={route.link} active={pathname}>
-            {route.icon} {route.name}
-          </Button>
-        ))}
+        {ROUTES.map((route) => {
+          if (
+            route.link === Paths.EMPLOYEE &&
+            user.role !== 'admin' &&
+            user.role !== 'superadmin'
+          )
+            return null
+
+          return (
+            <Button key={route.name} href={route.link} active={pathname}>
+              {route.icon} {route.name}
+            </Button>
+          )
+        })}
       </div>
     </nav>
   )

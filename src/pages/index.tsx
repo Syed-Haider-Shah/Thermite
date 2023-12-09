@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -12,7 +13,7 @@ import { Paths } from '@/constants'
 import { supabase } from '@/services/supabase'
 import { LoginSchema } from '@/utils/yupConfig'
 
-export default function Home() {
+const Home = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -49,47 +50,61 @@ export default function Home() {
         <meta name="description" content="Thermite" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className="-my-8 flex h-screen w-full">
+      <div className="absolute right-0 top-0 flex h-screen w-screen">
         <Image
           src="/home.webp"
           alt="home-art"
+          priority
           width={1500}
-          height={100}
-          className="-ml-8 object-cover"
+          height={900}
+          className="hidden w-1/2 object-cover md:block"
         />
-        <form
-          onSubmit={handleSubmit(handleSignIn)}
-          className="-mr-8 flex w-1/2 min-w-95 max-w-4xl flex-col items-center gap-7 bg-white py-[24vh]"
-        >
-          <Image src="/logo.svg" alt="Logo" width={150} height={150} />
-          <FormLine
-            id="email"
-            title="Email"
-            required
-            className="w-80"
-            placeholder="Email"
-            {...register('email')}
-            error={errors.email?.message}
-          />
-          <FormLine
-            id="password"
-            title="Password"
-            {...register('password')}
-            error={errors.password?.message}
-            type="password"
-            required
-            className="w-80"
-            placeholder="Password"
-          />
-          <Button
-            type="submit"
-            isLoading={isLoading}
-            className="w-80 bg-lightIndigo text-white hover:bg-indigo"
+        <div className="flex w-full min-w-95 flex-col items-center justify-center gap-5 bg-background md:w-1/2">
+          <h1 className="text-2xl font-semibold">Welcome back to Thermite</h1>
+          <form
+            onSubmit={handleSubmit(handleSignIn)}
+            className="flex flex-col rounded-2.5 bg-white p-4 shadow-md"
           >
-            Sign in
-          </Button>
-        </form>
+            <FormLine
+              id="email"
+              title="Email"
+              required
+              primary
+              className="w-80"
+              placeholder="Email"
+              {...register('email')}
+              error={errors.email?.message}
+            />
+            <FormLine
+              id="password"
+              title="Password"
+              {...register('password')}
+              error={errors.password?.message}
+              type="password"
+              required
+              primary
+              className="w-80"
+              placeholder="Password"
+            />
+            <Button
+              type="submit"
+              isLoading={isLoading}
+              active
+              className="w-80 p-2"
+            >
+              Sign in
+            </Button>
+            <Link
+              className="mt-2 text-sm font-semibold hover:underline"
+              href={Paths.FORGET_PASSWORD}
+            >
+              forget password ?
+            </Link>
+          </form>
+        </div>
       </div>
     </>
   )
 }
+
+export default Home

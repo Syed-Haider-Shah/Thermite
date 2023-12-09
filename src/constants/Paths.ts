@@ -15,5 +15,6 @@ export enum Paths {
   PROFILE = `${INDEX}profile`,
   PROFILE_UPDATE = `${PROFILE}/update`,
   EMPLOYEE = `${INDEX}employees`,
-  EMPLOYEE_CREATE = `${EMPLOYEE}/create`
+  EMPLOYEE_CREATE = `${EMPLOYEE}/create`,
+  FORGET_PASSWORD = `${INDEX}forget-password`
 }

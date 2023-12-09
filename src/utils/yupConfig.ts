@@ -79,3 +79,16 @@ export const CloseChildSchema = yup.object().shape({
     .max(300, 'maximum 300 text character allowed')
     .required('Please input ticket description')
 })
+
+export const CreateFeedSchema = yup.object().shape({
+  title: yup
+    .string()
+    .min(1, 'minimum 3 text character required')
+    .max(150, 'maximum 150 text character allowed')
+    .required('Please input feedback title'),
+  context: yup
+    .string()
+    .min(1, 'minimum 1 text character required')
+    .max(300, 'maximum 300 text character allowed')
+    .required('Please input feedback context')
+})

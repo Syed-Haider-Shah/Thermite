@@ -71,6 +71,9 @@ module.exports = {
         9.5: '2.375rem', // 38px
         15: '3.75rem', // 60px
       },
+      spacing: {
+        22: '5.5rem', // 88px
+      },
       gap: {
         15: '3.75rem', // 60px
       },

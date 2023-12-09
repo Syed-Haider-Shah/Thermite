@@ -4,6 +4,7 @@ import { FC, useCallback, useState } from 'react'
 
 import { Bell, Button } from '@/components'
 import { Paths } from '@/constants'
+import Feedback from '@/containers/Feedback'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/utils/cn'
 
@@ -20,12 +21,14 @@ const OPTIONS = [
 
 const HeaderComponent: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-
+  const [showFeedback, setShowFeedback] = useState<boolean>(false)
   const { signOut, user } = useAuth()
 
   const handleToggle = useCallback(() => setIsOpen((val) => !val), [])
 
   const handleClose = useCallback(() => setIsOpen(false), [])
+
+  const handleBlurFeedback = useCallback(() => setShowFeedback(false), [])
 
   return (
     <header className="relative flex h-24 w-full items-center justify-between border-l border-black/5 bg-white px-7 pb-5.5 pt-9 text-black/90">
@@ -33,10 +36,17 @@ const HeaderComponent: FC = () => {
         <h1 className="rounded-full bg-black/5 px-4 py-3.5 text-sm font-semibold">
           32 Tickets Open
         </h1>
-        <Button active className="rounded-md py-3">
+        <Button
+          onClick={() => {
+            setShowFeedback((val) => !val)
+          }}
+          active
+          className="rounded-md py-3"
+        >
           Add Feedback
         </Button>
       </div>
+      {showFeedback && <Feedback onBlur={handleBlurFeedback} />}
       <div className="flex items-center gap-7">
         <Bell />
         <div className="flex items-center gap-4">

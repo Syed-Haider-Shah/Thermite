@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
@@ -48,7 +48,7 @@ const Feedback = ({ onBlur }: { onBlur: () => void }) => {
   return (
     <form
       onSubmit={handleSubmit(handleCreateFeadback)}
-      className="top-22 absolute z-30 w-95 animate-fade rounded-2.5 border border-black/5 bg-white p-4 shadow-lg"
+      className="absolute top-22 z-30 w-95 animate-fade rounded-2.5 border border-black/5 bg-white p-4 shadow-lg"
     >
       <FormLine
         {...register('title')}
@@ -77,4 +77,4 @@ const Feedback = ({ onBlur }: { onBlur: () => void }) => {
   )
 }
 
-export default Feedback
+export default memo(Feedback)

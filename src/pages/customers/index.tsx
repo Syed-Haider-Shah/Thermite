@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import {
@@ -53,6 +53,8 @@ const Customers = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  const customerCols = useMemo(() => cols, [])
+
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true)
     const { data: rows, error } = await supabase
@@ -81,7 +83,7 @@ const Customers = () => {
           </Button>
         </div>
       </div>
-      <Table cols={cols} rows={customers} isLoading={isLoading} />
+      <Table cols={customerCols} rows={customers} isLoading={isLoading} />
       <PageNav pageCount={5} />
     </Card>
   )

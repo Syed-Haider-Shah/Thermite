@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC, memo, useMemo } from 'react'
 
 import { Spinner } from '@/components'
 import { IRow } from '@/types/supabaseTables'
@@ -68,4 +68,4 @@ const TableComponent: FC<ITable> = ({
   )
 }
 
-export default TableComponent
+export default memo(TableComponent)

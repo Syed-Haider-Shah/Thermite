@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import {
@@ -63,6 +63,8 @@ const Tickets = () => {
   const router = useRouter()
   const pathname = usePathname()
 
+  const ticketCols = useMemo(() => cols, [])
+
   const handleRowSelect = useCallback(
     (row: IRow) => {
       router.push(`${Paths.TICKET}/${row.id}`)
@@ -103,7 +105,7 @@ const Tickets = () => {
         </div>
       </div>
       <Table
-        cols={cols}
+        cols={ticketCols}
         rows={tickets}
         isLoading={isLoading}
         onRowSelect={handleRowSelect}

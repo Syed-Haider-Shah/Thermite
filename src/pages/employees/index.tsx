@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import {
@@ -62,6 +62,8 @@ const Employees = () => {
     [router]
   )
 
+  const employeeCols = useMemo(() => cols, [])
+
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
     const { data: rows, error } = await supabase.from('employees').select()
@@ -90,7 +92,7 @@ const Employees = () => {
         </div>
       </div>
       <Table
-        cols={cols}
+        cols={employeeCols}
         rows={rows}
         isLoading={isLoading}
         onRowSelect={handleSelectRow}

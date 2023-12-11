@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import {
@@ -83,6 +83,8 @@ const Tickets = () => {
     [pathname, router]
   )
 
+  const childTicketCols = useMemo(() => cols, [])
+
   const fetchChildTickets = useCallback(async () => {
     if (!pid) return
 
@@ -122,7 +124,7 @@ const Tickets = () => {
         <Table
           onRowSelect={handleRowSelect}
           isLoading={isLoading}
-          cols={cols}
+          cols={childTicketCols}
           rows={rows}
         />
         <PageNav pageCount={5} />

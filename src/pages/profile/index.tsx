@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Card, FilterSelect, SearchBar, Table } from '@/components'
@@ -55,6 +55,8 @@ const Profile = () => {
 
   const router = useRouter()
 
+  const ticketCols = useMemo(() => cols, [])
+
   const fetchTickets = useCallback(async () => {
     if (!user.name) return
 
@@ -93,7 +95,7 @@ const Profile = () => {
         <Table
           onRowSelect={handleSelectRow}
           isLoading={isLoading}
-          cols={cols}
+          cols={ticketCols}
           rows={rows}
         />
       </Card>

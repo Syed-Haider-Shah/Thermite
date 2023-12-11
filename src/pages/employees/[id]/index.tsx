@@ -1,6 +1,6 @@
 import { useParams, useRouter } from 'next/navigation'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Card, FilterSelect, SearchBar, Table } from '@/components'
@@ -60,8 +60,6 @@ const Profile = () => {
 
   const { id } = useParams()
 
-  const employeeCols = useMemo(() => cols, [])
-
   const fetchEmployee = useCallback(async () => {
     if (!id) return
 
@@ -115,7 +113,7 @@ const Profile = () => {
         <Table
           onRowSelect={handleSelectRow}
           isLoading={isLoading}
-          cols={employeeCols}
+          cols={cols}
           rows={rows}
         />
       </Card>

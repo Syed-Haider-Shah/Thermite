@@ -1,3 +1,5 @@
+import { Inter } from 'next/font/google'
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -128,9 +130,6 @@ module.exports = {
       md: '64rem', // 1024px
       lg: '80rem', // 1280px
       xl: '90rem', // 1440px
-    },
-    fontFamily: {
-      sans: ['HK Grotesk'],
     },
     colors: {
       transparent: 'transparent',

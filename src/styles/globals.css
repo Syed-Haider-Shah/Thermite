@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './fonts.css';
-
-
 html,body {
-  @apply flex h-screen w-screen justify-center overflow-hidden bg-white p-0 antialiased outline-none font-sans;
+  @apply flex h-screen w-screen justify-center overflow-hidden bg-white p-0 antialiased outline-none;
 }
 
 #__next {

@@ -35,12 +35,12 @@ const NavBarComponent: FC = () => {
   const pathname = usePathname()
   const { user } = useAuth()
   return (
-    <nav className="sticky top-0 h-screen bg-white px-5 py-10 drop-shadow-lg">
+    <nav className="sticky top-0 h-screen bg-white px-4 py-10 drop-shadow-lg">
       <Image
-        src="/logo.svg"
-        className="px-4"
+        src="/logoNew.svg"
+        className="mt-6 px-1"
         alt="logo"
-        width={120}
+        width={300}
         height={120}
       />
       <div className="mt-[80px] flex w-55 flex-col gap-4">

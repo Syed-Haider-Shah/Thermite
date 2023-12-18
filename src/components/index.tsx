@@ -30,5 +30,11 @@ export {
   Bell,
   Grid,
   Spinner,
-  Download
+  Download,
+  Dashboard,
+  Employees1,
+  Forms,
+  Softwares,
+  Tickets,
+  Customers
 } from './Icons'

@@ -6,11 +6,17 @@ import { FC } from 'react'
 import {
   Archive,
   Calender,
+  Customers,
+  Dashboard,
   Employees,
+  Employees1,
   Explore,
+  Forms,
   Gear,
   Grid,
-  People
+  People,
+  Softwares,
+  Tickets
 } from '@/components/Icons'
 import { Paths } from '@/constants'
 import { useAuth } from '@/context/AuthContext'
@@ -18,17 +24,17 @@ import { useAuth } from '@/context/AuthContext'
 import Button from './Button'
 
 const ROUTES = [
-  { name: 'Dashboard', link: Paths.HOME, icon: <Grid /> },
-  { name: 'Tickets', link: Paths.TICKET, icon: <Archive /> },
-  { name: 'Customers', link: Paths.CUSTOMER, icon: <People /> },
-  { name: 'Forms', link: Paths.FORM, icon: <Calender /> },
+  { name: 'Dashboard', link: Paths.HOME, icon: <Dashboard /> },
+  { name: 'Tickets', link: Paths.TICKET, icon: <Tickets /> },
+  { name: 'Customers', link: Paths.CUSTOMER, icon: <Customers /> },
+  { name: 'Forms', link: Paths.FORM, icon: <Forms /> },
   { name: 'Guides', link: Paths.GUIDE, icon: <Explore /> },
   {
     name: 'Employees',
     link: Paths.EMPLOYEE,
-    icon: <Employees />
+    icon: <Employees1 />
   },
-  { name: 'Softwares', link: Paths.SOFTWARE, icon: <Gear /> }
+  { name: 'Softwares', link: Paths.SOFTWARE, icon: <Softwares /> }
 ]
 
 const NavBarComponent: FC = () => {

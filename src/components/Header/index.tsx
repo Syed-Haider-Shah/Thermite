@@ -31,17 +31,17 @@ const HeaderComponent: FC = () => {
   const handleBlurFeedback = useCallback(() => setShowFeedback(false), [])
 
   return (
-    <header className="relative flex h-24 w-full items-center justify-between border-l border-black/5 bg-white px-7 pb-5.5 pt-9 text-black/90">
+    <header className="relative flex h-24 w-full items-center justify-between border-l border-black/5 bg-white px-9 pb-5.5 pt-9 text-black/90">
       <div className="flex items-center gap-7">
         <h1 className="rounded-full bg-black/5 px-4 py-3.5 text-sm font-semibold">
-          32 Tickets Open
+          Tickets 32
         </h1>
         <Button
           onClick={() => {
             setShowFeedback((val) => !val)
           }}
           active
-          className="rounded-md py-3"
+          className="rounded-md py-3 bg-darkIndigo"
         >
           Add Feedback
         </Button>

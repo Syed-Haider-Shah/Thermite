@@ -19,10 +19,6 @@ import { IEmployee, IRow } from '@/types/supabaseTables'
 
 const cols = [
   {
-    field: 'id',
-    name: 'ID'
-  },
-  {
     field: 'name',
     name: 'Name'
   },

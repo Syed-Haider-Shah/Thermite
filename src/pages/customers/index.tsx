@@ -36,7 +36,8 @@ const cols = [
   },
   {
     field: 'installation_date',
-    name: 'Installation Date'
+    name: 'Installation Date',
+    isData: true
   },
   {
     field: 'number_of_panels',

@@ -87,7 +87,7 @@ const Home = () => {
                 placeholder="Password"
                 required
                 className="w-80 border border-black/10 p-2 outline-none"
-                {...register('email')}
+                {...register('password')}
               />
             </label>
             <Button

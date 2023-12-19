@@ -33,9 +33,9 @@ const TableComponent: FC<ITable> = ({
             }
           )}
         >
-          {cols.map(({ field }) => (
+          {cols.map(({ field, isData }) => (
             <td className="py-4 pl-4" key={field}>
-              {row[field]}
+              {isData ? new Date(`${row[field]}`).toDateString() : row[field]}
             </td>
           ))}
         </tr>

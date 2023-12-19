@@ -34,7 +34,7 @@ const TableComponent: FC<ITable> = ({
           )}
         >
           {cols.map(({ field }) => (
-            <td className="py-3 pl-4" key={field}>
+            <td className="py-4 pl-4" key={field}>
               {row[field]}
             </td>
           ))}

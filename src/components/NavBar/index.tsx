@@ -4,17 +4,11 @@ import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 
 import {
-  Archive,
-  Calender,
   Customers,
   Dashboard,
-  Employees,
   Employees1,
   Explore,
   Forms,
-  Gear,
-  Grid,
-  People,
   Softwares,
   Tickets
 } from '@/components/Icons'

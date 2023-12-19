@@ -1,15 +1,13 @@
 import { FC, memo, useMemo } from 'react'
 
-import { Spinner } from '@/components'
+import { Gear } from '@/components'
 import { IRow } from '@/types/supabaseTables'
 import { cn } from '@/utils/cn'
-
-import SortableColumn from './SortableColumn'
 
 type ITable = {
   rows: IRow[]
   onRowSelect?: (row: IRow) => void
-  cols: { field: string; name: string }[]
+  cols: { field: string; name: string; isData?: boolean }[]
   selectedRow?: string
   isLoading?: boolean
 }
@@ -36,7 +34,7 @@ const TableComponent: FC<ITable> = ({
           )}
         >
           {cols.map(({ field }) => (
-            <td className="py-3 pl-4 text-sm" key={field}>
+            <td className="py-3 pl-4" key={field}>
               {row[field]}
             </td>
           ))}
@@ -46,14 +44,18 @@ const TableComponent: FC<ITable> = ({
   )
 
   return (
-    <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-md ring-1 ring-black/5 ">
+    <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-md ring-1 ring-black/5">
       <table className="h-full min-w-full divide-y">
         <thead className="sticky top-0 z-10 bg-darkIndigo bg-opacity-100">
           <tr>
             {cols.map((val) => (
-              <SortableColumn key={val.field} field={val.field}>
+              <th
+                key={val.field}
+                scope="col"
+                className="px-3 py-3.5 text-left font-semibold leading-5 text-white first:pl-4 first:sm:pl-6"
+              >
                 {val.name}
-              </SortableColumn>
+              </th>
             ))}
           </tr>
         </thead>
@@ -61,7 +63,7 @@ const TableComponent: FC<ITable> = ({
       </table>
       {isLoading && (
         <div className="absolute left-1/2 top-1/2">
-          <Spinner />
+          <Gear className="animate-spin" />
         </div>
       )}
     </div>

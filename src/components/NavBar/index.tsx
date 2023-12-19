@@ -4,13 +4,13 @@ import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 
 import {
-  Archive,
-  Calender,
-  Employees,
+  Customers,
+  Dashboard,
+  Employees1,
   Explore,
-  Gear,
-  Grid,
-  People
+  Forms,
+  Softwares,
+  Tickets
 } from '@/components/Icons'
 import { Paths } from '@/constants'
 import { useAuth } from '@/context/AuthContext'
@@ -18,29 +18,29 @@ import { useAuth } from '@/context/AuthContext'
 import Button from './Button'
 
 const ROUTES = [
-  { name: 'Dashboard', link: Paths.HOME, icon: <Grid /> },
-  { name: 'Tickets', link: Paths.TICKET, icon: <Archive /> },
-  { name: 'Customers', link: Paths.CUSTOMER, icon: <People /> },
-  { name: 'Forms', link: Paths.FORM, icon: <Calender /> },
+  { name: 'Dashboard', link: Paths.HOME, icon: <Dashboard /> },
+  { name: 'Tickets', link: Paths.TICKET, icon: <Tickets /> },
+  { name: 'Customers', link: Paths.CUSTOMER, icon: <Customers /> },
+  { name: 'Forms', link: Paths.FORM, icon: <Forms /> },
   { name: 'Guides', link: Paths.GUIDE, icon: <Explore /> },
   {
     name: 'Employees',
     link: Paths.EMPLOYEE,
-    icon: <Employees />
+    icon: <Employees1 />
   },
-  { name: 'Softwares', link: Paths.SOFTWARE, icon: <Gear /> }
+  { name: 'Softwares', link: Paths.SOFTWARE, icon: <Softwares /> }
 ]
 
 const NavBarComponent: FC = () => {
   const pathname = usePathname()
   const { user } = useAuth()
   return (
-    <nav className="sticky top-0 h-screen bg-white px-5 py-10 drop-shadow-lg">
+    <nav className="sticky top-0 h-screen bg-white px-4 py-10 drop-shadow-lg">
       <Image
-        src="/logo.svg"
-        className="px-4"
+        src="/logoNew.svg"
+        className="mt-6 px-1"
         alt="logo"
-        width={120}
+        width={300}
         height={120}
       />
       <div className="mt-[80px] flex w-55 flex-col gap-4">

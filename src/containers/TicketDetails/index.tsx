@@ -36,10 +36,6 @@ const DETAILS_FIELD = [
     field: 'region'
   },
   {
-    name: 'Status',
-    field: 'Status'
-  },
-  {
     name: 'Warranty',
     field: 'warranty'
   }
@@ -53,6 +49,10 @@ const tem = [
   {
     name: 'Serial Number',
     field: 'serial_number'
+  },
+  {
+    name: 'Status',
+    field: 'Status'
   }
 ]
 

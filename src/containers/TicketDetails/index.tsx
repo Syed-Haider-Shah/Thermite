@@ -28,28 +28,12 @@ const DETAILS_FIELD = [
     field: 'country'
   },
   {
-    name: 'Region',
-    field: 'region'
-  },
-  {
-    name: 'Child Count',
-    field: 'child_count'
-  },
-  {
-    name: 'Created Date',
-    field: 'created_at'
-  },
-  {
-    name: 'Installation Date',
-    field: 'installation_date'
-  },
-  {
     name: 'Number of Panels',
     field: 'number_of_panels'
   },
   {
-    name: 'Serial Number',
-    field: 'serial_number'
+    name: 'Region',
+    field: 'region'
   },
   {
     name: 'Status',
@@ -58,6 +42,17 @@ const DETAILS_FIELD = [
   {
     name: 'Warranty',
     field: 'warranty'
+  }
+]
+
+const tem = [
+  {
+    name: 'Child Count',
+    field: 'child_count'
+  },
+  {
+    name: 'Serial Number',
+    field: 'serial_number'
   }
 ]
 
@@ -85,19 +80,42 @@ const TicketDetails = () => {
   }, [fetchDetails])
 
   return (
-    <Card title="details" id="details">
-      <div className="flex w-full justify-between">
-        <h1 className="text-xl font-semibold leading-6">Details</h1>
-        <Button active>Edit</Button>
-      </div>
-      {isLoading ? (
-        <div className="relative left-1/2 pb-10">
-          <Spinner />
+    <div className="flex gap-8">
+      <Card title="details" id="details" className="w-4/6">
+        <div className="flex w-full justify-between">
+          <h1 className="text-xl font-semibold leading-6">Customer Details</h1>
+          <Button active>Edit</Button>
         </div>
-      ) : (
-        <div className="flex max-w-lg flex-wrap justify-between gap-8">
-          {DETAILS_FIELD.map(({ name, field }) => (
-            <div title={name} key={field}>
+        {isLoading ? (
+          <div className="relative left-1/2 pb-10">
+            <Spinner />
+          </div>
+        ) : (
+          <div className="flex max-w-lg flex-wrap gap-x-12 gap-y-4">
+            {DETAILS_FIELD.map(({ name, field }) => (
+              <div title={name} key={field}>
+                <h2 className="text-sm font-semibold leading-4">{name}</h2>
+                <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+                  {`${details[field]}`}
+                </p>
+              </div>
+            ))}
+            <div>
+              <h2 className="text-sm font-semibold leading-4">
+                Installation Date
+              </h2>
+              <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+                {new Date(`${details['installation_date']}`).toDateString()}
+              </p>
+            </div>
+          </div>
+        )}
+      </Card>
+      <Card>
+        <h1 className="text-xl font-semibold leading-6">Ticket Details</h1>
+        <div className="flex max-w-lg flex-wrap justify-between gap-x-12 gap-y-4">
+          {tem.map(({ name, field }) => (
+            <div className="pb-4" title={name} key={field}>
               <h2 className="text-sm font-semibold leading-4">{name}</h2>
               <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
                 {`${details[field]}`}
@@ -114,9 +132,15 @@ const TicketDetails = () => {
               )}
             </p>
           </div>
+          <div title={'Created At'}>
+            <h2 className="text-sm font-semibold leading-4">Created At</h2>
+            <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+              {new Date(`${details['created_at']}`).toDateString()}
+            </p>
+          </div>
         </div>
-      )}
-    </Card>
+      </Card>
+    </div>
   )
 }
 

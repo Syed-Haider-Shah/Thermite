@@ -29,12 +29,8 @@ const cols = [
     name: 'Role'
   },
   {
-    field: 'created_at',
-    name: 'Created At'
-  },
-  {
     field: 'country',
-    name: 'Country'
+    name: 'Team'
   }
 ]
 

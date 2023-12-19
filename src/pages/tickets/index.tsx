@@ -36,11 +36,8 @@ const cols = [
   },
   {
     field: 'created_at',
-    name: 'Created At'
-  },
-  {
-    field: 'close_date',
-    name: 'Close Date'
+    name: 'Created At',
+    isData: true
   },
   {
     field: 'employee',

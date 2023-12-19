@@ -28,7 +28,7 @@ const ROUTES = [
     link: Paths.EMPLOYEE,
     icon: <Employees1 />
   },
-  { name: 'Softwares', link: '/testpage', icon: <Softwares /> }
+  { name: 'Softwares', link: Paths.SOFTWARE, icon: <Softwares /> }
 ]
 
 const NavBarComponent: FC = () => {

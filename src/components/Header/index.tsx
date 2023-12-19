@@ -41,7 +41,7 @@ const HeaderComponent: FC = () => {
             setShowFeedback((val) => !val)
           }}
           active
-          className="rounded-md py-3 bg-darkIndigo"
+          className="rounded-md bg-darkIndigo py-3"
         >
           Add Feedback
         </Button>

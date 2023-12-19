@@ -29,7 +29,7 @@ const cols = [
   {
     field: 'created_at',
     name: 'Created At',
-    isData: true
+    isDate: true
   },
   {
     field: 'customer_impact',

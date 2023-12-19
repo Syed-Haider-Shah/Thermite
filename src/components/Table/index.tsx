@@ -7,7 +7,7 @@ import { cn } from '@/utils/cn'
 type ITable = {
   rows: IRow[]
   onRowSelect?: (row: IRow) => void
-  cols: { field: string; name: string; isData?: boolean }[]
+  cols: { field: string; name: string; isDate?: boolean }[]
   selectedRow?: string
   isLoading?: boolean
 }
@@ -19,6 +19,29 @@ const TableComponent: FC<ITable> = ({
   onRowSelect,
   selectedRow
 }) => {
+  const handleRowValue = (
+    val: string | number | boolean | string[] | null | undefined,
+    isStatus: boolean,
+    isDate?: boolean
+  ) => {
+    if (isDate) return new Date(`${val}`).toDateString()
+    else if (isStatus)
+      return (
+        <span
+          className={cn(
+            '-ml-4 w-full rounded-full px-4 py-1.5 text-sm font-bold',
+            {
+              'bg-green/5 text-darkGreen/60': val === 'OPEN',
+              'bg-red/5 text-red/90': val === 'CLOSED'
+            }
+          )}
+        >
+          {val}
+        </span>
+      )
+    else return `${val}`
+  }
+
   const rowList = useMemo(
     () =>
       rows.map((row, idx) => (
@@ -33,9 +56,9 @@ const TableComponent: FC<ITable> = ({
             }
           )}
         >
-          {cols.map(({ field, isData }) => (
+          {cols.map(({ field, isDate }) => (
             <td className="py-4 pl-4" key={field}>
-              {isData ? new Date(`${row[field]}`).toDateString() : row[field]}
+              {handleRowValue(row[field], field === 'status', isDate)}
             </td>
           ))}
         </tr>

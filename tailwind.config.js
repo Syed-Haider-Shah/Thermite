@@ -138,6 +138,8 @@ module.exports = {
       red: '#FF0000E5',
       // BG Colors
       black: '#000000',
+      darkGreen: '#003300',
+      green: '#00ff00',
       background: '#F3F3F3',
       heavyGray: '#D9D9D9',
       darkGray: '#D2D2D2',

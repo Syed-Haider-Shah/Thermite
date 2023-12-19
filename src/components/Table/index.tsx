@@ -26,7 +26,7 @@ const TableComponent: FC<ITable> = ({
           onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
           className={cn(
-            'cursor-pointer border-y border-black/5 transition-colors last:border-b-0 even:bg-indigo/5 hover:bg-black/5',
+            'cursor-pointer border-y border-black/5 transition duration-300 ease-in-out last:border-b-0 even:bg-indigo/5 hover:bg-black/5 hover:shadow-xl',
             {
               '!bg-indigo/30 hover:bg-indigo/40':
                 selectedRow === row.id?.toString()

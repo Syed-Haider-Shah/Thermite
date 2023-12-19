@@ -2,13 +2,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Button, FormLine } from '@/components'
+import { Button } from '@/components'
 import { Paths } from '@/constants'
 import { supabase } from '@/services/supabase'
 import { LoginSchema } from '@/utils/yupConfig'
@@ -43,6 +43,11 @@ const Home = () => {
     []
   )
 
+  useEffect(() => {
+    if (errors.email?.message) toast.error(errors.email.message)
+    if (errors.password?.message) toast.error(errors.password.message)
+  }, [errors.email?.message, errors.password?.message])
+
   return (
     <>
       <Head>
@@ -65,32 +70,31 @@ const Home = () => {
             onSubmit={handleSubmit(handleSignIn)}
             className="flex flex-col rounded-2.5 bg-white p-4 shadow-md"
           >
-            <FormLine
-              id="email"
-              title="Email"
-              required
-              primary
-              className="w-80"
-              placeholder="Email"
-              {...register('email')}
-              error={errors.email?.message}
-            />
-            <FormLine
-              id="password"
-              title="Password"
-              {...register('password')}
-              error={errors.password?.message}
-              type="password"
-              required
-              primary
-              className="w-80"
-              placeholder="Password"
-            />
+            <label title="email" htmlFor="email">
+              <input
+                id="email"
+                placeholder="Email"
+                type="email"
+                required
+                className="w-80 border-x border-t border-black/10 p-2 outline-none"
+                {...register('email')}
+              />
+            </label>
+            <label title="password" htmlFor="password">
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                required
+                className="w-80 border border-black/10 p-2 outline-none"
+                {...register('email')}
+              />
+            </label>
             <Button
               type="submit"
               isLoading={isLoading}
               active
-              className="w-80 p-2"
+              className="mt-1 w-80 p-2"
             >
               Sign in
             </Button>
@@ -98,7 +102,7 @@ const Home = () => {
               className="mt-2 text-sm font-semibold hover:underline"
               href={Paths.FORGET_PASSWORD}
             >
-              forget password ?
+              Forget password ?
             </Link>
           </form>
         </div>

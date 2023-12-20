@@ -7,6 +7,7 @@ import { Button, Card } from '@/components'
 import { Spinner } from '@/components'
 import { supabase } from '@/services/supabase'
 import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
+import { cn } from '@/utils/cn'
 
 import AssignEmployee from '../AssignEmployee'
 
@@ -15,6 +16,21 @@ const DETAILS_FIELD = [
     name: 'ID',
     field: 'id'
   },
+  {
+    name: 'Number of Panels',
+    field: 'number_of_panels'
+  },
+  {
+    name: 'Warranty',
+    field: 'warranty'
+  },
+  {
+    name: 'Serial Number',
+    field: 'serial_number'
+  }
+]
+
+const LOCATION_DETAILS = [
   {
     name: 'Co-ordinates',
     field: 'coordinates'
@@ -27,29 +43,14 @@ const DETAILS_FIELD = [
     name: 'Country',
     field: 'country'
   },
-  {
-    name: 'Number of Panels',
-    field: 'number_of_panels'
-  },
+
   {
     name: 'Region',
     field: 'region'
-  },
-  {
-    name: 'Warranty',
-    field: 'warranty'
   }
 ]
 
-const tem = [
-  {
-    name: 'Child Count',
-    field: 'child_count'
-  },
-  {
-    name: 'Serial Number',
-    field: 'serial_number'
-  },
+const TICKET_DETAILS = [
   {
     name: 'Status',
     field: 'Status'
@@ -81,7 +82,7 @@ const TicketDetails = () => {
 
   return (
     <div className="flex gap-8">
-      <Card title="details" id="details" className="w-4/6">
+      <Card title="details" id="details">
         <div className="flex w-full justify-between">
           <h1 className="text-xl font-semibold leading-6">Customer Details</h1>
           <Button active>Edit</Button>
@@ -91,33 +92,57 @@ const TicketDetails = () => {
             <Spinner />
           </div>
         ) : (
-          <div className="flex max-w-lg flex-wrap gap-x-12 gap-y-4">
-            {DETAILS_FIELD.map(({ name, field }) => (
-              <div title={name} key={field}>
-                <h2 className="text-sm font-semibold leading-4">{name}</h2>
-                <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
-                  {`${details[field]}`}
+          <div className="flex gap-6">
+            <div className="flex flex-wrap gap-x-12 gap-y-8 rounded-5 bg-lightGray p-4">
+              {LOCATION_DETAILS.map(({ name, field }) => (
+                <div title={name} key={field}>
+                  <h2 className="text-sm font-semibold leading-4">{name}</h2>
+                  <p className="mt-2 line-clamp-2 font-normal text-black/80">
+                    {`${details[field]}`}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-x-12 gap-y-8 rounded-5 bg-lightGray p-4">
+              {DETAILS_FIELD.map(({ name, field }) => (
+                <div title={name} key={field}>
+                  <h2 className="text-sm font-semibold leading-4">{name}</h2>
+                  <p className="mt-2 line-clamp-2 font-normal text-black/80">
+                    {`${details[field]}`}
+                  </p>
+                </div>
+              ))}
+              <div>
+                <h2 className="text-sm font-semibold leading-4">
+                  Installation Date
+                </h2>
+                <p className="mt-2 line-clamp-2 font-normal text-black/80">
+                  {new Date(`${details['installation_date']}`).toDateString()}
                 </p>
               </div>
-            ))}
-            <div>
-              <h2 className="text-sm font-semibold leading-4">
-                Installation Date
-              </h2>
-              <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
-                {new Date(`${details['installation_date']}`).toDateString()}
-              </p>
             </div>
           </div>
         )}
       </Card>
-      <Card>
+      <Card className="w-80">
         <h1 className="text-xl font-semibold leading-6">Ticket Details</h1>
-        <div className="flex max-w-lg flex-wrap justify-between gap-x-12 gap-y-4">
-          {tem.map(({ name, field }) => (
+        <div className="flex flex-wrap justify-between gap-x-12 gap-y-4">
+          <div className="w-full">
+            <div className="mb-2 text-sm font-semibold">Progress</div>
+            <div className="mb-0.5 w-full rounded-full ring-4">
+              <div
+                className={cn('rounded-full border-2 border-indigo', `w-[33%]`)}
+              />
+            </div>
+            <div className="flex justify-between">
+              <div>0</div>
+              <div>{details.child_count}</div>
+            </div>
+          </div>
+          {TICKET_DETAILS.map(({ name, field }) => (
             <div className="pb-4" title={name} key={field}>
               <h2 className="text-sm font-semibold leading-4">{name}</h2>
-              <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+              <p className="mt-2 line-clamp-2 font-normal text-black/80">
                 {`${details[field]}`}
               </p>
             </div>
@@ -126,7 +151,7 @@ const TicketDetails = () => {
             <h2 className="text-sm font-semibold leading-4">
               Employee Assigned
             </h2>
-            <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+            <p className="mt-2 line-clamp-2 font-normal text-black/80">
               {details['employee'] || (
                 <AssignEmployee fetchDetails={fetchDetails} />
               )}
@@ -134,7 +159,7 @@ const TicketDetails = () => {
           </div>
           <div title={'Created At'}>
             <h2 className="text-sm font-semibold leading-4">Created At</h2>
-            <p className="mt-2 line-clamp-2 max-w-sm font-normal text-black/80">
+            <p className="mt-2 line-clamp-2 font-normal text-black/80">
               {new Date(`${details['created_at']}`).toDateString()}
             </p>
           </div>

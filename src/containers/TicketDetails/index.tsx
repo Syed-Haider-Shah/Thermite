@@ -50,13 +50,6 @@ const LOCATION_DETAILS = [
   }
 ]
 
-const TICKET_DETAILS = [
-  {
-    name: 'Status',
-    field: 'Status'
-  }
-]
-
 const TicketDetails = () => {
   const [details, setDetails] = useState<IParentDetails>(INITIAL_PARENT_DETAILS)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -82,7 +75,7 @@ const TicketDetails = () => {
 
   return (
     <div className="flex gap-8">
-      <Card title="details" id="details">
+      <Card title="details" id="details" className="w-full">
         <div className="flex w-full justify-between">
           <h1 className="text-xl font-semibold leading-6">Customer Details</h1>
           <Button active>Edit</Button>
@@ -126,44 +119,51 @@ const TicketDetails = () => {
       </Card>
       <Card className="w-80">
         <h1 className="text-xl font-semibold leading-6">Ticket Details</h1>
-        <div className="flex flex-wrap justify-between gap-x-12 gap-y-4">
-          <div className="w-full">
-            <div className="mb-2 text-sm font-semibold">Progress</div>
-            <div className="mb-0.5 w-full rounded-full ring-4">
-              <div
-                className={cn('rounded-full border-2 border-indigo', `w-[33%]`)}
-              />
-            </div>
-            <div className="flex justify-between">
-              <div>0</div>
-              <div>{details.child_count}</div>
-            </div>
+        {isLoading ? (
+          <div className="relative left-1/2 pb-10">
+            <Spinner />
           </div>
-          {TICKET_DETAILS.map(({ name, field }) => (
-            <div className="pb-4" title={name} key={field}>
-              <h2 className="text-sm font-semibold leading-4">{name}</h2>
+        ) : (
+          <div className="flex flex-wrap justify-between gap-x-12 gap-y-4">
+            <div className="w-full">
+              <div className="mb-2 text-sm font-semibold">Progress</div>
+              <div className="mb-0.5 w-full rounded-full ring-4">
+                <div
+                  className={cn(
+                    'rounded-full border-2 border-indigo',
+                    `w-[33%]`
+                  )}
+                />
+              </div>
+              <div className="flex justify-between">
+                <div>0</div>
+                <div>{details.child_count}</div>
+              </div>
+            </div>
+            <div className="pb-4" title="Status">
+              <h2 className="text-sm font-semibold leading-4">Status</h2>
               <p className="mt-2 line-clamp-2 font-normal text-black/80">
-                {`${details[field]}`}
+                {`${details.status}`}
               </p>
             </div>
-          ))}
-          <div title="Employee">
-            <h2 className="text-sm font-semibold leading-4">
-              Employee Assigned
-            </h2>
-            <p className="mt-2 line-clamp-2 font-normal text-black/80">
-              {details['employee'] || (
-                <AssignEmployee fetchDetails={fetchDetails} />
-              )}
-            </p>
+            <div title="Employee">
+              <h2 className="text-sm font-semibold leading-4">
+                Employee Assigned
+              </h2>
+              <p className="mt-2 line-clamp-2 font-normal text-black/80">
+                {details['employee'] || (
+                  <AssignEmployee fetchDetails={fetchDetails} />
+                )}
+              </p>
+            </div>
+            <div title={'Created At'}>
+              <h2 className="text-sm font-semibold leading-4">Created At</h2>
+              <p className="mt-2 line-clamp-2 font-normal text-black/80">
+                {new Date(`${details['created_at']}`).toDateString()}
+              </p>
+            </div>
           </div>
-          <div title={'Created At'}>
-            <h2 className="text-sm font-semibold leading-4">Created At</h2>
-            <p className="mt-2 line-clamp-2 font-normal text-black/80">
-              {new Date(`${details['created_at']}`).toDateString()}
-            </p>
-          </div>
-        </div>
+        )}
       </Card>
     </div>
   )

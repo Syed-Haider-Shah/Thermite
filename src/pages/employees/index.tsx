@@ -116,6 +116,7 @@ const Employees = () => {
         <Table
           cols={cols}
           rows={rows}
+          selectedRow={selectedEmp?.id}
           isLoading={isLoading}
           onRowSelect={handleSelectRow}
         />

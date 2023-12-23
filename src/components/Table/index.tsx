@@ -1,8 +1,9 @@
 import { FC, memo, useMemo } from 'react'
 
-import { Gear } from '@/components'
 import { IRow } from '@/types/supabaseTables'
 import { cn } from '@/utils/cn'
+
+import RowSkeleton from './RowSkeleton'
 
 type ITable = {
   rows: IRow[]
@@ -49,7 +50,7 @@ const TableComponent: FC<ITable> = ({
           onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
           className={cn(
-            'h-5 cursor-pointer border-y border-black/5 transition duration-300 ease-in-out last:border-b-0 even:bg-indigo/5 hover:bg-black/5 hover:shadow-xl',
+            'cursor-pointer border-y border-black/5 transition duration-300 ease-in-out last:border-b-0 even:bg-indigo/5 hover:bg-black/5 hover:shadow-xl',
             {
               '!bg-indigo/30 hover:bg-indigo/40':
                 selectedRow === row.id?.toString()
@@ -67,8 +68,8 @@ const TableComponent: FC<ITable> = ({
   )
 
   return (
-    <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-md pb-2 ring-1 ring-black/5">
-      <table className="h-full min-w-full divide-y">
+    <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-md border border-black/5 pb-2">
+      <table className="h-min min-w-full divide-y">
         <thead className="sticky top-0 z-10 bg-darkIndigo bg-opacity-100">
           <tr>
             {cols.map((val) => (
@@ -82,13 +83,18 @@ const TableComponent: FC<ITable> = ({
             ))}
           </tr>
         </thead>
-        <tbody className="border-black/5">{rowList}</tbody>
+        <tbody className="border-black/5">
+          {isLoading ? (
+            <>
+              <RowSkeleton cols={cols} />
+              <RowSkeleton cols={cols} />
+              <RowSkeleton cols={cols} />
+            </>
+          ) : (
+            rowList
+          )}
+        </tbody>
       </table>
-      {isLoading && (
-        <div className="absolute left-1/2 top-1/2">
-          <Gear className="animate-spin" />
-        </div>
-      )}
     </div>
   )
 }

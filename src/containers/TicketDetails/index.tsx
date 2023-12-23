@@ -3,8 +3,7 @@ import { useParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button, Card } from '@/components'
-import { Spinner } from '@/components'
+import { Button, Card, Gear } from '@/components'
 import { supabase } from '@/services/supabase'
 import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
 import { cn } from '@/utils/cn'
@@ -82,13 +81,13 @@ const TicketDetails = () => {
         </div>
         {isLoading ? (
           <div className="relative left-1/2 pb-10">
-            <Spinner />
+            <Gear className="animate-spin" />
           </div>
         ) : (
           <div className="flex gap-6">
             <div className="flex flex-wrap gap-x-12 gap-y-8 rounded-5 bg-lightGray p-4">
               {LOCATION_DETAILS.map(({ name, field }) => (
-                <div title={name} key={field}>
+                <div title={name} key={field} className="min-w-55">
                   <h2 className="text-sm font-semibold leading-4">{name}</h2>
                   <p className="mt-2 line-clamp-2 font-normal text-black/80">
                     {`${details[field]}`}
@@ -121,7 +120,7 @@ const TicketDetails = () => {
         <h1 className="text-xl font-semibold leading-6">Ticket Details</h1>
         {isLoading ? (
           <div className="relative left-1/2 pb-10">
-            <Spinner />
+            <Gear className="animate-spin" />
           </div>
         ) : (
           <div className="flex flex-wrap justify-between gap-x-12 gap-y-4">

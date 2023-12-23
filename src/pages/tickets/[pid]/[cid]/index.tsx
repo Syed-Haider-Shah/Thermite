@@ -3,7 +3,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Spinner } from '@/components'
+import { Gear } from '@/components'
 import { ChildDetails, CloseChild, Modal } from '@/containers'
 import { supabase } from '@/services/supabase'
 import { IChildTicket, INITIAL_CHILD_DATA } from '@/types/supabaseTables'
@@ -38,7 +38,7 @@ const ChildTicket = () => {
     <Modal showModal onClose={router.back} title="Child Ticket">
       {isLoading ? (
         <div className="absolute left-1/2 top-1/2">
-          <Spinner className="" />
+          <Gear className="animate-spin" />
         </div>
       ) : (
         <>

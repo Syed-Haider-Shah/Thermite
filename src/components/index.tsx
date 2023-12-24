@@ -11,6 +11,8 @@ export { default as Tag } from './Tag'
 export { default as TextArea } from './TextArea'
 export { default as FormLine } from './FormLine'
 export { default as FilterSelect } from './FilterSelect'
+export { default as LineItem } from './LineItem'
+export { default as LineSkeleton } from './LineItem/LineSkeleton'
 
 export {
   MagnifierIcon,

@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button, Card, Gear } from '@/components'
+import { Button, Card, LineItem, LineSkeleton } from '@/components'
 import { supabase } from '@/services/supabase'
 import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
 import { cn } from '@/utils/cn'
@@ -79,48 +79,40 @@ const TicketDetails = () => {
           <h1 className="text-xl font-semibold leading-6">Customer Details</h1>
           <Button active>Edit</Button>
         </div>
-        {isLoading ? (
-          <div className="relative left-1/2 pb-10">
-            <Gear className="animate-spin" />
+
+        <div className="flex gap-6">
+          <div className="flex flex-wrap gap-x-12 gap-y-8 rounded-5 bg-lightGray p-4 [&>div]:min-w-55">
+            {LOCATION_DETAILS.map(({ name, field }) =>
+              isLoading ? (
+                <LineSkeleton key={name} />
+              ) : (
+                <LineItem key={name} title={name} item={details[field]} />
+              )
+            )}
           </div>
-        ) : (
-          <div className="flex gap-6">
-            <div className="flex flex-wrap gap-x-12 gap-y-8 rounded-5 bg-lightGray p-4">
-              {LOCATION_DETAILS.map(({ name, field }) => (
-                <div title={name} key={field} className="min-w-55">
-                  <h2 className="text-sm font-semibold leading-4">{name}</h2>
-                  <p className="mt-2 line-clamp-2 font-normal text-black/80">
-                    {`${details[field]}`}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-x-12 gap-y-8 rounded-5 bg-lightGray p-4">
-              {DETAILS_FIELD.map(({ name, field }) => (
-                <div title={name} key={field}>
-                  <h2 className="text-sm font-semibold leading-4">{name}</h2>
-                  <p className="mt-2 line-clamp-2 font-normal text-black/80">
-                    {`${details[field]}`}
-                  </p>
-                </div>
-              ))}
-              <div>
-                <h2 className="text-sm font-semibold leading-4">
-                  Installation Date
-                </h2>
-                <p className="mt-2 line-clamp-2 font-normal text-black/80">
-                  {new Date(`${details['installation_date']}`).toDateString()}
-                </p>
-              </div>
-            </div>
+          <div className="flex flex-wrap gap-x-12 gap-y-8 rounded-5 bg-lightGray p-4">
+            {DETAILS_FIELD.map(({ name, field }) =>
+              isLoading ? (
+                <LineSkeleton key={name} />
+              ) : (
+                <LineItem key={name} title={name} item={details[field]} />
+              )
+            )}
+            <LineItem
+              title="Installation Date"
+              item={new Date(`${details['installation_date']}`).toDateString()}
+            />
           </div>
-        )}
+        </div>
       </Card>
       <Card className="w-80">
         <h1 className="text-xl font-semibold leading-6">Ticket Details</h1>
         {isLoading ? (
-          <div className="relative left-1/2 pb-10">
-            <Gear className="animate-spin" />
+          <div className="">
+            <LineSkeleton />
+            <LineSkeleton />
+            <LineSkeleton />
+            <LineSkeleton />
           </div>
         ) : (
           <div className="flex flex-wrap justify-between gap-x-12 gap-y-4">
@@ -139,28 +131,19 @@ const TicketDetails = () => {
                 <div>{details.child_count}</div>
               </div>
             </div>
-            <div className="pb-4" title="Status">
-              <h2 className="text-sm font-semibold leading-4">Status</h2>
-              <p className="mt-2 line-clamp-2 font-normal text-black/80">
-                {`${details.status}`}
-              </p>
-            </div>
-            <div title="Employee">
-              <h2 className="text-sm font-semibold leading-4">
-                Employee Assigned
-              </h2>
-              <p className="mt-2 line-clamp-2 font-normal text-black/80">
-                {details['employee'] || (
+            <LineItem title="Status" item={details.status} />
+            <LineItem
+              title="Employee"
+              item={
+                details['employee'] || (
                   <AssignEmployee fetchDetails={fetchDetails} />
-                )}
-              </p>
-            </div>
-            <div title={'Created At'}>
-              <h2 className="text-sm font-semibold leading-4">Created At</h2>
-              <p className="mt-2 line-clamp-2 font-normal text-black/80">
-                {new Date(`${details['created_at']}`).toDateString()}
-              </p>
-            </div>
+                )
+              }
+            />
+            <LineItem
+              title="Created At"
+              item={new Date(`${details['created_at']}`).toDateString()}
+            />
           </div>
         )}
       </Card>

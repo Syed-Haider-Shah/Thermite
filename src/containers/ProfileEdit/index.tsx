@@ -91,7 +91,7 @@ const ProfileEdit = () => {
 
   return (
     edit && (
-      <Card className="gap-0 space-y-0 pb-1">
+      <Card id="update-profile" title="Update Profile" className="max-w-sm">
         <div className="flex w-full justify-between">
           <h1 className="text-xl font-semibold leading-6">Profile Edit</h1>
           <Link
@@ -102,10 +102,9 @@ const ProfileEdit = () => {
             <Button active>Details</Button>
           </Link>
         </div>
-        <div className="h-32 w-32 rounded-lg bg-gray" />
         <form
           onSubmit={handleUpdateSubmit(handleUpdateUser)}
-          className="!mt-2 flex flex-wrap items-center gap-6"
+          className="flex flex-wrap items-center gap-x-6 rounded-5 bg-lightGray p-4"
         >
           <FormLine
             className="w-80"
@@ -130,7 +129,7 @@ const ProfileEdit = () => {
         </form>
         <form
           onSubmit={handlePasswordSubmit(handleUpdatePassword)}
-          className="mt-4 flex flex-wrap items-center gap-6"
+          className="flex flex-wrap items-center gap-x-6 rounded-5 bg-lightGray p-4"
         >
           <FormLine
             className="w-80"

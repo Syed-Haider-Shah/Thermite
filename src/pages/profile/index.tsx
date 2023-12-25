@@ -80,10 +80,10 @@ const Profile = () => {
   }, [fetchTickets])
 
   return (
-    <>
+    <div className="flex flex-row-reverse gap-6">
       <ProfileDetails user={user} />
       <ProfileEdit />
-      <Card>
+      <Card className="w-full">
         <div className="flex justify-between">
           <SearchBar placeholder="Search for Tickets" />
           <div className="flex gap-x-2">
@@ -97,7 +97,7 @@ const Profile = () => {
           rows={rows}
         />
       </Card>
-    </>
+    </div>
   )
 }
 

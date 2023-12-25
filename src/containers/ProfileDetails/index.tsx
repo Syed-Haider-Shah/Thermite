@@ -17,7 +17,7 @@ const ProfileDetails = ({
   console.log(!!edit)
 
   return edit ? null : (
-    <Card title="profile" id="profile" className="h-min">
+    <Card title="profile" id="profile" className="h-min max-w-sm">
       <div className="flex w-full justify-between">
         <h1 className="text-xl font-semibold leading-6">Profile Details</h1>
         {hideEdit ? null : (
@@ -33,7 +33,7 @@ const ProfileDetails = ({
           </Link>
         )}
       </div>
-      <div className="flex w-full flex-wrap gap-10 [&>div]:min-w-[120px]">
+      <div className="flex w-full flex-wrap gap-10 rounded-5 bg-lightGray p-4 [&>div]:min-w-[120px]">
         <div>
           <h2 className="text-sm font-semibold leading-4">Name</h2>
           <p className="text-lg font-normal text-black/80">{user.name}</p>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -50,15 +50,17 @@ const cols = [
 ]
 const OPTIONS = [
   { value: 'all', name: 'All' },
-  { value: 'active', name: 'Active' },
-  { value: 'completed', name: 'Completed' }
+  { value: 'OPEN', name: 'Open' },
+  { value: 'CLOSED', name: 'Completed' }
 ]
+
 const Tickets = () => {
   const [tickets, setTickets] = useState<IParentTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
   const pathname = usePathname()
+  const status = useSearchParams().get('status')
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -69,8 +71,11 @@ const Tickets = () => {
 
   const fetchTickets = useCallback(async () => {
     setIsLoading(true)
-    const { data: rows, error } = await supabase
-      .rpc('get_parent_tickets')
+    const query = supabase.rpc('get_parent_tickets')
+
+    if (status && status !== 'all') query.eq('status', status)
+
+    const { data: rows, error } = await query
       .order('created_at', {
         ascending: false
       })
@@ -79,7 +84,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (rows) setTickets(rows as IParentTicket[])
-  }, [])
+  }, [status])
 
   useEffect(() => {
     fetchTickets()
@@ -90,7 +95,7 @@ const Tickets = () => {
       <div className="flex justify-between">
         <SearchBar placeholder="Search for Tickets" />
         <div className="flex gap-x-2">
-          <FilterSelect options={OPTIONS} name="category" />
+          <FilterSelect options={OPTIONS} name="status" />
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />

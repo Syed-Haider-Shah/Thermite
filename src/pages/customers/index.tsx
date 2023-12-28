@@ -4,7 +4,6 @@ import toast from 'react-hot-toast'
 import {
   Button,
   Card,
-  FilterSelect,
   PageNav,
   SearchBar,
   Table,
@@ -44,11 +43,6 @@ const cols = [
     name: 'Number of Panels'
   }
 ]
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'active', name: 'Active' },
-  { value: 'completed', name: 'Completed' }
-]
 
 const Customers = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
@@ -75,7 +69,6 @@ const Customers = () => {
       <div className="flex justify-between">
         <SearchBar placeholder="Search for Customers" />
         <div className="flex gap-x-2">
-          <FilterSelect options={OPTIONS} name="category" />
           <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
             <UnionIcon />
             New Customer

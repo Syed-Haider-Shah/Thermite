@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -48,10 +48,14 @@ const ticketCols = [
   }
 ]
 
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'active', name: 'Active' },
-  { value: 'completed', name: 'Completed' }
+const COUNTIES = [
+  { name: 'All', value: 'all' },
+  { name: 'Pakistan', value: 'pakistan' },
+  { name: 'South Africa', value: 'south_africa' },
+  { name: 'Australia', value: 'Australia' },
+  { name: 'United States', value: 'united_states' },
+  { name: 'Canada', value: 'canada' },
+  { name: 'China', value: 'china' }
 ]
 
 const Employees = () => {
@@ -62,6 +66,7 @@ const Employees = () => {
   const [isLoadingTickets, setIsLoadingTickets] = useState<boolean>(false)
 
   const pathname = usePathname()
+  const country = useSearchParams().get('country')
 
   const handleSelectRow = useCallback((row: IRow) => {
     setSelectedEmp(row as IEmployee)
@@ -69,12 +74,17 @@ const Employees = () => {
 
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
-    const { data: rows, error } = await supabase.from('employees').select()
+
+    const query = supabase.from('employees').select()
+
+    if (country && country !== 'all') query.eq('country', country)
+
+    const { data: rows, error } = await query
     setIsLoading(false)
 
     if (rows) setRows(rows as IEmployee[])
     else if (error) toast.error(error.message)
-  }, [])
+  }, [country])
 
   const fetchTickets = useCallback(async () => {
     if (!selectedEmp?.name) return
@@ -104,7 +114,7 @@ const Employees = () => {
         <div className="flex justify-between">
           <SearchBar placeholder="Search for Employees" />
           <div className="flex gap-x-2">
-            <FilterSelect options={OPTIONS} name="category" />
+            <FilterSelect options={COUNTIES} name="country" />
             <Link href={`${pathname}${Paths.CREATE}`}>
               <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
                 <UnionIcon />

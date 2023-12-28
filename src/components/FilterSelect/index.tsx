@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
 import { ChevronDownIcon } from '@/components'
 import { cn } from '@/utils/cn'
@@ -15,11 +15,16 @@ type IDropDown = {
 const FilterSelect = ({ options, className, name }: IDropDown) => {
   const [isOpen, setIsOpen] = useState(false)
   const searchParams = useSearchParams()
+  const selectedValue = searchParams.get(name)
   const pathname = usePathname()
 
   const handleToggle = (): void => {
     setIsOpen((value) => !value)
   }
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [selectedValue])
 
   const createQueryString = useCallback(
     (value: string) => {
@@ -42,7 +47,8 @@ const FilterSelect = ({ options, className, name }: IDropDown) => {
         onClick={handleToggle}
         className="flex w-full items-center justify-between rounded-lg border border-black/5 bg-white/40 px-2 py-3 text-left"
       >
-        {options[0]?.name}
+        {options.find(({ value }) => value === selectedValue)?.name ??
+          options[0]?.name}
         <ChevronDownIcon
           className={cn('origin-center transform transition', {
             '-rotate-90': !isOpen
@@ -53,7 +59,10 @@ const FilterSelect = ({ options, className, name }: IDropDown) => {
         className={cn(
           'absolute z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
           className || 'w-40',
-          { 'max-h-sm': isOpen, 'max-h-0': !isOpen }
+          {
+            'scrollbar-primary max-h-48 overflow-y-scroll': isOpen,
+            'max-h-0': !isOpen
+          }
         )}
       >
         {options.map(({ name, value }) => (

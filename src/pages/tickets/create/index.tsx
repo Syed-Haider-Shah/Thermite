@@ -29,22 +29,29 @@ const CreateParentTicket = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [customers, setCustomers] = useState<ICustomer[]>([])
   const [selectedRow, setSelectedRow] = useState<ICustomer>()
+  const [search, setSearch] = useState<string>('')
 
   const handleClose = useCallback(() => {
     router.push(Paths.TICKET)
   }, [router])
 
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
+  }, [])
+
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true)
-    const { data: rows, error } = await supabase
-      .from('Customers')
-      .select()
-      .limit(15)
+
+    const query = supabase.from('Customers').select()
+
+    if (search) query.textSearch('address', search)
+
+    const { data: rows, error } = await query.limit(15)
     setIsLoading(false)
 
     if (error) toast.error(error.message)
     else if (rows) setCustomers(rows as ICustomer[])
-  }, [])
+  }, [search])
 
   const handleRowSelect = useCallback((val: IRow) => {
     setSelectedRow(val as ICustomer)
@@ -77,7 +84,7 @@ const CreateParentTicket = () => {
         onSubmit={handleSubmit}
         className="flex h-full flex-col gap-5 overflow-hidden rounded-2xl bg-white p-4"
       >
-        <SearchBar placeholder="Search for Customers" />
+        <SearchBar onSearch={handleSearch} placeholder="Search for Customers" />
         <Table
           cols={cols}
           rows={customers}

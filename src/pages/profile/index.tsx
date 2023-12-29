@@ -50,23 +50,31 @@ const OPTIONS = [
 const Profile = () => {
   const [rows, setRows] = useState<IParentTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
 
   const { user } = useAuth()
 
   const router = useRouter()
 
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
+  }, [])
+
   const fetchTickets = useCallback(async () => {
     if (!user.name) return
 
     setIsLoading(true)
-    const { data, error } = await supabase
-      .rpc('get_parent_tickets')
-      .eq('employee', user.name)
+
+    const query = supabase.rpc('get_parent_tickets').eq('employee', user.name)
+
+    if (search) query.textSearch('address', search)
+
+    const { data, error } = await query
     setIsLoading(false)
 
     if (data) setRows(data)
     else if (error) toast.error(error.message)
-  }, [user.name])
+  }, [search, user.name])
 
   const handleSelectRow = useCallback(
     (row: IRow) => {
@@ -85,7 +93,7 @@ const Profile = () => {
       <ProfileEdit />
       <Card className="w-full">
         <div className="flex justify-between">
-          <SearchBar placeholder="Search for Tickets" />
+          <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
           <div className="flex gap-x-2">
             <FilterSelect options={OPTIONS} name="category" />
           </div>

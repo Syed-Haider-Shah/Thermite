@@ -47,18 +47,25 @@ const cols = [
 const Customers = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
+
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
+  }, [])
 
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true)
-    const { data: rows, error } = await supabase
-      .from('Customers')
-      .select()
-      .limit(15)
+
+    const query = supabase.from('Customers').select()
+
+    if (search) query.textSearch('address', search)
+
+    const { data: rows, error } = await query.limit(15)
     setIsLoading(false)
 
     if (error) toast.error(error.message)
     else if (rows) setCustomers(rows as ICustomer[])
-  }, [])
+  }, [search])
 
   useEffect(() => {
     fetchCustomers()
@@ -67,7 +74,7 @@ const Customers = () => {
   return (
     <Card>
       <div className="flex justify-between">
-        <SearchBar placeholder="Search for Customers" />
+        <SearchBar onSearch={handleSearch} placeholder="Search for Customers" />
         <div className="flex gap-x-2">
           <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
             <UnionIcon />

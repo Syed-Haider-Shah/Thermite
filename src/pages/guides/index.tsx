@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { useCallback, useState } from 'react'
+
 import { Card, FilterSelect, SearchBar, Tag } from '@/components'
 import { Paths } from '@/constants'
 
@@ -19,13 +21,23 @@ const OPTIONS = [
 ]
 
 const Guides = () => {
+  const [search, setSearch] = useState<string>('')
+
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
+  }, [])
+
   return (
     <Card
       title="Guides"
       id="guides"
       className="scrollbar-primary overflow-y-scroll"
     >
-      <SearchBar placeholder="Search for Guides" />
+      <SearchBar
+        value={search}
+        onSearch={handleSearch}
+        placeholder="Search for Guides"
+      />
       <div className="flex items-end justify-between">
         <div title="generations" className="flex flex-col gap-2">
           <h2 className="font-semibold leading-5 text-black/90 ">

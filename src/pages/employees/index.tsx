@@ -64,12 +64,17 @@ const Employees = () => {
   const [selectedEmp, setSelectedEmp] = useState<IEmployee | null>(null)
   const [tickets, setTickets] = useState<IRow[]>([])
   const [isLoadingTickets, setIsLoadingTickets] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
 
   const pathname = usePathname()
   const country = useSearchParams().get('country')
 
   const handleSelectRow = useCallback((row: IRow) => {
     setSelectedEmp(row as IEmployee)
+  }, [])
+
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
   }, [])
 
   const fetchEmployees = useCallback(async () => {
@@ -79,12 +84,14 @@ const Employees = () => {
 
     if (country && country !== 'all') query.eq('country', country)
 
+    if (search) query.textSearch('name', search)
+
     const { data: rows, error } = await query
     setIsLoading(false)
 
     if (rows) setRows(rows as IEmployee[])
     else if (error) toast.error(error.message)
-  }, [country])
+  }, [country, search])
 
   const fetchTickets = useCallback(async () => {
     if (!selectedEmp?.name) return
@@ -93,12 +100,11 @@ const Employees = () => {
     const { data, error } = await supabase
       .rpc('get_parent_tickets')
       .eq('employee', selectedEmp.name)
-      .select('id, address, status, employee')
     setIsLoadingTickets(false)
 
     if (data) setTickets(data)
     else if (error) toast.error(error.message)
-  }, [selectedEmp])
+  }, [selectedEmp?.name])
 
   useEffect(() => {
     fetchEmployees()
@@ -112,7 +118,10 @@ const Employees = () => {
     <div className="flex gap-6">
       <Card className="w-1/2">
         <div className="flex justify-between">
-          <SearchBar placeholder="Search for Employees" />
+          <SearchBar
+            onSearch={handleSearch}
+            placeholder="Search for Employees"
+          />
           <div className="flex gap-x-2">
             <FilterSelect options={COUNTIES} name="country" />
             <Link href={`${pathname}${Paths.CREATE}`}>

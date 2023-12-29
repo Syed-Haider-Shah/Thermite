@@ -30,9 +30,14 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<string>('')
   const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
 
   const handleShowModal = useCallback(() => setShowModal(true), [])
   const handleBlur = useCallback(() => setShowModal(false), [])
+
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
+  }, [])
 
   const { pid } = useParams() || { pid: '' }
 
@@ -42,13 +47,18 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
 
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
-    const { data: rows, error } = await supabase.from('employees').select()
+
+    const query = supabase.from('employees').select()
+
+    if (search) query.textSearch('', search)
+
+    const { data: rows, error } = await query
 
     setIsLoading(false)
 
     if (rows) setEmployees(rows as IEmployee[])
     else if (error) toast.error(error.message)
-  }, [])
+  }, [search])
 
   useEffect(() => {
     fetchEmployees()
@@ -81,7 +91,10 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
       </Button>
       <Modal showModal={showModal} onClose={handleBlur} title="Select Employee">
         <div className="relative mb-12 mt-5 space-y-5">
-          <SearchBar placeholder="Search for Employees" />
+          <SearchBar
+            onSearch={handleSearch}
+            placeholder="Search for Employees"
+          />
           <Table
             onRowSelect={handleRowSelect}
             selectedRow={selectedRow}

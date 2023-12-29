@@ -153,7 +153,11 @@ module.exports = {
       vLightIndigo: '#E0E7FF', //indigo-100
       //button
       gray: '#969DAE',
-      activeBlue: '#456BF0'
+      activeBlue: '#456BF0',
+      //loading
+      loadGray: '#E2E8F0',
+      loadYellow: '#facc15',
+      loadGreen: '#84cc16'
     }
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],

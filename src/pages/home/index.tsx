@@ -13,29 +13,79 @@ export default function Home() {
         <div className="text-sm text-gray">App Activities at a Glance</div>
       </div>
       <div className="h-200 ml-10 mt-2 flex w-80 flex-col gap-5">
-        <section className="flex h-full w-full flex-col justify-between bg-white shadow-lg">
+        <section className="flex h-full w-full flex-col justify-between bg-white shadow-xl">
           <div className="mt-15 flex flex-col items-center justify-center">
             <div className="text-xl font-bold">23</div>
             <div className="text-sm text-gray">Assigned Tickets</div>
           </div>
           <div className="mt- px-8 text-xs text-white">
-            <button className="flex w-full justify-between rounded-5 bg-darkIndigo p-3 px-8 hover:shadow-lg">
+            <button className="flex w-full justify-between rounded-5 bg-darkIndigo p-3 px-8 font-bold hover:shadow-xl">
               <div>TAKE ME TO TICKETS</div>
               <div>LL</div>
             </button>
           </div>
           <div className="flex justify-center gap-16 border-t-2 border-vLightIndigo text-xs text-gray">
-            <div className="my-6">
-              <div>Assigned Tickets: 23</div>
-              <div>Loading</div>
+            <div className="my-6 flex flex-col gap-2">
+              <div className="flex gap-1">
+                <div>Assigned Tickets:</div>
+                <div className="font-bold text-black">23</div>
+              </div>
+              <div className="bg-loadGray flex w-full">
+                <div className="h-1 w-[75%] bg-indigo"></div>
+              </div>
             </div>
-            <div className="my-6">
-              <div>Closed Tickets: 23</div>
-              <div>Loading</div>
+            <div className="my-6 flex flex-col gap-2">
+              <div className="flex gap-1">
+                <div>Closed Tickets:</div>
+                <div className="font-bold text-black">12</div>
+              </div>
+              <div className="bg-loadGray flex w-full">
+                <div className="bg-loadYellow h-1 w-[60%]"></div>
+              </div>
             </div>
           </div>
         </section>
-        <div className="h-full w-full bg-white"></div>
+        <section className="flex h-full w-full flex-col items-center justify-between bg-white p-6 shadow-xl">
+          <div className="bg-loadGray border border-gray p-1 text-sm text-gray">
+            Assigned Ticket Details
+          </div>
+          <div>Loading Bar</div>
+          <div className="flex w-full flex-col text-sm">
+            <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
+              <div className="flex items-center gap-2">
+                <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-darkIndigo">
+                  <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
+                </div>
+                <div className="font-bold">Open Tickets</div>
+              </div>
+              <div>
+                <div className="text-gray">60%</div>
+              </div>
+            </div>
+            <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
+              <div className="flex items-center gap-2">
+                <div className="bg-loadGreen flex h-4 w-4 items-center justify-center rounded-5">
+                  <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
+                </div>
+                <div className="font-bold">Water Sample Required</div>
+              </div>
+              <div>
+                <div className="text-gray">10%</div>
+              </div>
+            </div>
+            <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
+              <div className="flex items-center gap-2">
+                <div className="bg-loadYellow flex h-4 w-4 items-center justify-center rounded-5">
+                  <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
+                </div>
+                <div className="font-bold">Closed Tickets</div>
+              </div>
+              <div>
+                <div className="text-gray">30%</div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   )

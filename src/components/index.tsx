@@ -13,6 +13,7 @@ export { default as FormLine } from './FormLine'
 export { default as FilterSelect } from './FilterSelect'
 export { default as LineItem } from './LineItem'
 export { default as LineSkeleton } from './LineItem/LineSkeleton'
+export { default as Toggle } from './Toggle'
 
 export {
   MagnifierIcon,

@@ -1,22 +1,10 @@
 import Link from 'next/link'
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams
-} from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import {
-  Button,
-  Card,
-  FilterSelect,
-  PageNav,
-  Table,
-  UnionIcon
-} from '@/components'
+import { Button, Card, PageNav, Table, Toggle, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
@@ -69,20 +57,15 @@ const cols = [
     name: 'Serial Number'
   }
 ]
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'OPEN', name: 'Open' },
-  { value: 'CLOSED', name: 'Completed' }
-]
 
 const Tickets = () => {
   const [rows, setRows] = useState<IChildTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [showClosed, setShowClosed] = useState<boolean>(false)
 
   const { pid } = useParams() || { pid: '' }
   const pathname = usePathname()
   const router = useRouter()
-  const status = useSearchParams().get('status')
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -97,7 +80,7 @@ const Tickets = () => {
     setIsLoading(true)
     const query = supabase.from('Child').select().eq('parent_id', pid)
 
-    if (status && status !== 'all') query.eq('status', status)
+    if (showClosed) query.neq('status', 'CLOSED')
 
     const { data, error } = await query
       .order('created_at', {
@@ -109,7 +92,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (data) setRows(data)
-  }, [pid, status])
+  }, [pid, showClosed])
 
   useEffect(() => {
     fetchChildTickets()
@@ -126,7 +109,7 @@ const Tickets = () => {
               New Child Ticket
             </Button>
           </Link>
-          <FilterSelect options={OPTIONS} name="status" />
+          <Toggle onChange={setShowClosed} isChecked={showClosed} />
         </div>
         <Table
           onRowSelect={handleRowSelect}

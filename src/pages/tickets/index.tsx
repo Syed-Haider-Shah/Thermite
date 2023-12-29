@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -7,10 +7,10 @@ import toast from 'react-hot-toast'
 import {
   Button,
   Card,
-  FilterSelect,
   PageNav,
   SearchBar,
   Table,
+  Toggle,
   UnionIcon
 } from '@/components'
 import { Paths } from '@/constants'
@@ -48,20 +48,15 @@ const cols = [
     name: 'Status'
   }
 ]
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'OPEN', name: 'Open' },
-  { value: 'CLOSED', name: 'Completed' }
-]
 
 const Tickets = () => {
   const [tickets, setTickets] = useState<IParentTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
+  const [showClosed, setShowClosed] = useState<boolean>(false)
 
   const router = useRouter()
   const pathname = usePathname()
-  const status = useSearchParams().get('status')
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -78,7 +73,7 @@ const Tickets = () => {
     setIsLoading(true)
     const query = supabase.rpc('get_parent_tickets')
 
-    if (status && status !== 'all') query.eq('status', status)
+    if (showClosed) query.neq('status', 'CLOSED')
 
     if (search) {
       const newText = search.replaceAll(':', '\\:')
@@ -94,7 +89,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (rows) setTickets(rows as IParentTicket[])
-  }, [search, status])
+  }, [search, showClosed])
 
   useEffect(() => {
     fetchTickets()
@@ -105,7 +100,7 @@ const Tickets = () => {
       <div className="flex justify-between">
         <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
         <div className="flex gap-x-2">
-          <FilterSelect options={OPTIONS} name="status" />
+          <Toggle onChange={setShowClosed} isChecked={showClosed} />
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />

@@ -26,7 +26,7 @@ const TableComponent: FC<ITable> = ({
     isDate?: boolean
   ) => {
     if (isDate) return new Date(`${val}`).toDateString()
-    else if (isStatus)
+    if (isStatus)
       return (
         <span
           className={cn(
@@ -41,7 +41,8 @@ const TableComponent: FC<ITable> = ({
           {val}
         </span>
       )
-    else return `${val}`
+    if (!val) return '----'
+    return `${val}`
   }
 
   const rowList = useMemo(

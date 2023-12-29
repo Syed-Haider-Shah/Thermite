@@ -1,17 +1,15 @@
-import { FC } from 'react'
+import { FC, InputHTMLAttributes } from 'react'
 
 import { MagnifierIcon } from '@/components'
 
-type ISearch = {
-  placeholder?: string
-}
-
-const SearchComponent: FC<ISearch> = ({ placeholder }) => (
+const SearchComponent: FC<InputHTMLAttributes<HTMLInputElement>> = ({
+  ...props
+}) => (
   <div className="relative flex h-12 items-center overflow-hidden rounded-full border border-white/5 bg-black/5">
     <input
+      {...props}
       title="Search bar"
       type="text"
-      placeholder={placeholder}
       className={
         'peer w-full bg-transparent pl-11 pr-4 text-base font-medium leading-4 outline-none transition-all duration-300 placeholder:text-sm focus:pl-4'
       }

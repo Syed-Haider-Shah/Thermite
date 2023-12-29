@@ -25,7 +25,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       {pathname !== '/' && <NavBar />}
       <div
         className={cn(
-          'flex w-full flex-col',
+          'flex w-full flex-col text-darkIndigo',
           {
             'max-w-[calc(100%-260px)]': pathname !== '/'
           },

@@ -18,26 +18,38 @@ import { useAuth } from '@/context/AuthContext'
 import Button from './Button'
 
 const ROUTES = [
-  { name: 'Dashboard', link: Paths.HOME, icon: <Dashboard /> },
-  { name: 'Tickets', link: Paths.TICKET, icon: <Tickets /> },
-  { name: 'Customers', link: Paths.CUSTOMER, icon: <Customers /> },
-  { name: 'Forms', link: Paths.FORM, icon: <Forms /> },
-  { name: 'Guides', link: Paths.GUIDE, icon: <Explore /> },
+  {
+    name: 'Dashboard',
+    link: Paths.HOME,
+    icon: <Dashboard className="invert" />
+  },
+  { name: 'Tickets', link: Paths.TICKET, icon: <Tickets className="invert" /> },
+  {
+    name: 'Customers',
+    link: Paths.CUSTOMER,
+    icon: <Customers className="invert" />
+  },
+  { name: 'Forms', link: Paths.FORM, icon: <Forms className="invert" /> },
+  { name: 'Guides', link: Paths.GUIDE, icon: <Explore className="invert" /> },
   {
     name: 'Employees',
     link: Paths.EMPLOYEE,
-    icon: <Employees1 />
+    icon: <Employees1 className="invert" />
   },
-  { name: 'Softwares', link: Paths.SOFTWARE, icon: <Softwares /> }
+  {
+    name: 'Softwares',
+    link: Paths.SOFTWARE,
+    icon: <Softwares className="invert" />
+  }
 ]
 
 const NavBarComponent: FC = () => {
   const pathname = usePathname()
   const { user } = useAuth()
   return (
-    <nav className="sticky top-0 h-screen bg-white px-4 py-10 drop-shadow-lg">
+    <nav className="sticky top-0 h-screen -translate-x-1 bg-darkIndigo px-4 py-10 drop-shadow-lg">
       <Image
-        src="/logoNew.svg"
+        src="/logo.svg"
         className="mt-6 px-1"
         alt="logo"
         width={300}

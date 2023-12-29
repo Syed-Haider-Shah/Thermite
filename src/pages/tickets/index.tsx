@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-import { useCallback, useEffect, useState } from 'react'
+import {
+  ChangeEvent,
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useState
+} from 'react'
 import toast from 'react-hot-toast'
 
 import {
@@ -57,6 +63,9 @@ const OPTIONS = [
 const Tickets = () => {
   const [tickets, setTickets] = useState<IParentTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [address, setAddress] = useState<string>('')
+
+  const deferredAddress = useDeferredValue(address)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -69,11 +78,16 @@ const Tickets = () => {
     [router]
   )
 
+  const handleAddress = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setAddress(e.target.value)
+  }, [])
+
   const fetchTickets = useCallback(async () => {
     setIsLoading(true)
     const query = supabase.rpc('get_parent_tickets')
 
     if (status && status !== 'all') query.eq('status', status)
+    if (deferredAddress) query.textSearch('address', deferredAddress)
 
     const { data: rows, error } = await query
       .order('created_at', {
@@ -84,7 +98,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (rows) setTickets(rows as IParentTicket[])
-  }, [status])
+  }, [deferredAddress, status])
 
   useEffect(() => {
     fetchTickets()
@@ -93,7 +107,11 @@ const Tickets = () => {
   return (
     <Card>
       <div className="flex justify-between">
-        <SearchBar placeholder="Search for Tickets" />
+        <SearchBar
+          onChange={handleAddress}
+          value={address}
+          placeholder="Search for Tickets"
+        />
         <div className="flex gap-x-2">
           <FilterSelect options={OPTIONS} name="status" />
           <Link href={`${pathname}${Paths.CREATE}`}>

@@ -12,7 +12,7 @@ export default function Home() {
         <div className="text-xl font-bold">Analytics / Reporting</div>
         <div className="text-sm text-gray">App Activities at a Glance</div>
       </div>
-      <div className="h-200 ml-10 mt-2 flex w-80 flex-col gap-5">
+      <div className="h-200 ml-10 mt-2 flex w-62 flex-col gap-5">
         <section className="flex h-full w-full flex-col justify-between bg-white shadow-xl">
           <div className="mt-15 flex flex-col items-center justify-center">
             <div className="text-xl font-bold">23</div>
@@ -46,9 +46,7 @@ export default function Home() {
           </div>
         </section>
         <section className="flex h-full w-full flex-col items-center justify-between bg-white p-6 shadow-xl">
-          <div className="bg-loadGray border border-gray p-1 text-sm text-gray">
-            Assigned Ticket Details
-          </div>
+          <div className="p-1 text-sm text-black">Assigned Ticket Details</div>
           <div>Loading Bar</div>
           <div className="flex w-full flex-col text-sm">
             <div className="flex justify-between border-b-2 border-vLightIndigo p-2">

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -54,6 +54,7 @@ const Tickets = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
   const [showClosed, setShowClosed] = useState<boolean>(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   const router = useRouter()
   const pathname = usePathname()
@@ -65,13 +66,15 @@ const Tickets = () => {
     [router]
   )
 
+  const page = useSearchParams().get('page') || '1'
+
   const handleSearch = useCallback((text: string) => {
     setSearch(text)
   }, [])
 
   const fetchTickets = useCallback(async () => {
     setIsLoading(true)
-    const query = supabase.rpc('get_parent_tickets')
+    const query = supabase.rpc('get_parent_tickets', {}, { count: 'exact' })
 
     if (showClosed) query.neq('status', 'CLOSED')
 
@@ -80,16 +83,26 @@ const Tickets = () => {
       query.textSearch('address', newText)
     }
 
-    const { data: rows, error } = await query
+    const pageNum = Number(page)
+
+    const {
+      data: rows,
+      error,
+      count
+    } = await query
       .order('created_at', {
         ascending: false
       })
-      .limit(15)
+      .range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
+
+    console.log(count)
+
+    setTotalCount(count ? Math.ceil(count / 15) : 1)
 
     if (error) toast.error(error.message)
     else if (rows) setTickets(rows as IParentTicket[])
-  }, [search, showClosed])
+  }, [page, search, showClosed])
 
   useEffect(() => {
     fetchTickets()
@@ -115,7 +128,7 @@ const Tickets = () => {
         isLoading={isLoading}
         onRowSelect={handleRowSelect}
       />
-      <PageNav pageCount={5} />
+      <PageNav pageCount={totalCount} />
     </Card>
   )
 }

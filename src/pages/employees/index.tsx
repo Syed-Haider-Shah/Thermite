@@ -65,9 +65,11 @@ const Employees = () => {
   const [tickets, setTickets] = useState<IRow[]>([])
   const [isLoadingTickets, setIsLoadingTickets] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   const pathname = usePathname()
   const country = useSearchParams().get('country')
+  const page = useSearchParams().get('page') || '1'
 
   const handleSelectRow = useCallback((row: IRow) => {
     setSelectedEmp(row as IEmployee)
@@ -86,19 +88,28 @@ const Employees = () => {
 
     if (search) query.textSearch('name', search)
 
-    const { data: rows, error } = await query
+    const pageNum = Number(page)
+
+    const {
+      data: rows,
+      error,
+      count
+    } = await query.range((pageNum - 1) * 15, pageNum * 15)
+
     setIsLoading(false)
+
+    setTotalCount(count ? Math.ceil(count / 15) : 1)
 
     if (rows) setRows(rows as IEmployee[])
     else if (error) toast.error(error.message)
-  }, [country, search])
+  }, [country, page, search])
 
   const fetchTickets = useCallback(async () => {
     if (!selectedEmp?.name) return
 
     setIsLoadingTickets(true)
     const { data, error } = await supabase
-      .rpc('get_parent_tickets')
+      .rpc('get_parent_tickets', {}, { count: 'exact' })
       .eq('employee', selectedEmp.name)
     setIsLoadingTickets(false)
 
@@ -139,7 +150,7 @@ const Employees = () => {
           isLoading={isLoading}
           onRowSelect={handleSelectRow}
         />
-        <PageNav pageCount={5} />
+        <PageNav pageCount={totalCount} />
       </Card>
       <div className="flex w-1/2 flex-col gap-6">
         {selectedEmp && (

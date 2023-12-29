@@ -1,3 +1,5 @@
+import { useSearchParams } from 'next/navigation'
+
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -48,24 +50,35 @@ const Customers = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   const handleSearch = useCallback((text: string) => {
     setSearch(text)
   }, [])
 
+  const page = useSearchParams().get('page') || '1'
+
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true)
 
-    const query = supabase.from('Customers').select()
+    const query = supabase.from('Customers').select('*', { count: 'exact' })
 
     if (search) query.textSearch('address', search)
 
-    const { data: rows, error } = await query.limit(15)
+    const pageNum = Number(page)
+
+    const {
+      data: rows,
+      error,
+      count
+    } = await query.range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
+
+    setTotalCount(count ? Math.ceil(count / 15) : 1)
 
     if (error) toast.error(error.message)
     else if (rows) setCustomers(rows as ICustomer[])
-  }, [search])
+  }, [page, search])
 
   useEffect(() => {
     fetchCustomers()
@@ -83,7 +96,7 @@ const Customers = () => {
         </div>
       </div>
       <Table cols={cols} rows={customers} isLoading={isLoading} />
-      <PageNav pageCount={5} />
+      <PageNav pageCount={totalCount} />
     </Card>
   )
 }

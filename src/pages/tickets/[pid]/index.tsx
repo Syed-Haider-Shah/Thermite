@@ -1,5 +1,10 @@
 import Link from 'next/link'
-import { useParams, usePathname, useRouter } from 'next/navigation'
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams
+} from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -62,10 +67,12 @@ const Tickets = () => {
   const [rows, setRows] = useState<IChildTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showClosed, setShowClosed] = useState<boolean>(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   const { pid } = useParams() || { pid: '' }
   const pathname = usePathname()
   const router = useRouter()
+  const page = useSearchParams().get('page') || '1'
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -77,22 +84,26 @@ const Tickets = () => {
   const fetchChildTickets = useCallback(async () => {
     if (!pid) return
 
+    const pageNum = Number(page)
+
     setIsLoading(true)
     const query = supabase.from('Child').select().eq('parent_id', pid)
 
     if (showClosed) query.neq('status', 'CLOSED')
 
-    const { data, error } = await query
+    const { data, error, count } = await query
       .order('created_at', {
         ascending: false
       })
-      .limit(10)
+      .range((pageNum - 1) * 15, pageNum * 15)
 
     setIsLoading(false)
 
+    setTotalCount(count ? Math.ceil(count / 15) : 1)
+
     if (error) toast.error(error.message)
     else if (data) setRows(data)
-  }, [pid, showClosed])
+  }, [page, pid, showClosed])
 
   useEffect(() => {
     fetchChildTickets()
@@ -117,7 +128,7 @@ const Tickets = () => {
           cols={cols}
           rows={rows}
         />
-        <PageNav pageCount={5} />
+        <PageNav pageCount={totalCount} />
       </Card>
     </>
   )

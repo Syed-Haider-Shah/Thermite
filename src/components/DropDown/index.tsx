@@ -62,10 +62,10 @@ const DropDownComponent = ({
       </button>
       <div
         className={cn(
-          'absolute top-16 z-30 flex h-full w-40 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
+          'absolute top-16 z-30 flex w-40 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
           className,
           {
-            'scrollbar-primary max-h-sm overflow-y-scroll': isOpen,
+            'scrollbar-primary max-h-48 overflow-y-auto': isOpen,
             'max-h-0': !isOpen
           }
         )}

@@ -1,17 +1,15 @@
 import Link from 'next/link'
-import { useParams, usePathname, useRouter } from 'next/navigation'
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams
+} from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import {
-  Button,
-  Card,
-  FilterSelect,
-  PageNav,
-  Table,
-  UnionIcon
-} from '@/components'
+import { Button, Card, PageNav, Table, Toggle, UnionIcon } from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
@@ -64,18 +62,17 @@ const cols = [
     name: 'Serial Number'
   }
 ]
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'active', name: 'Active' },
-  { value: 'completed', name: 'Completed' }
-]
+
 const Tickets = () => {
   const [rows, setRows] = useState<IChildTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [showClosed, setShowClosed] = useState<boolean>(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   const { pid } = useParams() || { pid: '' }
   const pathname = usePathname()
   const router = useRouter()
+  const page = useSearchParams().get('page') || '1'
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -87,21 +84,26 @@ const Tickets = () => {
   const fetchChildTickets = useCallback(async () => {
     if (!pid) return
 
+    const pageNum = Number(page)
+
     setIsLoading(true)
-    const { data, error } = await supabase
-      .from('Child')
-      .select()
-      .eq('parent_id', pid)
+    const query = supabase.from('Child').select().eq('parent_id', pid)
+
+    if (showClosed) query.neq('status', 'CLOSED')
+
+    const { data, error, count } = await query
       .order('created_at', {
         ascending: false
       })
-      .limit(10)
+      .range((pageNum - 1) * 15, pageNum * 15)
 
     setIsLoading(false)
 
+    setTotalCount(count ? Math.ceil(count / 15) : 1)
+
     if (error) toast.error(error.message)
     else if (data) setRows(data)
-  }, [pid])
+  }, [page, pid, showClosed])
 
   useEffect(() => {
     fetchChildTickets()
@@ -118,7 +120,7 @@ const Tickets = () => {
               New Child Ticket
             </Button>
           </Link>
-          <FilterSelect options={OPTIONS} name="category" />
+          <Toggle onChange={setShowClosed} isChecked={showClosed} />
         </div>
         <Table
           onRowSelect={handleRowSelect}
@@ -126,7 +128,7 @@ const Tickets = () => {
           cols={cols}
           rows={rows}
         />
-        <PageNav pageCount={5} />
+        <PageNav pageCount={totalCount} />
       </Card>
     </>
   )

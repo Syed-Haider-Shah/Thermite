@@ -106,8 +106,11 @@ export interface Database {
       }
       employees: {
         Row: {
+          all_time_tickets_closed: number
           country: string | null
           created_at: string
+          email: string
+          fe_role: string
           id: string
           name: string | null
           number_of_assigned_tickets: number
@@ -115,8 +118,11 @@ export interface Database {
           role: string | null
         }
         Insert: {
+          all_time_tickets_closed?: number
           country?: string | null
           created_at?: string
+          email?: string
+          fe_role?: string
           id: string
           name?: string | null
           number_of_assigned_tickets?: number
@@ -124,8 +130,11 @@ export interface Database {
           role?: string | null
         }
         Update: {
+          all_time_tickets_closed?: number
           country?: string | null
           created_at?: string
+          email?: string
+          fe_role?: string
           id?: string
           name?: string | null
           number_of_assigned_tickets?: number
@@ -187,6 +196,72 @@ export interface Database {
           }
         ]
       }
+      water_samples: {
+        Row: {
+          comments: string | null
+          created_at: string
+          id: number
+          image: string | null
+          panel_generation: string | null
+          parent_id: number
+          real_image: string | null
+          region: string | null
+          result: string | null
+          sample_time_date: string | null
+          sample_time_date_read: string | null
+          submit_status: boolean
+          test_expiration_date: string | null
+          type: string | null
+        }
+        Insert: {
+          comments?: string | null
+          created_at?: string
+          id?: number
+          image?: string | null
+          panel_generation?: string | null
+          parent_id: number
+          real_image?: string | null
+          region?: string | null
+          result?: string | null
+          sample_time_date?: string | null
+          sample_time_date_read?: string | null
+          submit_status?: boolean
+          test_expiration_date?: string | null
+          type?: string | null
+        }
+        Update: {
+          comments?: string | null
+          created_at?: string
+          id?: number
+          image?: string | null
+          panel_generation?: string | null
+          parent_id?: number
+          real_image?: string | null
+          region?: string | null
+          result?: string | null
+          sample_time_date?: string | null
+          sample_time_date_read?: string | null
+          submit_status?: boolean
+          test_expiration_date?: string | null
+          type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'water_samples_parent_id_fkey'
+            columns: ['parent_id']
+            isOneToOne: true
+            referencedRelation: 'Parent'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'water_samples_real_image_fkey'
+            columns: ['real_image']
+            isOneToOne: false
+            referencedRelation: 'objects'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -205,15 +280,35 @@ export interface Database {
         }
         Returns: undefined
       }
+      child_status_change: {
+        Args: {
+          stat: string
+          t_id: number
+        }
+        Returns: undefined
+      }
       close_child_ticket: {
         Args: {
           c_id: number
         }
         Returns: undefined
       }
-      close_parent_ticket: {
+      close_parent_ticket_new: {
         Args: {
           par_id: number
+        }
+        Returns: undefined
+      }
+      close_parent_ticket_water_sample: {
+        Args: {
+          par_id: number
+        }
+        Returns: undefined
+      }
+      close_step_two_function: {
+        Args: {
+          par_id: number
+          cust_id: number
         }
         Returns: undefined
       }
@@ -260,6 +355,21 @@ export interface Database {
         }
         Returns: undefined
       }
+      fill_water_sample: {
+        Args: {
+          par_id: number
+          reg: string
+          panel_gen: string
+          typ: string
+          test_exp_date: string
+          samp_time_date: string
+          samp_time_date_read: string
+          reslt: string
+          img: string
+          commnts: string
+        }
+        Returns: undefined
+      }
       get_parent_tickets: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -269,7 +379,6 @@ export interface Database {
           close_date: string
           status: string
           employee: string
-          employee_id: string
           customer_id: number
           address: string
           region: string
@@ -280,6 +389,23 @@ export interface Database {
           country: string
           warranty: boolean
         }[]
+      }
+      number_of_closed_tickets: {
+        Args: {
+          user_id: string
+        }
+        Returns: undefined
+      }
+      parent_status_change: {
+        Args: {
+          stat: string
+          t_id: number
+        }
+        Returns: undefined
+      }
+      reset_all_number_of_closed_tickets: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
       }
       setup_name: {
         Args: {
@@ -310,6 +436,12 @@ export interface Database {
           warranty: boolean
         }[]
       }
+      unassign_employee: {
+        Args: {
+          par_id: number
+        }
+        Returns: undefined
+      }
       update_assigned_number_tickets: {
         Args: {
           user_id: string
@@ -329,6 +461,16 @@ export interface Database {
             }
             Returns: undefined
           }
+      update_email: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      update_fe_role: {
+        Args: {
+          employee: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

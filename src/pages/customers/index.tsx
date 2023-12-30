@@ -1,10 +1,11 @@
+import { useSearchParams } from 'next/navigation'
+
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import {
   Button,
   Card,
-  FilterSelect,
   PageNav,
   SearchBar,
   Table,
@@ -44,27 +45,40 @@ const cols = [
     name: 'Number of Panels'
   }
 ]
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'active', name: 'Active' },
-  { value: 'completed', name: 'Completed' }
-]
 
 const Customers = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
+  const [totalCount, setTotalCount] = useState<number>(0)
+
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
+  }, [])
+
+  const page = useSearchParams().get('page') || '1'
 
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true)
-    const { data: rows, error } = await supabase
-      .from('Customers')
-      .select()
-      .limit(15)
+
+    const query = supabase.from('Customers').select('*', { count: 'exact' })
+
+    if (search) query.textSearch('address', search)
+
+    const pageNum = Number(page)
+
+    const {
+      data: rows,
+      error,
+      count
+    } = await query.range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
+
+    setTotalCount(count ? Math.ceil(count / 15) : 1)
 
     if (error) toast.error(error.message)
     else if (rows) setCustomers(rows as ICustomer[])
-  }, [])
+  }, [page, search])
 
   useEffect(() => {
     fetchCustomers()
@@ -73,9 +87,8 @@ const Customers = () => {
   return (
     <Card>
       <div className="flex justify-between">
-        <SearchBar placeholder="Search for Customers" />
+        <SearchBar onSearch={handleSearch} placeholder="Search for Customers" />
         <div className="flex gap-x-2">
-          <FilterSelect options={OPTIONS} name="category" />
           <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
             <UnionIcon />
             New Customer
@@ -83,7 +96,7 @@ const Customers = () => {
         </div>
       </div>
       <Table cols={cols} rows={customers} isLoading={isLoading} />
-      <PageNav pageCount={5} />
+      <PageNav pageCount={totalCount} />
     </Card>
   )
 }

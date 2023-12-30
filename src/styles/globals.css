@@ -2,16 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body {
+html,
+body {
   @apply flex h-screen w-screen justify-center overflow-hidden bg-white p-0 antialiased outline-none;
 }
 
 #__next {
-  @apply flex h-screen w-full justify-between bg-vLightIndigo border-x border-black/5;
+  @apply flex h-screen w-full justify-between border-x border-black/5 bg-darkIndigo/5;
 }
 
 @layer components {
   .scrollbar-primary {
-    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-vLightIndigo scrollbar-thumb-rounded;
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-darkIndigo/10 scrollbar-thumb-rounded;
   }
 }

@@ -94,7 +94,7 @@ const Home = () => {
               type="submit"
               isLoading={isLoading}
               active
-              className="mt-1 w-80 p-2"
+              className="mt-3 w-80 p-2"
             >
               Sign in
             </Button>

@@ -14,8 +14,6 @@ const ProfileDetails = ({
   const pathname = usePathname()
   const edit = useSearchParams().get('edit')
 
-  console.log(!!edit)
-
   return edit ? null : (
     <Card title="profile" id="profile" className="h-min max-w-sm">
       <div className="flex w-full justify-between">

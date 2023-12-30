@@ -26,21 +26,23 @@ const TableComponent: FC<ITable> = ({
     isDate?: boolean
   ) => {
     if (isDate) return new Date(`${val}`).toDateString()
-    else if (isStatus)
+    if (isStatus)
       return (
         <span
           className={cn(
             '-ml-4 w-full rounded-full px-4 py-1.5 text-sm font-bold',
             {
               'bg-green/5 text-darkGreen/60': val === 'OPEN',
-              'bg-red/5 text-red/90': val === 'CLOSED'
+              'bg-red/5 text-red/90': val === 'CLOSED',
+              'bg-indigo/10 text-indigo/90': val === 'WATER-SAMPLE'
             }
           )}
         >
           {val}
         </span>
       )
-    else return `${val}`
+    if (!val) return '----'
+    return `${val}`
   }
 
   const rowList = useMemo(

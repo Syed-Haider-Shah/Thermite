@@ -49,9 +49,10 @@ const HeaderComponent: FC = () => {
       {showFeedback && <Feedback onBlur={handleBlurFeedback} />}
       <div className="flex items-center gap-7">
         <Bell />
-        <div className="flex items-center gap-4">
+        <div className="relative flex items-center gap-4">
           <h1 className=" text-lg font-semibold leading-6">{user.name}</h1>
           <button
+            title="user options"
             type="button"
             onBlur={handleClose}
             onClick={handleToggle}
@@ -59,7 +60,7 @@ const HeaderComponent: FC = () => {
           />
           <ul
             className={cn(
-              'absolute right-2 top-20 z-10 flex w-36 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
+              'absolute right-0 top-10 z-10 flex w-36 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
               { 'max-h-sm': isOpen, 'max-h-0': !isOpen }
             )}
           >

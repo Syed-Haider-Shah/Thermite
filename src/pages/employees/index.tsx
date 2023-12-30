@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -48,10 +48,14 @@ const ticketCols = [
   }
 ]
 
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'active', name: 'Active' },
-  { value: 'completed', name: 'Completed' }
+const COUNTIES = [
+  { name: 'All', value: 'all' },
+  { name: 'Pakistan', value: 'pakistan' },
+  { name: 'South Africa', value: 'south_africa' },
+  { name: 'Australia', value: 'Australia' },
+  { name: 'United States', value: 'united_states' },
+  { name: 'Canada', value: 'canada' },
+  { name: 'China', value: 'china' }
 ]
 
 const Employees = () => {
@@ -60,35 +64,58 @@ const Employees = () => {
   const [selectedEmp, setSelectedEmp] = useState<IEmployee | null>(null)
   const [tickets, setTickets] = useState<IRow[]>([])
   const [isLoadingTickets, setIsLoadingTickets] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
+  const [totalCount, setTotalCount] = useState<number>(0)
 
   const pathname = usePathname()
+  const country = useSearchParams().get('country')
+  const page = useSearchParams().get('page') || '1'
 
   const handleSelectRow = useCallback((row: IRow) => {
     setSelectedEmp(row as IEmployee)
   }, [])
 
+  const handleSearch = useCallback((text: string) => {
+    setSearch(text)
+  }, [])
+
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
-    const { data: rows, error } = await supabase.from('employees').select()
+
+    const query = supabase.from('employees').select()
+
+    if (country && country !== 'all') query.eq('country', country)
+
+    if (search) query.textSearch('name', search)
+
+    const pageNum = Number(page)
+
+    const {
+      data: rows,
+      error,
+      count
+    } = await query.range((pageNum - 1) * 15, pageNum * 15)
+
     setIsLoading(false)
+
+    setTotalCount(count ? Math.ceil(count / 15) : 1)
 
     if (rows) setRows(rows as IEmployee[])
     else if (error) toast.error(error.message)
-  }, [])
+  }, [country, page, search])
 
   const fetchTickets = useCallback(async () => {
     if (!selectedEmp?.name) return
 
     setIsLoadingTickets(true)
     const { data, error } = await supabase
-      .rpc('get_parent_tickets')
+      .rpc('get_parent_tickets', {}, { count: 'exact' })
       .eq('employee', selectedEmp.name)
-      .select('id, address, status, employee')
     setIsLoadingTickets(false)
 
     if (data) setTickets(data)
     else if (error) toast.error(error.message)
-  }, [selectedEmp])
+  }, [selectedEmp?.name])
 
   useEffect(() => {
     fetchEmployees()
@@ -102,9 +129,12 @@ const Employees = () => {
     <div className="flex gap-6">
       <Card className="w-1/2">
         <div className="flex justify-between">
-          <SearchBar placeholder="Search for Employees" />
+          <SearchBar
+            onSearch={handleSearch}
+            placeholder="Search for Employees"
+          />
           <div className="flex gap-x-2">
-            <FilterSelect options={OPTIONS} name="category" />
+            <FilterSelect options={COUNTIES} name="country" />
             <Link href={`${pathname}${Paths.CREATE}`}>
               <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
                 <UnionIcon />
@@ -120,7 +150,7 @@ const Employees = () => {
           isLoading={isLoading}
           onRowSelect={handleSelectRow}
         />
-        <PageNav pageCount={5} />
+        <PageNav pageCount={totalCount} />
       </Card>
       <div className="flex w-1/2 flex-col gap-6">
         {selectedEmp && (

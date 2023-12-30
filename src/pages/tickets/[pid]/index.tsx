@@ -89,7 +89,7 @@ const Tickets = () => {
     setIsLoading(true)
     const query = supabase.from('Child').select().eq('parent_id', pid)
 
-    if (showClosed) query.neq('status', 'CLOSED')
+    if (!showClosed) query.neq('status', 'CLOSED')
 
     const { data, error, count } = await query
       .order('created_at', {

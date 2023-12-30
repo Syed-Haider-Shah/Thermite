@@ -108,6 +108,7 @@ export const INITIAL_PARENT_DETAILS: IParentDetails = {
 export interface IEmployee {
   country: string | null
   created_at: string
+  image_url?: string
   id: string
   name: string | null
   number_of_assigned_tickets: number

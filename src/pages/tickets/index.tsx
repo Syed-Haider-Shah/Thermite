@@ -76,7 +76,7 @@ const Tickets = () => {
     setIsLoading(true)
     const query = supabase.rpc('get_parent_tickets', {}, { count: 'exact' })
 
-    if (showClosed) query.neq('status', 'CLOSED')
+    if (!showClosed) query.neq('status', 'CLOSED')
 
     if (search) {
       const newText = search.replaceAll(':', '\\:')

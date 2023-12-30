@@ -11,7 +11,10 @@ import { Button, Card, DropDown, FormLine } from '@/components'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
+import { uploadImage } from '@/utils/uploadFile'
 import { UpdateNameSchema, UpdatePasswordSchema } from '@/utils/yupConfig'
+
+import Avatar from './Avatar'
 
 const COUNTIES = [
   { name: 'Pakistan', value: 'pakistan' },
@@ -28,6 +31,8 @@ const ProfileEdit = () => {
   const [country, setCountry] = useState<IOption>(
     COUNTIES.find((val) => val.value === user.country) || COUNTIES[0]
   )
+
+  const [image, setImage] = useState<File | null>(null)
   const [isSavingPass, setIsSavingPass] = useState<boolean>(false)
   const [isSavingUser, setIsSavingUser] = useState<boolean>(false)
 
@@ -59,6 +64,8 @@ const ProfileEdit = () => {
     }
   })
 
+  console.log(updateErrors.name)
+
   const handleUpdatePassword = useCallback(
     async ({ password }: { password: string }) => {
       setIsSavingPass(true)
@@ -76,17 +83,29 @@ const ProfileEdit = () => {
   const handleUpdateUser = useCallback(
     async ({ name }: { name: string }) => {
       setIsSavingUser(true)
+
+      let filePath: string = ''
+      let deleteImage: () => Promise<void> = async () => {}
+      if (image) {
+        const { url, onDelete } = await uploadImage(image, 'avatars', user.id)
+        filePath = url
+        deleteImage = onDelete
+      }
+
       const { error } = await supabase.from('employees').update({
         name,
-        country: country.value
+        country: country.value,
+        image_url: filePath
       })
 
       setIsSavingUser(false)
 
-      if (error) toast.error(error.message)
-      else toast.success('Password updated successfully')
+      if (error) {
+        toast.error(error.message)
+        await deleteImage()
+      } else toast.success('Password updated successfully')
     },
-    [country.value]
+    [country.value, image, user.id]
   )
 
   return (
@@ -106,14 +125,15 @@ const ProfileEdit = () => {
           onSubmit={handleUpdateSubmit(handleUpdateUser)}
           className="flex flex-wrap items-center gap-x-6 rounded-5 bg-lightGray p-4"
         >
+          <Avatar avatarUrl={user.image_url || ''} setAvatar={setImage} />
           <FormLine
+            title="Name"
             className="w-80"
             id="name"
-            {...registerUpdate('name')}
             error={updateErrors.name?.message}
             required
             primary
-            title="Name"
+            {...registerUpdate('name')}
           />
           <DropDown
             title="Country"
@@ -123,7 +143,12 @@ const ProfileEdit = () => {
             options={COUNTIES}
             className="w-80"
           />
-          <Button isLoading={isSavingUser} className="py-2" active>
+          <Button
+            type="submit"
+            isLoading={isSavingUser}
+            className="py-2"
+            active
+          >
             Update Details
           </Button>
         </form>

@@ -112,6 +112,7 @@ export interface Database {
           email: string
           fe_role: string
           id: string
+          image_url: string
           name: string | null
           number_of_assigned_tickets: number
           number_of_closed_tickets: number
@@ -124,6 +125,7 @@ export interface Database {
           email?: string
           fe_role?: string
           id: string
+          image_url?: string
           name?: string | null
           number_of_assigned_tickets?: number
           number_of_closed_tickets?: number
@@ -136,6 +138,7 @@ export interface Database {
           email?: string
           fe_role?: string
           id?: string
+          image_url?: string
           name?: string | null
           number_of_assigned_tickets?: number
           number_of_closed_tickets?: number

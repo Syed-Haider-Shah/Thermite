@@ -39,5 +39,6 @@ export {
   Forms,
   Softwares,
   Tickets,
+  RightArrow,
   Customers
 } from './Icons'

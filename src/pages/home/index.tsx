@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
+import { RightArrow } from '@/components'
+
 export default function Home() {
   return (
     <>
@@ -23,10 +25,12 @@ export default function Home() {
             <div className="flex justify-center px-8 text-xs text-white">
               <Link
                 href="/"
-                className="bg-loadBlue  flex w-[70%] justify-between rounded-5 p-3 px-8 font-bold hover:shadow-xl"
+                className="bg-loadBlue flex w-[80%] justify-between gap-2 rounded-5 p-3 px-8 font-bold hover:shadow-xl"
               >
-                <div>TAKE ME TO TICKETS</div>
-                <div>LL</div>
+                <div className="">TAKE ME TO TICKETS</div>
+                <div className="">
+                  <RightArrow />
+                </div>
               </Link>
             </div>
             <div className="flex justify-center gap-16 border-t-2 border-vLightIndigo text-xs text-gray">
@@ -139,7 +143,7 @@ export default function Home() {
                   <div className="text-sm">BROKEN HILL</div>
                   <div className="flex items-center">
                     <div className="flex w-full bg-loadGray">
-                      <div className="h-1 w-[30%] bg-red"></div>
+                      <div className="h-1 w-[30%] bg-red/80"></div>
                     </div>
                     <div className="px-2 text-xs text-gray">30%</div>
                   </div>

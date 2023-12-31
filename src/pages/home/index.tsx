@@ -168,8 +168,10 @@ export default function Home() {
                     <div className="text-xs text-white">Submitted/Closed%</div>
                   </div>
                   <div className="flex w-[50%] flex-col items-center justify-center">
-                    <div className="text-lg font-bold text-white">30%</div>
-                    <div className="text-xs text-white">Submitted/Closed%</div>
+                    <div className="text-lg font-bold text-white">430</div>
+                    <div className="text-xs text-white">
+                      Filter Tickets Available
+                    </div>
                   </div>
                 </div>
               </div>

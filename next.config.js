@@ -9,6 +9,14 @@ const nextConfig = {
     ANON_KEY: process.env.ANON_KEY,
     SERVICE_ROLE: process.env.SERVICE_ROLE
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_SUPABASE_DOMAIN
+      }
+    ]
+  },
   trailingSlash: false
 }
 

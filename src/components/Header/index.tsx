@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { FC, useCallback, useState } from 'react'
 
-import { Bell, Button } from '@/components'
+import { AvatarImage, Bell, Button } from '@/components'
 import { Paths } from '@/constants'
 import Feedback from '@/containers/Feedback'
 import { useAuth } from '@/context/AuthContext'
@@ -57,7 +57,9 @@ const HeaderComponent: FC = () => {
             onBlur={handleClose}
             onClick={handleToggle}
             className="h-9 w-9 rounded-full bg-darkIndigo"
-          />
+          >
+            <AvatarImage avatarSrc={user.image_url} size="w-9 h-9" />
+          </button>
           <ul
             className={cn(
               'absolute right-0 top-10 z-10 flex w-36 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',

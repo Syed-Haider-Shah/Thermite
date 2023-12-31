@@ -64,8 +64,6 @@ const ProfileEdit = () => {
     }
   })
 
-  console.log(updateErrors.name)
-
   const handleUpdatePassword = useCallback(
     async ({ password }: { password: string }) => {
       setIsSavingPass(true)
@@ -87,23 +85,34 @@ const ProfileEdit = () => {
       let filePath: string = ''
       let deleteImage: () => Promise<void> = async () => {}
       if (image) {
-        const { url, onDelete } = await uploadImage(image, 'avatars', user.id)
+        const { url, onDelete, error } = await uploadImage(
+          image,
+          'avatars',
+          user.id
+        )
+        if (error) {
+          setIsSavingUser(false)
+          return
+        }
         filePath = url
         deleteImage = onDelete
       }
 
-      const { error } = await supabase.from('employees').update({
-        name,
-        country: country.value,
-        image_url: filePath
-      })
+      const { error } = await supabase
+        .from('employees')
+        .update({
+          name,
+          country: country.value,
+          image_url: filePath
+        })
+        .eq('id', user.id)
 
       setIsSavingUser(false)
 
       if (error) {
         toast.error(error.message)
         await deleteImage()
-      } else toast.success('Password updated successfully')
+      } else toast.success('Profile updated successfully')
     },
     [country.value, image, user.id]
   )

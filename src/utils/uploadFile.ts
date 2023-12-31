@@ -28,6 +28,7 @@ export const uploadImage = async (
     }
 
   return {
+    error,
     url: '',
     onDelete: async () => {}
   }

@@ -30,7 +30,8 @@ module.exports = {
         sm: '42.188rem', // 670px
         md: '47.688rem', // 763px
         lg: '50.125rem', // 802px
-        261: '64.0rem' //1044px
+        261: '64.0rem', //1044px
+        form: '84.0rem' //
       },
       minWidth: {
         55: '13.75rem', // 220px

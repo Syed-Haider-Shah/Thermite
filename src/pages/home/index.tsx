@@ -12,7 +12,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="ml-10">
-        <div className="text-xl font-bold">Analytics / Reporting</div>
+        <div className="text-xl font-bold text-darkIndigo">
+          Analytics / Reporting
+        </div>
         <div className="mb-2 text-sm text-gray">App Activities at a Glance</div>
       </div>
       <div className="flex h-md">

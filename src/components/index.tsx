@@ -40,5 +40,6 @@ export {
   Softwares,
   Tickets,
   RightArrow,
-  Customers
+  Customers,
+  WaterVial
 } from './Icons'

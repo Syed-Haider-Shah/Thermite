@@ -62,7 +62,8 @@ module.exports = {
       margin: {
         9.5: '2.375rem', // 38px
         34: '8.5rem', // 136px
-        15: '3.75rem' // 60px
+        15: '3.75rem', // 60px
+        20: '5.0rem' //80px
       },
       padding: {
         0.25: '0.063rem', // 1px

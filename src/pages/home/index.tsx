@@ -12,7 +12,7 @@ export default function Home() {
         <div className="text-xl font-bold">Analytics / Reporting</div>
         <div className="text-sm text-gray">App Activities at a Glance</div>
       </div>
-      <div className="h-200 ml-10 mt-2 flex w-62 flex-col gap-5">
+      <div className="ml-10 mt-2 flex h-200 w-62 flex-col gap-5">
         <section className="flex h-full w-full flex-col justify-between bg-white shadow-xl">
           <div className="mt-15 flex flex-col items-center justify-center">
             <div className="text-xl font-bold">23</div>
@@ -30,7 +30,7 @@ export default function Home() {
                 <div>Assigned Tickets:</div>
                 <div className="font-bold text-black">23</div>
               </div>
-              <div className="bg-loadGray flex w-full">
+              <div className="flex w-full bg-loadGray">
                 <div className="h-1 w-[75%] bg-indigo"></div>
               </div>
             </div>
@@ -39,8 +39,8 @@ export default function Home() {
                 <div>Closed Tickets:</div>
                 <div className="font-bold text-black">12</div>
               </div>
-              <div className="bg-loadGray flex w-full">
-                <div className="bg-loadYellow h-1 w-[60%]"></div>
+              <div className="flex w-full bg-loadGray">
+                <div className="h-1 w-[60%] bg-loadYellow"></div>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@ export default function Home() {
             </div>
             <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
               <div className="flex items-center gap-2">
-                <div className="bg-loadGreen flex h-4 w-4 items-center justify-center rounded-5">
+                <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-loadGreen">
                   <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
                 </div>
                 <div className="font-bold">Water Sample Required</div>
@@ -73,7 +73,7 @@ export default function Home() {
             </div>
             <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
               <div className="flex items-center gap-2">
-                <div className="bg-loadYellow flex h-4 w-4 items-center justify-center rounded-5">
+                <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-loadYellow">
                   <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
                 </div>
                 <div className="font-bold">Closed Tickets</div>

@@ -29,7 +29,8 @@ module.exports = {
         110: '27.5rem', // 440px
         sm: '42.188rem', // 670px
         md: '47.688rem', // 763px
-        lg: '50.125rem' // 802px
+        lg: '50.125rem', // 802px
+        261: '64.0rem' //1044px
       },
       minWidth: {
         55: '13.75rem', // 220px
@@ -54,6 +55,7 @@ module.exports = {
         0.5: '0.125rem', // 2px
         18: '4.5rem', //72px
         50.5: '12.625rem', //202px
+        176: '44.0rem', //704px
         200: '50.0rem', //400px
         md: '44.688rem' // 715px
       },
@@ -157,7 +159,8 @@ module.exports = {
       //loading
       loadGray: '#E2E8F0',
       loadYellow: '#facc15',
-      loadGreen: '#84cc16'
+      loadGreen: '#22c55e',
+      loadBlue: '#3b82f6'
     }
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],

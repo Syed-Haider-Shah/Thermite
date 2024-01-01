@@ -1,9 +1,9 @@
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { FormEvent, useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button, SearchBar, Table } from '@/components'
+import { Button, PageNav, SearchBar, Table } from '@/components'
 import { Paths } from '@/constants'
 import { Modal } from '@/containers'
 import { supabase } from '@/services/supabase'
@@ -30,6 +30,7 @@ const CreateParentTicket = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
   const [selectedRow, setSelectedRow] = useState<ICustomer>()
   const [search, setSearch] = useState<string>('')
+  const [pageCount, setPageCount] = useState<number>(1)
 
   const handleClose = useCallback(() => {
     router.push(Paths.TICKET)
@@ -39,19 +40,26 @@ const CreateParentTicket = () => {
     setSearch(text)
   }, [])
 
+  const page = useSearchParams().get('page') || '1'
+
   const fetchCustomers = useCallback(async () => {
     setIsLoading(true)
-
-    const query = supabase.from('Customers').select()
+    const pageNum = Number(page)
+    const query = supabase.from('Customers').select('*', { count: 'exact' })
 
     if (search) query.textSearch('address', search)
 
-    const { data: rows, error } = await query.limit(15)
+    const {
+      data: rows,
+      error,
+      count
+    } = await query.range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
 
+    setPageCount(count ? Math.ceil(count / 15) : 1)
     if (error) toast.error(error.message)
     else if (rows) setCustomers(rows as ICustomer[])
-  }, [search])
+  }, [page, search])
 
   const handleRowSelect = useCallback((val: IRow) => {
     setSelectedRow(val as ICustomer)
@@ -100,6 +108,7 @@ const CreateParentTicket = () => {
           </div>
         )}
       </form>
+      <PageNav pageCount={pageCount} />
     </Modal>
   )
 }

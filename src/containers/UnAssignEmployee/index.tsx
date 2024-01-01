@@ -4,6 +4,7 @@ import { memo, useCallback, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Button } from '@/components'
+import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 
 import Modal from '../Modal'
@@ -18,11 +19,17 @@ const UnAssignedEmployee = ({
   const [showModal, setShowModal] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  const { user } = useAuth()
+
   const { pid } = useParams() || { pid: '' }
 
   const handleBlur = () => {
     setShowModal(false)
   }
+
+  const handleOpen = useCallback(() => {
+    if (user.role && (user.role === 'admin' || 'superuser')) setShowModal(true)
+  }, [user.role])
 
   const handleUnAssignEmployee = useCallback(async () => {
     if (!pid) return
@@ -39,10 +46,7 @@ const UnAssignedEmployee = ({
 
   return (
     <>
-      <Button
-        onClick={() => setShowModal((val) => !val)}
-        className="rounded-sm border p-1"
-      >
+      <Button onClick={handleOpen} className="rounded-sm border p-1">
         {name}
       </Button>
       <Modal

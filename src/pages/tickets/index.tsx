@@ -96,8 +96,6 @@ const Tickets = () => {
       .range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
 
-    console.log(count)
-
     setTotalCount(count ? Math.ceil(count / 15) : 1)
 
     if (error) toast.error(error.message)

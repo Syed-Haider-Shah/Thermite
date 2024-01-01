@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { AvatarImage } from '@/components'
 
@@ -15,6 +16,12 @@ const Avatar = ({ avatarUrl, setAvatar }: IAvatar) => {
   }, [avatarUrl])
 
   const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // If file is larger than 2MBs throw error
+    if (e.target.files && e.target.files[0]?.size > 2097152) {
+      toast.error('File is too big')
+      return
+    }
+
     const imgFile = e.target.files?.[0]
     if (imgFile) {
       setAvatar(imgFile)

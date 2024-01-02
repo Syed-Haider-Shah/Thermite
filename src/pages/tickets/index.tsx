@@ -79,8 +79,7 @@ const Tickets = () => {
     if (!showClosed) query.neq('status', 'CLOSED')
 
     if (search) {
-      const newText = search.replaceAll(':', '\\:')
-      query.textSearch('address', newText)
+      query.ilike('address', `%${search}%`)
     }
 
     const pageNum = Number(page)

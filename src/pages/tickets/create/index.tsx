@@ -47,7 +47,7 @@ const CreateParentTicket = () => {
     const pageNum = Number(page)
     const query = supabase.from('Customers').select('*', { count: 'exact' })
 
-    if (search) query.textSearch('address', search)
+    if (search) query.ilike('address', `%${search}%`)
 
     const {
       data: rows,

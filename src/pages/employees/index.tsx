@@ -86,7 +86,7 @@ const Employees = () => {
 
     if (country && country !== 'all') query.eq('country', country)
 
-    if (search) query.textSearch('name', search)
+    if (search) query.ilike('name', `%${search}%`)
 
     const pageNum = Number(page)
 

@@ -50,7 +50,7 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
 
     const query = supabase.from('employees').select()
 
-    if (search) query.textSearch('', search)
+    if (search) query.ilike('', `%${search}%`)
 
     const { data: rows, error } = await query
 

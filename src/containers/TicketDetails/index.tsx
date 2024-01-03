@@ -9,6 +9,7 @@ import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
 import { cn } from '@/utils/cn'
 
 import AssignEmployee from '../AssignEmployee'
+import UnAssignedEmployee from '../UnAssignEmployee'
 
 const DETAILS_FIELD = [
   {
@@ -135,7 +136,12 @@ const TicketDetails = () => {
             <LineItem
               title="Employee"
               item={
-                details['employee'] || (
+                details['employee'] ? (
+                  <UnAssignedEmployee
+                    name={details['employee']}
+                    fetchDetails={fetchDetails}
+                  />
+                ) : (
                   <AssignEmployee fetchDetails={fetchDetails} />
                 )
               }

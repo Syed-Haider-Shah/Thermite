@@ -20,7 +20,9 @@ export interface Database {
           fault: string
           id: number
           parent_id: number
+          parts: string
           problem: string | null
+          resolution: string
           serial_number: string
           status: string
           upgrade: boolean
@@ -35,7 +37,9 @@ export interface Database {
           fault?: string
           id?: number
           parent_id: number
+          parts?: string
           problem?: string | null
+          resolution?: string
           serial_number?: string
           status?: string
           upgrade?: boolean
@@ -50,7 +54,9 @@ export interface Database {
           fault?: string
           id?: number
           parent_id?: number
+          parts?: string
           problem?: string | null
+          resolution?: string
           serial_number?: string
           status?: string
           upgrade?: boolean
@@ -112,6 +118,7 @@ export interface Database {
           email: string
           fe_role: string
           id: string
+          image_url: string
           name: string | null
           number_of_assigned_tickets: number
           number_of_closed_tickets: number
@@ -124,6 +131,7 @@ export interface Database {
           email?: string
           fe_role?: string
           id: string
+          image_url?: string
           name?: string | null
           number_of_assigned_tickets?: number
           number_of_closed_tickets?: number
@@ -136,6 +144,7 @@ export interface Database {
           email?: string
           fe_role?: string
           id?: string
+          image_url?: string
           name?: string | null
           number_of_assigned_tickets?: number
           number_of_closed_tickets?: number
@@ -209,7 +218,6 @@ export interface Database {
           result: string | null
           sample_time_date: string | null
           sample_time_date_read: string | null
-          submit_status: boolean
           test_expiration_date: string | null
           type: string | null
         }
@@ -225,7 +233,6 @@ export interface Database {
           result?: string | null
           sample_time_date?: string | null
           sample_time_date_read?: string | null
-          submit_status?: boolean
           test_expiration_date?: string | null
           type?: string | null
         }
@@ -241,7 +248,6 @@ export interface Database {
           result?: string | null
           sample_time_date?: string | null
           sample_time_date_read?: string | null
-          submit_status?: boolean
           test_expiration_date?: string | null
           type?: string | null
         }
@@ -293,7 +299,7 @@ export interface Database {
         }
         Returns: undefined
       }
-      close_parent_ticket_new: {
+      close_parent_ticket: {
         Args: {
           par_id: number
         }
@@ -328,20 +334,37 @@ export interface Database {
         Args: Record<PropertyKey, never>
         Returns: number
       }
-      create_child_ticket: {
-        Args: {
-          parentid: number
-          problem: string
-          fault: string
-          serial: string
-          customerimpact: boolean
-          customerinquiry: boolean
-          upgrade: boolean
-          datecreated: string
-          description: string
-        }
-        Returns: undefined
-      }
+      create_child_ticket:
+        | {
+            Args: {
+              parentid: number
+              problem: string
+              fault: string
+              serial: string
+              customerimpact: boolean
+              customerinquiry: boolean
+              upgrade: boolean
+              datecreated: string
+              description: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              parentid: number
+              problem: string
+              fault: string
+              serial: string
+              customerimpact: boolean
+              customerinquiry: boolean
+              upgrade: boolean
+              datecreated: string
+              description: string
+              res: string
+              part: string
+            }
+            Returns: undefined
+          }
       create_parent_ticket: {
         Args: {
           cus_id: number

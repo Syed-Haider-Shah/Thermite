@@ -56,6 +56,7 @@ export const UpdatePasswordSchema = yup.object().shape({
   password: yup
     .string()
     .password()
+    .min(8, 'Password must be at least 8 characters')
     .minRepeating(3, 'Repeated characters are not allowed')
     .required('Please input your password'),
   confirm: yup

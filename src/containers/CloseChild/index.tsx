@@ -14,16 +14,11 @@ import { CloseChildSchema } from '@/utils/yupConfig'
 const FAULTS = [{ name: 'Fault', value: '' }]
 const PARTS = [{ name: 'Parts', value: '' }]
 const RESOLUTIONS = [{ name: 'Resolution', value: '' }]
-const STATUS = [
-  { name: 'Close', value: 'CLOSED' },
-  { name: 'Waiting for Parts', value: 'PARTS' }
-]
 
 const CloseChild = () => {
   const [fault, setFault] = useState<IOption>(FAULTS[0])
   const [part, setPart] = useState<IOption>(PARTS[0])
   const [resolution, setResolution] = useState<IOption>(RESOLUTIONS[0])
-  const [status, setStatus] = useState<IOption>(STATUS[0])
   const [isSaving, setIsSaving] = useState<boolean>(false)
 
   const { cid } = useParams() || { cid: '' }
@@ -79,13 +74,6 @@ const CloseChild = () => {
         value={resolution}
         setValue={setResolution}
         options={RESOLUTIONS}
-        className="w-80"
-      />
-      <DropDown
-        title="Status"
-        value={status}
-        setValue={setStatus}
-        options={STATUS}
         className="w-80"
       />
       <TextArea

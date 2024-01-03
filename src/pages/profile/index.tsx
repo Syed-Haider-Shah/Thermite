@@ -67,7 +67,7 @@ const Profile = () => {
 
     const query = supabase.rpc('get_parent_tickets').eq('employee', user.name)
 
-    if (search) query.textSearch('address', search)
+    if (search) query.ilike('address', `%${search}%`)
 
     const { data, error } = await query
     setIsLoading(false)

@@ -76,11 +76,10 @@ const Tickets = () => {
     setIsLoading(true)
     const query = supabase.rpc('get_parent_tickets', {}, { count: 'exact' })
 
-    if (showClosed) query.neq('status', 'CLOSED')
+    if (!showClosed) query.neq('status', 'CLOSED')
 
     if (search) {
-      const newText = search.replaceAll(':', '\\:')
-      query.textSearch('address', newText)
+      query.ilike('address', `%${search}%`)
     }
 
     const pageNum = Number(page)
@@ -95,8 +94,6 @@ const Tickets = () => {
       })
       .range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
-
-    console.log(count)
 
     setTotalCount(count ? Math.ceil(count / 15) : 1)
 

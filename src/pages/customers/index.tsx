@@ -63,7 +63,7 @@ const Customers = () => {
 
     const query = supabase.from('Customers').select('*', { count: 'exact' })
 
-    if (search) query.textSearch('address', search)
+    if (search) query.ilike('address', `%${search}%`)
 
     const pageNum = Number(page)
 

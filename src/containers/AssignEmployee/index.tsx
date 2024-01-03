@@ -1,6 +1,6 @@
 import { useParams } from 'next/navigation'
 
-import { useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Button, SearchBar, Table } from '@/components'
@@ -50,7 +50,7 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
 
     const query = supabase.from('employees').select()
 
-    if (search) query.textSearch('', search)
+    if (search) query.ilike('', `%${search}%`)
 
     const { data: rows, error } = await query
 
@@ -118,4 +118,4 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
   )
 }
 
-export default AssignEmployee
+export default memo(AssignEmployee)

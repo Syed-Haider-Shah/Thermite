@@ -17,6 +17,7 @@ interface IFormLine extends InputHTMLAttributes<HTMLInputElement> {
   value?: string
   primary?: string | boolean
   secondary?: boolean
+  cusForm?: boolean
   required?: boolean
   disabled?: boolean
   error?: string | boolean
@@ -37,6 +38,7 @@ const FormLineComponent: ForwardRefRenderFunction<
     value,
     primary,
     secondary,
+    cusForm,
     required,
     disabled,
     error,
@@ -54,7 +56,8 @@ const FormLineComponent: ForwardRefRenderFunction<
         'relative mb-5 flex flex-col gap-y-1 text-xl font-semibold leading-6 text-black/60',
         {
           'text-sm leading-4 text-black/60': secondary,
-          'text-sm leading-4 text-black/90': primary
+          'text-sm leading-4 text-black/90': primary,
+          absol: cusForm
         }
       )}
     >
@@ -66,11 +69,12 @@ const FormLineComponent: ForwardRefRenderFunction<
       )}
       <input
         className={cn(
-          'rounded-full bg-black/5 p-3 text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
+          'rounded-full bg-black/5 text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
           {
             'rounded-md border border-heavyGray': secondary,
             'rounded-md border border-heavyGray bg-white/40 px-2 py-2.25':
-              primary
+              primary,
+            '-translate-y-3 rounded bg-transparent px-4 font-light': cusForm
           },
           className
         )}

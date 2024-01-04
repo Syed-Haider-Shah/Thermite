@@ -11,6 +11,8 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
   const searchParams = useSearchParams()
   const page = searchParams.get('page') || '1'
   const pathname = usePathname()
+  const x = Number(page) + 2 > count ? Number(page) + 2 - count : 0
+  const start = Number(page) > 3 ? Number(page) - 2 - x : 1
 
   const handlePageSelect = useCallback(
     (val: number) => {
@@ -54,8 +56,8 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
       >
         Prev
       </Link>
-      {[...Array(count)].map((e, val) => {
-        const pageVal = val + 1
+      {[...Array(count > 5 ? 5 : count)].map((e, val) => {
+        const pageVal = val + start
         return (
           <Link
             key={pageVal}
@@ -63,9 +65,8 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
               pathname,
               query: handlePageSelect(pageVal)
             }}
-            className={cn('rounded px-1 pt-1 font-semibold', {
-              'border border-darkGray text-black': `${pageVal}` === page,
-              'text-black/50': `${pageVal}` !== page
+            className={cn('rounded px-1 pt-1 font-semibold text-black/50', {
+              'border border-darkGray text-black': `${pageVal}` === page
             })}
           >
             {pageVal}

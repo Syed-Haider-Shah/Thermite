@@ -9,7 +9,15 @@ import {
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button, Card, PageNav, Table, Toggle, UnionIcon } from '@/components'
+import {
+  Button,
+  Card,
+  FilterSelect,
+  PageNav,
+  Table,
+  Toggle,
+  UnionIcon
+} from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
@@ -63,6 +71,17 @@ const cols = [
   }
 ]
 
+const STATUS_OPTIONS = [
+  {
+    name: 'Open',
+    value: 'OPEN'
+  },
+  {
+    name: 'Closed',
+    value: 'CLOSED'
+  }
+]
+
 const Tickets = () => {
   const [rows, setRows] = useState<IChildTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -72,7 +91,18 @@ const Tickets = () => {
   const { pid } = useParams() || { pid: '' }
   const pathname = usePathname()
   const router = useRouter()
-  const page = useSearchParams().get('page') || '1'
+  const searchParam = useSearchParams()
+
+  const page = searchParam.get('page') || '1'
+  const status = searchParam.get('status') || ''
+
+  const handleToggle = useCallback(
+    (val: boolean) => {
+      router.push(pathname)
+      setShowClosed(val)
+    },
+    [pathname, router]
+  )
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -89,7 +119,8 @@ const Tickets = () => {
     setIsLoading(true)
     const query = supabase.from('Child').select().eq('parent_id', pid)
 
-    if (!showClosed) query.neq('status', 'CLOSED')
+    if (status) query.eq('status', status)
+    else if (!showClosed) query.neq('status', 'CLOSED')
 
     const { data, error, count } = await query
       .order('created_at', {
@@ -103,7 +134,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (data) setRows(data)
-  }, [page, pid, showClosed])
+  }, [page, pid, showClosed, status])
 
   useEffect(() => {
     fetchChildTickets()
@@ -112,14 +143,15 @@ const Tickets = () => {
   return (
     <div className="flex gap-7">
       <Card>
-        <div className="flex flex-row-reverse">
+        <div className="flex flex-row-reverse gap-2">
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />
               New Child Ticket
             </Button>
           </Link>
-          <Toggle onChange={setShowClosed} isChecked={showClosed} />
+          <FilterSelect options={STATUS_OPTIONS} name="status" />
+          <Toggle onChange={handleToggle} isChecked={showClosed} />
         </div>
         <Table
           onRowSelect={handleRowSelect}

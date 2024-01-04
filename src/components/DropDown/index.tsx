@@ -1,4 +1,4 @@
-import { Dispatch, memo, SetStateAction, useCallback, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
 import { ChevronDownIcon } from '@/components'
 import { IOption } from '@/types/model'
@@ -85,4 +85,4 @@ const DropDownComponent = ({
   )
 }
 
-export default memo(DropDownComponent)
+export default DropDownComponent

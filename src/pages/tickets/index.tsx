@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import {
   Button,
   Card,
+  FilterSelect,
   PageNav,
   SearchBar,
   Table,
@@ -49,6 +50,21 @@ const cols = [
   }
 ]
 
+const STATUS_OPTIONS = [
+  {
+    name: 'Open',
+    value: 'OPEN'
+  },
+  {
+    name: 'Closed',
+    value: 'CLOSED'
+  },
+  {
+    name: 'Water Sample',
+    value: 'WATER_SAMPLE'
+  }
+]
+
 const Tickets = () => {
   const [tickets, setTickets] = useState<IParentTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -59,6 +75,14 @@ const Tickets = () => {
   const router = useRouter()
   const pathname = usePathname()
 
+  const handleToggle = useCallback(
+    (val: boolean) => {
+      router.push(pathname)
+      setShowClosed(val)
+    },
+    [pathname, router]
+  )
+
   const handleRowSelect = useCallback(
     (row: IRow) => {
       router.push(`${Paths.TICKET}/${row.id}`)
@@ -66,7 +90,10 @@ const Tickets = () => {
     [router]
   )
 
-  const page = useSearchParams().get('page') || '1'
+  const searchParam = useSearchParams()
+
+  const page = searchParam.get('page') || '1'
+  const status = searchParam.get('status') || ''
 
   const handleSearch = useCallback((text: string) => {
     setSearch(text)
@@ -76,7 +103,8 @@ const Tickets = () => {
     setIsLoading(true)
     const query = supabase.rpc('get_parent_tickets', {}, { count: 'exact' })
 
-    if (!showClosed) query.neq('status', 'CLOSED')
+    if (status) query.eq('status', status)
+    else if (!showClosed) query.neq('status', 'CLOSED')
 
     if (search) {
       query.ilike('address', `%${search}%`)
@@ -99,7 +127,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (rows) setTickets(rows as IParentTicket[])
-  }, [page, search, showClosed])
+  }, [page, search, showClosed, status])
 
   useEffect(() => {
     fetchTickets()
@@ -110,7 +138,8 @@ const Tickets = () => {
       <div className="flex justify-between">
         <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
         <div className="flex gap-x-2">
-          <Toggle onChange={setShowClosed} isChecked={showClosed} />
+          <Toggle onChange={handleToggle} isChecked={showClosed} />
+          <FilterSelect options={STATUS_OPTIONS} name="status" />
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />

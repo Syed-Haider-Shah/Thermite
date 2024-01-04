@@ -26,8 +26,8 @@ export default function Home() {
             </div>
             <div className="flex justify-center px-8 text-xs text-white">
               <Link
-                href="/"
-                className="bg-loadBlue flex w-[80%] justify-between gap-2 rounded-5 p-3 px-8 font-bold hover:shadow-xl"
+                href="/tickets"
+                className="flex w-[80%] justify-between gap-2 rounded-5 bg-loadBlue p-3 px-8 font-bold hover:shadow-xl"
               >
                 <div className="">TAKE ME TO TICKETS</div>
                 <div className="">
@@ -98,7 +98,7 @@ export default function Home() {
             </div>
           </section>
         </div>
-        <div className="w-261 ml-5 flex h-full flex-col gap-5">
+        <div className="ml-5 flex h-full w-261 flex-col gap-5">
           <section className="flex h-full w-full justify-between bg-white shadow-xl">
             <div className="h-full w-[60%]">
               <div className="p-12 pt-10 text-gray">
@@ -118,7 +118,7 @@ export default function Home() {
                   <div className="text-sm">LIGHTNING RIDGE</div>
                   <div className="flex items-center">
                     <div className="flex w-full bg-loadGray">
-                      <div className="bg-loadBlue h-1 w-[70%]"></div>
+                      <div className="h-1 w-[70%] bg-loadBlue"></div>
                     </div>
                     <div className="px-2 text-xs text-gray">70%</div>
                   </div>
@@ -153,7 +153,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex h-full w-[40%] items-center justify-center">
-              <div className="bg-loadBlue flex h-[95%] w-[95%] flex-col justify-between overflow-hidden rounded-md">
+              <div className="flex h-[95%] w-[95%] flex-col justify-between overflow-hidden rounded-md bg-loadBlue">
                 <Link
                   href="/"
                   className=" m-2 flex items-center justify-center rounded-md bg-white/10 p-4 text-white hover:shadow-lg"

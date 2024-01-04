@@ -110,10 +110,9 @@ const Tickets = () => {
   }, [fetchChildTickets])
 
   return (
-    <>
-      <TicketDetails />
+    <div className="flex gap-7">
       <Card>
-        <div className="flex flex-row-reverse gap-2">
+        <div className="flex flex-row-reverse">
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />
@@ -130,7 +129,8 @@ const Tickets = () => {
         />
         <PageNav pageCount={totalCount} />
       </Card>
-    </>
+      <TicketDetails />
+    </div>
   )
 }
 export default Tickets

@@ -109,7 +109,7 @@ const Employees = () => {
 
     setIsLoadingTickets(true)
     const { data, error } = await supabase
-      .rpc('get_parent_tickets', {}, { count: 'exact' })
+      .rpc('get_parent_tickets')
       .eq('employee', selectedEmp.name)
     setIsLoadingTickets(false)
 

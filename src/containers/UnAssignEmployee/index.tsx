@@ -50,8 +50,8 @@ const UnAssignedEmployee = ({
         {name}
       </Button>
       <Modal
-        title="UnAssign Employee"
-        className="min-h-0 min-w-0 max-w-sm gap-4 p-4"
+        title="Unassign Employee"
+        className="!min-h-0 min-w-0 max-w-sm gap-4 p-4"
         showModal={showModal}
         onClose={handleBlur}
       >

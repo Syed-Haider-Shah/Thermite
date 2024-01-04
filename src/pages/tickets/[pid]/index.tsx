@@ -15,7 +15,6 @@ import {
   FilterSelect,
   PageNav,
   Table,
-  Toggle,
   UnionIcon
 } from '@/components'
 import { Paths } from '@/constants'
@@ -80,13 +79,20 @@ const STATUS_OPTIONS = [
   {
     name: 'Closed',
     value: 'CLOSED'
+  },
+  {
+    name: 'Waiting for Parts',
+    value: 'PARTS'
+  },
+  {
+    name: 'Decision',
+    value: 'DECISION'
   }
 ]
 
 const Tickets = () => {
   const [rows, setRows] = useState<IChildTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [showClosed, setShowClosed] = useState<boolean>(false)
   const [totalCount, setTotalCount] = useState<number>(0)
 
   const { pid } = useParams() || { pid: '' }
@@ -96,14 +102,6 @@ const Tickets = () => {
 
   const page = searchParam.get('page') || '1'
   const status = searchParam.get('status') || ''
-
-  const handleToggle = useCallback(
-    (val: boolean) => {
-      router.push(pathname)
-      setShowClosed(val)
-    },
-    [pathname, router]
-  )
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -124,7 +122,6 @@ const Tickets = () => {
       .eq('parent_id', pid)
 
     if (status) query.eq('status', status)
-    else if (!showClosed) query.neq('status', 'CLOSED')
 
     const { data, error, count } = await query
       .order('created_at', {
@@ -138,7 +135,7 @@ const Tickets = () => {
 
     if (error) toast.error(error.message)
     else if (data) setRows(data)
-  }, [page, pid, showClosed, status])
+  }, [page, pid, status])
 
   useEffect(() => {
     fetchChildTickets()
@@ -155,7 +152,6 @@ const Tickets = () => {
             </Button>
           </Link>
           <FilterSelect options={STATUS_OPTIONS} name="status" />
-          <Toggle onChange={handleToggle} isChecked={showClosed} />
         </div>
         <Table
           onRowSelect={handleRowSelect}

@@ -30,6 +30,7 @@ const FilterSelect = ({ options, className, name }: IDropDown) => {
     (value: string) => {
       const params = new URLSearchParams(searchParams)
       params.set(name, value)
+      if (searchParams.get('page')) params.set('page', '1')
       return params.toString()
     },
     [name, searchParams]
@@ -57,10 +58,10 @@ const FilterSelect = ({ options, className, name }: IDropDown) => {
       </button>
       <ul
         className={cn(
-          'absolute z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
+          'absolute z-30 flex flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300',
           className || 'w-40',
           {
-            'scrollbar-primary max-h-48 overflow-y-scroll': isOpen,
+            'scrollbar-primary max-h-48 overflow-y-auto shadow-sm': isOpen,
             'max-h-0': !isOpen
           }
         )}

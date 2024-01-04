@@ -1,4 +1,4 @@
-import { Dispatch, memo, SetStateAction, useCallback, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
 import { ChevronDownIcon } from '@/components'
 import { IOption } from '@/types/model'
@@ -38,12 +38,12 @@ const DropDownComponent = ({
   return (
     <div
       className={cn(
-        'relative mb-5 w-40 text-sm font-medium text-black/60',
+        'relative mb-5 w-40 text-sm font-medium text-darkIndigo/60',
         className
       )}
     >
       {title && (
-        <h1 className="flex gap-1 text-sm font-semibold text-black/90">
+        <h1 className="flex gap-1 text-sm font-semibold text-darkIndigo/90">
           {title}
           {required && <span className="text-red">*</span>}
         </h1>
@@ -65,7 +65,7 @@ const DropDownComponent = ({
           'absolute top-16 z-30 flex w-40 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
           className,
           {
-            'scrollbar-primary max-h-48 overflow-y-auto': isOpen,
+            'scrollbar-primary max-h-48 overflow-y-auto shadow-sm': isOpen,
             'max-h-0': !isOpen
           }
         )}
@@ -75,7 +75,7 @@ const DropDownComponent = ({
             type="button"
             onClick={() => handleSelect(option)}
             key={option.name}
-            className="w-full cursor-pointer px-3 py-2.5 text-left hover:bg-black/5"
+            className="w-full cursor-pointer px-3 py-2.5 text-left hover:bg-darkIndigo/5"
           >
             {option.name}
           </button>
@@ -85,4 +85,4 @@ const DropDownComponent = ({
   )
 }
 
-export default memo(DropDownComponent)
+export default DropDownComponent

@@ -12,6 +12,7 @@ export interface Database {
       Child: {
         Row: {
           close_date: string | null
+          confirmed_fault: string
           created_at: string
           created_date: string
           customer_impact: boolean
@@ -29,6 +30,7 @@ export interface Database {
         }
         Insert: {
           close_date?: string | null
+          confirmed_fault?: string
           created_at?: string
           created_date?: string
           customer_impact?: boolean
@@ -46,6 +48,7 @@ export interface Database {
         }
         Update: {
           close_date?: string | null
+          confirmed_fault?: string
           created_at?: string
           created_date?: string
           customer_impact?: boolean
@@ -296,6 +299,9 @@ export interface Database {
       close_child_ticket: {
         Args: {
           c_id: number
+          c_parts: string
+          c_resolution: string
+          c_confirmed_fault: string
         }
         Returns: undefined
       }
@@ -334,37 +340,20 @@ export interface Database {
         Args: Record<PropertyKey, never>
         Returns: number
       }
-      create_child_ticket:
-        | {
-            Args: {
-              parentid: number
-              problem: string
-              fault: string
-              serial: string
-              customerimpact: boolean
-              customerinquiry: boolean
-              upgrade: boolean
-              datecreated: string
-              description: string
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              parentid: number
-              problem: string
-              fault: string
-              serial: string
-              customerimpact: boolean
-              customerinquiry: boolean
-              upgrade: boolean
-              datecreated: string
-              description: string
-              res: string
-              part: string
-            }
-            Returns: undefined
-          }
+      create_child_ticket: {
+        Args: {
+          parentid: number
+          problem: string
+          fault: string
+          serial: string
+          customerimpact: boolean
+          customerinquiry: boolean
+          upgrade: boolean
+          datecreated: string
+          description: string
+        }
+        Returns: undefined
+      }
       create_parent_ticket: {
         Args: {
           cus_id: number

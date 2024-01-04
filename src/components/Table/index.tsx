@@ -70,7 +70,7 @@ const TableComponent: FC<ITable> = ({
   )
 
   return (
-    <div className="scrollbar-primary relative max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-md border border-black/5 pb-2">
+    <div className="scrollbar-primary relative h-full max-h-[calc(100%-108px)] min-h-sm overflow-auto rounded-md border border-black/5 pb-2">
       <table className="h-min min-w-full divide-y">
         <thead className="sticky top-0 z-10 bg-darkIndigo bg-opacity-100">
           <tr>

@@ -9,7 +9,15 @@ import {
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { Button, Card, PageNav, Table, Toggle, UnionIcon } from '@/components'
+import {
+  Button,
+  Card,
+  FilterSelect,
+  PageNav,
+  Table,
+  Toggle,
+  UnionIcon
+} from '@/components'
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
@@ -63,6 +71,18 @@ const cols = [
   }
 ]
 
+const STATUS_OPTIONS = [
+  { name: 'All', value: '' },
+  {
+    name: 'Open',
+    value: 'OPEN'
+  },
+  {
+    name: 'Closed',
+    value: 'CLOSED'
+  }
+]
+
 const Tickets = () => {
   const [rows, setRows] = useState<IChildTicket[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -72,7 +92,18 @@ const Tickets = () => {
   const { pid } = useParams() || { pid: '' }
   const pathname = usePathname()
   const router = useRouter()
-  const page = useSearchParams().get('page') || '1'
+  const searchParam = useSearchParams()
+
+  const page = searchParam.get('page') || '1'
+  const status = searchParam.get('status') || ''
+
+  const handleToggle = useCallback(
+    (val: boolean) => {
+      router.push(pathname)
+      setShowClosed(val)
+    },
+    [pathname, router]
+  )
 
   const handleRowSelect = useCallback(
     (row: IRow) => {
@@ -87,9 +118,13 @@ const Tickets = () => {
     const pageNum = Number(page)
 
     setIsLoading(true)
-    const query = supabase.from('Child').select().eq('parent_id', pid)
+    const query = supabase
+      .from('Child')
+      .select('*', { count: 'exact' })
+      .eq('parent_id', pid)
 
-    if (!showClosed) query.neq('status', 'CLOSED')
+    if (status) query.eq('status', status)
+    else if (!showClosed) query.neq('status', 'CLOSED')
 
     const { data, error, count } = await query
       .order('created_at', {
@@ -99,19 +134,18 @@ const Tickets = () => {
 
     setIsLoading(false)
 
-    setTotalCount(count ? Math.ceil(count / 15) : 1)
+    setTotalCount(count || 0)
 
     if (error) toast.error(error.message)
     else if (data) setRows(data)
-  }, [page, pid, showClosed])
+  }, [page, pid, showClosed, status])
 
   useEffect(() => {
     fetchChildTickets()
   }, [fetchChildTickets])
 
   return (
-    <>
-      <TicketDetails />
+    <div className="flex gap-7">
       <Card>
         <div className="flex flex-row-reverse gap-2">
           <Link href={`${pathname}${Paths.CREATE}`}>
@@ -120,7 +154,8 @@ const Tickets = () => {
               New Child Ticket
             </Button>
           </Link>
-          <Toggle onChange={setShowClosed} isChecked={showClosed} />
+          <FilterSelect options={STATUS_OPTIONS} name="status" />
+          <Toggle onChange={handleToggle} isChecked={showClosed} />
         </div>
         <Table
           onRowSelect={handleRowSelect}
@@ -128,9 +163,16 @@ const Tickets = () => {
           cols={cols}
           rows={rows}
         />
-        <PageNav pageCount={totalCount} />
+        <div className="grid grid-cols-3 text-black/60">
+          <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
+            <h2 className="font-semibold">Total Count: </h2>
+            <p>{totalCount}</p>
+          </div>
+          <PageNav pageCount={totalCount} />
+        </div>
       </Card>
-    </>
+      <TicketDetails />
+    </div>
   )
 }
 export default Tickets

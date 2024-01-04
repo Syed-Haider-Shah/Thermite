@@ -39,7 +39,10 @@ const CloseChild = () => {
   const handleCloseChild = useCallback(async () => {
     setIsSaving(true)
     const { error } = await supabase.rpc('close_child_ticket', {
-      c_id: Number(cid)
+      c_id: Number(cid),
+      c_confirmed_fault: fault.value,
+      c_parts: part.value,
+      c_resolution: resolution.value
     })
     setIsSaving(false)
 
@@ -48,7 +51,7 @@ const CloseChild = () => {
       toast.success('Ticket Closed Successfully')
       router.back()
     }
-  }, [cid, router])
+  }, [cid, fault.value, part.value, resolution.value, router])
 
   return (
     <form

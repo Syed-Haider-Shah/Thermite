@@ -51,6 +51,7 @@ const cols = [
 ]
 
 const STATUS_OPTIONS = [
+  { name: 'All', value: '' },
   {
     name: 'Open',
     value: 'OPEN'
@@ -123,7 +124,7 @@ const Tickets = () => {
       .range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
 
-    setTotalCount(count ? Math.ceil(count / 15) : 1)
+    setTotalCount(count || 0)
 
     if (error) toast.error(error.message)
     else if (rows) setTickets(rows as IParentTicket[])
@@ -154,7 +155,13 @@ const Tickets = () => {
         isLoading={isLoading}
         onRowSelect={handleRowSelect}
       />
-      <PageNav pageCount={totalCount} />
+      <div className="grid grid-cols-3 text-black/60">
+        <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
+          <h2 className="font-semibold">Total Count: </h2>
+          <p>{totalCount}</p>
+        </div>
+        <PageNav pageCount={totalCount} />
+      </div>
     </Card>
   )
 }

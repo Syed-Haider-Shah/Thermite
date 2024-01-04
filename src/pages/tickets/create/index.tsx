@@ -56,7 +56,7 @@ const CreateParentTicket = () => {
     } = await query.range((pageNum - 1) * 15, pageNum * 15)
     setIsLoading(false)
 
-    setPageCount(count ? Math.ceil(count / 15) : 1)
+    setPageCount(count || 0)
     if (error) toast.error(error.message)
     else if (rows) setCustomers(rows as ICustomer[])
   }, [page, search])
@@ -108,7 +108,13 @@ const CreateParentTicket = () => {
           </div>
         )}
       </form>
-      <PageNav pageCount={pageCount} />
+      <div className="grid grid-cols-3 text-black/60">
+        <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
+          <h2 className="font-semibold">Total Count: </h2>
+          <p>{pageCount}</p>
+        </div>
+        <PageNav pageCount={pageCount} />
+      </div>
     </Modal>
   )
 }

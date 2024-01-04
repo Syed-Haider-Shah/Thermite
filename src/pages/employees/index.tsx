@@ -82,7 +82,7 @@ const Employees = () => {
   const fetchEmployees = useCallback(async () => {
     setIsLoading(true)
 
-    const query = supabase.from('employees').select()
+    const query = supabase.from('employees').select('*', { count: 'exact' })
 
     if (country && country !== 'all') query.eq('country', country)
 
@@ -98,7 +98,7 @@ const Employees = () => {
 
     setIsLoading(false)
 
-    setTotalCount(count ? Math.ceil(count / 15) : 1)
+    setTotalCount(count || 0)
 
     if (rows) setRows(rows as IEmployee[])
     else if (error) toast.error(error.message)
@@ -150,7 +150,13 @@ const Employees = () => {
           isLoading={isLoading}
           onRowSelect={handleSelectRow}
         />
-        <PageNav pageCount={totalCount} />
+        <div className="grid grid-cols-3 text-black/60">
+          <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
+            <h2 className="font-semibold">Total Count: </h2>
+            <p>{totalCount}</p>
+          </div>
+          <PageNav pageCount={totalCount} />
+        </div>
       </Card>
       <div className="flex w-1/2 flex-col gap-6">
         {selectedEmp && (

@@ -6,6 +6,8 @@ import { memo, useCallback } from 'react'
 import { cn } from '@/utils/cn'
 
 const PageNav = ({ pageCount }: { pageCount: number }) => {
+  const count = pageCount > 0 ? Math.ceil(pageCount / 15) : 1
+
   const searchParams = useSearchParams()
   const page = searchParams.get('page') || '1'
   const pathname = usePathname()
@@ -23,23 +25,23 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
     const newParams = new URLSearchParams(searchParams)
     const pageNum = Number(page)
 
-    if (pageNum >= pageCount) newParams.set('page', `${pageNum}`)
+    if (pageNum >= count) newParams.set('page', `${pageNum}`)
     else if (pageNum && pageNum > 1) newParams.set('page', `${pageNum + 1}`)
     else newParams.set('page', '2')
 
     return newParams.toString()
-  }, [page, pageCount, searchParams])
+  }, [page, count, searchParams])
 
   const handlePrev = useCallback(() => {
     const newParams = new URLSearchParams(searchParams)
     const pageNum = Number(page)
 
-    if (pageNum && pageNum > 1 && pageNum <= pageCount)
+    if (pageNum && pageNum > 1 && pageNum <= count)
       newParams.set('page', `${pageNum - 1}`)
     else newParams.set('page', '1')
 
     return newParams.toString()
-  }, [page, pageCount, searchParams])
+  }, [page, count, searchParams])
 
   return (
     <div className="flex items-center justify-center gap-x-2 shadow-md">
@@ -52,7 +54,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
       >
         Prev
       </Link>
-      {[...Array(pageCount)].map((e, val) => {
+      {[...Array(count)].map((e, val) => {
         const pageVal = val + 1
         return (
           <Link

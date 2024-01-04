@@ -81,13 +81,9 @@ const TicketDetails = () => {
   return (
     <div className="flex w-110 flex-col gap-8">
       <Card title="details" id="details" className="w-full">
-        <div className="flex w-full justify-between">
-          <h1 className="text-xl font-semibold leading-6">
-            Parent Ticket Details
-          </h1>
-          <Button active>Edit</Button>
-        </div>
-
+        <h1 className="text-xl font-semibold leading-6">
+          Parent Ticket Details
+        </h1>
         <div className="grid grid-cols-2 gap-6">
           {DETAILS_FIELD.map(({ name, field }) =>
             isLoading ? (
@@ -101,43 +97,56 @@ const TicketDetails = () => {
               />
             )
           )}
-          <LineItem
-            title="Installation Date"
-            item={new Date(`${details['installation_date']}`).toDateString()}
-          />
-          <LineItem
-            title="Created At"
-            item={new Date(`${details['created_at']}`).toDateString()}
-          />
-          <LineItem
-            title="Employee"
-            item={
-              details['employee'] ? (
-                <UnAssignedEmployee
-                  name={details['employee']}
-                  fetchDetails={fetchDetails}
+          {isLoading ? (
+            <>
+              <LineSkeleton />
+              <LineSkeleton />
+              <LineSkeleton />
+              <LineSkeleton />
+            </>
+          ) : (
+            <>
+              <LineItem
+                title="Installation Date"
+                item={new Date(
+                  `${details['installation_date']}`
+                ).toDateString()}
+              />
+              <LineItem
+                title="Created At"
+                item={new Date(`${details['created_at']}`).toDateString()}
+              />
+              <LineItem
+                title="Employee"
+                item={
+                  details['employee'] ? (
+                    <UnAssignedEmployee
+                      name={details['employee']}
+                      fetchDetails={fetchDetails}
+                    />
+                  ) : (
+                    <AssignEmployee fetchDetails={fetchDetails} />
+                  )
+                }
+              />
+              <div className="col-span-2 grid w-full grid-cols-2 items-center gap-2">
+                <DropDown
+                  options={STATUS_OPTIONS}
+                  setValue={setStatus}
+                  value={status}
+                  title="Status"
+                  className="w-full"
                 />
-              ) : (
-                <AssignEmployee fetchDetails={fetchDetails} />
-              )
-            }
-          />
-          <div className="col-span-2 grid w-full grid-cols-2 items-center gap-2">
-            <DropDown
-              options={STATUS_OPTIONS}
-              setValue={setStatus}
-              value={status}
-              title="Status"
-              className="w-full"
-            />
-            <Button
-              disabled={status.value === details.status}
-              active
-              className="py-2.25"
-            >
-              Update
-            </Button>
-          </div>
+                <Button
+                  disabled={status.value === details.status}
+                  active
+                  className="py-2.25"
+                >
+                  Update
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </Card>
     </div>

@@ -62,7 +62,15 @@ const STATUS_OPTIONS = [
   },
   {
     name: 'Water Sample',
-    value: 'WATER_SAMPLE'
+    value: 'WATER-SAMPLE'
+  },
+  {
+    name: 'Waiting for Parts',
+    value: 'PARTS'
+  },
+  {
+    name: 'Decision',
+    value: 'DECISION'
   }
 ]
 

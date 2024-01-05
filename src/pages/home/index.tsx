@@ -1,9 +1,49 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
+import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { RightArrow } from '@/components'
+import { useAuth } from '@/context/AuthContext'
+import { supabase } from '@/services/supabase'
 
 export default function Home() {
+  const [ticketCount, setTicketCount] = useState(0)
+  const [waterCount, setWaterCount] = useState(0)
+
+  const { user } = useAuth()
+
+  const fetchWaterSampleCount = useCallback(async () => {
+    const { error, count } = await supabase
+      .from('Parent')
+      .select('', { count: 'exact' })
+      .eq('employee', user.id)
+      .eq('status', 'WATER-SAMPLE')
+
+    if (error) toast.error(error.message)
+    else if (count) setWaterCount(count)
+  }, [user.id])
+
+  useEffect(() => {
+    fetchWaterSampleCount()
+  }, [fetchWaterSampleCount])
+
+  const fetchTicketCount = useCallback(async () => {
+    const { error, count } = await supabase
+      .from('Parent')
+      .select('', { count: 'exact' })
+      .eq('employee', user.id)
+      .neq('status', 'CLOSED')
+
+    if (error) toast.error(error.message)
+    else if (count) setTicketCount(count)
+  }, [user.id])
+
+  useEffect(() => {
+    fetchTicketCount()
+  }, [fetchTicketCount])
+
   return (
     <>
       <Head>
@@ -21,7 +61,7 @@ export default function Home() {
         <div className="ml-10 flex h-full w-62 flex-col gap-5">
           <section className="flex h-full w-full flex-col justify-between bg-white shadow-xl">
             <div className="mt-15 flex flex-col items-center justify-center">
-              <div className="mt-2 text-2xl font-bold">23</div>
+              <div className="mt-2 text-2xl font-bold">{ticketCount}</div>
               <div className="text-sm text-gray">Assigned Tickets</div>
             </div>
             <div className="flex justify-center px-8 text-xs text-white">
@@ -39,7 +79,7 @@ export default function Home() {
               <div className="my-6 flex flex-col gap-2">
                 <div className="flex gap-1">
                   <div>Assigned Tickets:</div>
-                  <div className="font-bold text-black">23</div>
+                  <div className="font-bold text-black">{ticketCount}</div>
                 </div>
                 <div className="flex w-full bg-loadGray">
                   <div className="h-1 w-[75%] bg-indigo"></div>
@@ -48,7 +88,9 @@ export default function Home() {
               <div className="my-6 flex flex-col gap-2">
                 <div className="flex gap-1">
                   <div>Closed Tickets:</div>
-                  <div className="font-bold text-black">12</div>
+                  <div className="font-bold text-black">
+                    {user.all_time_tickets_closed}
+                  </div>
                 </div>
                 <div className="flex w-full bg-loadGray">
                   <div className="h-1 w-[30%] bg-loadYellow"></div>
@@ -161,7 +203,7 @@ export default function Home() {
                   Water Sample Form
                 </Link>
                 <div className="flex flex-col items-center justify-center text-white">
-                  <div className=" text-3xl font-bold">12</div>
+                  <div className=" text-3xl font-bold">{waterCount}</div>
                   <div className="text-sm">Submittions left</div>
                 </div>
                 <div className=" bg- flex h-[30%] border-t-[0.025rem] border-white/50">

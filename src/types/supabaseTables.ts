@@ -19,7 +19,7 @@ export type IRow = {
 export interface IParentTicket {
   id: number
   created_at: string
-  child_count: string
+  child_count: number
   close_date: string
   status: string
   employee: string
@@ -71,7 +71,7 @@ export const INITIAL_CHILD_DATA = {
 export interface IParentDetails {
   id: number
   created_at: string
-  child_count: string
+  child_count: number
   close_date: string
   status: string
   employee: string

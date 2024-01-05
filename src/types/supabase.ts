@@ -165,7 +165,7 @@ export interface Database {
       }
       Parent: {
         Row: {
-          child_count: string
+          child_count: number
           close_date: string | null
           created_at: string
           customer_id: number | null
@@ -174,7 +174,7 @@ export interface Database {
           status: string
         }
         Insert: {
-          child_count?: string
+          child_count?: number
           close_date?: string | null
           created_at?: string
           customer_id?: number | null
@@ -183,7 +183,7 @@ export interface Database {
           status?: string
         }
         Update: {
-          child_count?: string
+          child_count?: number
           close_date?: string | null
           created_at?: string
           customer_id?: number | null
@@ -387,7 +387,7 @@ export interface Database {
         Returns: {
           id: number
           created_at: string
-          child_count: string
+          child_count: number
           close_date: string
           status: string
           employee: string
@@ -433,7 +433,7 @@ export interface Database {
         Returns: {
           id: number
           created_at: string
-          child_count: string
+          child_count: number
           close_date: string
           status: string
           employee: string

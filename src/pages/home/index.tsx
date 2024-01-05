@@ -4,16 +4,36 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { RightArrow } from '@/components'
+import { DashLoadBar, RightArrow } from '@/components'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 
 export default function Home() {
-  const [ticketCount, setTicketCount] = useState(0)
   const [waterCount, setWaterCount] = useState(0)
+  const [percentage, setPercentage] = useState(0)
+  const [invPercentage, setInvPercentage] = useState(0)
 
   const { user } = useAuth()
 
+  const calculating = useCallback(() => {
+    setPercentage(
+      Math.trunc(
+        (user.number_of_assigned_tickets /
+          (user.number_of_closed_tickets + user.number_of_assigned_tickets)) *
+          100
+      )
+    )
+  }, [user.number_of_assigned_tickets, user.number_of_closed_tickets])
+
+  useEffect(() => {
+    calculating()
+  }, [calculating])
+
+  useEffect(() => {
+    setInvPercentage(100 - percentage)
+  }, [percentage])
+  console.log(percentage)
+  console.log(invPercentage)
   const fetchWaterSampleCount = useCallback(async () => {
     const { error, count } = await supabase
       .from('Parent')
@@ -28,21 +48,6 @@ export default function Home() {
   useEffect(() => {
     fetchWaterSampleCount()
   }, [fetchWaterSampleCount])
-
-  const fetchTicketCount = useCallback(async () => {
-    const { error, count } = await supabase
-      .from('Parent')
-      .select('', { count: 'exact' })
-      .eq('employee', user.id)
-      .neq('status', 'CLOSED')
-
-    if (error) toast.error(error.message)
-    else if (count) setTicketCount(count)
-  }, [user.id])
-
-  useEffect(() => {
-    fetchTicketCount()
-  }, [fetchTicketCount])
 
   return (
     <>
@@ -61,7 +66,9 @@ export default function Home() {
         <div className="ml-10 flex h-full w-62 flex-col gap-5">
           <section className="flex h-full w-full flex-col justify-between bg-white shadow-xl">
             <div className="mt-15 flex flex-col items-center justify-center">
-              <div className="mt-2 text-2xl font-bold">{ticketCount}</div>
+              <div className="mt-2 text-2xl font-bold">
+                {user.number_of_assigned_tickets}
+              </div>
               <div className="text-sm text-gray">Assigned Tickets</div>
             </div>
             <div className="flex justify-center px-8 text-xs text-white">
@@ -79,21 +86,25 @@ export default function Home() {
               <div className="my-6 flex flex-col gap-2">
                 <div className="flex gap-1">
                   <div>Assigned Tickets:</div>
-                  <div className="font-bold text-black">{ticketCount}</div>
+                  <div className="font-bold text-black">
+                    {user.number_of_assigned_tickets}
+                  </div>
                 </div>
                 <div className="flex w-full bg-loadGray">
-                  <div className="h-1 w-[75%] bg-indigo"></div>
+                  <div className={`h-1 w-[${percentage}%] bg-indigo`}></div>
                 </div>
               </div>
               <div className="my-6 flex flex-col gap-2">
                 <div className="flex gap-1">
-                  <div>Closed Tickets:</div>
+                  <div>Closed This Month:</div>
                   <div className="font-bold text-black">
-                    {user.all_time_tickets_closed}
+                    {user.number_of_closed_tickets}
                   </div>
                 </div>
                 <div className="flex w-full bg-loadGray">
-                  <div className="h-1 w-[30%] bg-loadYellow"></div>
+                  <div
+                    className={`h-1 w-[${invPercentage}%] bg-loadYellow`}
+                  ></div>
                 </div>
               </div>
             </div>
@@ -147,15 +158,7 @@ export default function Home() {
                 TOP TOWNS WITH PENDING WORK
               </div>
               <div className="px-12">
-                <div className="flex flex-col">
-                  <div className="text-sm">WALGETT</div>
-                  <div className="flex items-center">
-                    <div className="flex w-full bg-loadGray">
-                      <div className="h-1 w-[80%] bg-loadGreen"></div>
-                    </div>
-                    <div className="px-2 text-xs text-gray">80%</div>
-                  </div>
-                </div>
+                <DashLoadBar />
                 <div className="flex flex-col">
                   <div className="text-sm">LIGHTNING RIDGE</div>
                   <div className="flex items-center">

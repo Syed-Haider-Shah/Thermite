@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { DashLoadBar, RightArrow } from '@/components'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
+import { cn } from '@/utils/cn'
 
 export default function Home() {
   const [waterCount, setWaterCount] = useState(0)
@@ -91,7 +92,12 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex w-full bg-loadGray">
-                  <div className={`h-1 w-[${percentage}%] bg-indigo`}></div>
+                  <div
+                    className={`h-1 bg-indigo`}
+                    style={{
+                      width: `${percentage}%`
+                    }}
+                  ></div>
                 </div>
               </div>
               <div className="my-6 flex flex-col gap-2">
@@ -158,7 +164,7 @@ export default function Home() {
                 TOP TOWNS WITH PENDING WORK
               </div>
               <div className="px-12">
-                <DashLoadBar />
+                <DashLoadBar townName="Wal" color="bg-red" progress="10" />
                 <div className="flex flex-col">
                   <div className="text-sm">LIGHTNING RIDGE</div>
                   <div className="flex items-center">

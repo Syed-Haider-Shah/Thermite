@@ -78,37 +78,40 @@ export interface Database {
         Row: {
           address: string
           coordinates: string | null
-          country: string | null
+          country: string
           created_at: string
           id: number
           installation_date: string | null
           number_of_panels: number
           region: string
           serial_number: string
+          town: string
           warranty: boolean | null
         }
         Insert: {
           address: string
           coordinates?: string | null
-          country?: string | null
+          country?: string
           created_at?: string
           id?: number
           installation_date?: string | null
-          number_of_panels: number
+          number_of_panels?: number
           region: string
           serial_number: string
+          town?: string
           warranty?: boolean | null
         }
         Update: {
           address?: string
           coordinates?: string | null
-          country?: string | null
+          country?: string
           created_at?: string
           id?: number
           installation_date?: string | null
           number_of_panels?: number
           region?: string
           serial_number?: string
+          town?: string
           warranty?: boolean | null
         }
         Relationships: []
@@ -326,7 +329,7 @@ export interface Database {
       }
       count_assigned_employees: {
         Args: {
-          user_id: string
+          emp: string
         }
         Returns: number
       }
@@ -339,6 +342,12 @@ export interface Database {
       count_parent_tickets: {
         Args: Record<PropertyKey, never>
         Returns: number
+      }
+      count_update_all: {
+        Args: {
+          lastval: number
+        }
+        Returns: undefined
       }
       create_child_ticket: {
         Args: {
@@ -460,19 +469,18 @@ export interface Database {
         }
         Returns: undefined
       }
-      update_child_count:
-        | {
-            Args: {
-              par_id: number
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              par_id: number
-            }
-            Returns: undefined
-          }
+      update_assigned_number_tickets_all_time: {
+        Args: {
+          user_id: string
+        }
+        Returns: undefined
+      }
+      update_child_count: {
+        Args: {
+          par_id: number
+        }
+        Returns: undefined
+      }
       update_email: {
         Args: Record<PropertyKey, never>
         Returns: undefined

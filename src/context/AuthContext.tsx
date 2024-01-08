@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           .single()
 
         if (empData) {
-          setUser({ ...empData, email: sesh.user.email })
+          setUser({ ...empData, email: sesh.user.email || '' })
           if (
             empData.role !== 'admin' &&
             empData.role !== 'superadmin' &&

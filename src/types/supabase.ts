@@ -435,6 +435,28 @@ export interface Database {
         }
         Returns: undefined
       }
+      show_parent_details: {
+        Args: {
+          parent_id: number
+        }
+        Returns: {
+          id: number
+          created_at: string
+          child_count: number
+          close_date: string
+          status: string
+          employee: string
+          customer_id: number
+          address: string
+          region: string
+          serial_number: string
+          coordinates: string
+          installation_date: string
+          number_of_panels: number
+          country: string
+          warranty: boolean
+        }[]
+      }
       unassign_employee: {
         Args: {
           par_id: number

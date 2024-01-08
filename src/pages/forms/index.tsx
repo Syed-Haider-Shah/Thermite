@@ -1,24 +1,24 @@
-import { Card } from '@/components'
+import Link from 'next/link'
 
-const Guides = () => {
+import { WaterVial } from '@/components'
+
+const Forms = () => {
   return (
-    <Card
-      title="forms"
-      id="forms"
-      className="scrollbar-primary overflow-y-scroll"
-    >
-      <h1 className="text-xl font-semibold leading-6">Forms</h1>
-      <div className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5">
-        <div className="space-y-2 text-sm">
-          <h1 className="font-semibold leading-4">
-            Source GUI Installation Instruction
-          </h1>
-          <p className="font-medium text-black/60">NEW 07/29/2023</p>
-        </div>
-        <p>Installation Instruction for the source GUI</p>
+    <>
+      <div className="ml-10 text-xl font-bold">Forms</div>
+      <div className="ml-10 mt-5">
+        <Link
+          href="/forms/water_sample_form"
+          className="flex h-50.5 w-80 flex-col items-center rounded-md bg-white pt-10 font-bold text-darkIndigo shadow-lg hover:shadow-xl"
+        >
+          <div className="text-lg">Water Sample Submission Form</div>
+          <div className="pt-6">
+            <WaterVial />
+          </div>
+        </Link>
       </div>
-    </Card>
+    </>
   )
 }
 
-export default Guides
+export default Forms

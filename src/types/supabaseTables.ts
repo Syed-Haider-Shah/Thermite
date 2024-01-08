@@ -72,7 +72,7 @@ export const INITIAL_CHILD_DATA = {
 export interface IParentDetails {
   id: number
   created_at: string
-  child_count: string
+  child_count: number
   close_date: string
   status: string
   employee: string
@@ -91,7 +91,7 @@ export interface IParentDetails {
 export const INITIAL_PARENT_DETAILS: IParentDetails = {
   id: 0,
   created_at: '',
-  child_count: '',
+  child_count: 0,
   close_date: '',
   status: '',
   employee: '',
@@ -107,15 +107,17 @@ export const INITIAL_PARENT_DETAILS: IParentDetails = {
 }
 
 export interface IEmployee {
+  all_time_tickets_closed: number
   country: string | null
   created_at: string
-  image_url?: string
+  email: string
+  fe_role: string
   id: string
+  image_url: string
   name: string | null
   number_of_assigned_tickets: number
   number_of_closed_tickets: number
   role: string | null
-  email?: string
   [key: string]: string | number | null | undefined
 }
 
@@ -126,5 +128,9 @@ export const INITIAL_EMPLOYEE_DATA: IEmployee = {
   number_of_assigned_tickets: 0,
   number_of_closed_tickets: 0,
   role: '',
-  country: null
+  country: null,
+  all_time_tickets_closed: 0,
+  email: '',
+  fe_role: '',
+  image_url: ''
 }

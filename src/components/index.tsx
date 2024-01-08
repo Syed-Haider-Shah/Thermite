@@ -15,6 +15,7 @@ export { default as LineItem } from './LineItem'
 export { default as LineSkeleton } from './LineItem/LineSkeleton'
 export { default as Toggle } from './Toggle'
 export { default as AvatarImage } from './AvatarImage'
+export { default as DashLoadBar } from './DashLoadBar'
 
 export {
   MagnifierIcon,
@@ -40,5 +41,7 @@ export {
   Forms,
   Softwares,
   Tickets,
-  Customers
+  RightArrow,
+  Customers,
+  WaterVial
 } from './Icons'

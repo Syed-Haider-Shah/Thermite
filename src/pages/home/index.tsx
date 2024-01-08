@@ -32,8 +32,6 @@ export default function Home() {
   useEffect(() => {
     setInvPercentage(100 - percentage)
   }, [percentage])
-  console.log(percentage)
-  console.log(invPercentage)
   const fetchWaterSampleCount = useCallback(async () => {
     const { error, count } = await supabase
       .from('Parent')
@@ -108,7 +106,8 @@ export default function Home() {
                 </div>
                 <div className="flex w-full bg-loadGray">
                   <div
-                    className={`h-1 w-[${invPercentage}%] bg-loadYellow`}
+                    className={`h-1 bg-loadYellow`}
+                    style={{ width: `${invPercentage}%` }}
                   ></div>
                 </div>
               </div>

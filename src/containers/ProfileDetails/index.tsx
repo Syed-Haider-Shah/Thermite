@@ -1,8 +1,10 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-import { Button, Card } from '@/components'
+import { Button } from '@/components'
 import { IEmployee } from '@/types/supabaseTables'
+import { cn } from '@/utils/cn'
 
 const ProfileDetails = ({
   user,
@@ -15,10 +17,10 @@ const ProfileDetails = ({
   const edit = useSearchParams().get('edit')
 
   return edit ? null : (
-    <Card title="profile" id="profile" className="h-min max-w-sm">
-      <div className="flex w-full justify-between">
-        <h1 className="text-xl font-semibold leading-6">Profile Details</h1>
-        {hideEdit ? null : (
+    <section className="rounded-md bg-white">
+      <div className="flex justify-between rounded-t-md bg-darkIndigo p-2 text-white">
+        <h1 className="font-semibold leading-6">Profile Details</h1>
+        {!hideEdit && (
           <Link
             href={{
               pathname,
@@ -27,45 +29,60 @@ const ProfileDetails = ({
               }
             }}
           >
-            <Button active>Edit</Button>
+            <Button className="border-0" active>
+              Edit
+            </Button>
           </Link>
         )}
       </div>
-      <div className="flex w-full flex-wrap gap-10 rounded-5 bg-lightGray p-4 [&>div]:min-w-[120px]">
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Name</h2>
-          <p className="text-lg font-normal text-black/80">{user.name}</p>
+      <div
+        className={cn('grid min-w-95 grid-cols-2 p-4', {
+          'flex flex-col gap-2': !hideEdit
+        })}
+      >
+        <div className="flex flex-col items-center text-center text-black/90">
+          {user.image_url ? (
+            <Image
+              src={user.image_url}
+              alt="avatar"
+              className="mb-3 h-32 w-32 rounded-full bg-darkGray"
+              width={128}
+              height={128}
+            />
+          ) : (
+            <div className="h-32 w-32 rounded-full bg-darkGray" />
+          )}
+          <h2 className="text-lg">{user.name}</h2>
+          <p className="text-sm font-bold">{user.country}</p>
         </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Country</h2>
-          <p className=" break-words text-lg font-normal text-black/80">
-            {`${user.country}`}
-          </p>
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Role</h2>
-          <p className="text-lg font-normal text-black/80">{user.role}</p>
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Date Created</h2>
-          <p className="mt-1 text-base font-normal text-black/80">
-            {new Date(user.created_at).toDateString()}
-          </p>
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Assigned Tickets</h2>
-          <p className="text-lg font-normal text-black/80">
-            {user.number_of_assigned_tickets}
-          </p>
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold leading-4">Closed Tickets</h2>
-          <p className="text-lg font-normal text-black/80">
-            {user.number_of_closed_tickets}
-          </p>
-        </div>
+        <ul className="flex w-full flex-col gap-2 rounded-md border border-black/10 bg-white">
+          <li className="grid grid-cols-2 border-b border-black/10 p-2">
+            <h2 className="text-sm font-semibold leading-4">Role</h2>
+            <p className=" font-normal text-black/80">{user.role}</p>
+          </li>
+          <li className="grid grid-cols-2 border-b border-black/10 p-2">
+            <h2 className="text-sm font-semibold leading-4">Date Created</h2>
+            <p className="mt-1 font-normal text-black/80">
+              {new Date(user.created_at).toDateString()}
+            </p>
+          </li>
+          <li className="grid grid-cols-2 border-b border-black/10 p-2">
+            <h2 className="text-sm font-semibold leading-4">
+              Assigned Tickets
+            </h2>
+            <p className=" font-normal text-black/80">
+              {user.number_of_assigned_tickets}
+            </p>
+          </li>
+          <li className="grid grid-cols-2 p-2">
+            <h2 className="text-sm font-semibold leading-4">Closed Tickets</h2>
+            <p className=" font-normal text-black/80">
+              {user.number_of_closed_tickets}
+            </p>
+          </li>
+        </ul>
       </div>
-    </Card>
+    </section>
   )
 }
 

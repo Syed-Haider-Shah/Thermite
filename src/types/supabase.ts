@@ -78,37 +78,40 @@ export interface Database {
         Row: {
           address: string
           coordinates: string | null
-          country: string | null
+          country: string
           created_at: string
           id: number
           installation_date: string | null
           number_of_panels: number
           region: string
           serial_number: string
+          town: string
           warranty: boolean | null
         }
         Insert: {
           address: string
           coordinates?: string | null
-          country?: string | null
+          country?: string
           created_at?: string
           id?: number
           installation_date?: string | null
-          number_of_panels: number
+          number_of_panels?: number
           region: string
           serial_number: string
+          town?: string
           warranty?: boolean | null
         }
         Update: {
           address?: string
           coordinates?: string | null
-          country?: string | null
+          country?: string
           created_at?: string
           id?: number
           installation_date?: string | null
           number_of_panels?: number
           region?: string
           serial_number?: string
+          town?: string
           warranty?: boolean | null
         }
         Relationships: []
@@ -165,7 +168,7 @@ export interface Database {
       }
       Parent: {
         Row: {
-          child_count: string
+          child_count: number
           close_date: string | null
           created_at: string
           customer_id: number | null
@@ -174,7 +177,7 @@ export interface Database {
           status: string
         }
         Insert: {
-          child_count?: string
+          child_count?: number
           close_date?: string | null
           created_at?: string
           customer_id?: number | null
@@ -183,7 +186,7 @@ export interface Database {
           status?: string
         }
         Update: {
-          child_count?: string
+          child_count?: number
           close_date?: string | null
           created_at?: string
           customer_id?: number | null
@@ -326,7 +329,7 @@ export interface Database {
       }
       count_assigned_employees: {
         Args: {
-          user_id: string
+          emp: string
         }
         Returns: number
       }
@@ -339,6 +342,12 @@ export interface Database {
       count_parent_tickets: {
         Args: Record<PropertyKey, never>
         Returns: number
+      }
+      count_update_all: {
+        Args: {
+          lastval: number
+        }
+        Returns: undefined
       }
       create_child_ticket: {
         Args: {
@@ -387,7 +396,7 @@ export interface Database {
         Returns: {
           id: number
           created_at: string
-          child_count: string
+          child_count: number
           close_date: string
           status: string
           employee: string
@@ -426,28 +435,6 @@ export interface Database {
         }
         Returns: undefined
       }
-      show_parent_details: {
-        Args: {
-          parent_id: number
-        }
-        Returns: {
-          id: number
-          created_at: string
-          child_count: string
-          close_date: string
-          status: string
-          employee: string
-          customer_id: number
-          address: string
-          region: string
-          serial_number: string
-          coordinates: string
-          installation_date: string
-          number_of_panels: number
-          country: string
-          warranty: boolean
-        }[]
-      }
       unassign_employee: {
         Args: {
           par_id: number
@@ -460,19 +447,18 @@ export interface Database {
         }
         Returns: undefined
       }
-      update_child_count:
-        | {
-            Args: {
-              par_id: number
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              par_id: number
-            }
-            Returns: undefined
-          }
+      update_assigned_number_tickets_all_time: {
+        Args: {
+          user_id: string
+        }
+        Returns: undefined
+      }
+      update_child_count: {
+        Args: {
+          par_id: number
+        }
+        Returns: undefined
+      }
       update_email: {
         Args: Record<PropertyKey, never>
         Returns: undefined

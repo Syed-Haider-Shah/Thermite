@@ -1,13 +1,14 @@
 export interface ICustomer {
   address: string
-  id: number
   coordinates: string | null
-  country: string | null
+  country: string
   created_at: string
+  id: number
   installation_date: string | null
   number_of_panels: number
   region: string
   serial_number: string
+  town: string
   warranty: boolean | null
   [key: string]: string | string[] | boolean | number | null
 }
@@ -19,7 +20,7 @@ export type IRow = {
 export interface IParentTicket {
   id: number
   created_at: string
-  child_count: string
+  child_count: number
   close_date: string
   status: string
   employee: string

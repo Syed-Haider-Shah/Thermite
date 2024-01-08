@@ -7,7 +7,6 @@ import toast from 'react-hot-toast'
 import { DashLoadBar, RightArrow } from '@/components'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
-import { cn } from '@/utils/cn'
 
 export default function Home() {
   const [waterCount, setWaterCount] = useState(0)

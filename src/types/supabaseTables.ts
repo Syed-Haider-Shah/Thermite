@@ -90,7 +90,7 @@ export interface IParentDetails {
 export const INITIAL_PARENT_DETAILS: IParentDetails = {
   id: 0,
   created_at: '',
-  child_count: '',
+  child_count: 0,
   close_date: '',
   status: '',
   employee: '',

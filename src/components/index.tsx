@@ -16,6 +16,7 @@ export { default as LineSkeleton } from './LineItem/LineSkeleton'
 export { default as Toggle } from './Toggle'
 export { default as AvatarImage } from './AvatarImage'
 export { default as DashLoadBar } from './DashLoadBar'
+export { default as ComboBox } from './ComboBox'
 
 export {
   MagnifierIcon,

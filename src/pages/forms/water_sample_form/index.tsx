@@ -1,4 +1,4 @@
-import { FormLine } from '@/components'
+import { ComboBox, FormLine } from '@/components'
 
 const WaterForm = () => {
   return (
@@ -8,27 +8,13 @@ const WaterForm = () => {
           Water Sample Form
         </div>
         <div className="flex flex-col items-center">
-          <div className="flex h-20 w-[80%]">
-            <div className="flex w-[50%] items-center justify-center">
-              <fieldset className="box-border h-[50%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
-                <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
-                  Ticket Name
-                </div>
-                <FormLine id="ticket" placeholder="Select a Ticket" cusForm />
-              </fieldset>
-            </div>
-            <div className="flex w-[50%] items-center justify-center">
-              <fieldset className=" box-border h-[50%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
-                <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
-                  Region
-                </div>
-                <FormLine id="region" placeholder="Select a Region" cusForm />
-              </fieldset>
-            </div>
+          <div className="grid h-20 w-4/5 w-full grid-cols-2">
+            <ComboBox items={[]} />
+            <ComboBox items={[]} />
           </div>
           <div className="flex h-20 w-[80%]">
-            <div className="flex w-[50%] items-center justify-center">
-              <fieldset className=" box-border h-[50%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
+            <div className="flex w-1/2 items-center justify-center">
+              <fieldset className=" box-border h-1/2 w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
                 <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Panel Generation
                 </div>
@@ -39,7 +25,7 @@ const WaterForm = () => {
                 />
               </fieldset>
             </div>
-            <div className="flex w-[50%] flex-col justify-center">
+            <div className="flex w-1/2 flex-col justify-center">
               <div className="ml-10 flex text-sm">
                 Where did you collect the sample from?
               </div>
@@ -87,16 +73,16 @@ const WaterForm = () => {
             </div>
           </div>
           <div className="flex h-20 w-[80%]">
-            <div className="flex w-[50%] items-center justify-center">
-              <fieldset className="box-border h-[50%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
+            <div className="flex w-1/2 items-center justify-center">
+              <fieldset className="box-border h-1/2 w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
                 <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Water Test Vial Expiration Date
                 </div>
                 <FormLine id="vial" placeholder="Select the Date" cusForm />
               </fieldset>
             </div>
-            <div className="flex w-[50%] items-center justify-center">
-              <fieldset className=" box-border h-[50%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
+            <div className="flex w-1/2 items-center justify-center">
+              <fieldset className=" box-border h-1/2 w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
                 <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Water Test Sample Date & Time
                 </div>
@@ -109,8 +95,8 @@ const WaterForm = () => {
             </div>
           </div>
           <div className="flex h-20 w-[80%]">
-            <div className="flex w-[50%] items-center justify-center">
-              <fieldset className="box-border h-[50%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
+            <div className="flex w-1/2 items-center justify-center">
+              <fieldset className="box-border h-1/2 w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
                 <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Water Test Read Date & Time
                 </div>
@@ -121,8 +107,8 @@ const WaterForm = () => {
                 />
               </fieldset>
             </div>
-            <div className="flex w-[50%] items-center justify-center">
-              <fieldset className=" box-border h-[50%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
+            <div className="flex w-1/2 items-center justify-center">
+              <fieldset className=" box-border h-1/2 w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
                 <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Water Test Sample Result
                 </div>
@@ -131,7 +117,7 @@ const WaterForm = () => {
             </div>
           </div>
           <div className="mt-5 flex h-20 w-[80%]">
-            <div className="flex w-[50%] translate-x-8 flex-col gap-2 ">
+            <div className="flex w-1/2 translate-x-8 flex-col gap-2 ">
               <div className="text-md w-fit bg-white px-1 font-bold">
                 Standard Water Test Results Image (No UV Black Light)
               </div>
@@ -142,7 +128,7 @@ const WaterForm = () => {
                 <div className="text-gray">No File Chosen</div>
               </div>
             </div>
-            <div className="flex w-[50%] items-center justify-center">
+            <div className="flex w-1/2 items-center justify-center">
               <fieldset className="box-border h-[100%] w-[90%] rounded-lg border-[0.25rem] border-loadGray focus-within:border-loadBlue">
                 <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Comments

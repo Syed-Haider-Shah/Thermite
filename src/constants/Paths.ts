@@ -8,6 +8,7 @@ export enum Paths {
   CUSTOMER = `${INDEX}customers`,
   CUSTOMER_ID = `${CUSTOMER}/[id]`,
   FORM = `${INDEX}forms`,
+  FORM_WATER = `${FORM}/water-sample-form`,
   FORM_ID = `${FORM}/[id]`,
   GUIDE = `${INDEX}guides`,
   GUIDE_ID = `${GUIDE}/[id]`,

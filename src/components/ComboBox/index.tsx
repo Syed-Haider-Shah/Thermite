@@ -6,11 +6,11 @@ import FormLine from '../FormLine'
 const ComboBox = ({ items }: { items: IRow[] }) => (
   <div
     id="dropdown-menu"
-    className="right-0 mt-2 space-y-1 rounded-md bg-white p-1"
+    className="right-0 mt-2 w-full space-y-1 rounded-md bg-white p-1"
   >
     <fieldset
       className={cn(
-        'box-border h-1/2 w-[90%] rounded-lg border-4 pb-3',
+        'box-border h-1/2 w-[90%] rounded-lg border-4',
         'border-loadGray focus-within:border-loadBlue'
       )}
     >

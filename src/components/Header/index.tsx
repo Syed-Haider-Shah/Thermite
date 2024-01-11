@@ -32,10 +32,7 @@ const HeaderComponent: FC = () => {
 
   return (
     <header className="relative flex h-24 w-full items-center justify-between border-l border-black/5 bg-white px-9 pb-5.5 pt-9 text-black/90">
-      <div className="flex items-center gap-7">
-        <h1 className="rounded-full bg-black/5 px-4 py-3.5 text-sm font-semibold">
-          Tickets 32
-        </h1>
+      <div className="ml-8 flex items-center">
         <Button
           onClick={() => {
             setShowFeedback((val) => !val)

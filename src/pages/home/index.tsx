@@ -56,14 +56,14 @@ export default function Home() {
         <meta name="description" content="Thermite" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className="ml-10">
+      <div className="">
         <div className="text-xl font-bold text-darkIndigo">
           Analytics / Reporting
         </div>
         <div className="mb-2 text-sm text-gray">App Activities at a Glance</div>
       </div>
       <div className="flex h-md">
-        <div className="ml-10 flex h-full w-62 flex-col gap-5">
+        <div className=" flex h-full w-62 flex-col gap-5">
           <section className="flex h-full w-full flex-col justify-between bg-white shadow-xl">
             <div className="mt-15 flex flex-col items-center justify-center">
               <div className="mt-2 text-2xl font-bold">
@@ -120,7 +120,7 @@ export default function Home() {
           </section>
           <TicketChart />
         </div>
-        <div className="ml-5 flex h-full w-full max-w-screen-md flex-col gap-5">
+        <div className="ml-5 flex h-full w-[70rem] flex-col gap-5">
           <section className="flex h-full w-full items-center justify-center bg-white shadow-xl">
             <div className="flex h-full w-full justify-between bg-white">
               <div className="flex h-full w-[40%] items-center justify-center ">
@@ -182,13 +182,13 @@ export default function Home() {
                         </button>
                       </div>
                     </div>
-                    <button className="flex w-full items-center justify-center rounded bg-white/10 p-2 text-sm font-light text-white transition-all hover:shadow-lg">
+                    <button className="flex w-full items-center justify-center rounded bg-white/10 p-2 text-sm font-light text-white transition-shadow hover:font-normal hover:shadow-lg">
                       Confirm Changes
                     </button>
                   </div>
                 </div>
               </div>
-              <div className="flex h-full w-[60%] items-center justify-center  bg-white">
+              <div className="flex h-full w-[60%] items-center justify-center  ">
                 <div className="h-[90%] w-[95%] rounded border border-gray/50 bg-white shadow-lg">
                   <ColumnChart />
                 </div>

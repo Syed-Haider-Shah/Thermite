@@ -4,7 +4,7 @@ const ColumnChart = () => {
   return (
     <>
       <section className="h-full w-full">
-        <div className="flex h-[25%] w-full items-center gap-5 bg-white pl-5">
+        <div className="flex h-[25%] w-full items-center gap-5 bg-white pl-8">
           <div className="flex h-[60%] w-[9%] items-center justify-center rounded bg-gray/20">
             <svg
               className="text-gray-500 dark:text-gray-400 h-6 w-6"
@@ -22,7 +22,7 @@ const ColumnChart = () => {
             <div className="text-sm text-gray">All time tickets closed</div>
           </div>
         </div>
-        <div className="mx-4 flex h-[55%] gap-5 border-y-2 border-vLightIndigo bg-white">
+        <div className="mx-4 flex h-[55%] justify-center gap-6 border-y-2 border-vLightIndigo bg-white">
           <ColumnChartLines title="Jan" value1="5rem" value2="5rem" />
           <ColumnChartLines title="Feb" value1="7.5rem" value2="5rem" />
           <ColumnChartLines title="Mar" value1="5rem" value2="2.5rem" />

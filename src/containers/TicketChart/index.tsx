@@ -36,7 +36,7 @@ const options = {
 const TicketChart = () => {
   return (
     <section className="flex h-full w-full flex-col items-center justify-between bg-white shadow-xl">
-      <div className="p-7 text-sm text-black">Assigned Ticket Details</div>
+      <div className="p-3.5 text-sm text-black">Assigned Ticket Details</div>
       <div className="h-32">
         <Doughnut data={data} options={options} />
       </div>

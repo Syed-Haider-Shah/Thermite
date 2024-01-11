@@ -127,7 +127,11 @@ export default function Home() {
                 TOP TOWNS WITH PENDING WORK
               </div>
               <div className="px-12">
-                <DashLoadBar townName="Wal" color="bg-red" progress="10" />
+                <DashLoadBar
+                  townName="WALGETT"
+                  color="bg-loadGreen"
+                  progress="90"
+                />
                 <div className="flex flex-col">
                   <div className="text-sm">LIGHTNING RIDGE</div>
                   <div className="flex items-center">

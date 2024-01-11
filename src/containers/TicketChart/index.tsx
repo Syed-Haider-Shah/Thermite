@@ -11,16 +11,16 @@ const data = {
       label: '# of Votes',
       data: [60, 10, 30],
       backgroundColor: [
-        'rgba(99, 102, 241, 0.2)',
-        'rgba(34, 197, 94, 0.2)',
-        'rgba(250, 204, 21, 0.2)'
+        'rgba(59, 130, 246,1)',
+        'rgba(80, 200, 120,1)',
+        'rgba(253, 186, 140, 1)'
       ],
       borderColor: [
-        'rgba(99, 102, 241, 1)',
-        'rgba(34, 197, 94, 1)',
-        'rgba(250, 204, 21, 1)'
+        'rgba(59, 130, 246,1)',
+        'rgba(80, 200, 120,1)',
+        'rgba(253, 186, 140, 1)'
       ],
-      borderWidth: 1
+      borderWidth: 0
     }
   ]
 }
@@ -43,7 +43,7 @@ const TicketChart = () => {
       <div className="flex w-full flex-col p-6 text-sm">
         <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
           <div className="flex items-center gap-2">
-            <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-indigo">
+            <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-loadBlue">
               <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
             </div>
             <div className="font-bold">Open Tickets</div>
@@ -73,7 +73,7 @@ const TicketChart = () => {
             <div
               className={cn(
                 'flex h-4 w-4 items-center justify-center rounded-5',
-                'bg-loadYellow'
+                'bg-loadOrange'
               )}
             >
               <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>

@@ -1,3 +1,5 @@
+import ColumnChartLines from '../ColumnChartLines'
+
 const ColumnChart = () => {
   return (
     <>
@@ -21,94 +23,57 @@ const ColumnChart = () => {
           </div>
         </div>
         <div className="mx-4 flex h-[55%] gap-5 border-y-2 border-vLightIndigo bg-white">
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Jan</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex items-end bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-10 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Feb</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Mar</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Apr</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">May</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Jun</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Jul</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Aug</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Sep</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Oct</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Nov</div>
-          </div>
-          <div className="flex h-full flex-col justify-end gap-2 bg-white">
-            <div className="flex bg-white">
-              <div className="h-20 w-3 rounded-t-5 bg-loadBlue"></div>
-              <div className="bg-loadOrange h-20 w-3 rounded-t-5"></div>
-            </div>
-            <div className="bg-white text-sm">Dec</div>
-          </div>
+          <ColumnChartLines title="Jan" value1="5rem" value2="5rem" />
+          <ColumnChartLines title="Feb" value1="7.5rem" value2="5rem" />
+          <ColumnChartLines title="Mar" value1="5rem" value2="2.5rem" />
+          <ColumnChartLines title="Apr" value1="2.5rem" value2="5rem" />
+          <ColumnChartLines title="May" value1="7rem" value2="6.75rem" />
+          <ColumnChartLines title="Jun" value1="5rem" value2="3.75rem" />
+          <ColumnChartLines title="Jul" value1="5rem" value2="5rem" />
+          <ColumnChartLines title="Aug" value1="2.5rem" value2="2.5rem" />
+          <ColumnChartLines title="Sep" value1="7.5rem" value2="7.5rem" />
+          <ColumnChartLines title="Oct" value1="7.5rem" value2="5rem" />
+          <ColumnChartLines title="Nov" value1="8.25rem" value2="7.5rem" />
+          <ColumnChartLines title="Dec" value1="7.5rem" value2="5rem" />
         </div>
         <div className="flex h-[20%] w-full items-center justify-around ">
-          <div className="text-gray">2024 L</div>{' '}
-          <div className="text-loadBlue">SEND REPORT L</div>
+          <button className="flex text-gray hover:text-darkIndigo">
+            <div>2024</div>
+            <svg
+              className="m-2.5 ms-1.5 w-2.5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+
+          <button className="flex items-center justify-center rounded p-2 px-4 font-bold text-loadBlue transition-all hover:bg-gray/20">
+            <div>SEND REPORT</div>
+            <svg
+              className="ms-1.5 h-2.5 w-2.5 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </button>
         </div>
       </section>
     </>

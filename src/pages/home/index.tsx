@@ -75,7 +75,7 @@ export default function Home() {
               <Link
                 href="/tickets"
                 className={cn(
-                  'flex w-[80%] justify-between gap-2 rounded-5 p-3 px-8 font-bold hover:shadow-xl',
+                  'flex w-[80%] justify-between rounded-5 p-3 px-6 font-bold transition-shadow hover:shadow-xl',
                   'bg-loadBlue '
                 )}
               >
@@ -95,7 +95,7 @@ export default function Home() {
                 </div>
                 <div className={cn('flex w-full', 'bg-loadGray')}>
                   <div
-                    className={`h-1 bg-indigo`}
+                    className={`h-1 bg-loadBlue`}
                     style={{
                       width: `${percentage}%`
                     }}
@@ -111,7 +111,7 @@ export default function Home() {
                 </div>
                 <div className={cn('flex w-full', 'bg-loadGray')}>
                   <div
-                    className={`h-1 bg-loadYellow`}
+                    className={`bg-loadOrange h-1`}
                     style={{ width: `${invPercentage}%` }}
                   ></div>
                 </div>
@@ -122,8 +122,8 @@ export default function Home() {
         </div>
         <div className="ml-5 flex h-full w-full max-w-screen-md flex-col gap-5">
           <section className="flex h-full w-full items-center justify-center bg-white shadow-xl">
-            <div className="flex h-full w-full justify-between bg-darkIndigo">
-              <div className="flex h-full w-[40%] items-center justify-center bg-white">
+            <div className="flex h-full w-full justify-between bg-white">
+              <div className="flex h-full w-[40%] items-center justify-center ">
                 <div className="flex h-[90%] w-[90%] flex-col items-center gap-3 rounded border border-gray/50 bg-white shadow-lg">
                   <div className="mt-10 flex h-20 w-20 flex-col items-center justify-center gap-0.5 rounded-full border-4 border-gray/20 bg-gray/5">
                     <div>
@@ -140,26 +140,56 @@ export default function Home() {
                   <div className=" flex h-[50%] w-full flex-col items-center justify-center gap-1 bg-loadBlue p-4 text-darkIndigo">
                     <div className="flex h-[95%] w-[95%] rounded bg-transparent">
                       <div className="flex w-[50%] flex-col items-center gap-3 p-2">
-                        <div className="font-bold text-white">Town</div>
-                        <button className="w-33 rounded border-2 border-white/10 p-2 text-sm font-light text-white">
-                          SELECT
+                        <div className=" font-bold text-white">Town</div>
+                        <button className="bg-re flex items-center justify-center gap-2 rounded pl-6 text-sm font-light text-white hover:font-normal">
+                          <div> SELECT </div>
+                          <svg
+                            className="m-2.5 ms-1.5 w-2.5"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 10 6"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m1 1 4 4 4-4"
+                            />
+                          </svg>
                         </button>
                       </div>
                       <div className="flex w-[50%] flex-col items-center gap-3 p-2 font-light">
                         <div className="font-bold text-white">Employee</div>
-                        <button className="w-33 rounded border-2 border-white/10 p-2 text-sm text-white">
-                          SELECT
+                        <button className="bg-re flex items-center justify-center gap-2 rounded pl-6 text-sm font-light text-white hover:font-normal">
+                          <div> SELECT </div>
+                          <svg
+                            className="m-2.5 ms-1.5 w-2.5"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 10 6"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m1 1 4 4 4-4"
+                            />
+                          </svg>
                         </button>
                       </div>
                     </div>
-                    <button className="flex w-full items-center justify-center rounded bg-white/10 p-2 text-sm font-light text-white hover:shadow-lg">
+                    <button className="flex w-full items-center justify-center rounded bg-white/10 p-2 text-sm font-light text-white transition-all hover:shadow-lg">
                       Confirm Changes
                     </button>
                   </div>
                 </div>
               </div>
               <div className="flex h-full w-[60%] items-center justify-center  bg-white">
-                <div className="h-[90%] w-[90%] rounded border border-gray/50 bg-white shadow-lg">
+                <div className="h-[90%] w-[95%] rounded border border-gray/50 bg-white shadow-lg">
                   <ColumnChart />
                 </div>
               </div>
@@ -173,45 +203,29 @@ export default function Home() {
               <div className="px-12">
                 <DashLoadBar
                   townName="WALGETT"
-                  color="bg-loadGreen"
+                  color="bg-loadBlue"
                   progress="90"
                 />
-                <div className="flex flex-col">
-                  <div className="text-sm">LIGHTNING RIDGE</div>
-                  <div className="flex items-center">
-                    <div className={cn('flex w-full', 'bg-loadGray')}>
-                      <div className={cn('h-1 w-[70%]', 'bg-loadBlue')}></div>
-                    </div>
-                    <div className="px-2 text-xs text-gray">70%</div>
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-sm">BOURKE</div>
-                  <div className="flex items-center">
-                    <div className={cn('flex w-full', 'bg-loadGray')}>
-                      <div className="h-1 w-[60%] bg-indigo"></div>
-                    </div>
-                    <div className="px-2 text-xs text-gray">60%</div>
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-sm">COBAR</div>
-                  <div className="flex items-center">
-                    <div className={cn('flex w-full', 'bg-loadGray')}>
-                      <div className={cn('h-1 w-[40%]', 'bg-loadYellow')}></div>
-                    </div>
-                    <div className="px-2 text-xs text-gray">40%</div>
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-sm">BROKEN HILL</div>
-                  <div className="flex items-center">
-                    <div className={cn('flex w-full', 'bg-loadGray')}>
-                      <div className="h-1 w-[30%] bg-red/80"></div>
-                    </div>
-                    <div className="px-2 text-xs text-gray">30%</div>
-                  </div>
-                </div>
+                <DashLoadBar
+                  townName="LIGHTNING RIDGE"
+                  color="bg-loadGreen"
+                  progress="80"
+                />
+                <DashLoadBar
+                  townName="BOURKE"
+                  color="bg-loadYellow"
+                  progress="70"
+                />
+                <DashLoadBar
+                  townName="COBAR"
+                  color="bg-loadOrange"
+                  progress="50"
+                />
+                <DashLoadBar
+                  townName="BROKEN HILL"
+                  color="bg-red/60"
+                  progress="30"
+                />
               </div>
             </div>
             <div className="flex h-full w-[40%] items-center justify-center">
@@ -223,7 +237,7 @@ export default function Home() {
               >
                 <Link
                   href="/"
-                  className=" m-2 flex items-center justify-center rounded-md bg-white/10 p-4 text-white hover:shadow-lg"
+                  className=" m-2 flex items-center justify-center rounded-md bg-white/10 p-4 text-white transition-all hover:shadow-lg"
                 >
                   Water Sample Form
                 </Link>

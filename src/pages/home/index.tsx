@@ -137,20 +137,23 @@ export default function Home() {
                   <div className="flex justify-center bg-white font-bold ">
                     EASY ASSIGN
                   </div>
-                  <div className=" flex h-[50%] w-full flex-col items-center justify-center bg-loadBlue/80 p-4 text-darkIndigo">
-                    <div className="flex h-[95%] w-[95%] rounded bg-white">
+                  <div className=" flex h-[50%] w-full flex-col items-center justify-center gap-1 bg-loadBlue p-4 text-darkIndigo">
+                    <div className="flex h-[95%] w-[95%] rounded bg-transparent">
                       <div className="flex w-[50%] flex-col items-center gap-3 p-2">
-                        <div className="font-bold">Town</div>
-                        <button className="rounded border-2 border-gray/20 p-2 text-sm text-gray">
+                        <div className="font-bold text-white">Town</div>
+                        <button className="w-24 rounded border-2 border-white/10 p-2 text-sm font-light text-white">
                           SELECT
                         </button>
                       </div>
-                      <div className="flex w-[50%] flex-col items-center gap-3 p-2">
-                        <div className="font-bold">Employee</div>
-                        <button className="rounded border-2 border-gray/20 p-2 text-sm text-gray">
+                      <div className="flex w-[50%] flex-col items-center gap-3 p-2 font-light">
+                        <div className="font-bold text-white">Employee</div>
+                        <button className="w-24 rounded border-2 border-white/10 p-2 text-sm text-white">
                           SELECT
                         </button>
                       </div>
+                    </div>
+                    <div className="flex w-full items-center justify-center rounded bg-white/20 p-2 text-sm font-light text-white">
+                      Confirm Changes
                     </div>
                   </div>
                 </div>

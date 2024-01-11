@@ -9,16 +9,16 @@ const data = {
   datasets: [
     {
       label: '# of Votes',
-      data: [12, 19, 3],
+      data: [60, 10, 30],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)'
+        'rgba(99, 102, 241, 0.2)',
+        'rgba(34, 197, 94, 0.2)',
+        'rgba(250, 204, 21, 0.2)'
       ],
       borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)'
+        'rgba(99, 102, 241, 1)',
+        'rgba(34, 197, 94, 1)',
+        'rgba(250, 204, 21, 1)'
       ],
       borderWidth: 1
     }
@@ -37,7 +37,7 @@ const TicketChart = () => {
   return (
     <section className="flex h-full w-full flex-col items-center justify-between bg-white shadow-xl">
       <div className="p-7 text-sm text-black">Assigned Ticket Details</div>
-      <div className="h-52">
+      <div className="h-32">
         <Doughnut data={data} options={options} />
       </div>
       <div className="flex w-full flex-col p-6 text-sm">

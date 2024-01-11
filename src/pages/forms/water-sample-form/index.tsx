@@ -1,4 +1,5 @@
-import { ComboBox, DatePicker, RadioButton } from '@/components'
+import { ComboBox, DatePicker, RadioButton, TextArea } from '@/components'
+import { cn } from '@/utils/cn'
 
 const WaterForm = () => {
   return (
@@ -35,7 +36,17 @@ const WaterForm = () => {
             <div className="text-gray">No File Chosen</div>
           </div>
         </div>
-        <ComboBox title="Comments" items={[]} />
+        <fieldset
+          className={cn(
+            'box-border w-full rounded-lg border-4',
+            'border-loadGray focus-within:border-loadBlue'
+          )}
+        >
+          <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
+            Comments
+          </div>
+          <TextArea id="ticket" placeholder="Select a Ticket" custForm />
+        </fieldset>
         <button className="text-md col-span-2 w-1/2 rounded bg-loadBlue p-2 px-56 font-bold text-white">
           SUBMIT
         </button>

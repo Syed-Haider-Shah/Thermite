@@ -3,19 +3,19 @@ import { cn } from '@/utils/cn'
 
 import FormLine from '../FormLine'
 
-const ComboBox = ({ items }: { items: IRow[] }) => (
+const ComboBox = ({ items, title }: { items: IRow[]; title: string }) => (
   <div
     id="dropdown-menu"
     className="right-0 mt-2 w-full space-y-1 rounded-md bg-white p-1"
   >
     <fieldset
       className={cn(
-        'box-border h-1/2 w-[90%] rounded-lg border-4',
+        'box-border rounded-lg border-4',
         'border-loadGray focus-within:border-loadBlue'
       )}
     >
       <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
-        Ticket Name
+        {title}
       </div>
       <FormLine id="ticket" placeholder="Select a Ticket" cusForm />
     </fieldset>

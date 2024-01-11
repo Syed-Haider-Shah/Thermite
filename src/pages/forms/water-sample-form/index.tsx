@@ -1,4 +1,4 @@
-import { ComboBox, RadioButton } from '@/components'
+import { ComboBox, DatePicker, RadioButton } from '@/components'
 
 const WaterForm = () => {
   return (
@@ -7,9 +7,9 @@ const WaterForm = () => {
         Water Sample Form
       </div>
       <div className="mx-auto grid h-20 w-4/5 grid-cols-2 place-items-center gap-7">
-        <ComboBox items={[]} />
-        <ComboBox items={[]} />
-        <ComboBox items={[]} />
+        <ComboBox title="Ticket Name" items={[]} />
+        <ComboBox title="Region" items={[]} />
+        <ComboBox title="Panel Generation" items={[]} />
         <div className="flex w-full flex-col justify-center pl-10">
           <div className="flex text-sm">
             Where did you collect the sample from?
@@ -20,12 +20,10 @@ const WaterForm = () => {
             <RadioButton name="BOTH" />
           </div>
         </div>
-
-        <ComboBox items={[]} />
-        <ComboBox items={[]} />
-
-        <ComboBox items={[]} />
-        <ComboBox items={[]} />
+        <DatePicker title="Water Test Vial Expiration Date" />
+        <DatePicker title="Water Test Sample Date & Time" showTime />
+        <DatePicker title="Water Test Read Date & Time" showTime />
+        <ComboBox title="Water Test Sample Result" items={[]} />
         <div className="flex w-full translate-x-8 flex-col gap-2 ">
           <div className="text-md w-fit bg-white px-1 font-bold">
             Standard Water Test Results Image (No UV Black Light)
@@ -37,7 +35,7 @@ const WaterForm = () => {
             <div className="text-gray">No File Chosen</div>
           </div>
         </div>
-        <ComboBox items={[]} />
+        <ComboBox title="Comments" items={[]} />
         <button className="text-md col-span-2 w-1/2 rounded bg-loadBlue p-2 px-56 font-bold text-white">
           SUBMIT
         </button>

@@ -57,7 +57,7 @@ const FormLineComponent: ForwardRefRenderFunction<
         {
           'text-sm leading-4 text-black/60': secondary,
           'text-sm leading-4 text-black/90': primary,
-          absol: cusForm
+          'absol mb-0': cusForm
         }
       )}
     >

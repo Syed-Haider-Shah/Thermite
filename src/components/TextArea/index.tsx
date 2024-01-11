@@ -15,6 +15,7 @@ interface IFormLine extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   placeholder?: string
   value?: string
   primary?: string | boolean
+  custForm?: boolean
   required?: boolean
   disabled?: boolean
   error?: string | boolean
@@ -33,6 +34,7 @@ const FormAreaComponent: ForwardRefRenderFunction<
     placeholder,
     value,
     primary,
+    custForm,
     required,
     disabled,
     onChange,
@@ -48,7 +50,8 @@ const FormAreaComponent: ForwardRefRenderFunction<
       htmlFor={id}
       className={cn('relative flex flex-col gap-y-1 font-semibold', {
         'text-sm leading-4 text-black/90': primary,
-        'mt-6 text-xl leading-6 text-black/60 ': !primary
+        'mt-6 text-xl leading-6 text-black/60 ': !primary,
+        'mt-0 -translate-y-3': custForm
       })}
     >
       <div className="flex gap-1">
@@ -60,7 +63,8 @@ const FormAreaComponent: ForwardRefRenderFunction<
           'resize-none text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
           {
             'rounded-1.25 border border-heavyGray px-2 py-2.5': primary,
-            'rounded-full bg-black/5 p-3': !primary
+            'rounded-full bg-black/5 p-3': !primary,
+            '!rounded-1.25  border-0 bg-transparent px-2 py-2.5': custForm
           },
           className
         )}

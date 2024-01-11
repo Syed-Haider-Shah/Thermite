@@ -5,8 +5,10 @@ import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { DashLoadBar, RightArrow } from '@/components'
+import { TicketChart } from '@/containers'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
+import { cn } from '@/utils/cn'
 
 export default function Home() {
   const [waterCount, setWaterCount] = useState(0)
@@ -72,7 +74,10 @@ export default function Home() {
             <div className="flex justify-center px-8 text-xs text-white">
               <Link
                 href="/tickets"
-                className="flex w-[80%] justify-between gap-2 rounded-5 bg-loadBlue p-3 px-8 font-bold hover:shadow-xl"
+                className={cn(
+                  'flex w-[80%] justify-between gap-2 rounded-5 p-3 px-8 font-bold hover:shadow-xl',
+                  'bg-loadBlue '
+                )}
               >
                 <div className="">TAKE ME TO TICKETS</div>
                 <div className="">
@@ -88,7 +93,7 @@ export default function Home() {
                     {user.number_of_assigned_tickets}
                   </div>
                 </div>
-                <div className="flex w-full bg-loadGray">
+                <div className={cn('flex w-full', 'bg-loadGray')}>
                   <div
                     className={`h-1 bg-indigo`}
                     style={{
@@ -104,7 +109,7 @@ export default function Home() {
                     {user.number_of_closed_tickets}
                   </div>
                 </div>
-                <div className="flex w-full bg-loadGray">
+                <div className={cn('flex w-full', 'bg-loadGray')}>
                   <div
                     className={`h-1 bg-loadYellow`}
                     style={{ width: `${invPercentage}%` }}
@@ -113,49 +118,9 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <section className="flex h-full w-full flex-col items-center justify-between bg-white shadow-xl">
-            <div className="p-7 text-sm text-black">
-              Assigned Ticket Details
-            </div>
-            <div>Loading Bar</div>
-            <div className="flex w-full flex-col p-6 text-sm">
-              <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-indigo">
-                    <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
-                  </div>
-                  <div className="font-bold">Open Tickets</div>
-                </div>
-                <div>
-                  <div className="text-gray">60%</div>
-                </div>
-              </div>
-              <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-loadGreen">
-                    <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
-                  </div>
-                  <div className="font-bold">Water Sample Required</div>
-                </div>
-                <div>
-                  <div className="text-gray">10%</div>
-                </div>
-              </div>
-              <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-loadYellow">
-                    <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
-                  </div>
-                  <div className="font-bold">Closed Tickets</div>
-                </div>
-                <div>
-                  <div className="text-gray">30%</div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <TicketChart />
         </div>
-        <div className="ml-5 flex h-full w-261 flex-col gap-5">
+        <div className="ml-5 flex h-full w-full max-w-screen-md flex-col gap-5">
           <section className="flex h-full w-full justify-between bg-white shadow-xl">
             <div className="h-full w-[60%]">
               <div className="p-12 pt-10 text-gray">
@@ -166,8 +131,8 @@ export default function Home() {
                 <div className="flex flex-col">
                   <div className="text-sm">LIGHTNING RIDGE</div>
                   <div className="flex items-center">
-                    <div className="flex w-full bg-loadGray">
-                      <div className="h-1 w-[70%] bg-loadBlue"></div>
+                    <div className={cn('flex w-full', 'bg-loadGray')}>
+                      <div className={cn('h-1 w-[70%]', 'bg-loadBlue')}></div>
                     </div>
                     <div className="px-2 text-xs text-gray">70%</div>
                   </div>
@@ -175,7 +140,7 @@ export default function Home() {
                 <div className="flex flex-col">
                   <div className="text-sm">BOURKE</div>
                   <div className="flex items-center">
-                    <div className="flex w-full bg-loadGray">
+                    <div className={cn('flex w-full', 'bg-loadGray')}>
                       <div className="h-1 w-[60%] bg-indigo"></div>
                     </div>
                     <div className="px-2 text-xs text-gray">60%</div>
@@ -184,8 +149,8 @@ export default function Home() {
                 <div className="flex flex-col">
                   <div className="text-sm">COBAR</div>
                   <div className="flex items-center">
-                    <div className="flex w-full bg-loadGray">
-                      <div className="h-1 w-[40%] bg-loadYellow"></div>
+                    <div className={cn('flex w-full', 'bg-loadGray')}>
+                      <div className={cn('h-1 w-[40%]', 'bg-loadYellow')}></div>
                     </div>
                     <div className="px-2 text-xs text-gray">40%</div>
                   </div>
@@ -193,7 +158,7 @@ export default function Home() {
                 <div className="flex flex-col">
                   <div className="text-sm">BROKEN HILL</div>
                   <div className="flex items-center">
-                    <div className="flex w-full bg-loadGray">
+                    <div className={cn('flex w-full', 'bg-loadGray')}>
                       <div className="h-1 w-[30%] bg-red/80"></div>
                     </div>
                     <div className="px-2 text-xs text-gray">30%</div>
@@ -202,7 +167,12 @@ export default function Home() {
               </div>
             </div>
             <div className="flex h-full w-[40%] items-center justify-center">
-              <div className="flex h-[95%] w-[95%] flex-col justify-between overflow-hidden rounded-md bg-loadBlue">
+              <div
+                className={cn(
+                  'flex h-[95%] w-[95%] flex-col justify-between overflow-hidden rounded-md',
+                  'bg-loadBlue'
+                )}
+              >
                 <Link
                   href="/"
                   className=" m-2 flex items-center justify-center rounded-md bg-white/10 p-4 text-white hover:shadow-lg"

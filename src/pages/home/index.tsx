@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { DashLoadBar, RightArrow } from '@/components'
+import { ComboBox, DashLoadBar, RightArrow } from '@/components'
 import { TicketChart } from '@/containers'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
@@ -121,6 +121,48 @@ export default function Home() {
           <TicketChart />
         </div>
         <div className="ml-5 flex h-full w-full max-w-screen-md flex-col gap-5">
+          <section className="flex h-full w-full items-center justify-center bg-white shadow-xl">
+            <div className="flex h-full w-full justify-between bg-darkIndigo">
+              <div className="flex h-full w-full items-center justify-center bg-white">
+                <div className="flex h-[90%] w-[90%] flex-col items-center gap-3 rounded border border-gray/50 bg-white shadow-lg">
+                  <div className="mt-10 flex h-20 w-20 flex-col items-center justify-center gap-0.5 rounded-full border-4 border-gray/20 bg-gray/5">
+                    <div>
+                      <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>
+                    </div>
+                    <div className="flex gap-1">
+                      <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>
+                      <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center bg-white font-bold ">
+                    EASY ASSIGN
+                  </div>
+                  <div className=" flex h-[50%] w-full flex-col items-center justify-center bg-loadBlue/80 p-4 text-darkIndigo">
+                    <div className="flex h-[95%] w-[95%] rounded bg-white">
+                      <div className="flex w-[50%] flex-col items-center gap-3 p-2">
+                        <div className="font-bold">Town</div>
+                        <button className="rounded border-2 border-gray/20 p-2 text-sm text-gray">
+                          SELECT
+                        </button>
+                      </div>
+                      <div className="flex w-[50%] flex-col items-center gap-3 p-2">
+                        <div className="font-bold">Employee</div>
+                        <button className="rounded border-2 border-gray/20 p-2 text-sm text-gray">
+                          SELECT
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex h-full w-full items-center justify-center border border-gray bg-red">
+                <div className="h-[90%] w-[90%] rounded bg-white"></div>
+              </div>
+              <div className="flex h-full w-full items-center justify-center border border-gray bg-loadGreen">
+                <div className="h-[90%] w-[90%] rounded bg-white"></div>
+              </div>
+            </div>
+          </section>
           <section className="flex h-full w-full justify-between bg-white shadow-xl">
             <div className="h-full w-[60%]">
               <div className="p-12 pt-10 text-gray">
@@ -202,7 +244,6 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <section className="flex h-full w-full flex-col justify-between bg-white shadow-xl"></section>
         </div>
       </div>
     </>

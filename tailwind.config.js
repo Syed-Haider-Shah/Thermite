@@ -162,7 +162,8 @@ module.exports = {
       loadGray: '#E2E8F0',
       loadYellow: '#facc15',
       loadGreen: '#22c55e',
-      loadBlue: '#3b82f6'
+      loadBlue: '#3b82f6',
+      loadOrange: '#FDBA8C'
     }
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],

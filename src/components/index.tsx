@@ -19,6 +19,7 @@ export { default as DashLoadBar } from './DashLoadBar'
 export { default as ComboBox } from './ComboBox'
 export { default as RadioButton } from './RadioButton'
 export { default as DatePicker } from './DatePicker'
+export { default as ColumnChart } from './ColumnChart'
 
 export {
   MagnifierIcon,

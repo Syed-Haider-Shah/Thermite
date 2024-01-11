@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { ComboBox, DashLoadBar, RightArrow } from '@/components'
+import { ColumnChart, DashLoadBar, RightArrow } from '@/components'
 import { TicketChart } from '@/containers'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
@@ -123,7 +123,7 @@ export default function Home() {
         <div className="ml-5 flex h-full w-full max-w-screen-md flex-col gap-5">
           <section className="flex h-full w-full items-center justify-center bg-white shadow-xl">
             <div className="flex h-full w-full justify-between bg-darkIndigo">
-              <div className="flex h-full w-full items-center justify-center bg-white">
+              <div className="flex h-full w-[40%] items-center justify-center bg-white">
                 <div className="flex h-[90%] w-[90%] flex-col items-center gap-3 rounded border border-gray/50 bg-white shadow-lg">
                   <div className="mt-10 flex h-20 w-20 flex-col items-center justify-center gap-0.5 rounded-full border-4 border-gray/20 bg-gray/5">
                     <div>
@@ -141,28 +141,27 @@ export default function Home() {
                     <div className="flex h-[95%] w-[95%] rounded bg-transparent">
                       <div className="flex w-[50%] flex-col items-center gap-3 p-2">
                         <div className="font-bold text-white">Town</div>
-                        <button className="w-24 rounded border-2 border-white/10 p-2 text-sm font-light text-white">
+                        <button className="w-33 rounded border-2 border-white/10 p-2 text-sm font-light text-white">
                           SELECT
                         </button>
                       </div>
                       <div className="flex w-[50%] flex-col items-center gap-3 p-2 font-light">
                         <div className="font-bold text-white">Employee</div>
-                        <button className="w-24 rounded border-2 border-white/10 p-2 text-sm text-white">
+                        <button className="w-33 rounded border-2 border-white/10 p-2 text-sm text-white">
                           SELECT
                         </button>
                       </div>
                     </div>
-                    <div className="flex w-full items-center justify-center rounded bg-white/20 p-2 text-sm font-light text-white">
+                    <button className="flex w-full items-center justify-center rounded bg-white/10 p-2 text-sm font-light text-white hover:shadow-lg">
                       Confirm Changes
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
-              <div className="flex h-full w-full items-center justify-center border border-gray bg-red">
-                <div className="h-[90%] w-[90%] rounded bg-white"></div>
-              </div>
-              <div className="flex h-full w-full items-center justify-center border border-gray bg-loadGreen">
-                <div className="h-[90%] w-[90%] rounded bg-white"></div>
+              <div className="flex h-full w-[60%] items-center justify-center  bg-white">
+                <div className="h-[90%] w-[90%] rounded border border-gray/50 bg-white shadow-lg">
+                  <ColumnChart />
+                </div>
               </div>
             </div>
           </section>

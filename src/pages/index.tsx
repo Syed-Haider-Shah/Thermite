@@ -75,7 +75,7 @@ const Home = () => {
                 Welcome back to Thermite
               </h1>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-10 px-2">
               <fieldset
                 className={cn(
                   'box-border rounded-lg border-4',
@@ -131,7 +131,7 @@ const Home = () => {
             >
               Login
             </Button>
-            <div className="ml-2 flex gap-2">
+            <div className="ml-2.5 flex gap-2">
               <div className="text-gray">Need help with something?</div>
               <button className="font-medium text-loadBlue">
                 Contact Support

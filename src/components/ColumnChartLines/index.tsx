@@ -16,7 +16,7 @@ const ColumnChartLines = ({
             style={{ height: `${value1}` }}
           ></div>
           <div
-            className={`bg-loadOrange w-3 animate-slide-up rounded-t-5`}
+            className={`w-3 animate-slide-up rounded-t-5 bg-loadOrange`}
             style={{ height: `${value2}` }}
           ></div>
         </div>

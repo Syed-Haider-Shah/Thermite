@@ -111,7 +111,7 @@ export default function Home() {
                 </div>
                 <div className={cn('flex w-full', 'bg-loadGray')}>
                   <div
-                    className={`bg-loadOrange h-1`}
+                    className={`h-1 bg-loadOrange`}
                     style={{ width: `${invPercentage}%` }}
                   ></div>
                 </div>

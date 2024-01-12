@@ -3,7 +3,15 @@ import { cn } from '@/utils/cn'
 
 import FormLine from '../FormLine'
 
-const ComboBox = ({ items, title }: { items: IRow[]; title: string }) => (
+const ComboBox = ({
+  items,
+  title,
+  place
+}: {
+  items: IRow[]
+  title: string
+  place?: string
+}) => (
   <div
     id="dropdown-menu"
     className="right-0 mt-2 w-full space-y-1 rounded-md bg-white p-1"
@@ -17,7 +25,7 @@ const ComboBox = ({ items, title }: { items: IRow[]; title: string }) => (
       <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
         {title}
       </div>
-      <FormLine id="ticket" placeholder="Select a Ticket" cusForm />
+      <FormLine id="ticket" placeholder={place} cusForm />
     </fieldset>
 
     {items.map((item) => (

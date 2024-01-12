@@ -14,7 +14,7 @@ const NavBarButtonComponent: FC<INavButton> = ({ children, href, active }) => (
   <Link
     href={href}
     className={cn(
-      'flex cursor-pointer items-center gap-2 rounded-2.5 text-base font-normal leading-6 transition-colors duration-300 hover:text-white',
+      'flex cursor-pointer items-center gap-4 rounded-2.5 text-base font-normal leading-6 transition-colors duration-300 hover:text-white',
       {
         'bg-darkIndigo font-medium text-white': active.startsWith(href),
         'text-white/60': !active.startsWith(href)

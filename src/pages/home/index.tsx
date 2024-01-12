@@ -124,7 +124,7 @@ export default function Home() {
           <section className="flex h-full w-full items-center justify-center bg-white shadow-xl">
             <div className="flex h-full w-full justify-between bg-white">
               <div className="flex h-full w-[40%] items-center justify-center ">
-                <div className="flex h-[90%] w-[90%] flex-col items-center gap-3 rounded border border-gray/50 bg-white shadow-lg">
+                <div className="flex h-[90%] w-[80%] -translate-x-3 flex-col items-center gap-3 rounded border border-gray/50 bg-white shadow-lg">
                   <div className="mt-10 flex h-20 w-20 flex-col items-center justify-center gap-0.5 rounded-full border-4 border-gray/20 bg-gray/5">
                     <div>
                       <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>
@@ -189,7 +189,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex h-full w-[60%] items-center justify-center  ">
-                <div className="h-[90%] w-[95%] rounded border border-gray/50 bg-white shadow-lg">
+                <div className="h-[90%] w-[95%] -translate-x-4 rounded border border-gray/50 bg-white shadow-lg">
                   <ColumnChart />
                 </div>
               </div>

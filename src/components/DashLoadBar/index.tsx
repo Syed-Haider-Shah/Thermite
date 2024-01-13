@@ -13,7 +13,10 @@ const DashLoadBar = ({
         <div className="text-sm">{townName}</div>
         <div className="flex items-center">
           <div className="flex w-full bg-loadGray">
-            <div className={`h-1 w-[80%] ${color}`}></div>
+            <div
+              className={`h-1 ${color}`}
+              style={{ width: `${progress}%` }}
+            ></div>
           </div>
           <div className="px-2 text-xs text-gray">{progress}%</div>
         </div>

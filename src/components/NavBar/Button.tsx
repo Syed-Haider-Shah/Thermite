@@ -14,13 +14,20 @@ const NavBarButtonComponent: FC<INavButton> = ({ children, href, active }) => (
   <Link
     href={href}
     className={cn(
-      'group flex cursor-pointer gap-2 rounded-2.5 px-4.5 py-2 text-base font-medium leading-6 transition-colors duration-300',
+      'flex cursor-pointer items-center gap-4 rounded-2.5 text-base font-normal leading-6 transition-colors duration-300 hover:text-white',
       {
-        'selected bg-darkIndigo text-white': active === href,
-        'text-white': active !== href
+        'bg-darkIndigo font-medium text-white': active.startsWith(href),
+        'text-white/60': !active.startsWith(href)
       }
     )}
   >
+    <div
+      className={cn('h-10 w-2', {
+        '-translate-x-4 rounded bg-white shadow-2xl shadow-white':
+          active.startsWith(href),
+        '': !active.startsWith(href)
+      })}
+    ></div>
     {children}
   </Link>
 )

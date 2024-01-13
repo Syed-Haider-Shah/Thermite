@@ -32,10 +32,7 @@ const HeaderComponent: FC = () => {
 
   return (
     <header className="relative flex h-24 w-full items-center justify-between border-l border-black/5 bg-white px-9 pb-5.5 pt-9 text-black/90">
-      <div className="flex items-center gap-7">
-        <h1 className="rounded-full bg-black/5 px-4 py-3.5 text-sm font-semibold">
-          Tickets 32
-        </h1>
+      <div className=" flex items-center">
         <Button
           onClick={() => {
             setShowFeedback((val) => !val)
@@ -47,7 +44,7 @@ const HeaderComponent: FC = () => {
         </Button>
       </div>
       {showFeedback && <Feedback onBlur={handleBlurFeedback} />}
-      <div className="flex items-center gap-7">
+      <div className=" flex items-center gap-7">
         <Bell />
         <div className="relative flex items-center gap-4">
           <h1 className=" text-lg font-semibold leading-6">{user.name}</h1>

@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -8,9 +7,10 @@ import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Button } from '@/components'
+import { Button, FormLine } from '@/components'
 import { Paths } from '@/constants'
 import { supabase } from '@/services/supabase'
+import { cn } from '@/utils/cn'
 import { LoginSchema } from '@/utils/yupConfig'
 
 const Home = () => {
@@ -57,53 +57,86 @@ const Home = () => {
       </Head>
       <div className="absolute right-0 top-0 flex h-screen w-screen">
         <Image
-          src="/home.webp"
+          src="/art2.jpg"
           alt="home-art"
           priority
           width={1500}
           height={900}
           className="hidden w-1/2 object-cover md:block"
         />
-        <div className="flex w-full min-w-95 flex-col items-center justify-center gap-5 bg-background md:w-1/2">
-          <h1 className="text-2xl font-semibold">Welcome back to Thermite</h1>
+        <div className="flex w-full min-w-95 flex-col items-center justify-center bg-white md:w-1/2">
           <form
             onSubmit={handleSubmit(handleSignIn)}
-            className="flex flex-col rounded-2.5 bg-white p-4 shadow-md"
+            className="mt-20 flex h-[50%] w-[60%] flex-col gap-10 bg-white"
           >
-            <label title="email" htmlFor="email">
-              <input
-                id="email"
-                placeholder="Email"
-                type="email"
-                required
-                className="w-80 border-x border-t border-black/10 p-2 outline-none"
-                {...register('email')}
-              />
-            </label>
-            <label title="password" htmlFor="password">
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                required
-                className="w-80 border border-black/10 p-2 outline-none"
-                {...register('password')}
-              />
-            </label>
+            <div className="ml-2 flex flex-col gap-2">
+              <h1 className="text-3xl font-bold">Login</h1>
+              <h1 className="text-sm font-normal text-gray">
+                Welcome back to Thermite
+              </h1>
+            </div>
+            <div className="flex flex-col gap-10 px-2">
+              <fieldset
+                className={cn(
+                  'box-border rounded-lg border-4',
+                  'border-loadGray focus-within:border-loadBlue'
+                )}
+              >
+                <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
+                  Email
+                </div>
+                <FormLine id="email" cusForm {...register('email')} />
+              </fieldset>
+              <fieldset
+                className={cn(
+                  'box-border rounded-lg border-4',
+                  'border-loadGray focus-within:border-loadBlue'
+                )}
+              >
+                <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
+                  Password
+                </div>
+                <FormLine
+                  id="password"
+                  type="password"
+                  cusForm
+                  {...register('password')}
+                />
+              </fieldset>
+            </div>
+            <div className="flex justify-between px-2">
+              <div className="text-gray">
+                <div className="flex items-center gap-3">
+                  <label
+                    title="sample"
+                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-[0.25rem] border-loadGray focus-within:border-loadBlue"
+                  >
+                    <input
+                      type="checkbox"
+                      title="sample"
+                      className="ring-cursor-pointer h-2 w-2 cursor-pointer appearance-none rounded-full bg-transparent accent-loadBlue ring-0 ring-loadBlue ring-offset-0 focus:bg-loadBlue focus:ring-2"
+                    ></input>
+                  </label>
+                  Remember me
+                </div>
+              </div>
+              <button className="font-medium text-loadBlue">
+                Forgot Password?
+              </button>
+            </div>
             <Button
               type="submit"
               isLoading={isLoading}
-              active
-              className="mt-3 w-80 p-2"
+              className="mx-2 flex items-center justify-center !rounded-2.5 bg-loadBlue/90 p-3 text-white hover:bg-loadBlue"
             >
-              Sign in
+              Login
             </Button>
-            <Link
-              className="mt-2 text-sm font-semibold hover:underline"
-              href={Paths.FORGET_PASSWORD}
-            >
-              Forget password ?
-            </Link>
+            <div className="ml-2.5 flex gap-2">
+              <div className="text-gray">Need help with something?</div>
+              <button className="font-medium text-loadBlue">
+                Contact Support
+              </button>
+            </div>
           </form>
         </div>
       </div>

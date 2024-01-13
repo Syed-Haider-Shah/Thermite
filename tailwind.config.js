@@ -55,6 +55,7 @@ module.exports = {
         0.25: '0.0625rem', // 1px
         0.5: '0.125rem', // 2px
         18: '4.5rem', //72px
+        30: '7.5rem', //120px
         50.5: '12.625rem', //202px
         176: '44.0rem', //704px
         200: '50.0rem', //400px
@@ -160,9 +161,10 @@ module.exports = {
       activeBlue: '#456BF0',
       //loading
       loadGray: '#E2E8F0',
-      loadYellow: '#facc15',
-      loadGreen: '#22c55e',
-      loadBlue: '#3b82f6'
+      loadYellow: '#FFD700',
+      loadGreen: '#50C878',
+      loadBlue: '#3b82f6',
+      loadOrange: '#FDBA8C'
     }
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],

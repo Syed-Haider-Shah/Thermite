@@ -47,7 +47,7 @@ Thermite is mainly a ticketing system that consist of tickets which represents t
 
 The abstract design of tickets is shown below, a more detailed picture of database schema is
 
-![Image1](./image1.png)
+![Image1](public/image1.png)
 
 #### Customers
 
@@ -69,7 +69,7 @@ The database at the Back-end is a PostgreSQL database which runs on Supabase, it
 
 A schema is displayed below
 
-![Schema](./Schema.png)
+![Schema](public/Schema.png)
 
 ### How does Status work?
 
@@ -77,7 +77,7 @@ A schema is displayed below
 
 By default, a newly opened `Child` or `Parent Ticket` will have `OPEN` status. As the `Site Technician` starts to complete tasks on the `Child Ticket`, he can change the `Child Ticket` status to `CLOSED` and once he turned all the `Child Ticket` status to `CLOSED` he can proceed to close the `Parent Ticket`. Ideally, the `Site Technician` has to change all the `Child Ticket` status to `CLOSED` before he closes the `Parent Ticket`, but sometimes this is not possible. So, in times where he is not able to close all `Child Tickets` of a particular `Parent Ticket` then the `OPEN` `CHILD TICKET` will decouple from that parent and will link to a newly created `Parent Ticket`. Visual Representation is shown below:
 
-![Image2](./image2.png)
+![Image2](public/image2.png)
 
 - In the image above, Child 1 and Child 2 closed while Child 3 remained open. So, when the Parent 1 closed, Child 3 no longer remained linked Parent 1, instead it links to a newly created Parent, Parent 2. In the end, Parent 1 is packaged with it's 2 closed child, while the Child 3 shows up again in the ticket list as an incomplete task.
 

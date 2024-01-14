@@ -78,22 +78,28 @@ const Home = () => {
             <div className="flex flex-col gap-10 px-2">
               <fieldset
                 className={cn(
-                  'box-border rounded-lg border-4',
+                  'relative box-border h-10 rounded-lg border-4',
                   'border-loadGray focus-within:border-loadBlue'
                 )}
               >
-                <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
+                <div className="absolute z-10 w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Email
                 </div>
-                <FormLine id="email" cusForm {...register('email')} />
+                <FormLine
+                  id="email"
+                  type="email"
+                  cusForm
+                  {...register('email')}
+                  className="h-8 translate-y-0"
+                />
               </fieldset>
               <fieldset
                 className={cn(
-                  'box-border rounded-lg border-4',
+                  'relative box-border h-10 rounded-lg border-4',
                   'border-loadGray focus-within:border-loadBlue'
                 )}
               >
-                <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
+                <div className="absolute z-10 w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                   Password
                 </div>
                 <FormLine
@@ -101,6 +107,7 @@ const Home = () => {
                   type="password"
                   cusForm
                   {...register('password')}
+                  className="h-8 translate-y-0"
                 />
               </fieldset>
             </div>

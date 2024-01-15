@@ -64,9 +64,8 @@ const TicketDetails = () => {
   const fetchDetails = useCallback(async () => {
     setIsLoading(true)
     const { data, error } = await supabase
-      .rpc('show_parent_details', {
-        parent_id: Number(pid)
-      })
+      .rpc('get_parent_tickets')
+      .eq('id', Number(pid))
       .single()
     setIsLoading(false)
 

@@ -4,8 +4,8 @@ import ChartLine from './ChartLine'
 const ColumnChart = () => {
   return (
     <section className="col-span-2 h-full w-full border border-black/10">
-      <div className="flex h-[25%] w-full items-center gap-5 bg-white pl-8">
-        <div className="flex h-[60%] w-[9%] items-center justify-center rounded bg-gray/20">
+      <div className="flex h-1/4 w-full items-center gap-5 bg-white pl-8">
+        <div className="flex h-3/5 w-[9%] items-center justify-center rounded bg-gray/20">
           <PeopleV2 />
         </div>
         <div>
@@ -27,7 +27,7 @@ const ColumnChart = () => {
         <ChartLine title="Nov" value1="8.25rem" value2="7.5rem" />
         <ChartLine title="Dec" value1="7.5rem" value2="5rem" />
       </div>
-      <div className="flex h-[20%] w-full items-center justify-around ">
+      <div className="flex h-1/5 w-full items-center justify-around ">
         <button className="flex text-gray hover:text-darkIndigo">
           <div>2024</div>
           <ArrowDown />

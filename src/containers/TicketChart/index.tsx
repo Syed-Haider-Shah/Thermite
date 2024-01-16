@@ -44,7 +44,7 @@ const TicketChart = () => {
         <div className="flex justify-between border-b-2 border-vLightIndigo p-2">
           <div className="flex items-center gap-2">
             <div className="flex h-4 w-4 items-center justify-center rounded-5 bg-loadBlue">
-              <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
+              <div className="h-3/5 w-3/5 rounded-5 bg-white"></div>
             </div>
             <div className="font-bold">Open Tickets</div>
           </div>
@@ -60,7 +60,7 @@ const TicketChart = () => {
                 'bg-loadGreen'
               )}
             >
-              <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
+              <div className="h-3/5 w-3/5 rounded-5 bg-white"></div>
             </div>
             <div className="font-bold">Water Sample Required</div>
           </div>
@@ -76,7 +76,7 @@ const TicketChart = () => {
                 'bg-loadOrange'
               )}
             >
-              <div className="h-[60%] w-[60%] rounded-5 bg-white"></div>
+              <div className="h-3/5 w-3/5 rounded-5 bg-white"></div>
             </div>
             <div className="font-bold">Closed Tickets</div>
           </div>

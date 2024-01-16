@@ -31,7 +31,7 @@ const TicketDash = () => {
   }, [percentage])
 
   return (
-    <section className="flex h-full flex-col justify-between bg-white shadow-xl">
+    <section className="flex h-full w-62 flex-col justify-between bg-white shadow-xl">
       <div className="mt-15 flex flex-col items-center justify-center">
         <div className="mt-2 text-2xl font-bold">
           {user.number_of_assigned_tickets}

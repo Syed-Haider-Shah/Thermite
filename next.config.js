@@ -16,7 +16,8 @@ const nextConfig = {
         protocol: 'https',
         hostname: process.env.NEXT_PUBLIC_SUPABASE_DOMAIN
       }
-    ]
+    ],
+    domains: [process.env.SUPABASE_URL]
   },
   trailingSlash: false
 }

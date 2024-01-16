@@ -7,7 +7,8 @@ const nextConfig = {
   env: {
     SUPABASE_URL: process.env.SUPABASE_URL,
     ANON_KEY: process.env.ANON_KEY,
-    SERVICE_ROLE: process.env.SERVICE_ROLE
+    SERVICE_ROLE: process.env.SERVICE_ROLE,
+    NEXT_PUBLIC_SUPABASE_DOMAIN: process.env.NEXT_PUBLIC_SUPABASE_DOMAIN
   },
   images: {
     remotePatterns: [

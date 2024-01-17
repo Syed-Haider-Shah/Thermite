@@ -33,7 +33,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         )}
       >
         {pathname !== '/' && <Header />}
-        <main className="flex flex-col gap-4 overflow-hidden p-8">
+        <main className="flex flex-col gap-4 overflow-x-hidden p-8">
           {children}
         </main>
       </div>

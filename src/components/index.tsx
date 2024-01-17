@@ -20,6 +20,7 @@ export { default as ComboBox } from './ComboBox'
 export { default as RadioButton } from './RadioButton'
 export { default as DatePicker } from './DatePicker'
 export { default as ColumnChart } from './ColumnChart'
+export { default as GuidesCard } from './GuidesCard'
 
 export {
   MagnifierIcon,
@@ -47,5 +48,7 @@ export {
   Tickets,
   RightArrow,
   Customers,
-  WaterVial
+  WaterVial,
+  SupportIcon,
+  DownloadIcon
 } from './Icons'

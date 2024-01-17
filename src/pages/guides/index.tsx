@@ -1,88 +1,37 @@
-import Link from 'next/link'
-
-import { useCallback, useState } from 'react'
-
-import { Card, FilterSelect, SearchBar, Tag } from '@/components'
-import { Paths } from '@/constants'
-
-const CATEGORYS = [
-  'Generation F',
-  'Generation E',
-  'Generation H',
-  'Visual Parts'
-]
-
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'installation', name: 'Installation' },
-  { value: 'production', name: 'Production' },
-  { value: 'dispensing', name: 'Dispensing' },
-  { value: 'ozonation', name: 'Ozonation' }
-]
-
+import GuidesCard from '@/components/GuidesCard'
+//took videos from https://www.pexels.com/
 const Guides = () => {
-  const [search, setSearch] = useState<string>('')
-
-  const handleSearch = useCallback((text: string) => {
-    setSearch(text)
-  }, [])
-
   return (
-    <Card
-      title="Guides"
-      id="guides"
-      className="scrollbar-primary overflow-y-scroll"
-    >
-      <SearchBar
-        value={search}
-        onSearch={handleSearch}
-        placeholder="Search for Guides"
-      />
-      <div className="flex items-end justify-between">
-        <div title="generations" className="flex flex-col gap-2">
-          <h2 className="font-semibold leading-5 text-black/90 ">
-            Generations:
-          </h2>
-          <div className="flex gap-2">
-            {CATEGORYS.map((tag) => (
-              <Tag title={tag} key={tag}>
-                {tag}
-              </Tag>
-            ))}
-          </div>
+    <>
+      <div className="">
+        <div className="text-xl font-bold text-darkIndigo">
+          Guides / Training
         </div>
-        <FilterSelect options={OPTIONS} name="type" />
+        <div className="mb-2 text-sm text-gray">
+          Familiarize yourself before you jump into action
+        </div>
       </div>
-      <h1 className="translate-y-1 font-semibold leading-5 text-black/90">
-        Guides
-      </h1>
-      <div className="space-y-3">
-        <Link
-          href={`${Paths.GUIDE}/1`}
-          className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5 transition-shadow duration-300 hover:shadow-lg"
-        >
-          <div className="space-y-2 text-sm">
-            <h1 className="font-semibold leading-4">
-              Source GUI Installation Instruction
-            </h1>
-            <p className="font-medium text-black/60">NEW 07/29/2023</p>
-          </div>
-          <p>Installation Instruction for the source GUI</p>
-        </Link>
-        <Link
-          href={`${Paths.GUIDE}/1`}
-          className="flex justify-between space-x-10 rounded-5 bg-lightGray p-5 transition-shadow duration-300 hover:shadow-lg"
-        >
-          <div className="space-y-2 text-sm">
-            <h1 className="font-semibold leading-4">
-              Source GUI Installation Instruction
-            </h1>
-            <p className="font-medium text-black/60">NEW 07/29/2023</p>
-          </div>
-          <p>Installation Instruction for the source GUI</p>
-        </Link>
+      <div className="flex flex-wrap gap-5">
+        <GuidesCard
+          guidevideo={'/video6.mp4'}
+          title="Water Filter Replacement Guide"
+        />
+        <GuidesCard guidevideo={'/video4.mp4'} title="Firmware Update Guide" />
+        <GuidesCard
+          guidevideo={'/video5.mp4'}
+          title="Panel Installation Guide"
+        />
+        <GuidesCard guidevideo={'/video7.mp4'} title="Site Audit Guide" />
+        <GuidesCard
+          guidevideo={'/video8.mp4'}
+          title="Motor replacement Guide"
+        />
+        <GuidesCard
+          guidevideo={'/video9.mp4'}
+          title="Motor replacement Guide"
+        />
       </div>
-    </Card>
+    </>
   )
 }
 

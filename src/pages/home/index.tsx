@@ -27,7 +27,7 @@ export default function Home() {
           <TicketChart />
         </div>
         <div className="ml-5 flex h-full w-full max-w-screen-lg flex-col gap-5">
-          <section className="grid h-full w-full grid-cols-3 gap-7 bg-white p-8 shadow-xl">
+          <section className="grid h-full w-full grid-cols-3 items-center gap-7 bg-white pl-4 shadow-xl">
             <QuickAssign />
             <ColumnChart />
           </section>

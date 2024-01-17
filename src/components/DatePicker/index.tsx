@@ -11,7 +11,7 @@ const DateTimePicker = ({
   title: string
   showTime?: boolean
 }) => {
-  const [startDate, setStartDate] = useState<null | Date>(new Date())
+  const [startDate, setStartDate] = useState<null | Date>(null)
 
   return (
     <label
@@ -29,6 +29,7 @@ const DateTimePicker = ({
         className="w-80 -translate-y-2.5 outline-none"
         selected={startDate}
         showTimeSelect={showTime}
+        placeholderText="Select a date"
         dateFormat={showTime ? 'MMMM d, yyyy h:mm aa' : 'MMMM d, yyyy'}
         onChange={(date) => setStartDate(date)}
       />

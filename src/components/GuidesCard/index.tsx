@@ -20,14 +20,16 @@ const GuidesCard = ({
           <h1 className="text-lg font-bold">{title}</h1>
           <button className="flex gap-2">
             <p className="text-sm text-gray">Instruction Document</p>
-            <Link href="/Sample.pdf">
+            <Link href="/Sample.pdf" target="_blank">
               <DownloadIcon />
             </Link>
           </button>
           <button className="flex gap-2">
             <p className="text-sm text-gray">FAQ</p>
             <div>
-              <DownloadIcon />
+              <Link href="/Sample.pdf" target="_blank">
+                <DownloadIcon />
+              </Link>
             </div>
           </button>
         </div>

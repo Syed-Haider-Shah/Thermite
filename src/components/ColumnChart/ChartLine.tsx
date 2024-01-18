@@ -15,7 +15,7 @@ const ChartLine = ({
           style={{ height: `${value1}` }}
         ></div>
         <div
-          className={`w-3 animate-slide-up rounded-t-5 bg-loadOrange`}
+          className={` w-3 animate-slide-up rounded-t-5 bg-loadOrange`}
           style={{ height: `${value2}` }}
         ></div>
       </div>

@@ -154,8 +154,8 @@ module.exports = {
       goldenMedium: '#DAA960',
       lightIndigo: '#818CF8', //indigo-400
       indigo: '#6366F1', //indigo-500
-      darkIndigo: '#2D405A', //indigo-600
-      vLightIndigo: '#eff6ff', //indigo-100
+      darkIndigo: '#2D405A',
+      vLightIndigo: '#eff6ff',
       //button
       gray: '#969DAE',
       activeBlue: '#456BF0',

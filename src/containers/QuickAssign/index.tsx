@@ -23,13 +23,13 @@ const QuickAssign = () => {
 
   return (
     <div className="relative col-span-1 flex h-[90%] w-full flex-col items-center gap-3 overflow-hidden rounded-md border border-black/10 bg-white shadow-lg">
-      <div className="mt-7 grid grid-cols-2 place-items-center justify-items-center gap-1 rounded-full border border-black/10 p-3 pt-2">
+      <div className="mt-7 grid grid-cols-2 place-items-center justify-items-center gap-1 rounded-full border border-black/10 p-3 pt-2 shadow-lg">
         <div className="col-span-2 h-5 w-5 rounded-full bg-loadBlue/50"></div>
         <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>
         <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>
       </div>
       <div className="flex justify-center bg-white font-bold">EASY ASSIGN</div>
-      <div className="absolute bottom-0 grid h-1/2 w-full grid-cols-2 gap-1 bg-loadBlue p-4">
+      <div className="min-h-1/2 absolute bottom-0 grid w-full grid-cols-2 gap-1 bg-loadBlue p-4 shadow-md">
         <div className="flex flex-col items-center p-2">
           <div className=" font-bold text-white">Town</div>
           <DropDown

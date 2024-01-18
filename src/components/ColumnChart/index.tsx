@@ -3,7 +3,7 @@ import ChartLine from './ChartLine'
 
 const ColumnChart = () => {
   return (
-    <section className="col-span-2 h-[90%] w-[98%] rounded border border-black/10 shadow-lg">
+    <section className="col-span-2 h-[90%] w-[98%] overflow-hidden rounded border border-black/10 shadow-lg">
       <div className="flex h-1/4 w-full items-center gap-5 bg-white pl-8">
         <div className="flex h-3/5 w-[9%] items-center justify-center rounded bg-gray/20">
           <PeopleV2 />
@@ -13,7 +13,7 @@ const ColumnChart = () => {
           <div className="text-sm text-gray">All time tickets closed</div>
         </div>
       </div>
-      <div className="mx-4 flex h-[55%] justify-center gap-6 border-y-2 border-vLightIndigo bg-white">
+      <div className="flex h-[55%] min-w-full justify-center gap-6 border-y-2 border-vLightIndigo bg-white">
         <ChartLine title="Jan" value1="5rem" value2="5rem" />
         <ChartLine title="Feb" value1="7.5rem" value2="5rem" />
         <ChartLine title="Mar" value1="5rem" value2="2.5rem" />

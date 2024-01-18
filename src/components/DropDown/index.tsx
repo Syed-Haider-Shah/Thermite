@@ -11,6 +11,7 @@ type IDropDown = {
   value: IOption
   title?: string
   required?: boolean
+  variation?: 'primary'
 }
 
 const DropDownComponent = ({
@@ -19,7 +20,8 @@ const DropDownComponent = ({
   setValue,
   value,
   title,
-  required
+  required,
+  variation
 }: IDropDown) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -51,10 +53,16 @@ const DropDownComponent = ({
       <button
         type="button"
         onClick={handleToggle}
-        className="flex w-full items-center justify-between rounded-lg border border-heavyGray bg-white/40 px-2 py-2.25 text-left"
+        className={cn(
+          'flex w-full items-center justify-between rounded-lg border border-heavyGray bg-white/40 px-2 py-2.25 text-left',
+          {
+            'border-0 bg-transparent text-white': variation === 'primary'
+          }
+        )}
       >
         {value?.name}
         <ChevronDownIcon
+          color={variation === 'primary' ? 'white' : undefined}
           className={cn('origin-center transform transition', {
             '-rotate-90': !isOpen
           })}

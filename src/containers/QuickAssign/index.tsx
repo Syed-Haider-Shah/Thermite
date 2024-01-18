@@ -36,7 +36,8 @@ const QuickAssign = () => {
             options={Towns}
             setValue={setTown}
             value={town}
-            className="mb-0 -space-y-4"
+            className="mb-0 w-28 -space-y-4"
+            variation="primary"
           />
         </div>
         <div className="flex flex-col items-center p-2 font-light">
@@ -45,7 +46,8 @@ const QuickAssign = () => {
             options={Employees}
             setValue={setEmployees}
             value={employees}
-            className="mb-0 -space-y-4"
+            className="mb-0 w-28 -space-y-4"
+            variation="primary"
           />
         </div>
         <button className="col-span-2 flex w-full items-center justify-center rounded bg-white/10 p-2 text-sm font-medium text-white transition-shadow hover:font-normal hover:shadow-lg">

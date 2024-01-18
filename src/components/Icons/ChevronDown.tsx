@@ -1,12 +1,12 @@
 import { ISvgIcon } from './model'
 
-const ChevronDown = ({ className }: ISvgIcon) => (
+const ChevronDown = ({ className, color }: ISvgIcon) => (
   <svg
     className={className}
     width="12"
     height="8"
     viewBox="0 0 12 8"
-    fill="none"
+    fill={'none' || color}
     xmlns="http://www.w3.org/2000/svg"
   >
     <path

@@ -52,11 +52,11 @@ const ComboBox = ({
   return (
     <div
       id="dropdown-menu"
-      className="bg-whit relative right-0 mt-2 w-full space-y-1 rounded-md"
+      className="relative right-0 mt-2 w-full space-y-1 rounded-md bg-white"
     >
       <fieldset
         className={cn(
-          'box-border rounded-lg border-4',
+          'z-10 box-border rounded-lg border-4',
           'border-loadGray focus-within:border-loadBlue'
         )}
       >

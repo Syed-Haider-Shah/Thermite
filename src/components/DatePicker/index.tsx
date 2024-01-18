@@ -19,7 +19,7 @@ const DateTimePicker = ({
     <label
       htmlFor={id}
       className={cn(
-        'box-border h-12 w-full translate-y-1 rounded-lg border-4 px-4',
+        'z-10 box-border block h-12 w-full translate-y-1 rounded-lg border-4 px-4',
         'border-loadGray focus-within:border-loadBlue'
       )}
     >

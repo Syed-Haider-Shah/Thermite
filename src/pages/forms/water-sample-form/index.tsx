@@ -48,7 +48,7 @@ const WaterForm = () => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="mx-auto grid h-20 w-4/5 grid-cols-2 place-items-center gap-7"
+        className="mx-auto grid h-20 w-4/5 grid-cols-2 place-items-center gap-10"
       >
         <ComboBox
           title="Ticket Name"

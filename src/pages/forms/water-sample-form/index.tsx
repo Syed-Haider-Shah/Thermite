@@ -60,21 +60,29 @@ const WaterForm = () => {
         />
         <ComboBox title="Region" items={[]} field="region" />
         <ComboBox title="Panel Generation" items={[]} field="panel" />
-        <div className="flex w-full flex-col justify-center pl-10">
+        <div className="flex w-full flex-col justify-center gap-2 pl-1">
           <div className="flex text-sm">
             Where did you collect the sample from?
           </div>
-          <div className="flex gap-5 text-xs">
+          <div className="flex gap-5 pl-1 text-xs">
             <RadioButton name="HUB" />
             <RadioButton name="SPOKE" />
             <RadioButton name="BOTH" />
           </div>
         </div>
-        <DatePicker title="Water Test Vial Expiration Date" />
-        <DatePicker title="Water Test Sample Date & Time" showTime />
-        <DatePicker title="Water Test Read Date & Time" showTime />
+        <DatePicker id="date-picker1" title="Water Test Vial Expiration Date" />
+        <DatePicker
+          id="date-picker2"
+          title="Water Test Sample Date & Time"
+          showTime
+        />
+        <DatePicker
+          id="date-picker3"
+          title="Water Test Read Date & Time"
+          showTime
+        />
         <ComboBox title="Water Test Sample Result" items={[]} field="" />
-        <div className="flex w-full translate-x-8 flex-col gap-2 ">
+        <div className="flex w-full flex-col gap-2 ">
           <div className="text-md w-fit bg-white px-1 font-bold">
             Standard Water Test Results Image (No UV Black Light)
           </div>

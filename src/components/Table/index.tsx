@@ -35,7 +35,8 @@ const TableComponent: FC<ITable> = ({
               {
                 'bg-green/5 text-darkGreen/60': val === 'OPEN',
                 'bg-red/5 text-red/90': val === 'CLOSED',
-                'bg-indigo/10 text-indigo/90': val === 'WATER-SAMPLE'
+                'bg-indigo/10 text-indigo/90': val === 'WATER-SAMPLE',
+                'bg-loadOrange/20 text-loadOrange': val === 'PARTS'
               }
             )}
           >

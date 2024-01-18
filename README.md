@@ -27,7 +27,7 @@ Jira |
 Github |
 Discord
 
-Google meets was used to have meetings to deliberate ideas and fix bugs, it was very convenient to use Google meets as we were able to share our screens and show are ideas more accurately. Jira was used to keep track of tasks and to assign tasks.
+Google meets was used to have meetings to deliberate ideas and fix bugs, it was very convenient to use Google meets as we were able to share our screens and show our ideas more accurately. Jira was used to keep track of tasks and to assign tasks.
 
 ## Technical Features
 
@@ -45,9 +45,7 @@ Thermite is mainly a ticketing system that consist of tickets which represents t
 
 ### Tickets
 
-The abstract design of tickets is shown below, a more detailed picture of database schema is
-
-![Image1](public/image1.png)
+This database has 3 main tables to represent tickets; `Customer` table, `Parent Ticket` table and `Child Ticket` table.
 
 #### Customers
 
@@ -55,13 +53,19 @@ The abstract design of tickets is shown below, a more detailed picture of databa
 
 #### Parent Ticket
 
-If one the customer is have trouble with their device, a `Parent Ticket` for that customer is opened to represent that some work needs to be done to their device. A new `Parent Ticket` is opened with a unique `Parent ID` and a foreign key linking it to the `Customer` with `Customer ID`.
+If one of the customer is have trouble with their device, a `Parent Ticket` for that customer is opened to represent that some work needs to be done to their device. A new `Parent Ticket` is opened with a unique `Parent ID` and a foreign key linking it to the `Customer` with `Customer ID`.
 
 #### Child Ticket
 
 Each `Child Ticket` represents a specific task that needs to be completed by a `Site Technician`(Eg. Filters need to be changed or Primary motor needs to be fixed etc.). Multiple `Child Tickets` are linked to a single `Parent Ticket` by its `Parent ID`.
 
 In summary, `Child Tickets` are all the tasks that needs to be done, while `Parent Ticket` and `Customer` are the details of where and for whom the task need to be completed.
+
+The abstract design of tickets is shown below, a more detailed picture of database schema is shown further down
+
+![Image1](public/image1.png)
+
+- A single `Customer` can have multiple `Parent Tickets` linked to it and each `Parent Ticket` has their own list of `Child Tickets` or tasks.
 
 ### Database
 
@@ -73,23 +77,27 @@ A schema is displayed below
 
 ### How does Status work?
 
-`Child Ticket` has 2 status `OPEN` and `CLOSED`, while `Parent Ticket` has 4 status `OPEN`, `PARTS`, `BUSINESS-DECISION`,`WATER-SAMPLE` and `CLOSED`.
+`Child Ticket` has 2 status `OPEN` and `CLOSED`, while `Parent Ticket` has 5 status `OPEN`, `PARTS`, `BUSINESS-DECISION`,`WATER-SAMPLE` and `CLOSED`.
 
-By default, a newly opened `Child` or `Parent Ticket` will have `OPEN` status. As the `Site Technician` starts to complete tasks on the `Child Ticket`, he can change the `Child Ticket` status to `CLOSED` and once he turned all the `Child Ticket` status to `CLOSED` he can proceed to close the `Parent Ticket`. Ideally, the `Site Technician` has to change all the `Child Ticket` status to `CLOSED` before he closes the `Parent Ticket`, but sometimes this is not possible. So, in times where he is not able to close all `Child Tickets` of a particular `Parent Ticket` then the `OPEN` `CHILD TICKET` will decouple from that parent and will link to a newly created `Parent Ticket`. Visual Representation is shown below:
+By default, a newly opened `Child` or `Parent Ticket` will have `OPEN` status. As the `Site Technician` starts to complete tasks on the `Child Ticket`, he can change the `Child Ticket` status to `CLOSED` and once he turned all the `Child Ticket` status to `CLOSED` he can proceed to close the `Parent Ticket`.
+
+Ideally, the `Site Technician` has to change all the `Child Ticket` status to `CLOSED` before he closes the `Parent Ticket`, but sometimes this is not possible. So, in times where he is not able to close all `Child Tickets` of a particular `Parent Ticket` then the `OPEN` `CHILD TICKET` will decouple from that parent and will link to a newly created `Parent Ticket`.
+
+Visual Representation is shown below:
 
 ![Image2](public/image2.png)
 
-- In the image above, Child 1 and Child 2 closed while Child 3 remained open. So, when the Parent 1 closed, Child 3 no longer remained linked Parent 1, instead it links to a newly created Parent, Parent 2. In the end, Parent 1 is packaged with it's 2 closed child, while the Child 3 shows up again in the ticket list as an incomplete task.
+- In the image above, Child 1 and Child 2 are closed while Child 3 remained open. So, when the Parent 1 closed, Child 3 no longer remained linked to Parent 1, instead it links to a newly created Parent, Parent 2. In the end, Parent 1 is packaged with it's 2 closed child, while the Child 3 shows up again in the ticket list as an incomplete task.
 
 When closing the `Parent Ticket` the status cannot be directly changed to `CLOSED` instead the status will change from `OPEN` to `WATER-SAMPLE`. In order to escalate the status to `CLOSED` the `Site Technician` must submit the `Water Sample` form related to this ticket. They can click on `WATER-SAMPLE` status to get redirected to `Water sample` form or visit the form using the navbar. Once the `Water Sample` form has been completed the `Parent Ticket` associated with that `Water Sample` form will change it's status from `WATER-SAMPLE` to `CLOSED`. This ensures that no `Parent Ticket` can be closed without the submission of `Water Sample`.
 
-The final two status for the `Parent Ticket`, `PARTS` and `BUSINESS-DECISION` are flags. `PARTS` indicate that `Site Technician` wasn't able to complete the task or close the ticket because they did not have adequate parts on them. `BUSINESS-DECISION` indicate that `Site Technician` was unable to visit the site because of a permanent external interference, such as the house has been burnt down or the owners of the house refused the service work.
+The final two status for the `Parent Ticket` are `PARTS`and `BUSINESS-DECISION`, which are flags for the ticket. `PARTS` status indicate that the `Site Technician` wasn't able to complete the task or close the ticket because they did not have adequate parts on them. `BUSINESS-DECISION` status indicate that the `Site Technician` was unable to visit the site because of a permanent external interference, such as the house being burnt down or the owners of the house refusing entry.
 
 # Getting Started
 
 Visit [Thermite](https://thermite.com.au/)
 
-You can sign in as a `Site Supervisor` having access to all tickets or `Site Technician`.
+You can sign in as a `Site Supervisor` having access to all tickets or `Site Technician` having only the access to the tickets assigned to you.
 
 `Site Supervisor` credentials :
 <Credentials>

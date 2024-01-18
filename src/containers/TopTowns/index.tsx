@@ -1,7 +1,7 @@
 import { DashLoadBar } from '@/components'
 
 const TopTowns = () => (
-  <div className="h-full w-3/5">
+  <div className="max-h-96 min-h-sm min-w-[650px]">
     <div className="p-12 pt-10 text-gray">TOP TOWNS WITH PENDING WORK</div>
     <div className="px-12">
       <DashLoadBar townName="WALGETT" color="bg-loadBlue" progress="90" />

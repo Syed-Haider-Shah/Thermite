@@ -22,7 +22,7 @@ const QuickAssign = () => {
   const [employees, setEmployees] = useState<IOption>(Employees[0])
 
   return (
-    <div className="relative col-span-1 flex h-[90%] w-full flex-col items-center gap-3 overflow-hidden rounded-md border border-black/10 bg-white shadow-lg">
+    <div className="relative flex max-h-96 min-h-sm w-95 flex-col items-center gap-3 rounded-md border border-black/10 bg-white shadow-lg">
       <div className="mt-7 grid grid-cols-2 place-items-center justify-items-center gap-1 rounded-full border border-black/10 p-3 pt-2 shadow-lg">
         <div className="col-span-2 h-5 w-5 rounded-full bg-loadBlue/50"></div>
         <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>

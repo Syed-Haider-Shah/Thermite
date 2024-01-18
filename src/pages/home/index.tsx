@@ -21,17 +21,17 @@ export default function Home() {
         </div>
         <div className="mb-2 text-sm text-gray">App Activities at a Glance</div>
       </div>
-      <div className="flex h-md w-[1100px] flex-col flex-wrap">
-        <div className=" min-w-62 flex min-h-full flex-col gap-5">
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-wrap gap-5">
           <TicketDash />
-          <TicketChart />
-        </div>
-        <div className="ml-5 flex h-full w-full max-w-screen-lg flex-col gap-5">
-          <section className="grid h-full min-w-full grid-cols-3 flex-wrap items-center gap-7 bg-white pl-4 shadow-xl">
+          <section className="flex max-h-lg min-h-sm flex-row flex-wrap items-center gap-7 overflow-x-auto bg-white p-4 shadow-xl">
             <QuickAssign />
             <ColumnChart />
           </section>
-          <section className="flex h-full min-w-full justify-between bg-white shadow-xl">
+        </div>
+        <div className="flex h-full w-full flex-wrap gap-5">
+          <TicketChart />
+          <section className="flex flex-wrap justify-between bg-white shadow-xl">
             <TopTowns />
             <WaterSampleAccess />
           </section>

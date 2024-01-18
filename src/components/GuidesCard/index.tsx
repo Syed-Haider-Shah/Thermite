@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { DownloadIcon, SupportIcon } from '../Icons'
 const GuidesCard = ({
   title,
@@ -18,9 +20,9 @@ const GuidesCard = ({
           <h1 className="text-lg font-bold">{title}</h1>
           <button className="flex gap-2">
             <p className="text-sm text-gray">Instruction Document</p>
-            <div>
+            <Link href="/Sample.pdf">
               <DownloadIcon />
-            </div>
+            </Link>
           </button>
           <button className="flex gap-2">
             <p className="text-sm text-gray">FAQ</p>

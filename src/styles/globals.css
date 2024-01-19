@@ -4,11 +4,11 @@
 
 html,
 body {
-  @apply flex h-screen w-screen justify-center overflow-hidden bg-white p-0 antialiased outline-none;
+  @apply flex h-screen bg-white p-0 antialiased outline-none md:w-screen md:justify-center;
 }
 
 #__next {
-  @apply flex h-screen w-full justify-between border-x border-black/5 bg-darkIndigo/5;
+  @apply flex h-screen w-full border-x border-black/5 bg-darkIndigo/5 md:justify-between;
 }
 
 @layer components {

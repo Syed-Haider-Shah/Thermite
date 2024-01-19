@@ -28,7 +28,7 @@ const DateTimePicker = ({
       </div>
       <DatePicker
         id={id}
-        className="w-96 -translate-y-2.5 outline-none"
+        className="min-w-[14.5rem] -translate-y-2.5 outline-none md:w-96"
         selected={startDate}
         showTimeSelect={showTime}
         placeholderText="Select a date"

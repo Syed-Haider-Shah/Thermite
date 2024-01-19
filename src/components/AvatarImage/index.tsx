@@ -1,5 +1,6 @@
-import { cn } from '@/utils/cn'
+import Image from 'next/image'
 
+import { cn } from '@/utils/cn'
 /* eslint-disable @next/next/no-img-element */
 const AvatarImage = ({
   avatarSrc,
@@ -9,7 +10,7 @@ const AvatarImage = ({
   size?: string
 }) =>
   avatarSrc ? (
-    <img
+    <Image
       src={avatarSrc}
       alt="avatar"
       width="100"

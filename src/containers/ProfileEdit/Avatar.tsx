@@ -39,7 +39,7 @@ const Avatar = ({ avatarUrl, setAvatar }: IAvatar) => {
       <label
         htmlFor="avatar"
         title="avatar"
-        className="rounded-xl border px-2 py-1 text-xs font-medium text-black/90"
+        className=" cursor-pointer rounded-xl border px-2 py-1 text-xs font-medium text-black/90"
       >
         Upload New Image
         <input

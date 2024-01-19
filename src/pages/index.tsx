@@ -64,7 +64,15 @@ const Home = () => {
           height={900}
           className="hidden w-1/2 object-cover md:block"
         />
+
         <div className="flex w-full min-w-95 flex-col items-center justify-center bg-white md:w-1/2">
+          <Image
+            src="/logo.svg"
+            className="mt-6 px-1"
+            alt="logo"
+            width={300}
+            height={120}
+          />
           <form
             onSubmit={handleSubmit(handleSignIn)}
             className="mt-20 flex h-[50%] w-[60%] flex-col gap-10 bg-white"
@@ -113,7 +121,7 @@ const Home = () => {
             </div>
             <div className="flex justify-between px-2">
               <div className="text-gray">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 text-sm md:text-base">
                   <label
                     title="sample"
                     className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-[0.25rem] border-loadGray focus-within:border-loadBlue"
@@ -127,7 +135,7 @@ const Home = () => {
                   Remember me
                 </div>
               </div>
-              <button className="font-medium text-loadBlue">
+              <button className="text-sm font-medium text-loadBlue md:text-base">
                 Forgot Password?
               </button>
             </div>
@@ -139,8 +147,10 @@ const Home = () => {
               Login
             </Button>
             <div className="ml-2.5 flex gap-2">
-              <div className="text-gray">Need help with something?</div>
-              <button className="font-medium text-loadBlue">
+              <div className="text-sm text-gray md:text-base">
+                Need help with something?
+              </div>
+              <button className="text-sm font-medium text-loadBlue md:text-base">
                 Contact Support
               </button>
             </div>

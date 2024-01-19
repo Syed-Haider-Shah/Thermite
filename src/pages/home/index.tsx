@@ -22,16 +22,16 @@ export default function Home() {
         <div className="mb-2 text-sm text-gray">App Activities at a Glance</div>
       </div>
       <div className="flex flex-col gap-5">
-        <div className="flex flex-wrap gap-5">
+        <div className="flex flex-wrap justify-center gap-5 md:justify-start">
           <TicketDash />
-          <section className="flex max-h-lg min-h-sm flex-row flex-wrap items-center gap-7 overflow-x-auto bg-white p-4 shadow-xl">
+          <section className="flex min-h-sm flex-row flex-wrap items-center justify-center gap-7 overflow-x-auto bg-transparent p-4 md:bg-white md:shadow-xl">
             <QuickAssign />
             <ColumnChart />
           </section>
         </div>
-        <div className="flex h-full w-full flex-wrap gap-5">
+        <div className="flex h-full w-full flex-wrap justify-center gap-5  md:justify-start">
           <TicketChart />
-          <section className="flex flex-wrap justify-between bg-white shadow-xl">
+          <section className="flex flex-wrap justify-center bg-white pr-8 shadow-xl md:justify-between">
             <TopTowns />
             <WaterSampleAccess />
           </section>

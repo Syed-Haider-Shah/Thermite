@@ -27,7 +27,7 @@ const WaterSampleAccess = () => {
   }, [fetchWaterSampleCount])
 
   return (
-    <div className="m-4 flex max-h-96 min-h-sm min-w-95 flex-col justify-between rounded-md bg-loadBlue shadow-lg">
+    <div className=" m-4 flex max-h-96 min-h-sm min-w-95 translate-x-8 flex-col justify-between rounded-md bg-loadBlue shadow-lg">
       <Link
         href="/"
         className=" m-2 flex items-center justify-center rounded-md bg-white/10 p-4 text-white transition-all hover:shadow-lg"

@@ -27,10 +27,7 @@ const Guides = () => {
           guidevideo={'/video8.mp4'}
           title="Motor replacement Guide"
         />
-        <GuidesCard
-          guidevideo={'/video9.mp4'}
-          title="Motor replacement Guide"
-        />
+        <GuidesCard guidevideo={'/video9.mp4'} title="Pump replacement Guide" />
         <GuideSkeleton />
       </div>
     </>

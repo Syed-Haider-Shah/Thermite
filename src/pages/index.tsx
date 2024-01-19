@@ -67,15 +67,15 @@ const Home = () => {
 
         <div className="flex w-full min-w-95 flex-col items-center justify-center bg-white md:w-1/2">
           <Image
-            src="/logo.svg"
-            className="mt-6 px-1"
+            src="/logoSymbol.svg"
+            className="md:w-[120px]"
             alt="logo"
-            width={300}
-            height={120}
+            width={80}
+            height={80}
           />
           <form
             onSubmit={handleSubmit(handleSignIn)}
-            className="mt-20 flex h-[50%] w-[60%] flex-col gap-10 bg-white"
+            className="mt-10 flex w-[60%] flex-col gap-10 md:h-[50%]"
           >
             <div className="ml-2 flex flex-col gap-2">
               <h1 className="text-3xl font-bold">Login</h1>
@@ -83,7 +83,7 @@ const Home = () => {
                 Welcome back to Thermite
               </h1>
             </div>
-            <div className="flex flex-col gap-10 px-2">
+            <div className="flex flex-col gap-4 px-2 md:gap-10">
               <fieldset
                 className={cn(
                   'relative box-border h-10 rounded-lg border-4',
@@ -121,21 +121,21 @@ const Home = () => {
             </div>
             <div className="flex justify-between px-2">
               <div className="text-gray">
-                <div className="flex items-center gap-3 text-sm md:text-base">
+                <div className="flex w-28 items-center gap-3 text-xs md:w-auto md:text-base">
                   <label
                     title="sample"
-                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-[0.25rem] border-loadGray focus-within:border-loadBlue"
+                    className="flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-2 border-loadGray focus-within:border-loadBlue md:h-7 md:w-7 md:border-[0.25rem]"
                   >
                     <input
                       type="checkbox"
                       title="sample"
-                      className="ring-cursor-pointer h-2 w-2 cursor-pointer appearance-none rounded-full bg-transparent accent-loadBlue ring-0 ring-loadBlue ring-offset-0 focus:bg-loadBlue focus:ring-2"
+                      className="ring-cursor-pointer h-1 w-1 cursor-pointer appearance-none rounded-full bg-transparent accent-loadBlue ring-0 ring-loadBlue ring-offset-0 focus:bg-loadBlue focus:ring-2 md:h-2 md:w-2"
                     ></input>
                   </label>
                   Remember me
                 </div>
               </div>
-              <button className="text-sm font-medium text-loadBlue md:text-base">
+              <button className="w-28 text-xs font-medium text-loadBlue md:w-auto md:text-base">
                 Forgot Password?
               </button>
             </div>
@@ -146,11 +146,11 @@ const Home = () => {
             >
               Login
             </Button>
-            <div className="ml-2.5 flex gap-2">
-              <div className="text-sm text-gray md:text-base">
+            <div className="ml-2.5 flex flex-col gap-2 text-sm md:flex-row">
+              <div className="text-gray md:text-base">
                 Need help with something?
               </div>
-              <button className="text-sm font-medium text-loadBlue md:text-base">
+              <button className="text-left font-medium text-loadBlue md:text-base">
                 Contact Support
               </button>
             </div>

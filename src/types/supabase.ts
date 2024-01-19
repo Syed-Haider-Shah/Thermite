@@ -11,57 +11,60 @@ export interface Database {
     Tables: {
       Child: {
         Row: {
+          cause: string
           close_date: string | null
-          confirmed_fault: string
+          confirmed_failure: string
           created_at: string
-          created_date: string
           customer_impact: boolean
           customer_inquiry: boolean
-          description: string
-          fault: string
+          description_open: string
+          fault: string | null
           id: number
+          indicated_failure: string
+          outage_date: string
           parent_id: number
-          parts: string
-          problem: string | null
           resolution: string
-          serial_number: string
+          source: string
           status: string
+          ticket_description_close: string
           upgrade: boolean
         }
         Insert: {
+          cause?: string
           close_date?: string | null
-          confirmed_fault?: string
+          confirmed_failure?: string
           created_at?: string
-          created_date?: string
           customer_impact?: boolean
           customer_inquiry?: boolean
-          description?: string
-          fault?: string
+          description_open?: string
+          fault?: string | null
           id?: number
+          indicated_failure?: string
+          outage_date?: string
           parent_id: number
-          parts?: string
-          problem?: string | null
           resolution?: string
-          serial_number?: string
+          source?: string
           status?: string
+          ticket_description_close?: string
           upgrade?: boolean
         }
         Update: {
+          cause?: string
           close_date?: string | null
-          confirmed_fault?: string
+          confirmed_failure?: string
           created_at?: string
-          created_date?: string
           customer_impact?: boolean
           customer_inquiry?: boolean
-          description?: string
-          fault?: string
+          description_open?: string
+          fault?: string | null
           id?: number
+          indicated_failure?: string
+          outage_date?: string
           parent_id?: number
-          parts?: string
-          problem?: string | null
           resolution?: string
-          serial_number?: string
+          source?: string
           status?: string
+          ticket_description_close?: string
           upgrade?: boolean
         }
         Relationships: [
@@ -82,10 +85,13 @@ export interface Database {
           created_at: string
           id: number
           installation_date: string | null
+          nsw_loop: string
           number_of_panels: number
           region: string
           serial_number: string
+          street: string
           town: string
+          type: string
           warranty: boolean | null
         }
         Insert: {
@@ -95,10 +101,13 @@ export interface Database {
           created_at?: string
           id?: number
           installation_date?: string | null
+          nsw_loop?: string
           number_of_panels?: number
           region: string
           serial_number: string
+          street?: string
           town?: string
+          type?: string
           warranty?: boolean | null
         }
         Update: {
@@ -108,10 +117,13 @@ export interface Database {
           created_at?: string
           id?: number
           installation_date?: string | null
+          nsw_loop?: string
           number_of_panels?: number
           region?: string
           serial_number?: string
+          street?: string
           town?: string
+          type?: string
           warranty?: boolean | null
         }
         Relationships: []
@@ -302,9 +314,10 @@ export interface Database {
       close_child_ticket: {
         Args: {
           c_id: number
-          c_parts: string
+          c_cause: string
           c_resolution: string
           c_confirmed_fault: string
+          c_description: string
         }
         Returns: undefined
       }
@@ -352,14 +365,14 @@ export interface Database {
       create_child_ticket: {
         Args: {
           parentid: number
-          problem: string
-          fault: string
-          serial: string
           customerimpact: boolean
           customerinquiry: boolean
           upgrade: boolean
-          datecreated: string
-          description: string
+          indicatedfailure: string
+          outagedate: string
+          source: string
+          fault: string
+          descriptionopen: string
         }
         Returns: undefined
       }
@@ -435,9 +448,49 @@ export interface Database {
         }
         Returns: undefined
       }
+      show_all_children: {
+        Args: {
+          par_id: number
+        }
+        Returns: {
+          id: number
+          created_at: string
+          status: string
+          close_date: string
+          parent_id: number
+          customer_impact: boolean
+          customer_inquiry: boolean
+          upgrade: boolean
+          indicated_failure: string
+          fault: string
+          outage_date: string
+          source: string
+          serial_number: string
+        }[]
+      }
+      show_child_details: {
+        Args: {
+          child_id: number
+        }
+        Returns: {
+          id: number
+          created_at: string
+          status: string
+          close_date: string
+          parent_id: number
+          customer_impact: boolean
+          customer_inquiry: boolean
+          upgrade: boolean
+          indicated_failure: string
+          fault: string
+          outage_date: string
+          source: string
+          serial_number: string
+        }[]
+      }
       show_parent_details: {
         Args: {
-          parent_id: number
+          par_id: number
         }
         Returns: {
           id: number
@@ -455,6 +508,15 @@ export interface Database {
           number_of_panels: number
           country: string
           warranty: boolean
+        }[]
+      }
+      test: {
+        Args: {
+          par_id: number
+        }
+        Returns: {
+          parent_id: number
+          child_count: string
         }[]
       }
       unassign_employee: {

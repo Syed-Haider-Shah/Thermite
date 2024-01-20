@@ -14,6 +14,7 @@ type IComboBox = {
   placeholder?: string
   field: string
   isLoading?: boolean
+  className?: string
   onSelect?: (val: string) => void
   onSearch?: (val: string) => void
 }
@@ -24,6 +25,7 @@ const ComboBox = ({
   placeholder,
   field,
   isLoading,
+  className,
   onSelect,
   onSearch
 }: IComboBox) => {
@@ -52,7 +54,10 @@ const ComboBox = ({
   return (
     <div
       id="dropdown-menu"
-      className="relative right-0 mt-2 w-full min-w-[14.5rem] -translate-y-1 space-y-1 rounded-md"
+      className={cn(
+        'relative right-0 mt-2 w-full min-w-[14.5rem] -translate-y-1 space-y-1 rounded-md',
+        className
+      )}
     >
       <fieldset
         className={cn(

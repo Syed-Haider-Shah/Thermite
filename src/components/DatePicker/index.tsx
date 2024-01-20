@@ -7,10 +7,12 @@ import { cn } from '@/utils/cn'
 const DateTimePicker = ({
   title,
   showTime,
+  className,
   id
 }: {
   title: string
   showTime?: boolean
+  className?: string
   id: string
 }) => {
   const [startDate, setStartDate] = useState<null | Date>(null)
@@ -20,7 +22,8 @@ const DateTimePicker = ({
       htmlFor={id}
       className={cn(
         'z-10 box-border block h-12 w-full translate-y-1 rounded-lg border-4 px-4',
-        'border-loadGray focus-within:border-loadBlue'
+        'border-loadGray focus-within:border-loadBlue',
+        className
       )}
     >
       <div className="w-fit -translate-y-3 translate-x-3 bg-white px-1 text-sm">
@@ -28,7 +31,7 @@ const DateTimePicker = ({
       </div>
       <DatePicker
         id={id}
-        className="min-w-[14.5rem] -translate-y-2.5 outline-none md:w-96"
+        className="w-full min-w-[14.5rem] -translate-y-2.5 outline-none"
         selected={startDate}
         showTimeSelect={showTime}
         placeholderText="Select a date"

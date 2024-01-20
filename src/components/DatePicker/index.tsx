@@ -22,7 +22,7 @@ const DateTimePicker = ({
   return (
     <fieldset
       className={cn(
-        'z-10 box-border block h-12 w-full translate-y-1 rounded-lg border-4 px-4',
+        'z-10 box-border block h-14 w-full translate-y-1 rounded-lg border-4 px-4',
         'border-loadGray focus-within:border-loadBlue',
         className
       )}
@@ -32,7 +32,7 @@ const DateTimePicker = ({
       </legend>
       <DatePicker
         id={id}
-        className="w-full min-w-[14.5rem] -translate-y-1 bg-transparent outline-none"
+        className="w-full min-w-[14.5rem] bg-transparent outline-none"
         selected={date}
         wrapperClassName="w-full"
         showTimeSelect={showTime}

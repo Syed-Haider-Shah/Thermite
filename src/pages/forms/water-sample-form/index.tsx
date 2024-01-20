@@ -88,14 +88,8 @@ const WaterForm = () => {
               <div className="text-gray">No File Chosen</div>
             </div>
           </div>
-          <ComboBox
-            title="Region"
-            items={[]}
-            field="region"
-            className="w-[48%]"
-          />
           <div className="flex w-[48%] flex-col justify-center gap-2 pl-1">
-            <div className="flex text-sm">
+            <div className="flex text-sm font-semibold">
               Where did you collect the sample from?
             </div>
             <div className="flex gap-5 pl-1 text-xs">
@@ -104,6 +98,12 @@ const WaterForm = () => {
               <RadioButton name="BOTH" />
             </div>
           </div>
+          <ComboBox
+            title="Region"
+            items={[]}
+            field="region"
+            className="w-[48%]"
+          />
           <DatePicker
             id="date-picker2"
             title="Water Test Sample Date & Time"

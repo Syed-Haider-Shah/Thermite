@@ -33,9 +33,9 @@ const TableComponent: FC<ITable> = ({
             className={cn(
               '-ml-4 w-full rounded-full px-4 py-1.5 text-sm font-bold',
               {
-                'bg-green/5 text-darkGreen/60': val === 'OPEN',
+                'bg-green/10 text-darkGreen/60': val === 'OPEN',
                 'bg-red/5 text-red/90': val === 'CLOSED',
-                'bg-indigo/10 text-indigo/90': val === 'WATER-SAMPLE',
+                'bg-loadBlue/10 text-loadBlue/90': val === 'WATER-SAMPLE',
                 'bg-loadOrange/20 text-loadOrange': val === 'PARTS'
               }
             )}
@@ -66,7 +66,7 @@ const TableComponent: FC<ITable> = ({
           className={cn(
             'cursor-pointer border-y border-black/5 transition duration-300 ease-in-out last:border-b-0 even:bg-indigo/5 hover:bg-black/5 hover:shadow-xl',
             {
-              '!bg-indigo/30 hover:bg-indigo/40':
+              '!bg-loadBlue/20 hover:bg-loadBlue/40':
                 selectedRow === row.id?.toString()
             }
           )}

@@ -160,10 +160,11 @@ const Tickets = () => {
           rows={rows}
         />
         <div className="grid grid-cols-3 text-black/60">
-          <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
-            <h2 className="font-semibold">Total Count: </h2>
-            <p>{totalCount}</p>
+          <div className=" flex items-center justify-center gap-2 rounded-2.5 border-4 border-gray/40 bg-white text-sm font-bold text-darkIndigo">
+            <h2 className="font-normal">Child Tickets</h2>
+            <p className=" font-bold">{totalCount}</p>
           </div>
+
           <PageNav pageCount={totalCount} />
         </div>
       </Card>

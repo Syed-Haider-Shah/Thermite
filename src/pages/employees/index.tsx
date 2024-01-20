@@ -129,10 +129,16 @@ const Employees = () => {
     <div className="flex gap-6">
       <Card className="w-1/2">
         <div className="flex justify-between">
-          <SearchBar
-            onSearch={handleSearch}
-            placeholder="Search for Employees"
-          />
+          <div className="flex gap-2">
+            <SearchBar
+              onSearch={handleSearch}
+              placeholder="Search for Employees"
+            />
+            <div className=" flex items-center justify-center gap-2 rounded-2.5 border-4 border-gray/40 bg-white px-4 text-sm font-bold text-darkIndigo">
+              <h2 className="font-normal">Workers</h2>
+              <p className=" font-bold">{totalCount}</p>
+            </div>
+          </div>
           <div className="flex gap-x-2">
             <FilterSelect options={COUNTIES} name="country" />
             <Link href={`${pathname}${Paths.CREATE}`}>
@@ -150,11 +156,7 @@ const Employees = () => {
           isLoading={isLoading}
           onRowSelect={handleSelectRow}
         />
-        <div className="grid grid-cols-3 text-black/60">
-          <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
-            <h2 className="font-semibold">Total Count: </h2>
-            <p>{totalCount}</p>
-          </div>
+        <div className="flex justify-center text-black/60">
           <PageNav pageCount={totalCount} />
         </div>
       </Card>

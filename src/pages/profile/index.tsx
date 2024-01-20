@@ -88,7 +88,7 @@ const Profile = () => {
   }, [fetchTickets])
 
   return (
-    <div className="flex flex-row-reverse gap-6">
+    <div className="flex flex-row-reverse gap-6 ">
       <ProfileDetails user={user} />
       <ProfileEdit />
       <Card className="w-full">

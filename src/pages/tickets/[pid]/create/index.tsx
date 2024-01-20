@@ -6,15 +6,40 @@ import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Button, DropDown, TextArea } from '@/components'
+import { Button, DatePicker, DropDown, TextArea } from '@/components'
 import FormLine from '@/components/FormLine'
 import { Modal } from '@/containers'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
 import { CreateChildSchema } from '@/utils/yupConfig'
 
-const PROBLEMS = [{ name: 'Problem', value: '' }]
-const SERIAL_NUMBERS = [{ name: 'Serial Number', value: '' }]
+const FAULT = [
+  { name: 'Air Filter Server', value: 'air-filter-server' },
+  {
+    name: 'Ambient RH Sensor Failure',
+    value: 'ambient-rh-sensor-failure'
+  },
+  {
+    name: 'Battery Charger Failure',
+    value: 'battery-charger-failure'
+  },
+  {
+    name: 'Battery Disconnected',
+    value: 'battery-disconnected'
+  },
+  {
+    name: 'Battery Not Charging',
+    value: 'battery-not-charging'
+  },
+  {
+    name: 'Battery Voltage Low',
+    value: 'Battery Voltage Low'
+  }
+]
+const SOURCES = [{ name: 'Python', value: 'python' }]
+const INDICATED_FAILURES = [
+  { name: 'Carbon Polishing Filter', value: 'carbon-polishing-filter' }
+]
 
 type IChildFields = {
   customerimpact: boolean
@@ -24,8 +49,10 @@ type IChildFields = {
 }
 
 const CreateTicket = () => {
-  const [problem, setProblem] = useState<IOption>(PROBLEMS[0])
-  const [serialNumber, setSerialNumber] = useState<IOption>(SERIAL_NUMBERS[0])
+  const [fault, setFault] = useState<IOption>(FAULT[0])
+  const [source, setSource] = useState<IOption>(SOURCES[0])
+  const [failure, setFailure] = useState<IOption>(INDICATED_FAILURES[0])
+  const [outageDate, setOutageDate] = useState<Date | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
@@ -51,14 +78,22 @@ const CreateTicket = () => {
 
   const handleCreateChild = useCallback(
     async (data: IChildFields) => {
+      if (!outageDate) {
+        toast.error('Please Provide Outage Date')
+        return
+      }
+
       setIsLoading(true)
       const { error } = await supabase.rpc('create_child_ticket', {
-        ...data,
-        fault: '',
+        fault: fault.value,
         parentid: Number(pid),
-        problem: problem.value,
-        serial: serialNumber.value,
-        datecreated: new Date().toISOString()
+        customerimpact: data.customerimpact,
+        customerinquiry: data.customerinquiry,
+        descriptionopen: data.description,
+        upgrade: data.upgrade,
+        indicatedfailure: failure.value,
+        outagedate: outageDate.toISOString(),
+        source: source.value
       })
 
       setIsLoading(false)
@@ -66,13 +101,13 @@ const CreateTicket = () => {
       if (error) toast.error(error.message)
       else router.back()
     },
-    [pid, problem.value, router, serialNumber.value]
+    [outageDate, fault.value, pid, failure.value, source.value, router]
   )
 
   return (
     <Modal showModal title="Create Ticket" onClose={router.back}>
       <form onSubmit={handleSubmit(handleCreateChild)} className="space-y-5">
-        <div className="mt-5 flex h-full flex-1 flex-wrap gap-6 rounded-5 bg-lightGray px-5 py-8">
+        <div className="mt-5 flex h-full flex-1 flex-wrap rounded-5 bg-lightGray px-5 py-8">
           <TextArea
             required
             id="description"
@@ -83,7 +118,7 @@ const CreateTicket = () => {
             rows={4}
             primary
           />
-          <div className="flex w-full gap-20">
+          <div className="mb-3 mt-6 flex w-full gap-20">
             <div className="flex items-start">
               <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
                 Customer Impact
@@ -124,20 +159,36 @@ const CreateTicket = () => {
               />
             </div>
           </div>
-          <DropDown
-            title="Problem"
-            setValue={setProblem}
-            value={problem}
-            options={PROBLEMS}
-            className="w-80"
-          />
-          <DropDown
-            title="Serial Number"
-            setValue={setSerialNumber}
-            value={serialNumber}
-            options={[{ name: 'Serial No', value: '' }]}
-            className="w-80"
-          />
+          <div className="flex flex-wrap gap-x-6">
+            <DropDown
+              title="Problem"
+              setValue={setFault}
+              value={fault}
+              options={FAULT}
+              className="w-80"
+            />
+            <DropDown
+              title="Source"
+              setValue={setSource}
+              value={source}
+              options={SOURCES}
+              className="w-80"
+            />
+            <DatePicker
+              title="Outage Start Date"
+              className="w-80"
+              setDate={setOutageDate}
+              date={outageDate}
+              id="outage"
+            />
+            <DropDown
+              title="Indicated Failure"
+              setValue={setFailure}
+              value={failure}
+              options={INDICATED_FAILURES}
+              className="w-80"
+            />
+          </div>
         </div>
         <div className="mb-2 flex w-full justify-end pr-3">
           <Button type="submit" isLoading={isLoading} active>

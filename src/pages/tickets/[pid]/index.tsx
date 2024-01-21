@@ -20,7 +20,7 @@ import {
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
-import { IChildTicket, IRow } from '@/types/supabaseTables'
+import { IRow } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -91,7 +91,7 @@ const STATUS_OPTIONS = [
 ]
 
 const Tickets = () => {
-  const [rows, setRows] = useState<IChildTicket[]>([])
+  const [rows, setRows] = useState<IRow[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [totalCount, setTotalCount] = useState<number>(0)
 

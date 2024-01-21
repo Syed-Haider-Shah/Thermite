@@ -78,7 +78,7 @@ const TicketDetails = () => {
   }, [fetchDetails])
 
   return (
-    <div className="flex w-110 flex-col gap-8">
+    <div className="flex w-full min-w-95 max-w-screen-xs flex-col gap-8">
       <Card title="details" id="details" className="w-full">
         <h1 className="text-xl font-semibold leading-6">
           Parent Ticket Details

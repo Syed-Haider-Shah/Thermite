@@ -63,10 +63,6 @@ const cols = [
   {
     field: 'upgrade',
     name: 'Upgrade'
-  },
-  {
-    field: 'serial_number',
-    name: 'Serial Number'
   }
 ]
 
@@ -143,7 +139,7 @@ const Tickets = () => {
 
   return (
     <div className="flex gap-7">
-      <Card>
+      <Card className="w-full">
         <div className="flex flex-row-reverse gap-2">
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">

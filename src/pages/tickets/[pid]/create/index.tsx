@@ -6,19 +6,11 @@ import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import {
-  Button,
-  ComboBox,
-  DatePicker,
-  DropDown,
-  RadioButton,
-  TextArea
-} from '@/components'
+import { Button, DatePicker, DropDown, TextArea } from '@/components'
 import FormLine from '@/components/FormLine'
 import { Modal } from '@/containers'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
-import { cn } from '@/utils/cn'
 import { CreateChildSchema } from '@/utils/yupConfig'
 
 const FAULT = [
@@ -115,43 +107,87 @@ const CreateTicket = () => {
   return (
     <Modal showModal title="Create Ticket" onClose={router.back}>
       <form onSubmit={handleSubmit(handleCreateChild)} className="space-y-5">
-        <div className="mt-5 flex h-full flex-1 flex-wrap gap-2 rounded-5 bg-white px-5 py-8">
-          <fieldset
-            className={cn(
-              'box-border w-full rounded-lg border-4',
-              'border-loadGray focus-within:border-loadBlue'
-            )}
-          >
-            <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
-              Description
-            </div>
-            <TextArea id="ticket" custForm />
-          </fieldset>
+        <div className="mt-5 flex h-full flex-1 flex-wrap rounded-5 bg-lightGray px-5 py-8">
+          <TextArea
+            required
+            id="description"
+            title="Description"
+            {...register('description')}
+            error={errors.description?.message}
+            className="w-sm resize-none"
+            rows={4}
+            primary
+          />
           <div className="mb-3 mt-6 flex w-full gap-20">
             <div className="flex items-start">
-              <RadioButton name="Customer Impacting" />
-            </div>
-            <div className="flex items-start">
-              <RadioButton name="Customer Inquiry" />
-            </div>
-            <div className="flex items-start">
-              <RadioButton name="Upgrade" />
-            </div>
-          </div>
-          <div className="flex w-full flex-wrap justify-between">
-            <div className="flex w-[45%] flex-col gap-2">
-              <ComboBox title="Problem" items={[]} field="" />
-              <DatePicker
-                id="outtage"
-                className="h-14"
-                title="Outtage Start Date"
-                showTime
+              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
+                Customer Impact
+              </h1>
+              <FormLine
+                id="customer-impact"
+                {...register('customerimpact')}
+                error={errors.customerimpact?.message}
+                primary
+                className="translate-x-3 self-start"
+                type="checkbox"
               />
             </div>
-            <div className="flex w-[45%] flex-col gap-4">
-              <ComboBox title="Source" items={[]} field="" />
-              <ComboBox title="Indicated Failure" items={[]} field="" />
+            <div className="flex items-start">
+              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
+                Customer Inquiry
+              </h1>
+              <FormLine
+                id="customer-inquiry"
+                {...register('customerinquiry')}
+                error={errors.customerinquiry?.message}
+                primary
+                className="translate-x-3 self-start"
+                type="checkbox"
+              />
             </div>
+            <div className="flex items-start">
+              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
+                Upgrade
+              </h1>
+              <FormLine
+                id="upgrade"
+                {...register('upgrade')}
+                error={errors.upgrade?.message}
+                primary
+                className="translate-x-3 self-start"
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-x-6">
+            <DropDown
+              title="Problem"
+              setValue={setFault}
+              value={fault}
+              options={FAULT}
+              className="w-80"
+            />
+            <DropDown
+              title="Source"
+              setValue={setSource}
+              value={source}
+              options={SOURCES}
+              className="w-80"
+            />
+            <DatePicker
+              title="Outage Start Date"
+              className="w-80"
+              setDate={setOutageDate}
+              date={outageDate}
+              id="outage"
+            />
+            <DropDown
+              title="Indicated Failure"
+              setValue={setFailure}
+              value={failure}
+              options={INDICATED_FAILURES}
+              className="w-80"
+            />
           </div>
         </div>
         <div className="mb-2 flex w-full justify-end pr-3">

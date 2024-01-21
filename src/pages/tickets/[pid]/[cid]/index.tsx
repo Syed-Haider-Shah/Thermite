@@ -20,10 +20,11 @@ const ChildTicket = () => {
   const fetchChildTicket = useCallback(async () => {
     setIsLoading(true)
     const { data, error } = await supabase
-      .from('Child')
-      .select()
-      .eq('id', Number(cid))
+      .rpc('show_child_details', {
+        child_id: Number(cid)
+      })
       .single()
+
     setIsLoading(false)
 
     if (data) setChildTicket(data)

@@ -40,7 +40,8 @@ const FormAreaComponent: ForwardRefRenderFunction<
     onChange,
     onKeyDown,
     error,
-    rows
+    rows,
+    ...props
   },
   ref
 ) => {
@@ -68,6 +69,7 @@ const FormAreaComponent: ForwardRefRenderFunction<
           },
           className
         )}
+        {...props}
         ref={ref}
         placeholder={placeholder}
         rows={rows}

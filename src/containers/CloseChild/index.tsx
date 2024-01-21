@@ -36,22 +36,26 @@ const CloseChild = () => {
     }
   })
 
-  const handleCloseChild = useCallback(async () => {
-    setIsSaving(true)
-    const { error } = await supabase.rpc('close_child_ticket', {
-      c_id: Number(cid),
-      c_confirmed_fault: fault.value,
-      c_parts: part.value,
-      c_resolution: resolution.value
-    })
-    setIsSaving(false)
+  const handleCloseChild = useCallback(
+    async ({ description }: { description: string }) => {
+      setIsSaving(true)
+      const { error } = await supabase.rpc('close_child_ticket', {
+        c_id: Number(cid),
+        c_confirmed_fault: fault.value,
+        c_cause: part.value,
+        c_description: description,
+        c_resolution: resolution.value
+      })
+      setIsSaving(false)
 
-    if (error) toast.error(error.message)
-    else {
-      toast.success('Ticket Closed Successfully')
-      router.back()
-    }
-  }, [cid, fault.value, part.value, resolution.value, router])
+      if (error) toast.error(error.message)
+      else {
+        toast.success('Ticket Closed Successfully')
+        router.back()
+      }
+    },
+    [cid, fault.value, part.value, resolution.value, router]
+  )
 
   return (
     <form

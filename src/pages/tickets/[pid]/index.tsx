@@ -20,7 +20,7 @@ import {
 import { Paths } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
-import { IChildTicket, IRow } from '@/types/supabaseTables'
+import { IRow } from '@/types/supabaseTables'
 
 const cols = [
   {
@@ -63,10 +63,6 @@ const cols = [
   {
     field: 'upgrade',
     name: 'Upgrade'
-  },
-  {
-    field: 'serial_number',
-    name: 'Serial Number'
   }
 ]
 
@@ -91,7 +87,7 @@ const STATUS_OPTIONS = [
 ]
 
 const Tickets = () => {
-  const [rows, setRows] = useState<IChildTicket[]>([])
+  const [rows, setRows] = useState<IRow[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [totalCount, setTotalCount] = useState<number>(0)
 
@@ -143,7 +139,7 @@ const Tickets = () => {
 
   return (
     <div className="flex gap-7">
-      <Card>
+      <Card className="w-full">
         <div className="flex flex-row-reverse gap-2">
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">

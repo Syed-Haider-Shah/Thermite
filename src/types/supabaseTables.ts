@@ -37,36 +37,36 @@ export interface IParentTicket {
 }
 
 export interface IChildTicket {
-  close_date: string | null
+  id: number
   created_at: string
-  created_date: string
+  status: string
+  close_date: string
+  parent_id: number
   customer_impact: boolean
   customer_inquiry: boolean
-  description: string
-  fault: string
-  id: number
-  parent_id: number
-  problem: string | null
-  serial_number: string
-  status: string
   upgrade: boolean
+  indicated_failure: string
+  fault: string
+  outage_date: string
+  source: string
+  serial_number: string
   [key: string]: string | string[] | boolean | number | null
 }
 
 export const INITIAL_CHILD_DATA = {
-  close_date: null,
+  id: 0,
   created_at: '',
-  created_date: '',
+  status: '',
+  close_date: '',
+  parent_id: 0,
   customer_impact: false,
   customer_inquiry: false,
-  description: '',
+  upgrade: false,
+  indicated_failure: '',
   fault: '',
-  id: 0,
-  parent_id: 0,
-  problem: null,
-  serial_number: '',
-  status: '',
-  upgrade: false
+  outage_date: '',
+  source: '',
+  serial_number: ''
 }
 
 export interface IParentDetails {

@@ -17,7 +17,7 @@ const Toggle = ({
         onChange={(event) => onChange && onChange(event.target.checked)}
         className="peer sr-only"
       />
-      <div className="block h-4 w-10 rounded-full bg-gray p-2 py-1.5 text-right text-sm font-bold transition-colors peer-checked:bg-darkIndigo peer-checked:text-left peer-checked:text-white">
+      <div className="block h-4 w-10 rounded-full bg-gray p-2 py-1.5 text-right text-sm font-bold transition-colors peer-checked:bg-gradient-to-tr peer-checked:from-darkIndigo peer-checked:to-darkIndigo/70 peer-checked:text-left peer-checked:text-white">
         {isChecked ? '' : ''}
       </div>
       <div className="dot absolute h-6 w-6 -translate-y-5 rounded-full border-[1px] bg-white shadow-lg transition ease-in-out peer-checked:translate-x-5" />

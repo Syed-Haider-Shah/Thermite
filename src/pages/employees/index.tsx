@@ -134,8 +134,8 @@ const Employees = () => {
               onSearch={handleSearch}
               placeholder="Search for Employees"
             />
-            <div className=" flex items-center justify-center gap-2 rounded-2.5 border-4 border-gray/40 bg-white px-4 text-sm font-bold text-darkIndigo">
-              <h2 className="font-normal">Workers</h2>
+            <div className=" l flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo px-4 text-sm font-bold text-white shadow-lg">
+              <h2 className="font-normal">RESULTS</h2>
               <p className=" font-bold">{totalCount}</p>
             </div>
           </div>

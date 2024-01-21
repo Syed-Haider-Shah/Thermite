@@ -39,7 +39,7 @@ const TicketChart = () => {
       <div className="translate-y-2 p-3.5 text-sm text-black">
         Assigned Ticket Details
       </div>
-      <div className="drop-shadow-3 h-32 w-32 translate-y-4 ">
+      <div className="h-32 w-32 translate-y-4 ">
         <Doughnut data={data} options={options} />
       </div>
       <div className="flex w-full flex-col p-6 text-sm">

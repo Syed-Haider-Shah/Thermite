@@ -29,7 +29,7 @@ const QuickAssign = () => {
         <div className="h-5 w-5 rounded-full bg-loadBlue/50"></div>
       </div>
       <div className="flex justify-center bg-white font-bold">EASY ASSIGN</div>
-      <div className="min-h-1/2 absolute bottom-0 grid w-full grid-cols-2 gap-1 bg-loadBlue p-4 shadow-lg">
+      <div className="min-h-1/2 absolute bottom-0 grid w-full grid-cols-2 gap-1 bg-gradient-to-tl from-loadBlue to-loadBlue/90 p-4 shadow-lg">
         <div className="flex flex-col items-center p-2">
           <div className=" font-bold text-white">Town</div>
           <DropDown

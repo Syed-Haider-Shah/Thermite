@@ -42,7 +42,7 @@ const TicketDash = () => {
         href="/tickets"
         className={cn(
           'mx-auto flex w-4/5 justify-between rounded-5 p-3 px-6 text-xs font-bold text-white',
-          'bg-loadBlue transition-shadow hover:shadow-xl'
+          'bg-gradient-to-tl from-loadBlue to-loadBlue/80 transition-shadow hover:shadow-xl'
         )}
       >
         TAKE ME TO TICKETS

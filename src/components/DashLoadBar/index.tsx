@@ -16,7 +16,7 @@ const DashLoadBar = ({
         <div className="flex items-center gap-2 text-xs text-gray">
           <div className={`flex w-full ${color2}`}>
             <div
-              className={`h-[0.3rem] animate-fade ${color}`}
+              className={` h-[0.3rem] animate-fade ${color}`}
               style={{ width: `${progress}%` }}
             />
           </div>

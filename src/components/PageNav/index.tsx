@@ -68,7 +68,7 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
             className={cn(
               ' rounded-5 p-2 px-4 text-sm text-black/50 transition-all duration-75 hover:bg-gray/20',
               {
-                'bg-darkIndigo text-white hover:bg-darkIndigo/80':
+                'bg-gradient-to-tr from-darkIndigo to-darkIndigo/90 text-white hover:bg-darkIndigo/80':
                   `${pageVal}` === page
               }
             )}

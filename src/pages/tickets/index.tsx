@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
@@ -146,6 +147,7 @@ const Tickets = () => {
     <Card>
       <div className="flex justify-between">
         <div className="flex gap-8">
+          <Image src="/logoSymbol.svg" alt="logo Icon" width={40} height={40} />
           <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
           <div className=" l flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo px-4 text-sm font-bold text-white shadow-lg">
             <h2 className="font-normal">RESULTS</h2>

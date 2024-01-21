@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
@@ -88,6 +89,7 @@ const Customers = () => {
     <Card>
       <div className="flex justify-between">
         <div className="flex gap-8">
+          <Image src="/logoSymbol.svg" alt="logo Icon" width={40} height={40} />
           <SearchBar
             onSearch={handleSearch}
             placeholder="Search for Customers"

@@ -155,12 +155,12 @@ const Tickets = () => {
           cols={cols}
           rows={rows}
         />
-        <div className="grid grid-cols-3 text-black/60">
-          <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
-            <h2 className="font-semibold">Total Count: </h2>
-            <p>{totalCount}</p>
-          </div>
+        <div className="flex justify-center text-black/60">
           <PageNav pageCount={totalCount} />
+        </div>
+        <div className="absolute bottom-5 right-6 flex w-fit items-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo  px-4 py-2 text-sm font-bold text-white shadow-lg">
+          <h2 className="font-normal">RESULTS</h2>
+          <p className="">{totalCount}</p>
         </div>
       </Card>
       <TicketDetails />

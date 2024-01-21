@@ -11,14 +11,14 @@ const data = {
       label: '# of Votes',
       data: [60, 10, 30],
       backgroundColor: [
-        'rgba(59, 130, 246,1)',
-        'rgba(80, 200, 120,1)',
-        'rgba(253, 186, 140, 1)'
+        'rgba(69, 107, 240,1)',
+        'rgba(76, 169, 190,1)',
+        'rgba(241, 157, 55,1)'
       ],
       borderColor: [
-        'rgba(59, 130, 246,1)',
-        'rgba(80, 200, 120,1)',
-        'rgba(253, 186, 140, 1)'
+        'rgba(69, 107, 240,1)',
+        'rgba(76, 169, 190,1)',
+        'rgba(241, 157, 55,1)'
       ],
       borderWidth: 0
     }
@@ -39,7 +39,7 @@ const TicketChart = () => {
       <div className="translate-y-2 p-3.5 text-sm text-black">
         Assigned Ticket Details
       </div>
-      <div className="drop-shadow-3 h-32 w-32 translate-y-4 ">
+      <div className="h-32 w-32 translate-y-4 ">
         <Doughnut data={data} options={options} />
       </div>
       <div className="flex w-full flex-col p-6 text-sm">

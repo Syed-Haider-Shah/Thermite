@@ -61,7 +61,7 @@ const FormAreaComponent: ForwardRefRenderFunction<
       </div>
       <textarea
         className={cn(
-          'resize-none text-base font-medium leading-5 text-black/90 placeholder-black/40 outline-none autofill:bg-black/5',
+          'mx-3 resize-none text-base font-medium leading-5 text-black/10 placeholder-black/40 outline-none autofill:bg-black/5',
           {
             'rounded-1.25 border border-heavyGray px-2 py-2.5': primary,
             'rounded-full bg-black/5 p-3': !primary,

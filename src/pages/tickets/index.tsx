@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
@@ -145,7 +146,10 @@ const Tickets = () => {
   return (
     <Card>
       <div className="flex justify-between">
-        <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
+        <div className="flex gap-2">
+          <Image src="/logoSymbol.svg" alt="logo Icon" width={40} height={40} />
+          <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
+        </div>
         <div className="flex gap-x-2">
           <Toggle onChange={handleToggle} isChecked={showClosed} />
           <FilterSelect options={STATUS_OPTIONS} name="status" />
@@ -163,12 +167,12 @@ const Tickets = () => {
         isLoading={isLoading}
         onRowSelect={handleRowSelect}
       />
-      <div className="grid grid-cols-3 text-black/60">
-        <div className="flex w-max gap-2 rounded-1.25 border border-darkGray p-2">
-          <h2 className="font-semibold">Total Count: </h2>
-          <p>{totalCount}</p>
-        </div>
+      <div className="flex justify-center text-black/60">
         <PageNav pageCount={totalCount} />
+      </div>
+      <div className="absolute bottom-5 right-6 flex w-fit items-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo  px-4 py-2 text-sm font-bold text-white shadow-lg">
+        <h2 className="font-normal">RESULTS</h2>
+        <p className="">{totalCount}</p>
       </div>
     </Card>
   )

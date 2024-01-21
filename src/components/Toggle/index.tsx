@@ -7,10 +7,9 @@ const Toggle = ({
 }) => (
   <label
     htmlFor="checkbox"
-    className="flex cursor-pointer select-none items-center gap-2 rounded-2.5 border border-black/5 px-2 transition-colors hover:bg-lightGray"
+    className="mr-2 flex cursor-pointer select-none items-center gap-2 rounded-2.5 px-2 text-sm text-gray transition-colors hover:bg-lightGray"
   >
-    Show Closed
-    <div className="relative">
+    <div className="">
       <input
         id="checkbox"
         title="Checkbox"
@@ -18,11 +17,12 @@ const Toggle = ({
         onChange={(event) => onChange && onChange(event.target.checked)}
         className="peer sr-only"
       />
-      <div className="block h-8 w-16 rounded-full bg-[#E5E7EB] p-2 py-1.5 text-right text-sm font-bold transition-colors peer-checked:bg-indigo peer-checked:text-left peer-checked:text-white">
-        {isChecked ? 'OFF' : 'ON'}
+      <div className="block h-4 w-10 rounded-full bg-gray p-2 py-1.5 text-right text-sm font-bold transition-colors peer-checked:bg-gradient-to-tr peer-checked:from-darkIndigo peer-checked:to-darkIndigo/70 peer-checked:text-left peer-checked:text-white">
+        {isChecked ? '' : ''}
       </div>
-      <div className="dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition ease-in-out peer-checked:translate-x-8" />
+      <div className="dot absolute h-6 w-6 -translate-y-5 rounded-full border-[1px] bg-white shadow-lg transition ease-in-out peer-checked:translate-x-5" />
     </div>
+    Show Closed
   </label>
 )
 

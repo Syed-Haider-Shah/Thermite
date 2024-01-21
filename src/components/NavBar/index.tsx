@@ -55,6 +55,13 @@ const NavBarComponent: FC = () => {
         width={300}
         height={120}
       />
+      <Image
+        src="/logoSymbolVar2.svg"
+        className=" translate-y-6 md:hidden"
+        alt="logo Icon"
+        width={60}
+        height={60}
+      />
       <div className="mt-[80px] flex flex-col gap-4 md:w-55">
         {ROUTES.map((route) => {
           if (

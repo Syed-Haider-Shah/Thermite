@@ -52,9 +52,9 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
           pathname,
           query: handlePrev()
         }}
-        className="h-7 rounded-md border border-darkGray bg-white px-2 pt-0.5 text-black/50"
+        className=" rounded-5 p-2 px-4 text-sm text-black/50 transition-all duration-75 hover:bg-gray/20"
       >
-        Prev
+        PREV
       </Link>
       {[...Array(count > 5 ? 5 : count)].map((e, val) => {
         const pageVal = val + start
@@ -65,9 +65,13 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
               pathname,
               query: handlePageSelect(pageVal)
             }}
-            className={cn('rounded px-1 pt-1 font-semibold text-black/50', {
-              'border border-darkGray text-black': `${pageVal}` === page
-            })}
+            className={cn(
+              ' rounded-5 p-2 px-4 text-sm text-black/50 transition-all duration-75 hover:bg-gray/20',
+              {
+                'bg-gradient-to-tr from-darkIndigo to-darkIndigo/90 text-white hover:bg-darkIndigo/80':
+                  `${pageVal}` === page
+              }
+            )}
           >
             {pageVal}
           </Link>
@@ -78,9 +82,9 @@ const PageNav = ({ pageCount }: { pageCount: number }) => {
           pathname,
           query: handleNext()
         }}
-        className="h-7 rounded-md border border-darkGray bg-white px-2 pt-0.5 text-black/50"
+        className=" rounded-5 p-2 px-4 text-sm text-black/50 transition-all duration-75 hover:bg-gray/20"
       >
-        Next
+        NEXT
       </Link>
     </div>
   )

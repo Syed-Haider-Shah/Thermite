@@ -83,7 +83,7 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
 
   return (
     <>
-      <Button className="border py-1 text-indigo" onClick={handleShowModal}>
+      <Button className="border py-1 text-loadBlue" onClick={handleShowModal}>
         Assign
       </Button>
       <Modal showModal={showModal} onClose={handleBlur} title="Select Employee">

@@ -11,12 +11,12 @@ const data = {
       label: '# of Votes',
       data: [60, 10, 30],
       backgroundColor: [
-        'rgba(59, 130, 246,1)',
+        'rgba(69, 107, 240,1)',
         'rgba(76, 169, 190,1)',
         'rgba(241, 157, 55,1)'
       ],
       borderColor: [
-        'rgba(59, 130, 246,1)',
+        'rgba(69, 107, 240,1)',
         'rgba(76, 169, 190,1)',
         'rgba(241, 157, 55,1)'
       ],

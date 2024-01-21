@@ -146,13 +146,9 @@ const Tickets = () => {
   return (
     <Card>
       <div className="flex justify-between">
-        <div className="flex gap-8">
+        <div className="flex gap-2">
           <Image src="/logoSymbol.svg" alt="logo Icon" width={40} height={40} />
           <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
-          <div className=" l flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo px-4 text-sm font-bold text-white shadow-lg">
-            <h2 className="font-normal">RESULTS</h2>
-            <p className="">{totalCount}</p>
-          </div>
         </div>
         <div className="flex gap-x-2">
           <Toggle onChange={handleToggle} isChecked={showClosed} />
@@ -173,6 +169,10 @@ const Tickets = () => {
       />
       <div className="flex justify-center text-black/60">
         <PageNav pageCount={totalCount} />
+      </div>
+      <div className="absolute bottom-5 right-6 flex w-fit items-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo  px-4 py-2 text-sm font-bold text-white shadow-lg">
+        <h2 className="font-normal">RESULTS</h2>
+        <p className="">{totalCount}</p>
       </div>
     </Card>
   )

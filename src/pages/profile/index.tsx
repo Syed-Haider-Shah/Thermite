@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
@@ -93,7 +94,18 @@ const Profile = () => {
       <ProfileEdit />
       <Card className="w-full">
         <div className="flex justify-between">
-          <SearchBar onSearch={handleSearch} placeholder="Search for Tickets" />
+          <div className="flex gap-2">
+            <Image
+              src="/logoSymbol.svg"
+              alt="logo Icon"
+              width={40}
+              height={40}
+            />
+            <SearchBar
+              onSearch={handleSearch}
+              placeholder="Search for Tickets"
+            />
+          </div>
           <div className="flex gap-x-2">
             <FilterSelect options={OPTIONS} name="category" />
           </div>

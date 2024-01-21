@@ -36,9 +36,12 @@ const ProfileDetails = ({
         )}
       </div>
       <div
-        className={cn('grid min-w-95 grid-cols-2 items-center pb-4 ', {
-          'flex flex-col gap-10': !hideEdit
-        })}
+        className={cn(
+          'min-w-80 grid w-fit grid-cols-2 items-center bg-darkIndigo pb-4 ',
+          {
+            'flex flex-col gap-10': !hideEdit
+          }
+        )}
       >
         <div className="flex flex-col items-center gap-4  text-center text-black/90">
           {user.image_url ? (
@@ -57,7 +60,7 @@ const ProfileDetails = ({
             <p className="text-sm font-bold text-white/80">{user.country}</p>
           </div>
         </div>
-        <ul className="flex w-[20rem] flex-row flex-wrap justify-between gap-2 border-t border-white bg-darkIndigo">
+        <ul className="flex w-[20rem] flex-row flex-wrap justify-between gap-2 border-t border-dashed border-white bg-darkIndigo p-5">
           <li>
             <li className="flex flex-col  justify-start gap-2 p-2 pt-4">
               <h2 className="text-base font-semibold leading-4">ROLE</h2>

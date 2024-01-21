@@ -31,7 +31,7 @@ const TableComponent: FC<ITable> = ({
         return (
           <span
             className={cn(
-              '-ml-4 w-full rounded-full px-4 py-1.5 text-sm font-bold',
+              '-ml-4 w-full rounded-full px-4 py-1.5 text-sm font-bold shadow-md',
               {
                 'bg-green/10 text-darkGreen/60': val === 'OPEN',
                 'bg-red/5 text-red/90': val === 'CLOSED',
@@ -64,7 +64,7 @@ const TableComponent: FC<ITable> = ({
           onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
           className={cn(
-            'cursor-pointer border-y border-black/5 transition duration-300 ease-in-out last:border-b-0 even:bg-indigo/5 hover:bg-black/5 hover:shadow-xl',
+            'cursor-pointer border-y border-black/5 transition duration-300 ease-in-out last:border-b-0 even:bg-loadBlue/5 hover:bg-black/5 hover:shadow-xl',
             {
               '!bg-loadBlue/20 hover:bg-loadBlue/40':
                 selectedRow === row.id?.toString()

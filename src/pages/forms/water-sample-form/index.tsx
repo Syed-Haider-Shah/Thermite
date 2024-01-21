@@ -54,13 +54,19 @@ const WaterForm = () => {
           <div className="flex min-w-[16rem] flex-col gap-8 md:w-[32rem]">
             <ComboBox
               title="Ticket Name"
+              placeholder="Select a Ticket"
               items={ticketList}
               field="address"
               isLoading={isLoading}
               onSearch={fetchTickets}
               onSelect={handleSelect}
             />
-            <ComboBox title="Panel Generation" items={[]} field="panel" />
+            <ComboBox
+              title="Panel Generation"
+              placeholder="Select Generation"
+              items={[]}
+              field="panel"
+            />
             <DatePicker
               id="date-picker1"
               title="Water Test Vial Expiration Date"
@@ -83,7 +89,12 @@ const WaterForm = () => {
             </div>
           </div>
           <div className="flex min-w-[20rem] flex-col gap-8 md:w-[32rem]">
-            <ComboBox title="Region" items={[]} field="region" />
+            <ComboBox
+              title="Region"
+              items={[]}
+              field="region"
+              placeholder="Select Region"
+            />
             <div className="flex w-full flex-col justify-center gap-2 pl-1">
               <div className="flex text-sm">
                 Where did you collect the sample from?
@@ -99,7 +110,12 @@ const WaterForm = () => {
               title="Water Test Sample Date & Time"
               showTime
             />
-            <ComboBox title="Water Test Sample Result" items={[]} field="" />
+            <ComboBox
+              title="Water Test Sample Result"
+              placeholder="Select Result"
+              items={[]}
+              field=""
+            />
             <fieldset
               className={cn(
                 'box-border w-full rounded-lg border-4',
@@ -109,7 +125,7 @@ const WaterForm = () => {
               <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
                 Comments
               </div>
-              <TextArea id="ticket" placeholder="Select a Ticket" custForm />
+              <TextArea id="ticket" placeholder="Add Description" custForm />
             </fieldset>
           </div>
         </div>

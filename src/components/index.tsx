@@ -21,6 +21,7 @@ export { default as RadioButton } from './RadioButton'
 export { default as DatePicker } from './DatePicker'
 export { default as ColumnChart } from './ColumnChart'
 export { default as GuidesCard } from './GuidesCard'
+export { default as ImagePicker } from './ImagePicker'
 
 export {
   MagnifierIcon,

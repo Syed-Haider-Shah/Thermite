@@ -5,6 +5,7 @@ import {
   Button,
   ComboBox,
   DatePicker,
+  ImagePicker,
   RadioButton,
   TextArea
 } from '@/components'
@@ -16,6 +17,7 @@ const WaterForm = () => {
   const [ticketList, setTicketList] = useState<IRow[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [selected, setSelected] = useState<string>('')
+  const [imageFile, setImageFile] = useState<File | null>(null)
 
   const fetchTickets = useCallback(async (search: string) => {
     setIsLoading(true)
@@ -77,15 +79,19 @@ const WaterForm = () => {
             items={[]}
             field="panel"
           />
+
           <div className="flex w-[48%] flex-col gap-2">
             <div className="text-md w-fit bg-white px-1 font-bold">
               Standard Water Test Results Image (No UV Black Light)
             </div>
             <div className="flex items-center gap-5">
-              <button className="rounded bg-loadBlue p-2 text-sm text-white">
-                Upload Water Sample
-              </button>
-              <div className="text-gray">No File Chosen</div>
+              <ImagePicker
+                setAvatar={setImageFile}
+                className="h-9 w-40 justify-center rounded-md bg-activeBlue text-sm text-white [&>label]:h-min [&>label]:border-0"
+              />
+              <div className="text-gray">
+                {imageFile ? imageFile.name : 'No File Chosen'}
+              </div>
             </div>
           </div>
           <div className="flex w-[48%] flex-col justify-center gap-2 pl-1">

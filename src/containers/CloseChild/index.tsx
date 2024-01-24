@@ -11,13 +11,39 @@ import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
 import { CloseChildSchema } from '@/utils/yupConfig'
 
-const FAULTS = [{ name: 'Fault', value: '' }]
-const PARTS = [{ name: 'Parts', value: '' }]
-const RESOLUTIONS = [{ name: 'Resolution', value: '' }]
+const FAILURE = [
+  { name: 'Acoustic Box - H', value: '' },
+  { name: 'Air Filter - F', value: '' },
+  { name: 'Battery (E/F/FP) 070-0035-00', value: '' },
+  { name: 'CAN Cable - G', value: '' },
+  { name: 'Condenser Flowmeter - G', value: '' },
+  { name: 'Condenser Pump Assmbly, Clocking Flowmeter', value: '' },
+  { name: 'Condenser Supply Hose', value: '' }
+]
+const CAUSE = [
+  { name: 'False Positive', value: '' },
+  { name: 'Firmware Bug', value: '' },
+  { name: 'Physical Damage', value: '' },
+  { name: 'No Failure Present', value: '' },
+  { name: 'Clog', value: '' },
+  { name: 'Component does not run at setpoint', value: '' },
+  { name: 'Plumbing Issue', value: '' },
+  { name: 'Wheel Dropout', value: '' }
+]
+const RESOLUTIONS = [
+  { name: 'Resolved - First Contact Resolution', value: '' },
+  { name: 'Resolved - No Filed Service Visit Required', value: '' },
+  { name: 'Repaired - Field Service Visit Completed', value: '' },
+  { name: 'Replaced - New Panel - Filed Service Visit', value: '' },
+  { name: 'Removed Panel', value: '' },
+  { name: 'SENT_KNOWLEDGE_DOCUMENT_LINK', value: '' },
+  { name: 'FEATURE_REQUEST_TRACKED', value: '' },
+  { name: 'Environmental Reasons - No Action Required', value: '' }
+]
 
 const CloseChild = () => {
-  const [fault, setFault] = useState<IOption>(FAULTS[0])
-  const [part, setPart] = useState<IOption>(PARTS[0])
+  const [confirmedFailure, setConfirmedFailure] = useState<IOption>(FAILURE[0])
+  const [cause, setCause] = useState<IOption>(CAUSE[0])
   const [resolution, setResolution] = useState<IOption>(RESOLUTIONS[0])
   const [isSaving, setIsSaving] = useState<boolean>(false)
 
@@ -41,10 +67,10 @@ const CloseChild = () => {
       setIsSaving(true)
       const { error } = await supabase.rpc('close_child_ticket', {
         c_id: Number(cid),
-        c_confirmed_fault: fault.value,
-        c_cause: part.value,
+        c_confirmed_fault: confirmedFailure.name,
+        c_cause: cause.name,
         c_description: description,
-        c_resolution: resolution.value
+        c_resolution: resolution.name
       })
       setIsSaving(false)
 
@@ -54,7 +80,7 @@ const CloseChild = () => {
         router.back()
       }
     },
-    [cid, fault.value, part.value, resolution.value, router]
+    [cid, confirmedFailure.name, cause.name, resolution.name, router]
   )
 
   return (
@@ -63,24 +89,24 @@ const CloseChild = () => {
       className="mt-5 flex flex-1 flex-wrap gap-4 rounded-5 bg-lightGray p-5"
     >
       <DropDown
-        title="Fault"
-        value={fault}
-        setValue={setFault}
-        options={FAULTS}
+        title="CONFIRMED FAILURE"
+        value={confirmedFailure}
+        setValue={setConfirmedFailure}
+        options={FAILURE}
         className="w-80"
       />
       <DropDown
-        title="Parts"
-        value={part}
-        setValue={setPart}
-        options={PARTS}
-        className="w-80"
-      />
-      <DropDown
-        title="Resolution"
+        title="RESOLUTION"
         value={resolution}
         setValue={setResolution}
         options={RESOLUTIONS}
+        className="w-80"
+      />
+      <DropDown
+        title="CAUSE"
+        value={cause}
+        setValue={setCause}
+        options={CAUSE}
         className="w-80"
       />
       <TextArea
@@ -90,7 +116,7 @@ const CloseChild = () => {
         error={errors.description?.message}
         primary
         rows={4}
-        className="w-sm"
+        className="w-sm text-black/60"
       />
       <div className="mr-2 flex w-full flex-row-reverse">
         <Button type="submit" isLoading={isSaving} active>

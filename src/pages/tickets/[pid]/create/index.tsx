@@ -36,9 +36,27 @@ const FAULT = [
     value: 'Battery Voltage Low'
   }
 ]
-const SOURCES = [{ name: 'Python', value: 'python' }]
+const SOURCES = [
+  { name: 'CHAT', value: 'chat' },
+  { name: 'EMAIL', value: 'email' },
+  { name: 'FORM', value: 'form' },
+  { name: 'PHONE', value: 'phone' },
+  { name: 'SGP', value: 'sgp' },
+  { name: 'Field App', value: 'field-app' },
+  { name: 'NOC', value: 'noc' },
+  { name: 'Site Review', value: 'site-review' },
+  { name: 'Python', value: 'python' },
+  { name: 'Support Portal', value: 'support-portal' },
+  { name: 'Customer Phone', value: 'customer-phone' }
+]
 const INDICATED_FAILURES = [
-  { name: 'Carbon Polishing Filter', value: 'carbon-polishing-filter' }
+  { name: 'Acoustic Box - H', value: '' },
+  { name: 'Air Filter - F', value: '' },
+  { name: 'Battery (E/F/FP) 070-0035-00', value: '' },
+  { name: 'CAN Cable - G', value: '' },
+  { name: 'Condenser Flowmeter - G', value: '' },
+  { name: 'Condenser Pump Assmbly, Clocking Flowmeter', value: '' },
+  { name: 'Condenser Supply Hose', value: '' }
 ]
 
 type IChildFields = {
@@ -91,7 +109,7 @@ const CreateTicket = () => {
         customerinquiry: data.customerinquiry,
         descriptionopen: data.description,
         upgrade: data.upgrade,
-        indicatedfailure: failure.value,
+        indicatedfailure: failure.name,
         outagedate: outageDate.toISOString(),
         source: source.value
       })
@@ -101,7 +119,7 @@ const CreateTicket = () => {
       if (error) toast.error(error.message)
       else router.back()
     },
-    [outageDate, fault.value, pid, failure.value, source.value, router]
+    [outageDate, fault.value, pid, failure.name, source.value, router]
   )
 
   return (
@@ -114,7 +132,7 @@ const CreateTicket = () => {
             title="Description"
             {...register('description')}
             error={errors.description?.message}
-            className="w-sm resize-none"
+            className="w-sm resize-none text-black/60"
             rows={4}
             primary
           />

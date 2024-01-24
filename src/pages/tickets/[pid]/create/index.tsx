@@ -52,7 +52,7 @@ const CreateTicket = () => {
   const [fault, setFault] = useState<IOption>(FAULT[0])
   const [source, setSource] = useState<IOption>(SOURCES[0])
   const [failure, setFailure] = useState<IOption>(INDICATED_FAILURES[0])
-  const [outageDate, setOutageDate] = useState<Date | null>(null)
+  const [outageDate, setOutageDate] = useState<Date>(new Date())
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
@@ -177,8 +177,8 @@ const CreateTicket = () => {
             <DatePicker
               title="Outage Start Date"
               className="w-80"
-              setDate={setOutageDate}
-              date={outageDate}
+              setValue={setOutageDate}
+              value={outageDate}
               id="outage"
             />
             <DropDown

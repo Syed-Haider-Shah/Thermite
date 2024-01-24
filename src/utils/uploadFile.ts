@@ -5,7 +5,7 @@ import { supabase } from '@/services/supabase'
 
 export const uploadImage = async (
   photoFile: File,
-  folder: 'avatars' | 'post_images',
+  folder: 'avatars' | 'water_sample',
   name: string
 ) => {
   const bucket = supabase.storage.from('thermite_bucket')

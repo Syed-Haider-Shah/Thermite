@@ -93,3 +93,10 @@ export const CreateFeedSchema = yup.object().shape({
     .max(300, 'maximum 300 text character allowed')
     .required('Please input feedback context')
 })
+
+export const WaterFormSchema = yup.object().shape({
+  region: yup.string().required(),
+  result: yup.string().required(),
+  panel: yup.string().required(),
+  comment: yup.string().required()
+})

@@ -1,17 +1,18 @@
-import { ChangeEvent, useCallback, useRef, useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
+import { ChangeEvent, ForwardedRef, useCallback, useRef, useState } from 'react'
 
 import debounce from 'lodash.debounce'
 
 import { IRow } from '@/types/supabaseTables'
 import { cn } from '@/utils/cn'
 
-import FormLine from '../FormLine'
+import ComboInput from './ComboInput'
+import DropList from './DropList'
 
 type IComboBox = {
   items: IRow[]
   title: string
   placeholder?: string
+  ref?: ForwardedRef<HTMLInputElement>
   field: string
   isLoading?: boolean
   className?: string
@@ -25,6 +26,7 @@ const ComboBox = ({
   placeholder,
   field,
   isLoading,
+  ref,
   className,
   onSelect,
   onSearch
@@ -55,52 +57,24 @@ const ComboBox = ({
     <div
       id="dropdown-menu"
       className={cn(
-        'relative right-0 mt-2 w-full min-w-[14.5rem] -translate-y-1 space-y-1 rounded-md',
+        'group relative right-0 mt-2 w-full min-w-[14.5rem] -translate-y-1 space-y-1 rounded-md',
         className
       )}
     >
-      <fieldset
-        className={cn(
-          'z-10 box-border rounded-lg border-4',
-          'border-loadGray focus-within:border-loadBlue'
-        )}
-      >
-        <div className="w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
-          {title}
-        </div>
-        <FormLine
-          id="ticket"
-          placeholder={placeholder}
-          value={search}
-          cusForm
-          onChange={handleChange}
-        />
-      </fieldset>
-      <ul
-        className={cn(
-          'absolute z-10 w-[calc(100%-10px)] overflow-hidden rounded-md border border-black/10 bg-white',
-          { 'border-0': items.length < 1 && !isLoading }
-        )}
-      >
-        {items.map((item) => (
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-          <li
-            onClick={() => {
-              handleSelect(item)
-            }}
-            key={`${item}`}
-            className="block cursor-pointer border-b border-black/5 px-4 py-2 last:border-b-0 hover:bg-black/10"
-          >
-            {item[field]}
-          </li>
-        ))}
-        {isLoading && (
-          <li className="block cursor-pointer border-b border-black/5 px-4 py-2 last:border-b-0 hover:bg-black/10">
-            <Skeleton className="" />
-            <Skeleton className="" />
-          </li>
-        )}
-      </ul>
+      <ComboInput
+        id="ticket-name"
+        title={title}
+        ref={ref}
+        placeholder={placeholder}
+        value={search}
+        onChange={handleChange}
+      />
+      <DropList
+        field={field}
+        items={items}
+        isLoading={isLoading}
+        onSelect={handleSelect}
+      />
     </div>
   )
 }

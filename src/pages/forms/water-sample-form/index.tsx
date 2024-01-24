@@ -52,7 +52,7 @@ const WaterForm = () => {
         onSubmit={handleSubmit}
         className="mx-auto flex h-full w-4/5 flex-col items-center gap-8 bg-white "
       >
-        <div className="flex w-full flex-wrap justify-between gap-8 gap-y-12 bg-white">
+        <div className="flex w-full flex-wrap justify-between gap-8 gap-y-8 bg-white">
           <ComboBox
             title="Ticket Name"
             items={ticketList}

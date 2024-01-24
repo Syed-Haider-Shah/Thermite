@@ -27,7 +27,7 @@ const DateTimePicker = ({
         className
       )}
     >
-      <legend className="-trnaslate-y-1 w-fit px-1 text-sm font-medium text-darkIndigo/90">
+      <legend className="mx-2 w-fit px-1 text-sm font-medium text-darkIndigo/90">
         {title}
       </legend>
       <DatePicker

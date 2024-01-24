@@ -50,8 +50,8 @@ const FormAreaComponent: ForwardRefRenderFunction<
       title={title}
       htmlFor={id}
       className={cn('relative flex flex-col gap-y-1 font-semibold', {
-        'text-sm leading-4 text-black/90': primary,
-        'mt-6 text-xl leading-6 text-black/60 ': !primary,
+        'text-sm leading-4 text-black': primary,
+        'mt-6 text-xl leading-6 text-black ': !primary,
         'mt-0 -translate-y-3': custForm
       })}
     >
@@ -61,7 +61,7 @@ const FormAreaComponent: ForwardRefRenderFunction<
       </div>
       <textarea
         className={cn(
-          'mx-3 resize-none text-base font-medium leading-5 text-black/10 placeholder-black/40 outline-none autofill:bg-black/5',
+          'resize-none text-base font-medium leading-5 text-black/10 placeholder-black/40 outline-none autofill:bg-black/5',
           {
             'rounded-1.25 border border-heavyGray px-2 py-2.5': primary,
             'rounded-full bg-black/5 p-3': !primary,

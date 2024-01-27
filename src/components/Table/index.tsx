@@ -53,7 +53,7 @@ const TableComponent: FC<ITable> = ({
             return 'Employee'
         }
     }
-    if (val === undefined) return '----'
+    if (val === undefined || val === null) return '----'
     return `${val}`
   }
 

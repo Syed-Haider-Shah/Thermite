@@ -79,24 +79,36 @@ const TicketDetails = () => {
   const statusUpdate = async () => {
     if (status == 'WATER-SAMPLE' && confirmation == false) {
       toggleDialog()
-    } else {
-      console.log('value of confirmation: ', confirmation)
-      setIsLoading(true)
-      const { error } = await supabase.rpc('parent_status_change', {
-        stat: status,
-        t_id: Number(pid)
-      })
-      setIsLoading(false)
-      if (error) toast.error(error.message)
-      else {
-        toast.success('Status Updated')
-        nav.push('/tickets')
-      }
+      return
+    }
+
+    if (!pid) {
+      toast.error('Parent ID not specified')
+      return
+    }
+
+    console.log('value of confirmation: ', confirmation)
+    setIsLoading(true)
+    const { error } = await supabase.rpc('parent_status_change', {
+      stat: status,
+      t_id: Number(pid)
+    })
+    setIsLoading(false)
+    if (error) toast.error(error.message)
+    else {
+      setConfirmation(false)
+      toast.success('Status Updated')
+      nav.push('/tickets')
     }
   }
 
   const statusClose = async () => {
     setIsLoading(true)
+    if (!pid) {
+      toast.error('Parent ID not specified')
+      return
+    }
+
     const { error } = await supabase.rpc('close_parent_ticket_water_sample', {
       par_id: Number(pid)
     })
@@ -200,23 +212,25 @@ const TicketDetails = () => {
                   )
                 }
               />
-              <div className="col-span-2 grid w-full grid-cols-2 items-center gap-2">
-                <DropDown2
-                  options={STATUS_OPTIONS}
-                  setValue={setStatus}
-                  value={status}
-                  title="Status"
-                  className="w-full"
-                />
-                <Button
-                  disabled={status === details.status}
-                  className="py-2.25"
-                  active
-                  onClick={statusUpdate}
-                >
-                  Update
-                </Button>
-              </div>
+              {details.status !== 'WATER-SAMPLE' && (
+                <div className="col-span-2 grid w-full grid-cols-2 items-center gap-2">
+                  <DropDown2
+                    options={STATUS_OPTIONS}
+                    setValue={setStatus}
+                    value={status}
+                    title="Status"
+                    className="w-full"
+                  />
+                  <Button
+                    disabled={status === details.status}
+                    className="py-2.25"
+                    active
+                    onClick={statusUpdate}
+                  >
+                    Update
+                  </Button>
+                </div>
+              )}
             </>
           )}
         </div>

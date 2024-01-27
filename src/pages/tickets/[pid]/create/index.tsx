@@ -194,7 +194,8 @@ const CreateTicket = () => {
             />
             <DatePicker
               title="Outage Start Date"
-              className="w-80"
+              className="mt-3 h-min w-80"
+              titleBG="bg-lightGray"
               setValue={setOutageDate}
               value={outageDate}
               id="outage"

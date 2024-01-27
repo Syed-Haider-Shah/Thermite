@@ -139,6 +139,7 @@ module.exports = {
     },
     colors: {
       transparent: 'transparent',
+      inherit: 'inherit',
       // Content Colors
       white: '#FFFFFF',
       red: '#FF0000E5',

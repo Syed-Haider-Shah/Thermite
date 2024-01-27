@@ -15,6 +15,7 @@ import { LoginSchema } from '@/utils/yupConfig'
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const [checked, setChecked] = useState(false)
 
   const {
     register,
@@ -124,12 +125,14 @@ const Home = () => {
                 <div className="flex w-28 items-center gap-3 text-xs md:w-auto md:text-base">
                   <label
                     title="sample"
-                    className="flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-2 border-loadGray focus-within:border-loadBlue md:h-7 md:w-7 md:border-[0.25rem]"
+                    aria-checked={checked}
+                    className="flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-2 border-loadGray aria-checked:border-loadBlue md:h-7 md:w-7 md:border-[0.25rem]"
                   >
                     <input
                       type="checkbox"
                       title="sample"
-                      className="ring-cursor-pointer h-1 w-1 cursor-pointer appearance-none rounded-full bg-transparent accent-loadBlue ring-0 ring-loadBlue ring-offset-0 focus:bg-loadBlue focus:ring-2 md:h-2 md:w-2"
+                      onClick={() => setChecked(!checked)}
+                      className="h-1 w-1 cursor-pointer appearance-none rounded-full bg-transparent ring-0 ring-offset-0 checked:bg-loadBlue checked:accent-loadBlue checked:ring-2 checked:ring-loadBlue md:h-2 md:w-2"
                     ></input>
                   </label>
                   Remember me

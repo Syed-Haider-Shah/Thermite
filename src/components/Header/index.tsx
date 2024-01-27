@@ -21,29 +21,23 @@ const OPTIONS = [
 
 const HeaderComponent: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [showFeedback, setShowFeedback] = useState<boolean>(false)
   const { signOut, user } = useAuth()
 
   const handleToggle = useCallback(() => setIsOpen((val) => !val), [])
 
   const handleClose = useCallback(() => setIsOpen(false), [])
 
-  const handleBlurFeedback = useCallback(() => setShowFeedback(false), [])
-
   return (
     <header className="relative flex h-24 w-full items-center justify-between border-l border-black/5 bg-white px-9 pb-5.5 pt-9 text-black/90">
-      <div className=" flex items-center">
+      <div className="group flex items-center">
         <Button
-          onClick={() => {
-            setShowFeedback((val) => !val)
-          }}
           active
-          className="rounded-md bg-gradient-to-tr from-darkIndigo to-darkIndigo/70 py-3"
+          className="rounded-md bg-gradient-to-tr from-darkIndigo to-darkIndigo/80 py-3"
         >
           Add Feedback
         </Button>
+        <Feedback />
       </div>
-      {showFeedback && <Feedback onBlur={handleBlurFeedback} />}
       <div className=" flex items-center gap-7">
         <Bell />
         <div className="relative flex items-center gap-4">

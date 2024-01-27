@@ -138,7 +138,7 @@ const Tickets = () => {
   }, [fetchChildTickets])
 
   return (
-    <div className="flex h-full gap-7">
+    <div className="mb-0 flex gap-7 md:mb-28">
       <Card className="w-full">
         <div className="flex flex-row-reverse gap-2">
           <Link href={`${pathname}${Paths.CREATE}`}>

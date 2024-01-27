@@ -178,6 +178,38 @@ export interface Database {
           }
         ]
       }
+      feed_back: {
+        Row: {
+          created_at: string
+          description: string
+          employee_id: string | null
+          id: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          employee_id?: string | null
+          id?: number
+          title?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          employee_id?: string | null
+          id?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'feed_back_employee_id_fkey'
+            columns: ['employee_id']
+            isOneToOne: false
+            referencedRelation: 'employees'
+            referencedColumns: ['id']
+          }
+        ]
+      }
       Parent: {
         Row: {
           child_count: number
@@ -321,12 +353,6 @@ export interface Database {
         }
         Returns: undefined
       }
-      close_parent_ticket: {
-        Args: {
-          par_id: number
-        }
-        Returns: undefined
-      }
       close_parent_ticket_water_sample: {
         Args: {
           par_id: number
@@ -334,6 +360,12 @@ export interface Database {
         Returns: undefined
       }
       close_step_two_function: {
+        Args: {
+          par_id: number
+        }
+        Returns: undefined
+      }
+      close_step_two_function_old: {
         Args: {
           par_id: number
           cust_id: number

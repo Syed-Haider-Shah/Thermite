@@ -32,7 +32,7 @@ const ButtonComponent: FC<IButton> = ({
       className={cn(
         ' flex items-center justify-center gap-x-2 rounded-full px-4.5 py-3 text-sm font-bold shadow-md transition duration-300 hover:opacity-70 disabled:bg-black/40 disabled:invert-0',
         {
-          '!rounded-1.25 border bg-gradient-to-br from-activeBlue/80 to-activeBlue py-1 text-white hover:opacity-90':
+          '!rounded-1.25 border bg-gradient-to-br from-activeBlue/80 to-activeBlue py-1 text-white hover:opacity-90 disabled:from-black/10 disabled:to-black/10':
             active,
           '!rounded-1.25 border border-black/10 bg-transparent text-black/40':
             primary

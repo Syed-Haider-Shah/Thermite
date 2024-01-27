@@ -1,14 +1,13 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
 import { ChevronDownIcon } from '@/components'
-import { IOption } from '@/types/model'
 import { cn } from '@/utils/cn'
 
 type IDropDown = {
-  options: IOption[]
+  options: string[]
   className?: string
-  setValue: Dispatch<SetStateAction<IOption>>
-  value: IOption
+  setValue: Dispatch<SetStateAction<string>>
+  value: string
   title?: string
   required?: boolean
 }
@@ -28,7 +27,7 @@ const DropDownComponent2 = ({
   }
 
   const handleSelect = useCallback(
-    (option: IOption) => {
+    (option: string) => {
       setValue(option)
       setIsOpen(false)
     },
@@ -53,7 +52,7 @@ const DropDownComponent2 = ({
         onClick={handleToggle}
         className="flex w-full items-center justify-between rounded-lg border border-heavyGray bg-white/40 px-2 py-2.25 text-left"
       >
-        {value?.name}
+        {value}
         <ChevronDownIcon
           className={cn('origin-center transform transition', {
             '-rotate-90': !isOpen
@@ -74,10 +73,10 @@ const DropDownComponent2 = ({
           <button
             type="button"
             onClick={() => handleSelect(option)}
-            key={option.name}
+            key={option}
             className="w-full cursor-pointer px-3 py-2.5 text-left hover:bg-darkIndigo/5"
           >
-            {option.name}
+            {option}
           </button>
         ))}
       </div>

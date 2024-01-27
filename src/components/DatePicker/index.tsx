@@ -6,6 +6,7 @@ type DatePickerProps = {
   showTime?: boolean
   className?: string
   setValue?: Dispatch<SetStateAction<Date>>
+  titleBG?: string
   value?: Date
   id?: string
   title: string
@@ -15,6 +16,7 @@ const DatePicker: FC<DatePickerProps> = ({
   showTime,
   className,
   setValue,
+  titleBG,
   value,
   id,
   title
@@ -51,7 +53,10 @@ const DatePicker: FC<DatePickerProps> = ({
     >
       <label
         htmlFor={id}
-        className="absolute w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm"
+        className={cn(
+          'bg-inherit absolute w-fit -translate-y-3 translate-x-6 px-1 text-sm',
+          titleBG
+        )}
       >
         {title}
       </label>
@@ -60,7 +65,7 @@ const DatePicker: FC<DatePickerProps> = ({
         type="date"
         value={value?.toISOString().substring(0, 10)}
         onChange={handleDateChange}
-        className={'rounded-md bg-white px-4 py-1.5 text-lg outline-none'}
+        className={'rounded-md bg-transparent px-4 py-1.5 text-lg outline-none'}
       />
       {showTime && (
         <input
@@ -68,7 +73,7 @@ const DatePicker: FC<DatePickerProps> = ({
           value={value?.toTimeString().substring(0, 5)}
           type="time"
           onChange={handleTimeChange}
-          className="border-l bg-white px-4 text-lg outline-none"
+          className="border-l bg-transparent px-4 text-lg outline-none"
         />
       )}
     </fieldset>

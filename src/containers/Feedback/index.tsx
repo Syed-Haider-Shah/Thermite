@@ -13,7 +13,7 @@ type TFeedback = {
   context: string
 }
 
-const Feedback = ({ onBlur }: { onBlur: () => void }) => {
+const Feedback = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const {
@@ -34,25 +34,26 @@ const Feedback = ({ onBlur }: { onBlur: () => void }) => {
       setIsLoading(true)
 
       const { error } = await supabase
-        .from('Feedback')
+        .from('feed_back')
         .insert({ title, context })
 
       setIsLoading(false)
 
       if (error) toast.error(error.message)
-      else onBlur()
+      else toast.success('Feedback Saved')
     },
-    [onBlur]
+    []
   )
 
   return (
     <form
       onSubmit={handleSubmit(handleCreateFeadback)}
-      className="absolute top-22 z-30 w-95 animate-fade rounded-2.5 border border-black/5 bg-white p-4 shadow-lg"
+      className="absolute top-22 z-30 hidden w-95 animate-fade rounded-2.5 border border-black/5 bg-white p-4 shadow-lg group-focus-within:block"
     >
       <FormLine
         {...register('title')}
         error={errors.title?.message}
+        placeholder="what would you like to see?"
         title="Title"
         id="title"
         primary
@@ -60,6 +61,8 @@ const Feedback = ({ onBlur }: { onBlur: () => void }) => {
       <TextArea
         {...register('context')}
         error={errors.context?.message}
+        className="text-black/90"
+        placeholder="tell us more"
         title="Context"
         id="context"
         rows={3}

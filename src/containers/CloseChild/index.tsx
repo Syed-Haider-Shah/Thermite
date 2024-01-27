@@ -63,13 +63,13 @@ const CloseChild = () => {
   })
 
   const handleCloseChild = useCallback(
-    async ({ description }: { description: string }) => {
+    async ({ description }: { description?: string }) => {
       setIsSaving(true)
       const { error } = await supabase.rpc('close_child_ticket', {
         c_id: Number(cid),
         c_confirmed_fault: confirmedFailure.name,
         c_cause: cause.name,
-        c_description: description,
+        c_description: description || '',
         c_resolution: resolution.name
       })
       setIsSaving(false)

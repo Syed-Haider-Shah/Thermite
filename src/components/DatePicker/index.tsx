@@ -54,7 +54,7 @@ const DatePicker: FC<DatePickerProps> = ({
       <label
         htmlFor={id}
         className={cn(
-          'bg-inherit absolute w-fit -translate-y-3 translate-x-6 px-1 text-sm',
+          'absolute w-fit -translate-y-3 translate-x-6 px-1 text-sm',
           titleBG
         )}
       >

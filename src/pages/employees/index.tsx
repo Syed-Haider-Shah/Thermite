@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -71,10 +71,18 @@ const Employees = () => {
   const pathname = usePathname()
   const country = useSearchParams().get('country')
   const page = useSearchParams().get('page') || '1'
+  const router = useRouter()
 
   const handleSelectRow = useCallback((row: IRow) => {
     setSelectedEmp(row as IEmployee)
   }, [])
+
+  const handleTicketSelect = useCallback(
+    (row: IRow) => {
+      router.push(`${Paths.TICKET}/${row.id}`)
+    },
+    [router]
+  )
 
   const handleSearch = useCallback((text: string) => {
     setSearch(text)
@@ -127,7 +135,7 @@ const Employees = () => {
   }, [fetchTickets, selectedEmp])
 
   return (
-    <div className="flex gap-6">
+    <div className="flex h-full gap-6">
       <Card className="w-1/2">
         <div className="flex justify-between">
           <div className="flex gap-2">
@@ -176,7 +184,7 @@ const Employees = () => {
                 cols={ticketCols}
                 rows={tickets}
                 isLoading={isLoadingTickets}
-                onRowSelect={handleSelectRow}
+                onRowSelect={handleTicketSelect}
               />
             </Card>
           </>

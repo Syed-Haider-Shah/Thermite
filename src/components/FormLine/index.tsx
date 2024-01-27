@@ -14,7 +14,7 @@ interface IFormLine extends InputHTMLAttributes<HTMLInputElement> {
   title?: string
   className?: string
   placeholder?: string
-  value?: string
+  value?: string | number | readonly string[]
   primary?: string | boolean
   secondary?: boolean
   cusForm?: boolean

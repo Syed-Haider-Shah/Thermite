@@ -7,14 +7,19 @@ import toast from 'react-hot-toast'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Button, Card, DropDown, FormLine } from '@/components'
+import {
+  AvatarImage,
+  Button,
+  Card,
+  DropDown,
+  FormLine,
+  ImagePicker
+} from '@/components'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
 import { uploadImage } from '@/utils/uploadFile'
 import { UpdateNameSchema, UpdatePasswordSchema } from '@/utils/yupConfig'
-
-import Avatar from './Avatar'
 
 const COUNTIES = [
   { name: 'Pakistan', value: 'pakistan' },
@@ -33,6 +38,7 @@ const ProfileEdit = () => {
   )
 
   const [image, setImage] = useState<File | null>(null)
+  const [imageSrc, setImageSrc] = useState<string>(user.image_url)
   const [isSavingPass, setIsSavingPass] = useState<boolean>(false)
   const [isSavingUser, setIsSavingUser] = useState<boolean>(false)
 
@@ -134,7 +140,9 @@ const ProfileEdit = () => {
           onSubmit={handleUpdateSubmit(handleUpdateUser)}
           className="flex flex-wrap items-center gap-x-6 rounded-5 bg-lightGray p-4"
         >
-          <Avatar avatarUrl={user.image_url || ''} setAvatar={setImage} />
+          <ImagePicker setAvatar={setImage} setAvatarSrc={setImageSrc}>
+            <AvatarImage avatarSrc={imageSrc} />
+          </ImagePicker>
           <FormLine
             title="Name"
             className="w-80"

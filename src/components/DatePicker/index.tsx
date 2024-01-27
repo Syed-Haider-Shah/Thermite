@@ -1,46 +1,78 @@
-import { Dispatch, SetStateAction } from 'react'
-import DatePicker from 'react-datepicker'
-
-import 'react-datepicker/dist/react-datepicker.css'
+import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react'
 
 import { cn } from '@/utils/cn'
-const DateTimePicker = ({
-  title,
-  showTime,
-  id,
-  className,
-  setDate,
-  date
-}: {
-  title: string
+
+type DatePickerProps = {
   showTime?: boolean
-  id: string
   className?: string
-  setDate?: Dispatch<SetStateAction<Date | null>>
-  date?: Date | null
+  setValue?: Dispatch<SetStateAction<Date>>
+  value?: Date
+  id?: string
+  title: string
+}
+
+const DatePicker: FC<DatePickerProps> = ({
+  showTime,
+  className,
+  setValue,
+  value,
+  id,
+  title
 }) => {
+  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!setValue || !value) return
+    if (!event.target.value) {
+      setValue(new Date())
+      return
+    }
+    const date = new Date(value)
+    const [year, month, day] = event.target.value.split('-').map(Number)
+    date.setFullYear(year, month - 1, day)
+    setValue(date)
+  }
+
+  const handleTimeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!setValue || !value) return
+
+    const date = new Date(value)
+    const [hours, minutes] = event.target.value.split(':').map(Number)
+    date.setHours(hours, minutes)
+    setValue(date)
+  }
+
   return (
     <fieldset
       className={cn(
-        'z-10 box-border block h-14 w-full translate-y-1 rounded-lg border-4 px-4',
+        'box-border flex w-full flex-col rounded-lg border-4',
         'border-loadGray focus-within:border-loadBlue',
+        { 'grid grid-cols-2 ': showTime },
         className
       )}
     >
-      <legend className="-trnaslate-y-1 w-fit px-1 text-sm font-medium text-darkIndigo/90">
+      <label
+        htmlFor={id}
+        className="absolute w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm"
+      >
         {title}
-      </legend>
-      <DatePicker
+      </label>
+      <input
         id={id}
-        className="w-full min-w-[14.5rem] bg-transparent outline-none"
-        selected={date}
-        wrapperClassName="w-full"
-        showTimeSelect={showTime}
-        placeholderText="Select a date"
-        dateFormat={showTime ? 'MMMM d, yyyy h:mm aa' : 'MMMM d, yyyy'}
-        onChange={(date) => setDate && setDate(date)}
+        type="date"
+        value={value?.toISOString().substring(0, 10)}
+        onChange={handleDateChange}
+        className={'rounded-md bg-white px-4 py-1.5 text-lg outline-none'}
       />
+      {showTime && (
+        <input
+          title="Time"
+          value={value?.toTimeString().substring(0, 5)}
+          type="time"
+          onChange={handleTimeChange}
+          className="border-l bg-white px-4 text-lg outline-none"
+        />
+      )}
     </fieldset>
   )
 }
-export default DateTimePicker
+
+export default DatePicker

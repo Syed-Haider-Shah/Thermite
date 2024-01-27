@@ -138,35 +138,32 @@ const Tickets = () => {
   }, [fetchChildTickets])
 
   return (
-    <div className="flex flex-col">
-      <div className="flex gap-7">
-        <Card className="w-full">
-          <div className="flex flex-row-reverse gap-2">
-            <Link href={`${pathname}${Paths.CREATE}`}>
-              <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
-                <UnionIcon />
-                New Child Ticket
-              </Button>
-            </Link>
-            <FilterSelect options={STATUS_OPTIONS} name="status" />
-          </div>
-          <Table
-            onRowSelect={handleRowSelect}
-            isLoading={isLoading}
-            cols={cols}
-            rows={rows}
-          />
-          <div className="flex justify-center text-black/60">
-            <PageNav pageCount={totalCount} />
-          </div>
-          <div className="absolute bottom-5 right-6 flex w-fit items-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo  px-4 py-2 text-sm font-bold text-white shadow-lg">
-            <h2 className="font-normal">RESULTS</h2>
-            <p className="">{totalCount}</p>
-          </div>
-        </Card>
-        <TicketDetails />
-      </div>
-      <div className="mb-0 md:mb-28"></div>
+    <div className="mb-0 flex gap-7 md:mb-28">
+      <Card className="w-full">
+        <div className="flex flex-row-reverse gap-2">
+          <Link href={`${pathname}${Paths.CREATE}`}>
+            <Button className="group rounded-xl border border-black/5 bg-white px-4 font-medium text-black/60">
+              <UnionIcon />
+              New Child Ticket
+            </Button>
+          </Link>
+          <FilterSelect options={STATUS_OPTIONS} name="status" />
+        </div>
+        <Table
+          onRowSelect={handleRowSelect}
+          isLoading={isLoading}
+          cols={cols}
+          rows={rows}
+        />
+        <div className="flex justify-center text-black/60">
+          <PageNav pageCount={totalCount} />
+        </div>
+        <div className="absolute bottom-5 right-6 flex w-fit items-center gap-2 rounded-full bg-gradient-to-br from-loadBlue/80 to-darkIndigo  px-4 py-2 text-sm font-bold text-white shadow-lg">
+          <h2 className="font-normal">RESULTS</h2>
+          <p className="">{totalCount}</p>
+        </div>
+      </Card>
+      <TicketDetails />
     </div>
   )
 }

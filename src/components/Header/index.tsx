@@ -38,7 +38,7 @@ const HeaderComponent: FC = () => {
             setShowFeedback((val) => !val)
           }}
           active
-          className="rounded-md bg-gradient-to-tr from-darkIndigo to-darkIndigo/70 py-3"
+          className="rounded-md bg-gradient-to-tr from-darkIndigo to-darkIndigo/80 py-3"
         >
           Add Feedback
         </Button>

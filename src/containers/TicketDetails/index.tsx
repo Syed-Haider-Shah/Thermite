@@ -87,7 +87,6 @@ const TicketDetails = () => {
       return
     }
 
-    console.log('value of confirmation: ', confirmation)
     setIsLoading(true)
     const { error } = await supabase.rpc('parent_status_change', {
       stat: status,

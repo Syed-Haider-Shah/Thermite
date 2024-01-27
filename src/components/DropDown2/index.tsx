@@ -10,6 +10,7 @@ type IDropDown = {
   value: string
   title?: string
   required?: boolean
+  variation?: 'primary'
 }
 
 const DropDownComponent2 = ({
@@ -18,7 +19,8 @@ const DropDownComponent2 = ({
   setValue,
   value,
   title,
-  required
+  required,
+  variation
 }: IDropDown) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -50,10 +52,18 @@ const DropDownComponent2 = ({
       <button
         type="button"
         onClick={handleToggle}
-        className="flex w-full items-center justify-between rounded-lg border border-heavyGray bg-white/40 px-2 py-2.25 text-left"
+        className={cn(
+          'flex w-full items-center justify-between rounded-lg border border-heavyGray bg-white/40 px-2 py-2.25 text-left decoration-white decoration-2 underline-offset-4 transition-all hover:underline',
+          {
+            'underline decoration-white decoration-2 underline-offset-4 transition-all':
+              isOpen,
+            'border-0 bg-transparent text-white': variation === 'primary'
+          }
+        )}
       >
         {value}
         <ChevronDownIcon
+          color={variation === 'primary' ? 'white' : undefined}
           className={cn('origin-center transform transition', {
             '-rotate-90': !isOpen
           })}
@@ -61,10 +71,10 @@ const DropDownComponent2 = ({
       </button>
       <div
         className={cn(
-          'absolute top-16 z-30 flex w-40 flex-col overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
+          'absolute top-16 z-30 flex w-40 flex-col gap-2 overflow-hidden rounded-lg bg-white drop-shadow-xl transition-maxHeight duration-300 ',
           className,
           {
-            'scrollbar-primary max-h-48 overflow-y-auto shadow-sm': isOpen,
+            'scrollbar-primary max-h-16 overflow-y-auto shadow-sm': isOpen,
             'max-h-0': !isOpen
           }
         )}
@@ -74,7 +84,7 @@ const DropDownComponent2 = ({
             type="button"
             onClick={() => handleSelect(option)}
             key={option}
-            className="w-full cursor-pointer px-3 py-2.5 text-left hover:bg-darkIndigo/5"
+            className="w-full cursor-pointer px-3 py-2.5 text-left hover:bg-loadBlue/20"
           >
             {option}
           </button>

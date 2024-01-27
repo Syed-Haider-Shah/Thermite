@@ -330,6 +330,13 @@ export interface Database {
         }
         Returns: undefined
       }
+      bulk_assign: {
+        Args: {
+          employee: string
+          assigntown: string
+        }
+        Returns: undefined
+      }
       change_status_superuser: {
         Args: {
           u_id: string
@@ -455,6 +462,14 @@ export interface Database {
           country: string
           warranty: boolean
         }[]
+      }
+      list_of_employees: {
+        Args: Record<PropertyKey, never>
+        Returns: string[]
+      }
+      list_of_town: {
+        Args: Record<PropertyKey, never>
+        Returns: string[]
       }
       number_of_closed_tickets: {
         Args: {

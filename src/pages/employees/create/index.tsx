@@ -59,12 +59,12 @@ const CreateEmployee = () => {
       email: string
       password: string
     }) => {
-      setIsLoading(true)
-
-      if (user.role !== 'admin' || 'superuser') {
+      if (user.role !== 'admin' && user.role !== 'superuser') {
         toast.error('Invalid Permission')
         return
       }
+
+      setIsLoading(true)
 
       const res = await fetch('/api/create-user', {
         method: 'POST',

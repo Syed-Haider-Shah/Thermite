@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
@@ -30,7 +30,11 @@ const WaterForm = () => {
   const [waterTestVial, setWaterTestVial] = useState<Date>(new Date())
   const [type, setType] = useState<string>('')
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
     resolver: yupResolver(WaterFormSchema),
     mode: 'onBlur',
     defaultValues: {
@@ -40,6 +44,13 @@ const WaterForm = () => {
       panel: ''
     }
   })
+
+  useEffect(() => {
+    if (errors.comment?.message) toast.error(errors.comment.message)
+    else if (errors.panel?.message) toast.error(errors.panel.message)
+    else if (errors.region?.message) toast.error(errors.region.message)
+    else if (errors.result?.message) toast.error(errors.result.message)
+  }, [errors])
 
   const fetchTickets = useCallback(async (search: string) => {
     if (search === '') {
@@ -207,6 +218,7 @@ const WaterForm = () => {
           </div>
           <TextArea
             id="ticket"
+            className="-translate-y-3 text-black/90"
             placeholder="Select a Ticket"
             {...register('comment')}
             custForm

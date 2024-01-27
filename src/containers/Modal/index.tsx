@@ -26,7 +26,7 @@ const ModalWrapper: FC<IModal> = ({
       ) : null}
       <div
         className={cn(
-          'z-50 flex h-fit max-h-lg min-h-md w-md animate-float-zoom flex-col rounded-5 bg-white p-5',
+          'z-50 flex h-fit max-h-lg min-h-md w-md animate-float-zoom flex-col overflow-y-auto rounded-5 bg-white p-5 scrollbar-none',
           className
         )}
       >

@@ -17,7 +17,7 @@ const ComboInput: ForwardRefRenderFunction<HTMLInputElement, IComboInput> = (
   return (
     <fieldset
       className={cn(
-        'box-border w-full overflow-hidden rounded-lg border-4',
+        'box-border h-12 w-full overflow-hidden rounded-lg border-4',
         'border-loadGray focus-within:border-loadBlue',
         className
       )}
@@ -25,7 +25,12 @@ const ComboInput: ForwardRefRenderFunction<HTMLInputElement, IComboInput> = (
       <div className="absolute w-fit -translate-y-3 translate-x-6 bg-white px-1 text-sm">
         {title}
       </div>
-      <input className="w-full px-2 py-2.5 outline-none" {...props} ref={ref} />
+      <input
+        className="w-full px-2 py-2.5 outline-none"
+        title={title}
+        {...props}
+        ref={ref}
+      />
     </fieldset>
   )
 }

@@ -6,21 +6,31 @@ import { cn } from '@/utils/cn'
 type IDropList = {
   isLoading?: boolean
   items: IRow[]
+  showList?: boolean
   field: string
   onSelect?: (val: IRow) => void
 }
 
-const DropList = ({ isLoading, items, field, onSelect }: IDropList) => {
+const DropList = ({
+  isLoading,
+  items,
+  field,
+  onSelect,
+  showList
+}: IDropList) => {
   const handleSelect = (val: IRow) => {
+    console.log(val)
     if (onSelect) onSelect(val)
   }
 
   return (
     <ul
       className={cn(
-        'absolute max-h-0 w-full overflow-hidden rounded-md border-black/10 bg-white shadow-lg',
-        'group-focus-within:max-h-48 group-focus-within:border',
-        { 'border-0': items.length < 1 && !isLoading }
+        'absolute max-h-0 w-full translate-y-1 overflow-hidden rounded-md border-black/10 bg-white shadow-lg',
+        {
+          'max-h-48 border': showList,
+          'border-0': items.length < 1 && !isLoading
+        }
       )}
     >
       {items.map((item) => (

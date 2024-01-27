@@ -32,6 +32,7 @@ const ComboBox = ({
   onSearch
 }: IComboBox) => {
   const [search, setSearch] = useState<string>('')
+  const [isFocused, setIsFocused] = useState<boolean>(false)
 
   const debouncedFn = useRef(
     debounce(onSearch ? onSearch : () => {}, 500)
@@ -47,6 +48,7 @@ const ComboBox = ({
 
   const handleSelect = useCallback(
     (val: IRow) => {
+      console.log(val[field])
       setSearch(val[field] as string)
       if (onSelect) onSelect(val['id'] as string)
     },
@@ -56,8 +58,9 @@ const ComboBox = ({
   return (
     <div
       id="dropdown-menu"
+      onFocus={() => setIsFocused(true)}
       className={cn(
-        'group relative right-0 mt-2 w-full min-w-[14.5rem] -translate-y-1 space-y-1 rounded-md',
+        'group relative mt-2 h-12 w-full -translate-y-1 rounded-md',
         className
       )}
     >
@@ -71,6 +74,7 @@ const ComboBox = ({
       />
       <DropList
         field={field}
+        showList={isFocused}
         items={items}
         isLoading={isLoading}
         onSelect={handleSelect}

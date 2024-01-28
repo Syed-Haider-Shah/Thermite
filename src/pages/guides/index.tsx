@@ -1,5 +1,4 @@
 import GuidesCard from '@/components/GuidesCard'
-import GuideSkeleton from '@/components/GuidesCard/GuideSkeleton'
 //took videos from https://www.pexels.com/
 const Guides = () => {
   return (
@@ -28,7 +27,6 @@ const Guides = () => {
           title="Motor replacement Guide"
         />
         <GuidesCard guidevideo={'/video9.mp4'} title="Pump replacement Guide" />
-        <GuideSkeleton />
       </div>
     </>
   )

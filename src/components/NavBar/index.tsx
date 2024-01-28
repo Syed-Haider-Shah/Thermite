@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { FC } from 'react'
@@ -48,20 +49,22 @@ const NavBarComponent: FC = () => {
   const { user } = useAuth()
   return (
     <nav className="top-0 w-[3.8rem] -translate-x-1 bg-darkIndigo px-4  py-10 drop-shadow-lg md:sticky md:w-auto">
-      <Image
-        src="/logo.svg"
-        className="mt-6 hidden px-1 md:block"
-        alt="logo"
-        width={300}
-        height={120}
-      />
-      <Image
-        src="/logoSymbolVar2.svg"
-        className=" translate-y-6 md:hidden"
-        alt="logo Icon"
-        width={60}
-        height={60}
-      />
+      <Link href="/home">
+        <Image
+          src="/logo.svg"
+          className="mt-6 hidden px-1 md:block"
+          alt="logo"
+          width={300}
+          height={120}
+        />
+        <Image
+          src="/logoSymbolVar2.svg"
+          className=" translate-y-6 md:hidden"
+          alt="logo Icon"
+          width={60}
+          height={60}
+        />
+      </Link>
       <div className="mt-[80px] flex flex-col gap-4 md:w-55">
         {ROUTES.map((route) => {
           if (

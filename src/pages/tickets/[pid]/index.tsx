@@ -17,74 +17,10 @@ import {
   Table,
   UnionIcon
 } from '@/components'
-import { Paths } from '@/constants'
+import { PARENT_DETAILS_COLS, Paths, TICKET_STATUS_OPTIONS } from '@/constants'
 import { TicketDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
 import { IRow } from '@/types/supabaseTables'
-
-const cols = [
-  {
-    field: 'id',
-    name: 'ID'
-  },
-  {
-    field: 'description',
-    name: 'Description'
-  },
-  {
-    field: 'created_at',
-    name: 'Created At',
-    isDate: true
-  },
-  {
-    field: 'customer_impact',
-    name: 'Customer Impact'
-  },
-  {
-    field: 'customer_inquiry',
-    name: 'Customer Inquiry'
-  },
-  {
-    field: 'fault',
-    name: 'Fault'
-  },
-  {
-    field: 'parent_id',
-    name: 'Parent ID'
-  },
-  {
-    field: 'problem',
-    name: 'Problem'
-  },
-  {
-    field: 'status',
-    name: 'Status'
-  },
-  {
-    field: 'upgrade',
-    name: 'Upgrade'
-  }
-]
-
-const STATUS_OPTIONS = [
-  { name: 'All', value: '' },
-  {
-    name: 'Open',
-    value: 'OPEN'
-  },
-  {
-    name: 'Closed',
-    value: 'CLOSED'
-  },
-  {
-    name: 'Waiting for Parts',
-    value: 'PARTS'
-  },
-  {
-    name: 'Decision',
-    value: 'DECISION'
-  }
-]
 
 const Tickets = () => {
   const [rows, setRows] = useState<IRow[]>([])
@@ -147,12 +83,12 @@ const Tickets = () => {
               New Child Ticket
             </Button>
           </Link>
-          <FilterSelect options={STATUS_OPTIONS} name="status" />
+          <FilterSelect options={TICKET_STATUS_OPTIONS} name="status" />
         </div>
         <Table
           onRowSelect={handleRowSelect}
           isLoading={isLoading}
-          cols={cols}
+          cols={PARENT_DETAILS_COLS}
           rows={rows}
         />
         <div className="flex justify-center text-black/60">

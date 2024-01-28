@@ -7,29 +7,16 @@ import toast from 'react-hot-toast'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, DropDown, FormLine } from '@/components'
+import { COUNTRY_OPTIONS } from '@/constants'
+import { ROLES_OPTIONS } from '@/constants/Options'
 import { Modal } from '@/containers'
 import { useAuth } from '@/context/AuthContext'
 import { IOption } from '@/types/model'
 import { CreateEmployeeSchema } from '@/utils/yupConfig'
 
-const ROLES = [
-  { name: 'Employee', value: 'user' },
-  { name: 'Admin', value: 'admin' },
-  { name: 'Super User', value: 'superuser' }
-]
-
-const COUNTIES = [
-  { name: 'Pakistan', value: 'pakistan' },
-  { name: 'South Africa', value: 'south_africa' },
-  { name: 'Australia', value: 'australia' },
-  { name: 'United States', value: 'united_states' },
-  { name: 'Canada', value: 'canada' },
-  { name: 'China', value: 'china' }
-]
-
 const CreateEmployee = () => {
-  const [country, setCountry] = useState<IOption>(COUNTIES[0])
-  const [role, setRole] = useState<IOption>(ROLES[0])
+  const [country, setCountry] = useState<IOption>(COUNTRY_OPTIONS[0])
+  const [role, setRole] = useState<IOption>(ROLES_OPTIONS[0])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
@@ -139,14 +126,14 @@ const CreateEmployee = () => {
             title="Country"
             setValue={setCountry}
             value={country}
-            options={COUNTIES}
+            options={COUNTRY_OPTIONS}
             className="w-80"
           />
           <DropDown
             setValue={setRole}
             value={role}
             title="Role"
-            options={ROLES}
+            options={ROLES_OPTIONS}
             className="w-80"
           />
         </div>

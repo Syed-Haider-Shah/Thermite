@@ -5,48 +5,11 @@ import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Card, FilterSelect, SearchBar, Table } from '@/components'
-import { Paths } from '@/constants'
+import { PARENT_TICKET_COLS, Paths, TICKET_STATUS_OPTIONS } from '@/constants'
 import { ProfileDetails, ProfileEdit } from '@/containers'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 import { IParentTicket, IRow } from '@/types/supabaseTables'
-
-const cols = [
-  {
-    field: 'id',
-    name: 'ID'
-  },
-  {
-    field: 'serial_number',
-    name: 'Serial Number'
-  },
-  {
-    field: 'address',
-    name: 'Address'
-  },
-  {
-    field: 'region',
-    name: 'Region'
-  },
-  {
-    field: 'coordinates',
-    name: 'Coordinates'
-  },
-  {
-    field: 'installation_date',
-    name: 'Installation Date'
-  },
-  {
-    field: 'number_of_panels',
-    name: 'Number of Panels'
-  }
-]
-
-const OPTIONS = [
-  { value: 'all', name: 'All' },
-  { value: 'active', name: 'Active' },
-  { value: 'completed', name: 'Completed' }
-]
 
 const Profile = () => {
   const [rows, setRows] = useState<IParentTicket[]>([])
@@ -107,13 +70,13 @@ const Profile = () => {
             />
           </div>
           <div className="flex gap-x-2">
-            <FilterSelect options={OPTIONS} name="category" />
+            <FilterSelect options={TICKET_STATUS_OPTIONS} name="category" />
           </div>
         </div>
         <Table
           onRowSelect={handleSelectRow}
           isLoading={isLoading}
-          cols={cols}
+          cols={PARENT_TICKET_COLS}
           rows={rows}
         />
       </Card>

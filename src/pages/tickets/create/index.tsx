@@ -4,25 +4,10 @@ import { FormEvent, useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Button, PageNav, SearchBar, Table } from '@/components'
-import { Paths } from '@/constants'
+import { LOCATION_TICKET_COLS, Paths } from '@/constants'
 import { Modal } from '@/containers'
 import { supabase } from '@/services/supabase'
 import { ICustomer, IRow } from '@/types/supabaseTables'
-
-const cols = [
-  {
-    field: 'id',
-    name: 'ID'
-  },
-  {
-    field: 'address',
-    name: 'Address'
-  },
-  {
-    field: 'region',
-    name: 'Region'
-  }
-]
 
 const CreateParentTicket = () => {
   const router = useRouter()
@@ -103,7 +88,7 @@ const CreateParentTicket = () => {
           </div>
         </div>
         <Table
-          cols={cols}
+          cols={LOCATION_TICKET_COLS}
           rows={customers}
           selectedRow={selectedRow?.id.toString()}
           isLoading={isLoading}

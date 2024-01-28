@@ -8,56 +8,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, DatePicker, DropDown, TextArea } from '@/components'
 import FormLine from '@/components/FormLine'
+import {
+  FAULT_OPTIONS,
+  INDICATED_FAILURES_OPTIONS,
+  SOURCES_OPTIONS
+} from '@/constants'
 import { Modal } from '@/containers'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
 import { CreateChildSchema } from '@/utils/yupConfig'
-
-const FAULT = [
-  { name: 'Air Filter Server', value: 'air-filter-server' },
-  {
-    name: 'Ambient RH Sensor Failure',
-    value: 'ambient-rh-sensor-failure'
-  },
-  {
-    name: 'Battery Charger Failure',
-    value: 'battery-charger-failure'
-  },
-  {
-    name: 'Battery Disconnected',
-    value: 'battery-disconnected'
-  },
-  {
-    name: 'Battery Not Charging',
-    value: 'battery-not-charging'
-  },
-  {
-    name: 'Battery Voltage Low',
-    value: 'Battery Voltage Low'
-  }
-]
-const SOURCES = [
-  { name: 'CHAT', value: 'chat' },
-  { name: 'EMAIL', value: 'email' },
-  { name: 'FORM', value: 'form' },
-  { name: 'PHONE', value: 'phone' },
-  { name: 'SGP', value: 'sgp' },
-  { name: 'Field App', value: 'field-app' },
-  { name: 'NOC', value: 'noc' },
-  { name: 'Site Review', value: 'site-review' },
-  { name: 'Python', value: 'python' },
-  { name: 'Support Portal', value: 'support-portal' },
-  { name: 'Customer Phone', value: 'customer-phone' }
-]
-const INDICATED_FAILURES = [
-  { name: 'Acoustic Box - H', value: '' },
-  { name: 'Air Filter - F', value: '' },
-  { name: 'Battery (E/F/FP) 070-0035-00', value: '' },
-  { name: 'CAN Cable - G', value: '' },
-  { name: 'Condenser Flowmeter - G', value: '' },
-  { name: 'Condenser Pump Assmbly, Clocking Flowmeter', value: '' },
-  { name: 'Condenser Supply Hose', value: '' }
-]
 
 type IChildFields = {
   customerimpact: boolean
@@ -67,9 +26,9 @@ type IChildFields = {
 }
 
 const CreateTicket = () => {
-  const [fault, setFault] = useState<IOption>(FAULT[0])
-  const [source, setSource] = useState<IOption>(SOURCES[0])
-  const [failure, setFailure] = useState<IOption>(INDICATED_FAILURES[0])
+  const [fault, setFault] = useState<IOption>(FAULT_OPTIONS[0])
+  const [source, setSource] = useState<IOption>(SOURCES_OPTIONS[0])
+  const [failure, setFailure] = useState<IOption>(INDICATED_FAILURES_OPTIONS[0])
   const [outageDate, setOutageDate] = useState<Date>(new Date())
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -182,14 +141,14 @@ const CreateTicket = () => {
               title="Problem"
               setValue={setFault}
               value={fault}
-              options={FAULT}
+              options={FAULT_OPTIONS}
               className="w-80"
             />
             <DropDown
               title="Source"
               setValue={setSource}
               value={source}
-              options={SOURCES}
+              options={SOURCES_OPTIONS}
               className="w-80"
             />
             <DatePicker
@@ -204,7 +163,7 @@ const CreateTicket = () => {
               title="Indicated Failure"
               setValue={setFailure}
               value={failure}
-              options={INDICATED_FAILURES}
+              options={INDICATED_FAILURES_OPTIONS}
               className="w-80"
             />
           </div>

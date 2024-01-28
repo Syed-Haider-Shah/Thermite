@@ -15,65 +15,9 @@ import {
   Toggle,
   UnionIcon
 } from '@/components'
-import { Paths } from '@/constants'
+import { PARENT_TICKET_COLS, Paths, TICKET_STATUS_OPTIONS } from '@/constants'
 import { supabase } from '@/services/supabase'
 import { IParentTicket, IRow } from '@/types/supabaseTables'
-
-const cols = [
-  {
-    field: 'id',
-    name: 'ID'
-  },
-  {
-    field: 'address',
-    name: 'Address'
-  },
-  {
-    field: 'child_count',
-    name: 'Child Count'
-  },
-  {
-    field: 'customer_id',
-    name: 'Customer ID'
-  },
-  {
-    field: 'created_at',
-    name: 'Created At',
-    isDate: true
-  },
-  {
-    field: 'employee',
-    name: 'Assigned Employee'
-  },
-  {
-    field: 'status',
-    name: 'Status'
-  }
-]
-
-const STATUS_OPTIONS = [
-  { name: 'All', value: '' },
-  {
-    name: 'Open',
-    value: 'OPEN'
-  },
-  {
-    name: 'Closed',
-    value: 'CLOSED'
-  },
-  {
-    name: 'Water Sample',
-    value: 'WATER-SAMPLE'
-  },
-  {
-    name: 'Waiting for Parts',
-    value: 'PARTS'
-  },
-  {
-    name: 'Decision',
-    value: 'DECISION'
-  }
-]
 
 const Tickets = () => {
   const [tickets, setTickets] = useState<IParentTicket[]>([])
@@ -152,7 +96,7 @@ const Tickets = () => {
         </div>
         <div className="flex gap-x-2">
           <Toggle onChange={handleToggle} isChecked={showClosed} />
-          <FilterSelect options={STATUS_OPTIONS} name="status" />
+          <FilterSelect options={TICKET_STATUS_OPTIONS} name="status" />
           <Link href={`${pathname}${Paths.CREATE}`}>
             <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
               <UnionIcon />
@@ -162,7 +106,7 @@ const Tickets = () => {
         </div>
       </div>
       <Table
-        cols={cols}
+        cols={PARENT_TICKET_COLS}
         rows={tickets}
         isLoading={isLoading}
         onRowSelect={handleRowSelect}

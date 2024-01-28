@@ -14,50 +14,15 @@ import {
   Table,
   UnionIcon
 } from '@/components'
-import { Paths } from '@/constants'
+import {
+  COUNTRY_OPTIONS,
+  EMPLOYEE_COLS,
+  PARENT_TICKET_COLS,
+  Paths
+} from '@/constants'
 import { ProfileDetails } from '@/containers'
 import { supabase } from '@/services/supabase'
 import { IEmployee, IRow } from '@/types/supabaseTables'
-
-const cols = [
-  {
-    field: 'name',
-    name: 'Name'
-  },
-  {
-    field: 'role',
-    name: 'Role'
-  },
-  {
-    field: 'country',
-    name: 'Team'
-  }
-]
-
-const ticketCols = [
-  {
-    name: 'ID',
-    field: 'id'
-  },
-  {
-    name: 'Location',
-    field: 'address'
-  },
-  {
-    name: 'Status',
-    field: 'status'
-  }
-]
-
-const COUNTIES = [
-  { name: 'All', value: 'all' },
-  { name: 'Pakistan', value: 'pakistan' },
-  { name: 'South Africa', value: 'south_africa' },
-  { name: 'Australia', value: 'Australia' },
-  { name: 'United States', value: 'united_states' },
-  { name: 'Canada', value: 'canada' },
-  { name: 'China', value: 'china' }
-]
 
 const Employees = () => {
   const [rows, setRows] = useState<IEmployee[]>([])
@@ -151,7 +116,7 @@ const Employees = () => {
             />
           </div>
           <div className="flex gap-x-2">
-            <FilterSelect options={COUNTIES} name="country" />
+            <FilterSelect options={COUNTRY_OPTIONS} name="country" />
             <Link href={`${pathname}${Paths.CREATE}`}>
               <Button className="group rounded-lg border border-black/5 bg-white px-4 font-medium text-black/60">
                 <UnionIcon />
@@ -161,7 +126,7 @@ const Employees = () => {
           </div>
         </div>
         <Table
-          cols={cols}
+          cols={EMPLOYEE_COLS}
           rows={rows}
           selectedRow={selectedEmp?.id}
           isLoading={isLoading}
@@ -181,7 +146,9 @@ const Employees = () => {
             <ProfileDetails user={selectedEmp} hideEdit />
             <Card>
               <Table
-                cols={ticketCols}
+                cols={PARENT_TICKET_COLS.filter(
+                  (element) => element.field !== 'employee'
+                )}
                 rows={tickets}
                 isLoading={isLoadingTickets}
                 onRowSelect={handleTicketSelect}

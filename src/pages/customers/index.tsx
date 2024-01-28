@@ -12,40 +12,9 @@ import {
   Table,
   UnionIcon
 } from '@/components'
+import { LOCATION_DETAILS_COLS } from '@/constants'
 import { supabase } from '@/services/supabase'
 import { ICustomer } from '@/types/supabaseTables'
-
-const cols = [
-  {
-    field: 'id',
-    name: 'ID'
-  },
-  {
-    field: 'serial_number',
-    name: 'Serial Number'
-  },
-  {
-    field: 'address',
-    name: 'Address'
-  },
-  {
-    field: 'region',
-    name: 'Region'
-  },
-  {
-    field: 'coordinates',
-    name: 'Coordinates'
-  },
-  {
-    field: 'installation_date',
-    name: 'Installation Date',
-    isDate: true
-  },
-  {
-    field: 'number_of_panels',
-    name: 'Number of Panels'
-  }
-]
 
 const Customers = () => {
   const [customers, setCustomers] = useState<ICustomer[]>([])
@@ -102,7 +71,11 @@ const Customers = () => {
           </Button>
         </div>
       </div>
-      <Table cols={cols} rows={customers} isLoading={isLoading} />
+      <Table
+        cols={LOCATION_DETAILS_COLS}
+        rows={customers}
+        isLoading={isLoading}
+      />
       <div className="flex justify-center text-black/60">
         <PageNav pageCount={totalCount} />
       </div>

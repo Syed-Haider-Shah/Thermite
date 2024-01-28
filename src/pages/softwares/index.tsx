@@ -42,7 +42,7 @@ const Guides = () => {
               Installation Instruction for the source GUI
             </Link>
           </div>
-          <div className="h-[0.05rem] w-[90%] w-full bg-black/40"></div>
+          <div className="h-[0.05rem] w-[90%] bg-black/40"></div>
           <Link href="Sample.pdf" target="_blank" className="flex gap-2">
             <p className="font-medium text-black/60">3.10.4</p>
             <DownloadIcon />
@@ -74,7 +74,7 @@ const Guides = () => {
               Installation Instruction for the source GUI
             </Link>
           </div>
-          <div className="h-[0.05rem] w-[90%] w-full bg-black/40"></div>
+          <div className="h-[0.05rem] w-[90%] bg-black/40"></div>
           <Link href="Sample.pdf" target="_blank" className="flex gap-2">
             <p className="font-medium text-black/60">2.6.4</p>
             <DownloadIcon />

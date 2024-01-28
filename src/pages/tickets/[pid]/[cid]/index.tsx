@@ -25,8 +25,6 @@ const ChildTicket = () => {
       })
       .single()
 
-    console.log(data)
-
     setIsLoading(false)
 
     if (data) setChildTicket(data)

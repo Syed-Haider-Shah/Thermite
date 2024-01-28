@@ -84,15 +84,6 @@ export const ROLES_OPTIONS = [
   { name: 'Super User', value: 'superuser' }
 ]
 
-export const FAILURE_OPTIONS = [
-  { name: 'Acoustic Box - H', value: '' },
-  { name: 'Air Filter - F', value: '' },
-  { name: 'Battery (E/F/FP) 070-0035-00', value: '' },
-  { name: 'CAN Cable - G', value: '' },
-  { name: 'Condenser Flowmeter - G', value: '' },
-  { name: 'Condenser Pump Assmbly, Clocking Flowmeter', value: '' },
-  { name: 'Condenser Supply Hose', value: '' }
-]
 export const CAUSE_OPTIONS = [
   { name: 'False Positive', value: '' },
   { name: 'Firmware Bug', value: '' },

@@ -12,7 +12,7 @@ const ChildDetails = ({ child }: { child: IChildTicket }) => {
             {key.split('_').join(' ')}:
           </h2>
           <p className="whitespace-nowrap text-sm font-normal text-black/60">
-            {key === 'created_at' || 'close_date'
+            {key === 'created_at' || key === 'close_date'
               ? new Date(`${child[key]}`).toDateString()
               : `${child[key]}`}
           </p>

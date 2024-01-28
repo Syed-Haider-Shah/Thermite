@@ -125,8 +125,12 @@ const Home = () => {
                 <div className="flex w-28 items-center gap-3 text-xs md:w-auto md:text-base">
                   <label
                     title="sample"
-                    aria-checked={checked}
-                    className="flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-2 border-loadGray aria-checked:border-loadBlue md:h-7 md:w-7 md:border-[0.25rem]"
+                    className={cn(
+                      'flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border-2 border-loadGray md:h-7 md:w-7 md:border-[0.25rem]',
+                      {
+                        'border-loadBlue': checked
+                      }
+                    )}
                   >
                     <input
                       type="checkbox"

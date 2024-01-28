@@ -23,13 +23,24 @@ export default async function handler(
 ) {
   const { email, password, name, role, country }: RequestBody = req.body
 
+  let fe_role
+  switch (role) {
+    case 'user':
+      fe_role = 'Field Technician'
+      break
+    default:
+      fe_role = 'Field Executive'
+      break
+  }
+
   const { error } = await supabase.auth.admin.createUser({
     email,
     password,
     user_metadata: {
       name,
       role,
-      country
+      country,
+      fe_role
     }
   })
 

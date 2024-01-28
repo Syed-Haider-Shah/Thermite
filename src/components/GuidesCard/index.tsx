@@ -12,7 +12,7 @@ const GuidesCard = ({
     <>
       <div className="flex h-[25rem] w-96 flex-col border-[1px] border-gray/20 shadow-lg">
         <div className="flex h-[55%] w-full items-center justify-center ">
-          <div className="max-h-[85%] w-[90%] overflow-hidden rounded-2.5 border-4 border-gray shadow-lg">
+          <div className="h-[85%] max-h-[85%] w-[90%] overflow-hidden rounded-2.5 border-4 border-gray shadow-lg">
             <video autoPlay loop muted src={guidevideo}></video>
           </div>
         </div>

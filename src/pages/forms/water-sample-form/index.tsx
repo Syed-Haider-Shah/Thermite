@@ -33,7 +33,8 @@ const WaterForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm({
     resolver: yupResolver(WaterFormSchema),
     mode: 'onBlur',
@@ -121,9 +122,21 @@ const WaterForm = () => {
       if (error) {
         await deleteImage()
         toast.error(error.message)
+      } else {
+        toast.success('Water Sample Filled Successfully')
+        setSelected('')
+        reset()
       }
     },
-    [imageFile, selected, type, waterTestRead, waterTestSample, waterTestVial]
+    [
+      imageFile,
+      reset,
+      selected,
+      type,
+      waterTestRead,
+      waterTestSample,
+      waterTestVial
+    ]
   )
 
   return (

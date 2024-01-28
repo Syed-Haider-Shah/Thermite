@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, FormLine, TextArea } from '@/components'
+import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 import { CreateFeedSchema } from '@/utils/yupConfig'
 
@@ -16,9 +17,12 @@ type TFeedback = {
 const Feedback = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  const { user } = useAuth()
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(CreateFeedSchema),
@@ -35,14 +39,14 @@ const Feedback = () => {
 
       const { error } = await supabase
         .from('feed_back')
-        .insert({ title, context })
+        .insert({ title, description: context, employee_id: user.id })
 
       setIsLoading(false)
-
+      reset()
       if (error) toast.error(error.message)
       else toast.success('Feedback Saved')
     },
-    []
+    [reset, user.id]
   )
 
   return (

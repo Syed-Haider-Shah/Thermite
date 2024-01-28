@@ -36,7 +36,7 @@ const ChildTicket = () => {
   }, [fetchChildTicket])
 
   return (
-    <Modal showModal onClose={router.back} title="Child Ticket">
+    <Modal showModal onClose={router.back} title="Child Ticket Details">
       {isLoading ? (
         <div className="absolute left-1/2 top-1/2">
           <Gear className="animate-spin" />

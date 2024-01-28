@@ -2,10 +2,7 @@ import { IChildTicket } from '@/types/supabaseTables'
 
 const ChildDetails = ({ child }: { child: IChildTicket }) => {
   return (
-    <div className="mt-5 grid grid-cols-3 gap-10 rounded-5 border border-black/5 p-5 text-black/90">
-      <h1 className="col-span-3 h-min w-full text-lg font-semibold underline underline-offset-4">
-        DETAILS
-      </h1>
+    <div className="mt-5 grid grid-cols-3 gap-10 rounded-5 p-5 text-black/90">
       {Object.keys(child).map((key) => (
         <div
           key={key}

@@ -1,3 +1,11 @@
+# Table of Content
+
+- [Introduction](#introduction)
+- [Technologies Used](#technologies-used)
+- [Technical Features](#technical-features)
+- [Page Description](#pages)
+- [Getting Started](#getting-started)
+
 # Welcome to Thermite
 
 ## Introduction
@@ -143,7 +151,10 @@ Visit [Thermite](https://thermite.com.au/)
 
 You can sign in as a `Site Supervisor` having access to all tickets.
 
-**USERNAME :** haidershah123123@gmail.com
-**PASSWORD :** Haider@123456
+```
+USERNAME : haidershah123123@gmail.com
+
+PASSWORD : Haider@123456
+```
 
 Have any questions? Email me at haidershah123123@gmail.com

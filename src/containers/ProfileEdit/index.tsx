@@ -15,26 +15,19 @@ import {
   FormLine,
   ImagePicker
 } from '@/components'
+import { COUNTRY_OPTIONS } from '@/constants'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
 import { uploadImage } from '@/utils/uploadFile'
 import { UpdateNameSchema, UpdatePasswordSchema } from '@/utils/yupConfig'
 
-const COUNTIES = [
-  { name: 'Pakistan', value: 'pakistan' },
-  { name: 'South Africa', value: 'south_africa' },
-  { name: 'Australia', value: 'australia' },
-  { name: 'United States', value: 'united_states' },
-  { name: 'Canada', value: 'canada' },
-  { name: 'China', value: 'china' }
-]
-
 const ProfileEdit = () => {
   const { user } = useAuth()
 
   const [country, setCountry] = useState<IOption>(
-    COUNTIES.find((val) => val.value === user.country) || COUNTIES[0]
+    COUNTRY_OPTIONS.find((val) => val.value === user.country) ||
+      COUNTRY_OPTIONS[0]
   )
 
   const [image, setImage] = useState<File | null>(null)
@@ -157,7 +150,7 @@ const ProfileEdit = () => {
             required
             setValue={setCountry}
             value={country}
-            options={COUNTIES}
+            options={COUNTRY_OPTIONS}
             className="w-80"
           />
           <Button

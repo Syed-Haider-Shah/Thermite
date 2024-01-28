@@ -4,25 +4,11 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { Button, SearchBar, Table } from '@/components'
+import { EMPLOYEE_COLS } from '@/constants'
 import { supabase } from '@/services/supabase'
 import { IEmployee, IRow } from '@/types/supabaseTables'
 
 import Modal from '../Modal'
-
-const cols = [
-  {
-    field: 'id',
-    name: 'ID'
-  },
-  {
-    field: 'name',
-    name: 'Name'
-  },
-  {
-    field: 'country',
-    name: 'Country'
-  }
-]
 
 const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([])
@@ -96,7 +82,7 @@ const AssignEmployee = ({ fetchDetails }: { fetchDetails: () => void }) => {
             onRowSelect={handleRowSelect}
             selectedRow={selectedRow}
             isLoading={isLoading}
-            cols={cols}
+            cols={EMPLOYEE_COLS}
             rows={employees}
           />
           {selectedRow && (

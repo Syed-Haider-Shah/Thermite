@@ -7,44 +7,18 @@ import toast from 'react-hot-toast'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, DropDown, TextArea } from '@/components'
+import { INDICATED_FAILURES_OPTIONS } from '@/constants'
+import { CAUSE_OPTIONS, RESOLUTIONS_OPTIONS } from '@/constants/Options'
 import { supabase } from '@/services/supabase'
 import { IOption } from '@/types/model'
 import { CloseChildSchema } from '@/utils/yupConfig'
 
-const FAILURE = [
-  { name: 'Acoustic Box - H', value: '' },
-  { name: 'Air Filter - F', value: '' },
-  { name: 'Battery (E/F/FP) 070-0035-00', value: '' },
-  { name: 'CAN Cable - G', value: '' },
-  { name: 'Condenser Flowmeter - G', value: '' },
-  { name: 'Condenser Pump Assmbly, Clocking Flowmeter', value: '' },
-  { name: 'Condenser Supply Hose', value: '' }
-]
-const CAUSE = [
-  { name: 'False Positive', value: '' },
-  { name: 'Firmware Bug', value: '' },
-  { name: 'Physical Damage', value: '' },
-  { name: 'No Failure Present', value: '' },
-  { name: 'Clog', value: '' },
-  { name: 'Component does not run at setpoint', value: '' },
-  { name: 'Plumbing Issue', value: '' },
-  { name: 'Wheel Dropout', value: '' }
-]
-const RESOLUTIONS = [
-  { name: 'Resolved - First Contact Resolution', value: '' },
-  { name: 'Resolved - No Filed Service Visit Required', value: '' },
-  { name: 'Repaired - Field Service Visit Completed', value: '' },
-  { name: 'Replaced - New Panel - Filed Service Visit', value: '' },
-  { name: 'Removed Panel', value: '' },
-  { name: 'SENT_KNOWLEDGE_DOCUMENT_LINK', value: '' },
-  { name: 'FEATURE_REQUEST_TRACKED', value: '' },
-  { name: 'Environmental Reasons - No Action Required', value: '' }
-]
-
 const CloseChild = () => {
-  const [confirmedFailure, setConfirmedFailure] = useState<IOption>(FAILURE[0])
-  const [cause, setCause] = useState<IOption>(CAUSE[0])
-  const [resolution, setResolution] = useState<IOption>(RESOLUTIONS[0])
+  const [confirmedFailure, setConfirmedFailure] = useState<IOption>(
+    INDICATED_FAILURES_OPTIONS[0]
+  )
+  const [cause, setCause] = useState<IOption>(CAUSE_OPTIONS[0])
+  const [resolution, setResolution] = useState<IOption>(RESOLUTIONS_OPTIONS[0])
   const [isSaving, setIsSaving] = useState<boolean>(false)
 
   const { cid } = useParams() || { cid: '' }
@@ -92,21 +66,21 @@ const CloseChild = () => {
         title="CONFIRMED FAILURE"
         value={confirmedFailure}
         setValue={setConfirmedFailure}
-        options={FAILURE}
+        options={INDICATED_FAILURES_OPTIONS}
         className="w-80"
       />
       <DropDown
         title="RESOLUTION"
         value={resolution}
         setValue={setResolution}
-        options={RESOLUTIONS}
+        options={RESOLUTIONS_OPTIONS}
         className="w-80"
       />
       <DropDown
         title="CAUSE"
         value={cause}
         setValue={setCause}
-        options={CAUSE}
+        options={CAUSE_OPTIONS}
         className="w-80"
       />
       <TextArea

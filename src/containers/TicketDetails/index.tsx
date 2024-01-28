@@ -12,54 +12,19 @@ import {
   LineSkeleton,
   StatusModal
 } from '@/components'
+import { PARENT_TICKET_COLS, TICKET_STATUS_OPTIONS } from '@/constants'
 import { supabase } from '@/services/supabase'
 import { INITIAL_PARENT_DETAILS, IParentDetails } from '@/types/supabaseTables'
 
 import AssignEmployee from '../AssignEmployee'
 import UnAssignedEmployee from '../UnAssignEmployee'
 
-const DETAILS_FIELD = [
-  {
-    name: 'Name',
-    field: 'address'
-  },
-  {
-    name: 'ID',
-    field: 'id'
-  },
-  {
-    name: 'Number of Panels',
-    field: 'number_of_panels'
-  },
-  {
-    name: 'Warranty',
-    field: 'warranty'
-  },
-  {
-    name: 'Serial Number',
-    field: 'serial_number'
-  },
-  {
-    name: 'Co-ordinates',
-    field: 'coordinates'
-  },
-  {
-    name: 'Country',
-    field: 'country'
-  },
-
-  {
-    name: 'Region',
-    field: 'region'
-  }
-]
-
-const STATUS_OPTIONS = ['OPEN', 'PARTS', 'BUSINESS-DECISION', 'WATER-SAMPLE']
-
 const TicketDetails = () => {
   const [details, setDetails] = useState<IParentDetails>(INITIAL_PARENT_DETAILS)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [status, setStatus] = useState<string>(STATUS_OPTIONS[0])
+  const [status, setStatus] = useState<string>(
+    TICKET_STATUS_OPTIONS.map((val) => val.value)[0]
+  )
   const [confirmation, setConfirmation] = useState<boolean>(false)
   const nav = useRouter()
 
@@ -167,7 +132,7 @@ const TicketDetails = () => {
           Parent Ticket Details
         </h1>
         <div className="grid grid-cols-2 gap-6">
-          {DETAILS_FIELD.map(({ name, field }) =>
+          {PARENT_TICKET_COLS.map(({ name, field }) =>
             isLoading ? (
               <LineSkeleton key={name} />
             ) : (
@@ -214,7 +179,7 @@ const TicketDetails = () => {
               {details.status !== 'WATER-SAMPLE' && (
                 <div className="col-span-2 grid w-full grid-cols-2 items-center gap-2">
                   <DropDown2
-                    options={STATUS_OPTIONS}
+                    options={TICKET_STATUS_OPTIONS.map((val) => val.value)}
                     setValue={setStatus}
                     value={status}
                     title="Status"

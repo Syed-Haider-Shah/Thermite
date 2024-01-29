@@ -1,3 +1,5 @@
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+
 import {
   ChangeEvent,
   FC,
@@ -37,10 +39,16 @@ const SearchComponent: FC<ISearchBar> = ({
   ...restProps
 }) => {
   const debouncedFn = useRef(debounce(onSearch, 500)).current
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
 
   const [search, setSearch] = useState<string>('')
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newParams = new URLSearchParams(searchParams)
+    newParams.delete('page')
+    router.push(`${pathname}?${newParams.toString()}`)
     setSearch(event.target.value)
   }
 

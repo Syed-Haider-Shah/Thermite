@@ -45,7 +45,7 @@ const DatePicker: FC<DatePickerProps> = ({
   return (
     <fieldset
       className={cn(
-        'box-border flex w-full flex-col rounded-lg border-4',
+        'relative box-border flex w-full flex-col rounded-lg border-4',
         'border-loadGray focus-within:border-loadBlue',
         { 'grid grid-cols-2 ': showTime },
         className

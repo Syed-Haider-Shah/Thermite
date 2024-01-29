@@ -82,92 +82,96 @@ const CreateTicket = () => {
   )
 
   return (
-    <Modal showModal title="Create Ticket" onClose={router.back}>
-      <form onSubmit={handleSubmit(handleCreateChild)} className="space-y-5">
-        <div className="mt-5 flex h-full flex-1 flex-wrap rounded-5 bg-lightGray px-5 py-8">
-          <TextArea
-            required
-            id="description"
-            title="Description"
-            {...register('description')}
-            error={errors.description?.message}
-            className="w-sm resize-none text-black/60"
-            rows={4}
-            primary
-          />
-          <div className="mb-3 mt-6 flex w-full gap-20">
-            <div className="flex items-start">
-              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
-                Customer Impact
-              </h1>
-              <FormLine
-                id="customer-impact"
-                {...register('customerimpact')}
-                error={errors.customerimpact?.message}
-                primary
-                className="translate-x-3 self-start"
-                type="checkbox"
-              />
-            </div>
-            <div className="flex items-start">
-              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
-                Customer Inquiry
-              </h1>
-              <FormLine
-                id="customer-inquiry"
-                {...register('customerinquiry')}
-                error={errors.customerinquiry?.message}
-                primary
-                className="translate-x-3 self-start"
-                type="checkbox"
-              />
-            </div>
-            <div className="flex items-start">
-              <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
-                Upgrade
-              </h1>
-              <FormLine
-                id="upgrade"
-                {...register('upgrade')}
-                error={errors.upgrade?.message}
-                primary
-                className="translate-x-3 self-start"
-                type="checkbox"
-              />
-            </div>
+    <Modal
+      showModal
+      title="Create Ticket"
+      onClose={router.back}
+      className="h-md"
+    >
+      <form
+        onSubmit={handleSubmit(handleCreateChild)}
+        className="mt-5 flex flex-wrap gap-2 gap-x-6 rounded-5 bg-lightGray px-5 py-8"
+      >
+        <TextArea
+          required
+          id="description"
+          title="Description"
+          {...register('description')}
+          error={errors.description?.message}
+          className="w-sm resize-none text-black/60"
+          rows={4}
+          primary
+        />
+        <div className="mb-3 mt-6 flex w-full gap-20">
+          <div className="flex items-start">
+            <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
+              Customer Impact
+            </h1>
+            <FormLine
+              id="customer-impact"
+              {...register('customerimpact')}
+              error={errors.customerimpact?.message}
+              primary
+              className="translate-x-3 self-start"
+              type="checkbox"
+            />
           </div>
-          <div className="flex flex-wrap gap-x-6">
-            <DropDown
-              title="Problem"
-              setValue={setFault}
-              value={fault}
-              options={FAULT_OPTIONS}
-              className="w-80"
+          <div className="flex items-start">
+            <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
+              Customer Inquiry
+            </h1>
+            <FormLine
+              id="customer-inquiry"
+              {...register('customerinquiry')}
+              error={errors.customerinquiry?.message}
+              primary
+              className="translate-x-3 self-start"
+              type="checkbox"
             />
-            <DropDown
-              title="Source"
-              setValue={setSource}
-              value={source}
-              options={SOURCES_OPTIONS}
-              className="w-80"
-            />
-            <DatePicker
-              title="Outage Start Date"
-              className="mt-3 h-min w-80"
-              titleBG="bg-lightGray"
-              setValue={setOutageDate}
-              value={outageDate}
-              id="outage"
-            />
-            <DropDown
-              title="Indicated Failure"
-              setValue={setFailure}
-              value={failure}
-              options={INDICATED_FAILURES_OPTIONS}
-              className="w-80"
+          </div>
+          <div className="flex items-start">
+            <h1 className="-translate-y-0.5 text-sm font-semibold text-black/90">
+              Upgrade
+            </h1>
+            <FormLine
+              id="upgrade"
+              {...register('upgrade')}
+              error={errors.upgrade?.message}
+              primary
+              className="translate-x-3 self-start"
+              type="checkbox"
             />
           </div>
         </div>
+        <DropDown
+          title="Problem"
+          setValue={setFault}
+          value={fault}
+          options={FAULT_OPTIONS}
+          className="w-80"
+        />
+        <DropDown
+          title="Source"
+          setValue={setSource}
+          value={source}
+          options={SOURCES_OPTIONS}
+          className="w-80"
+        />
+        <DatePicker
+          title="Outage Start Date"
+          className="mt-3 h-min w-80"
+          titleBG="bg-lightGray"
+          setValue={setOutageDate}
+          value={outageDate}
+          id="outage"
+        />
+        <DropDown
+          title="Indicated Failure"
+          setValue={setFailure}
+          value={failure}
+          options={INDICATED_FAILURES_OPTIONS}
+          className="w-80"
+        />
         <div className="mb-2 flex w-full justify-end pr-3">
           <Button type="submit" isLoading={isLoading} active>
             Create

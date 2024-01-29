@@ -64,10 +64,11 @@ const TableComponent: FC<ITable> = ({
           onClick={() => onRowSelect && onRowSelect(row)}
           key={idx}
           className={cn(
-            'cursor-pointer border-y border-black/5 pr-2 transition duration-300 ease-in-out last:border-b-0 even:bg-loadBlue/5 hover:bg-black/5 hover:shadow-xl',
+            'cursor-pointer border-y border-black/5 pr-2 transition duration-300 ease-in-out last:border-b-0 even:bg-loadBlue/5',
             {
               '!bg-loadBlue/20 hover:bg-loadBlue/40':
-                selectedRow === row.id?.toString()
+                selectedRow === row.id?.toString(),
+              'hover:bg-black/5 hover:shadow-xl': onRowSelect
             }
           )}
         >

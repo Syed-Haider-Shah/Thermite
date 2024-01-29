@@ -45,6 +45,7 @@ export const FAULT_OPTIONS = [
     value: 'Battery Voltage Low'
   }
 ]
+
 export const SOURCES_OPTIONS = [
   { name: 'CHAT', value: 'chat' },
   { name: 'EMAIL', value: 'email' },
@@ -58,14 +59,22 @@ export const SOURCES_OPTIONS = [
   { name: 'Support Portal', value: 'support-portal' },
   { name: 'Customer Phone', value: 'customer-phone' }
 ]
+
 export const INDICATED_FAILURES_OPTIONS = [
-  { name: 'Acoustic Box - H', value: '' },
-  { name: 'Air Filter - F', value: '' },
-  { name: 'Battery (E/F/FP) 070-0035-00', value: '' },
-  { name: 'CAN Cable - G', value: '' },
-  { name: 'Condenser Flowmeter - G', value: '' },
-  { name: 'Condenser Pump Assmbly, Clocking Flowmeter', value: '' },
-  { name: 'Condenser Supply Hose', value: '' }
+  { name: 'Acoustic Box - H', value: 'acoustic-box-h' },
+  { name: 'Air Filter - F', value: 'air-filter-f' },
+  {
+    name: 'Battery (E/F/FP) 070-0035-00',
+    value: 'battery-(e/f/fp)-070-0035-00'
+  },
+  { name: 'CAN Cable - G', value: 'can-cable-g' },
+  { name: 'Condenser Flowmeter - G', value: 'condenser-flowmeter-g' },
+  {
+    name: 'Condenser Pump Assmbly',
+    value: 'condenser-pump-assembly'
+  },
+  { name: 'Clocking Flowmeter', value: 'clocking-flowmeter' },
+  { name: 'Condenser Supply Hose', value: 'condenser-supply-hose' }
 ]
 
 export const COUNTRY_OPTIONS = [
@@ -85,22 +94,41 @@ export const ROLES_OPTIONS = [
 ]
 
 export const CAUSE_OPTIONS = [
-  { name: 'False Positive', value: '' },
-  { name: 'Firmware Bug', value: '' },
-  { name: 'Physical Damage', value: '' },
-  { name: 'No Failure Present', value: '' },
-  { name: 'Clog', value: '' },
-  { name: 'Component does not run at setpoint', value: '' },
-  { name: 'Plumbing Issue', value: '' },
-  { name: 'Wheel Dropout', value: '' }
+  { name: 'False Positive', value: 'false-positive' },
+  { name: 'Firmware Bug', value: 'firmware-bug' },
+  { name: 'Physical Damage', value: 'physical-damamge' },
+  { name: 'No Failure Present', value: 'no-failure-present' },
+  { name: 'Clog', value: 'clog' },
+  {
+    name: 'Component does not run at setpoint',
+    value: 'component-setpoint-failure'
+  },
+  { name: 'Plumbing Issue', value: 'plumbing-issue' },
+  { name: 'Wheel Dropout', value: 'wheel-dropout' }
 ]
+
 export const RESOLUTIONS_OPTIONS = [
-  { name: 'Resolved - First Contact Resolution', value: '' },
-  { name: 'Resolved - No Filed Service Visit Required', value: '' },
-  { name: 'Repaired - Field Service Visit Completed', value: '' },
-  { name: 'Replaced - New Panel - Filed Service Visit', value: '' },
-  { name: 'Removed Panel', value: '' },
-  { name: 'SENT_KNOWLEDGE_DOCUMENT_LINK', value: '' },
-  { name: 'FEATURE_REQUEST_TRACKED', value: '' },
-  { name: 'Environmental Reasons - No Action Required', value: '' }
+  {
+    name: 'Resolved - First Contact Resolution',
+    value: 'first-contact-resolution'
+  },
+  {
+    name: 'Resolved - No Filed Service Visit Required',
+    value: 'no-visit-required'
+  },
+  {
+    name: 'Repaired - Field Service Visit Completed',
+    value: 'visit-completed'
+  },
+  { name: 'Replaced - New Panel - Filed Service Visit', value: 'new-panel' },
+  { name: 'Removed Panel', value: 'removed-panel' },
+  {
+    name: 'SENT_KNOWLEDGE_DOCUMENT_LINK',
+    value: 'sent-knowledge-document-link'
+  },
+  { name: 'FEATURE_REQUEST_TRACKED', value: 'feature-request-tracked' },
+  {
+    name: 'Environmental Reasons - No Action Required',
+    value: 'environmental-reasons'
+  }
 ]

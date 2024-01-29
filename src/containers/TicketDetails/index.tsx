@@ -131,19 +131,20 @@ const TicketDetails = () => {
         <h1 className="text-xl font-semibold leading-6">
           Parent Ticket Details
         </h1>
-        <div className="grid grid-cols-2 gap-6">
-          {PARENT_TICKET_COLS.map(({ name, field }) =>
-            isLoading ? (
-              <LineSkeleton key={name} />
-            ) : (
+        <div className="mt-4 grid grid-cols-2 gap-8">
+          {PARENT_TICKET_COLS.map(({ name, field }) => {
+            if (name === 'ID' || name === 'Assigned Employee') return
+            if (isLoading) return <LineSkeleton key={name} />
+            return (
               <LineItem
-                className="first:col-span-2"
+                className={name === 'Address' ? 'col-span-2' : ''}
+                isDate={field === 'created_at'}
                 key={name}
                 title={name}
                 item={details[field]}
               />
             )
-          )}
+          })}
           {isLoading ? (
             <>
               <LineSkeleton />
@@ -155,16 +156,12 @@ const TicketDetails = () => {
             <>
               <LineItem
                 title="Installation Date"
-                item={new Date(
-                  `${details['installation_date']}`
-                ).toDateString()}
-              />
-              <LineItem
-                title="Created At"
-                item={new Date(`${details['created_at']}`).toDateString()}
+                item={details['installation_date']}
+                isDate
               />
               <LineItem
                 title="Employee"
+                className="border-b-0"
                 item={
                   details['employee'] ? (
                     <UnAssignedEmployee

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 
 import {
@@ -96,7 +97,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider value={value}>
       {isLoading ? (
         <div className="flex h-screen w-screen items-center justify-center">
-          <Spinner />
+          <Image
+            src="/logoSymbol.svg"
+            className="animate-pulse md:w-[120px]"
+            alt="logo"
+            width={80}
+            height={80}
+          />
         </div>
       ) : (
         children

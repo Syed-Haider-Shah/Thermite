@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import Skeleton from 'react-loading-skeleton'
+
 import { DownloadIcon, SupportIcon } from '../Icons'
 const GuidesCard = ({
   title,
@@ -12,8 +14,15 @@ const GuidesCard = ({
     <>
       <div className="flex h-[25rem] w-96 flex-col border-[1px] border-gray/20 shadow-lg">
         <div className="flex h-[55%] w-full items-center justify-center ">
-          <div className="h-[85%] max-h-[85%] w-[90%] overflow-hidden rounded-2.5 border-4 border-gray shadow-lg">
-            <video autoPlay loop muted src={guidevideo}></video>
+          <div className="relative h-[180px] w-[350px] overflow-hidden rounded-2.5 border-4 border-gray shadow-lg">
+            <video
+              className="absolute z-20 h-[180px] w-[350px] bg-transparent object-fill"
+              autoPlay
+              loop
+              muted
+              src={guidevideo}
+            />
+            <Skeleton className="h-full w-full" />
           </div>
         </div>
         <div className="m-4 flex flex-col gap-2 text-darkIndigo">

@@ -13,7 +13,6 @@ import {
 
 import { Session } from '@supabase/supabase-js'
 
-import { Spinner } from '@/components'
 import { Paths } from '@/constants'
 import { supabase } from '@/services/supabase'
 import { IEmployee, INITIAL_EMPLOYEE_DATA } from '@/types/supabaseTables'

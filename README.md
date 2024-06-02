@@ -1,4 +1,4 @@
-# Table of Content
+# Table of Contents
 
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)

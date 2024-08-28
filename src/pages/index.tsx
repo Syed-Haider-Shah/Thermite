@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -154,12 +155,13 @@ const Home = () => {
               Login
             </Button>
             <div className="ml-2.5 flex flex-col gap-2 text-sm md:flex-row">
-              <div className="text-gray md:text-base">
-                Need help with something?
-              </div>
-              <button className="text-left font-medium text-loadBlue md:text-base">
-                Contact Support
-              </button>
+              <div className="text-gray md:text-base"> How do I log in?</div>
+              <Link
+                href="https://github.com/Syed-Haider-Shah/Thermite?tab=readme-ov-file#getting-started"
+                className="text-left font-medium text-loadBlue md:text-base"
+              >
+                Click Here
+              </Link>
             </div>
           </form>
         </div>

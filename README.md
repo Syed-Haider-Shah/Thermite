@@ -10,7 +10,7 @@
 
 ## Introduction
 
-Thermite is a ticketing system inspired by my experience using the various ticketing systems in the water company I worked for before graduating. After graduation I wanted to start a professional project, so I choose to create something similar to the ticketing systems I'm used to working with. Since, I have been a user for those ticketing system I am able to provide detailed requirements/user stories for the project. Thermite combines the best features of existing ticketing systems and adds some unique functionalities to make it more user-friendly.
+Thermite is a ticketing system inspired by my experience using the various ticketing systems in the water company I worked for. After graduation I wanted to start a professional project, so I choose to create something similar to the ticketing systems I'm used to working with. Since, I have been a user for those ticketing system I am able to provide detailed requirements/user stories for the project. Thermite combines the best features of existing ticketing systems and adds some unique functionalities to make it more user-friendly.
 
 Thermite is a collaborative project between me and my friend Ali Aizaz. We challenged each other to improve our skills while working remotely across different time zones. This taught us how to collaborate effectively online. This was the project we used to test the extent of our knowledge and go beyond.
 
